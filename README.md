@@ -15,7 +15,7 @@ Text Area - (*comments*) Providing a "comments" field will generate a Text Area 
 
 Coverage for more input types will be available in future versions. 
 
-## Usage
+## Usage:
 
 The FormOne component accepts a list of filetypes as a "fileTypes" prop and form fields as "fields" prop.  
 
@@ -24,8 +24,10 @@ The FormTwo component allows you to specify an object containing the supported f
 Both Forms must be passed a callback function to handle the multipart data using the "cb" prop. 
 
 
-FormOne Example:
+#### FormOne Example:
 ```
+import {FormOne} from 'react-smartmultiparts';
+
 const fields = ["Title", "Submitee", "Name", "Comments"];
 
 const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
@@ -37,8 +39,10 @@ const printData = (data) => {
 <FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>
 ```
 
-FormTwo Example:
+#### FormTwo Example:
 ```
+import {FormTwo} from 'react-smartmultiparts';
+
 const printData = (data) => { 
     console.log(data);
 };
@@ -49,5 +53,5 @@ const formObj = {
     jpg: ["Title", "Subject", "Source"]
 };
 
-<Form2 fileTypes={formObj} cb={printData}/>
+<FormTwo fileTypes={formObj} cb={printData}/>
 ```
