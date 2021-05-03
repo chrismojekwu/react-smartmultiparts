@@ -1,11 +1,53 @@
-## React Smart Multipart Form
+# react-smartmultiparts
 
-npm package in progress.
+smartmultiparts are file input components for React that return a form with specified values. Upon submission the form will pass the multipart form data into a callback function provided by you. FormOne will return a single set of input fields for a group of file types. FormTwo will return a specified set of fields for each individual file type.
 
-The Form component accepts a list of filetypes and form fields.  
+```
+npm i react-smartmultiparts
+```
 
-The Form 2 component allows you to specify an object containing supported file types as keys and their correspending fields as a value array.  
+## Input Types Supported:
+#### Input Type - (Field Name) - Info
 
-Using "comments" will generate a text area input, support for more input types to be added soon.
+Text Inputs - (*DEFAULT*) Any field value supplied will generate a text input.
+
+Text Area - (*comments*) Providing a "comments" field will generate a Text Area Input.
+
+Coverage for more input types will be available in future versions. 
+
+## Usage
+
+The FormOne component accepts a list of filetypes as a "fileTypes" prop and form fields as "fields" prop.  
+
+The FormTwo component allows you to specify an object containing the supported file types as keys and their correspending fields as an array using the "fileTypes" prop.
 
 Both Forms must be passed a callback function to handle the multipart data using the "cb" prop. 
+
+
+FormOne Example:
+```
+const fields = ["Title", "Submitee", "Name", "Comments"];
+
+const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
+
+const printData = (data) => { 
+    console.log(data);
+};
+
+<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>
+```
+
+FormTwo Example:
+```
+const printData = (data) => { 
+    console.log(data);
+};
+
+const formObj = {
+    wav: ["Title", "Artist", "Comments"],
+    mp3: ["Title", "Artist"],
+    jpg: ["Title", "Subject", "Source"]
+};
+
+<Form2 fileTypes={formObj} cb={printData}/>
+```
