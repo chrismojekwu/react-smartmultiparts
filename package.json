@@ -4,11 +4,18 @@
   "description": "Form generating file upload components for React",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build-lib": "rollup -c"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   },
   "author": "Chris Mojekwu",
   "license": "MIT",
@@ -33,5 +40,12 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@babel/preset-env": "^7.14.1",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^13.1.8",
+    "jest": "^26.6.3",
+    "react-test-renderer": "^17.0.2"
+  }
 }
