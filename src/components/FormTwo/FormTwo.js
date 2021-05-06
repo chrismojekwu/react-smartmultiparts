@@ -18,7 +18,7 @@ export const FormTwo = (props) => {
     if (!ext) return "Invalid Extention";
 
     if (re.test(ext) === true) {
-      return <FormFields fields={props.fileTypes[ext]}/>;
+      return <FormFields fields={props.fields} filename={fileName}/>;
     }
 
     else setFileType("INVALID");
@@ -34,6 +34,9 @@ export const FormTwo = (props) => {
     const fieldArr = props.fileTypes[ext];
 
     for(let i = 0; i < fieldArr.length; i++){
+      if(new RegExp('filename', 'gi').test(fieldArr[i]) === true){
+        data.append('filename', fileName);
+      } else
       data.append(fieldArr[i], e.target[fieldArr[i]].value);
     };
 

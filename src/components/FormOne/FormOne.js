@@ -14,7 +14,7 @@ export const FormOne = (props) => {
     const re = new RegExp(props.fileTypes.join("|"), "gi");
     if (!ext) return "Invalid Extention";
     if (re.test(ext) === true) {
-      return <FormFields fields={props.fields}/>;
+      return <FormFields fields={props.fields} filename={fileName}/>;
     }
     else setFileType("INVALID");
     return "File type not supported.";
@@ -26,6 +26,9 @@ export const FormOne = (props) => {
     data.append('file', fileType[0]);
 
     for(let i = 0; i < props.fields.length; i++){
+      if(new RegExp('filename', 'gi').test(props.fields[i]) === true){
+        data.append('filename', fileType[0].name);
+      } else
       data.append(props.fields[i], e.target[props.fields[i]].value);
     };
 
