@@ -27,7 +27,7 @@ export const FormOne = (props) => {
 
     for(let i = 0; i < props.fields.length; i++){
       if(new RegExp('filename', 'gi').test(props.fields[i]) === true){
-        data.append('filename', fileType[0].name);
+        data.append('filename', fileName);
       } else
       data.append(props.fields[i], e.target[props.fields[i]].value);
     };
