@@ -18,7 +18,7 @@ export const FormTwo = (props) => {
     if (!ext) return "Invalid Extention";
 
     if (re.test(ext) === true) {
-      return <FormFields fields={props.fields} filename={fileName}/>;
+      return <FormFields fields={props.fileTypes[ext]} filename={fileName}/>;
     }
 
     else setFileType("INVALID");
