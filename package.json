@@ -4,6 +4,7 @@
   "description": "Form generating file upload components for React",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "storybook": "start-storybook -p 6006",

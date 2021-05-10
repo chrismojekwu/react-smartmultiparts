@@ -12,5 +12,5 @@ stories.add('App', () => {
 
     const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
       
-    return (<FormOne fields={fields} fileTypes={fileTypes} cb={setData}/>);
+    return (<FormOne fields={fields} fileTypes={fileTypes} cb={setData} />);
 });

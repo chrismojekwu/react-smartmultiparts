@@ -9,9 +9,11 @@ npm i react-smartmultiparts
 ## Input Types Supported:
 #### Input Type - (Field Name) - Info
 
-Text Inputs - (*DEFAULT*) Any field value supplied will generate a text input.
+Text Inputs - (*DEFAULT*) - Any field value supplied will generate a text input.
 
-Text Area - (*comments*) Providing a "comments" field will generate a Text Area Input.
+Text Area - (*comments*) - Providing a "comments" field will generate a Text Area Input.
+
+Filename - (*filename*) - Using "filename" as a field will generate the filename inside of the form and include it in the multipart data.
 
 Coverage for more input types will be available in future versions. 
 
