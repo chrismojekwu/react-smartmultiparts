@@ -1,16 +1,27 @@
 import React from "react";
 
-export const Select = (props) => {
+const Select = (props) => {
+
+    const generateOptions = () => {
+        return props.obj.select.map((options, index) => {
+            return (
+                <option value={options} key={index}>{options}</option>
+            )
+        })
+    };
+
+    const handleChange = (e) => {
+        props.setValue(e.target.value)
+    };
+
     return (
         <>
             <label htmlFor="select">{props.obj.query}</label>
-            <select name="select">
-                {props.obj.select.map((options, index) => {
-                    return (
-                        <option value={options} key={index}>{options}</option>
-                    )
-                })}
+            <select name="select" onChange={handleChange}>
+                {generateOptions()}
             </select>
         </>
     )
 };
+
+export default Select;

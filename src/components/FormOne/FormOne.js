@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import FormFields from "../FormFields/FormFields";
-
+import Select from '../Select/Select';
 import "../Form.css";
 
 export const FormOne = (props) => {
   const [fileType, setFileType] = useState("");
   const [fileName, setFileName] = useState("");
+  const [select, setSelect] = useState();
+  const [selectValue, setSelectValue] = useState("");
 
   //function to render correct form component for file type
   const detectFile = () => {
@@ -24,6 +26,11 @@ export const FormOne = (props) => {
     e.preventDefault();
     const data = new FormData();
     data.append('file', fileType[0]);
+    
+    //check for select prop and add value
+    if(props.select && select === true){
+      data.append(props.select.query, selectValue);
+    }
 
     for(let i = 0; i < props.fields.length; i++){
       if(new RegExp('filename', 'gi').test(props.fields[i]) === true){
@@ -39,6 +46,12 @@ export const FormOne = (props) => {
     if (file[0] === undefined || file[0] === null) {
       return null;
     } else return file;
+  };
+
+  const generateSelect = (selectObj) => {
+    return (
+      <Select obj={selectObj} setValue={setSelectValue}/>
+    );
   };
 
  
@@ -67,14 +80,23 @@ export const FormOne = (props) => {
               name="upload"
               onChange={(e) => {
                 let file = handleFile(e.target.files);
-
+                
                 if (file === null) {
                   return false;
-                } else setFileType(file);
+                } else {
+                setFileType(file);
                 setFileName(file[0].name);
+
+                //checks for Select prop
+                if (props.select) setSelect(true);
+                }
               }}
             />
             <br />
+            {select === true 
+              ? generateSelect(props.select)
+              : ""}
+
             {detectFile()}
             <input id="submit" type="submit" className="button" />
             

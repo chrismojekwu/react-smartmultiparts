@@ -11,6 +11,11 @@ stories.add('App', () => {
     const fields = ["Title", "Submitee", "Name", "Comments", "fILEName"];
 
     const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
+
+    const selectObj = {
+        query: "Whats your name?",
+        select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"]
+    }
       
-    return (<FormOne fields={fields} fileTypes={fileTypes} cb={setData} />);
+    return (<FormOne fields={fields} fileTypes={fileTypes} cb={setData} select={selectObj}/>);
 });
