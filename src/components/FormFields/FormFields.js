@@ -25,7 +25,7 @@ function FormFields(props) {
             return (
               <React.Fragment key={index}>
                 <label htmlFor={field}>{field}:</label>
-                <input type="text" name={field} />
+                <input type="text" name={field} id={field} />
               </React.Fragment>
             );
           }
