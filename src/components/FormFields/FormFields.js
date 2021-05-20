@@ -9,15 +9,15 @@ function FormFields(props) {
         {props.fields.map((field, index) => {
           if (field.match(/comments/gi)) {
             return (
-              <>
+              <React.Fragment key={"textarea-" + index.toString()}>
                 <label htmlFor='comments'>Comments:</label>
                 <textarea
                   name="comments"
                   className="comments"
                   placeholder="Additional Comments"
-                  key={"textarea-" + index.toString()}
+                  id="comments"
                 />
-              </>
+              </React.Fragment>
             );
           } else if(field.match(/filename/gi)){
             return `Filename: ${props.filename}`
@@ -33,6 +33,7 @@ function FormFields(props) {
       </>
     );
   };
+
   return <>{renderFields()}</>;
 }
 
