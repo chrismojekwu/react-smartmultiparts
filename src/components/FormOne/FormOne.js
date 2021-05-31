@@ -57,7 +57,7 @@ export const FormOne = (props) => {
  
   return (
     <>
-      <div className="container">
+      <div className="container form-body">
           <p>
             Select your file, fill out the form and submit.
             <br />
