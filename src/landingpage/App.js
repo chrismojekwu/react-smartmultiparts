@@ -4,7 +4,7 @@ import {FormTwo} from '../components/FormTwo/FormTwo'
 import './app.css'
 
 const App = () => {
-    const fields = ["Title", "Submitee", "Name", "Comments"];
+    const fields = ["Title", "Submitee", "Name", "Comments", "Filename"];
 
     const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
 
@@ -21,10 +21,15 @@ const App = () => {
     return (
         <div className="landing-container">
             <div className="landing-page">
-                <h1>smart multiparts!</h1>
+                <h1 className="landing-title">react-smart-<span className="hover-color">multiparts</span></h1>
+                <h5 className="landing-subtitle">an ever evolving file detecting multipart form library...for react!</h5>
             </div>
-            <FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>
-            <FormTwo fileTypes={formObj} cb={printData}/>
+            <section className="forms">
+                <h3 className="landing-title">Form One:</h3>
+                <FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>
+                <h3 className="landing-title">Form Two:</h3>
+                <FormTwo fileTypes={formObj} cb={printData}/>
+            </section>
         </div>
     )
 };

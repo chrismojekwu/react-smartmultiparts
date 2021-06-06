@@ -59,8 +59,6 @@ export const FormOne = (props) => {
     <>
       <div className="container form-body">
           <p>
-            Select your file, fill out the form and submit.
-            <br />
             Supported File Types: {props.fileTypes.map(x => {
               return `.${x}`
             }).join(" ")}
@@ -73,7 +71,7 @@ export const FormOne = (props) => {
             method="post"
             name="upload"
           >
-            <label htmlFor="file">Upload a file</label>
+            <label htmlFor="file">File:</label>
             <input
               id="file"
               type="file"
