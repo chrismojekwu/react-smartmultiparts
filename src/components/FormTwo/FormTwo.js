@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FormFields from "../FormFields/FormFields";
 import Select from '../Select/Select';
+import {stringInArr} from '../util/helpers';
 
 import "../Form.css";
 
@@ -63,7 +64,7 @@ export const FormTwo = (props) => {
     );
   };
 
-  return (
+  return (  
     <>
       <div className="container form-body">
           <p>
@@ -99,7 +100,7 @@ export const FormTwo = (props) => {
               }}
             />
             <br />
-            {select === true 
+            {select === true && stringInArr(props.select.types, fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "") === true
               ? generateSelect(props.select)
               : ""}
 

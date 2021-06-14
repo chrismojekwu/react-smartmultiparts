@@ -18,17 +18,23 @@ const App = () => {
         jpg: ["Title", "Subject", "Source"]
     };
 
+    const selectObj = {
+        query: "Whats your name?",
+        select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
+        types: ["wav","jpeg","mp3"]
+    };
+
     return (
         <div className="landing-container">
             <div className="landing-page">
                 <h1 className="landing-title">react-smart-<span className="hover-color">multiparts</span></h1>
-                <h5 className="landing-subtitle">an ever evolving file detecting multipart form library...for react!</h5>
+                <h5 className="landing-subtitle">a file detecting multipart form library...for react!</h5>
             </div>
             <section className="forms">
                 <h3 className="landing-title">Form One:</h3>
                 <FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>
                 <h3 className="landing-title">Form Two:</h3>
-                <FormTwo fileTypes={formObj} cb={printData}/>
+                <FormTwo fileTypes={formObj} cb={printData} select={selectObj}/>
             </section>
         </div>
     )

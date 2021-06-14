@@ -97,3 +97,35 @@ test('it renders the correct span when file is uploaded with filename field', ()
 
     expect(wrapper.find('#filename-span').text()).toBe(`Filename: test.jpg`);
 });
+
+test('it renders a select element with the correct options when provided a select object', () => {
+    const fields = ["filEnaMe"];
+
+    const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
+    
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const selectObj = {
+        query: "Whats your name?",
+        select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
+    };
+
+    const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} select={selectObj}/>);
+    const file = new File(["test"], "test.jpg", {
+        type: "image/jpeg"
+    });
+    
+    wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+    expect(wrapper.exists({name: "select"})).toBeTruthy();
+    
+    for(let i = 0; i < selectObj.select.length; i++){
+
+        const element = wrapper.find(`#${selectObj.select[i]}`);
+
+        expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}">${selectObj.select[i]}</option>`);
+    };
+    
+});

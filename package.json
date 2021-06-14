@@ -1,5 +1,6 @@
 {
   "name": "react-smartmultiparts",
+  "homepage": "http://chrismojekwu.github.io/react-smartmultiparts",
   "version": "1.0.3",
   "description": "Form generating file upload components for React",
   "main": "dist/index.js",
@@ -7,9 +8,9 @@
   "scripts": {
     "develop": "webpack serve",
     "test": "jest",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "build-lib": "rollup -c"
+    "build-lib": "rollup -c",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "jest": {
     "moduleNameMapper": {
@@ -30,6 +31,7 @@
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "babel-loader": "^8.2.2",
     "enzyme": "^3.11.0",
+    "gh-pages": "^3.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rollup": "^2.46.0",

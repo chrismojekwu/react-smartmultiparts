@@ -142,4 +142,40 @@ test('it renders the correct span when file is uploaded with filename field',() 
     expect(wrapper.find('#filename-span').text()).toBe(`Filename: test.wav`);
 });
 
+test('it renders a select element with the correct options when provided a select object',() => {
+
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const formObj = {
+        wav: ["Title", "Artist", "Comments"],
+        mp3: ["Title", "Artist"],
+        jpg: ["Title", "Subject", "Source"]
+    };
+
+    const selectObj = {
+        query: "Whats your name?",
+        select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
+        types: ["wav","jpeg","mp3"]
+    };
+    
+    const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData} select={selectObj}/>);
+
+    const file = new File(["test"], "test.jpg", {
+        type: "image/jpeg"
+    });
+    
+    wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+    expect(wrapper.exists({name: "select"})).toBeFalsy();
+
+    const mp3File = new File(["test"], "test.mp3", {
+        type: "audio/mpeg"
+    });
+
+    wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
+    
+    expect(wrapper.exists({name: "select"})).toBeTruthy();
+});
 
