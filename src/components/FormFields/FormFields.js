@@ -20,7 +20,7 @@ function FormFields(props) {
               </React.Fragment>
             );
           } else if(field.match(/filename/gi)){
-            return `Filename: ${props.filename}`
+            return <span id="filename-span" key={index}>Filename: {props.filename}</span>
           } else {
             return (
               <React.Fragment key={index}>

@@ -1,9 +1,9 @@
 .container {
     text-align: left;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    padding: 5px;
     width: fit-content;
+}
+input[type^="text"], textarea#comments {
+  width: 75%;
 }
 .logo {
   height: 250px;
@@ -30,4 +30,7 @@
 .comments {
   height: 100px;
   width: 50%;
+}
+#submit {
+  margin-top: 10px;
 }

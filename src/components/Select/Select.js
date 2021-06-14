@@ -5,7 +5,7 @@ const Select = (props) => {
     const generateOptions = () => {
         return props.obj.select.map((options, index) => {
             return (
-                <option value={options} key={index}>{options}</option>
+                <option value={options} id={options} key={index}>{options}</option>
             )
         })
     };

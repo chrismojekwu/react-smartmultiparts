@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FormFields from "../FormFields/FormFields";
 import Select from '../Select/Select';
+import {stringInArr} from '../util/helpers';
 
 import "../Form.css";
 
@@ -30,8 +31,8 @@ export const FormTwo = (props) => {
   };
 
   const upload = (e) => {
-    const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
     e.preventDefault();
+    const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
     const data = new FormData();
     data.append('file', fileType[0]);
     const fieldArr = props.fileTypes[ext];
@@ -63,12 +64,10 @@ export const FormTwo = (props) => {
     );
   };
 
-  return (
+  return (  
     <>
-      <div className="container">
+      <div className="container form-body">
           <p>
-            Select your file, fill out the form and submit.
-            <br />
             Supported File Types: {Object.keys(props.fileTypes).map(x => {
               return `.${x}`
             }).join(" ")}
@@ -81,7 +80,7 @@ export const FormTwo = (props) => {
             method="post"
             name="upload"
           >
-            <label htmlFor="file">Upload a file</label>
+            <label htmlFor="file">File:</label>
             <input
               id="file"
               type="file"
@@ -101,7 +100,7 @@ export const FormTwo = (props) => {
               }}
             />
             <br />
-            {select === true 
+            {select === true && stringInArr(props.select.types, fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "") === true
               ? generateSelect(props.select)
               : ""}
 
