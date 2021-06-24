@@ -6,17 +6,6 @@ smartmultiparts are file input components for React that return a form with spec
 npm i react-smartmultiparts
 ```
 
-## Input Types Supported:
-#### Input Type - (Field Name) - Info
-
-Text Inputs - (*DEFAULT*) - Any field value supplied will generate a text input.
-
-Text Area - (*comments*) - Providing a "comments" field will generate a Text Area Input.
-
-Filename - (*filename*) - Using "filename" as a field will generate the filename inside of the form and include it in the multipart data.
-
-Coverage for more input types will be available in future versions. 
-
 ## Usage:
 
 The FormOne component accepts a list of filetypes as a "fileTypes" prop and form fields as "fields" prop.  
@@ -57,3 +46,45 @@ const formObj = {
 
 <FormTwo fileTypes={formObj} cb={printData}/>
 ```
+
+## Input Types Supported:
+#### Input Type - (Field Name) - Info
+
+Text Inputs - (*DEFAULT*) - Any field value supplied will generate a text input.
+
+Text Area - (*comments*) - Providing a "comments" field will generate a Text Area Input.
+
+Filename - (*filename*) - Using "filename" as a field will generate the filename inside of the form and include it in the multipart data.
+
+Selects - You can generate a single select field by providing a select object as a prop to either Form component using the name "select". The select object requires 2 key-values to work. "query", which refers to your question/prompt. "select", which refers to the options you want to display. If you're using Form Two, you can provide a "types" key-value which specifies the file types you would like to generate a select input for.
+
+See Below:
+```
+const selectObj = {
+        query: "Whats your name?",
+        select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
+        types: ["wav","jpeg","mp3"] //meant for use with FormTwo
+    };
+
+<FormOne ... select={selectObj}/>
+<FormTwo ... select={selectObj}/>
+```
+
+Coverage for more input types will be available in future versions. 
+
+## Styling:
+You can style the various aspects of the form using CSS Class selectors.
+
+Body/Container - .form-body
+
+Labels - .form-label
+
+File Input - .form-fileinput
+
+Filename - .form-filename
+
+Comments - .form-textarea
+
+Text Inputs - .form-textinput
+
+Submit Button - .form-button

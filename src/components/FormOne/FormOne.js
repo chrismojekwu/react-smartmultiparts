@@ -71,11 +71,12 @@ export const FormOne = (props) => {
             method="post"
             name="upload"
           >
-            <label htmlFor="file">File:</label>
+            <label htmlFor="file form-label">File:</label>
             <input
               id="file"
               type="file"
               name="upload"
+              className="form-fileinput"
               onChange={(e) => {
                 let file = handleFile(e.target.files);
                 
@@ -96,7 +97,7 @@ export const FormOne = (props) => {
               : ""}
 
             {detectFile()}
-            <input id="submit" type="submit" className="button" />
+            <input id="submit" type="submit" className="button form-button" />
             
           </form>
           <br />

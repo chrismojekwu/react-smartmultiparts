@@ -16,8 +16,8 @@ const Select = (props) => {
 
     return (
         <>
-            <label htmlFor="select">{props.obj.query}</label>
-            <select name="select" onChange={handleChange}>
+            <label htmlFor="select form-label">{props.obj.query}</label>
+            <select name="select form-select" onChange={handleChange}>
                 <option defaultValue>{props.obj.placeholder}</option>
                 {generateOptions()}
             </select>
