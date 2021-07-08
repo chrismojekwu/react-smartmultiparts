@@ -8,6 +8,10 @@ body {
 
 .landing-title {
     font-family: 'Press Start 2P', cursive;
+    z-index: 1;
+    background-color: #c8e2e7;
+    grid-area: title;
+    padding-left: 6px;
 }
 
 .hover-color:hover {
@@ -30,5 +34,80 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin-bottom: 10px;
     padding: 10px;
-    min-width: 375px;
+    width: 90%;
+}
+
+.form-control-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-containing-div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+    grid-area: form;
+}
+
+.form-containing-div::-webkit-scrollbar {
+    display: none;
+}
+
+.form-carousel-div {
+    min-width: 100%;
+}
+
+.form-options-control {
+    grid-area: control;
+    width: 90%;
+    padding: 10px;
+    margin: auto;
+    border: 1px solid #000000;
+    z-index: 0;
+}
+
+.form-control-instructions {
+    font-size: 11px;
+    font-weight: bolder;
+    display: block;
+}
+
+.form-control-btn {
+    margin-bottom: 20px;
+}
+
+.select-toggle {
+    display: block;
+    margin: auto;
+}
+
+.select-obj-btn {
+    display: block; 
+    margin: auto; 
+    margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+    .form-control-grid {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 10% 90%;
+        grid-template-areas: 
+        "title tile"
+        "control form";
+        justify-items: center;
+    }
+
+    .form-body {
+        margin: auto;
+        width: 90%;
+        height: auto;
+    }
+    .form-options-control {
+        margin: 0;
+        padding: 20px;
+    }
 }
