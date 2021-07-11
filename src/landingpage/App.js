@@ -84,17 +84,15 @@ const App = () => {
 
     return (
         <div className="landing-container">
-            <div className="landing-page">
-                <h1 className="landing-title">react-smart-<span className="hover-color">multiparts</span></h1>
+            <div className="landing-header">
+                <h1 className="landing-title-header">react-smart-<span className="hover-color">multiparts</span></h1>
                 <h5 className="landing-subtitle">a file detecting multipart form library...for react!</h5>
             </div>
             <section className="forms">
                 <div className="form-control-grid">
 
                     <h3 className="landing-title">
-                        <div className="landing-title">
                             Form One:
-                        </div>
                     </h3>
                     <FormControls 
                         btnTitle={formOneButtonTitle} setBtnTitle={setFormOneButtonTitle}
@@ -116,9 +114,7 @@ const App = () => {
 
                 <div className="form-control-grid">
                     <h3 className="landing-title">
-                        <div className="landing-title">
                             Form Two:
-                        </div>
                     </h3>
                     <FormControls
                         btnTitle={formTwoButtonTitle} setBtnTitle={setFormTwoButtonTitle}

@@ -1,16 +1,32 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: #c8e2e7;
 }
 
-.landing-container {
-    padding: 0 10px 0 10px;
+.landing-header {
+    background-color: #ffffff;
+    width: 100%;
+    margin-bottom: 40px;
+    position: sticky;
+    top:0px;
+    z-index: 3;
+}
+
+.landing-title-header {
+    font-family: 'Press Start 2P', cursive;
+    z-index: 1;
+    grid-area: title;
+    padding-left: 6px;
 }
 
 .landing-title {
     font-family: 'Press Start 2P', cursive;
     z-index: 1;
     background-color: #c8e2e7;
-    grid-area: title;
     padding-left: 6px;
 }
 
@@ -21,7 +37,8 @@ body {
 
 .landing-subtitle {
     position: relative;
-    bottom: 20px;
+    left: 10px;
+    margin: 0px 20px -20px 0px;
 }
 
 .forms {
@@ -40,6 +57,7 @@ body {
 .form-control-grid {
     display: flex;
     flex-direction: column;
+    margin-bottom: 20px;
 }
 
 .form-containing-div {
