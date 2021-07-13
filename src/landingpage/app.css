@@ -11,21 +11,22 @@ body {
     background-color: #ffffff;
     width: 100%;
     margin-bottom: 40px;
-    position: sticky;
+    position: fixed;
     top:0px;
     z-index: 3;
+    overflow: hidden;
 }
 
 .landing-title-header {
     font-family: 'Press Start 2P', cursive;
     z-index: 1;
-    grid-area: title;
-    padding-left: 6px;
+    padding-left: 5%;
 }
 
 .landing-title {
     font-family: 'Press Start 2P', cursive;
     z-index: 1;
+    grid-area: title;
     background-color: #c8e2e7;
     padding-left: 6px;
 }
@@ -35,13 +36,9 @@ body {
     transition: 0.3s;
 }
 
-.landing-subtitle {
-    position: relative;
-    left: 10px;
-    margin: 0px 20px -20px 0px;
-}
-
 .forms {
+    position: relative;
+    top: 90px;
     text-align: center;
 }
 
@@ -76,6 +73,7 @@ body {
 
 .form-carousel-div {
     min-width: 100%;
+    transition: 0.4s;
 }
 
 .form-options-control {
@@ -94,6 +92,7 @@ body {
 }
 
 .form-control-btn {
+    position: relative;
     margin-bottom: 20px;
 }
 
