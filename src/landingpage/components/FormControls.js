@@ -19,15 +19,18 @@ const FormControls = (props) => {
                     <label htmlFor="select-query" className="form-control-instructions">
                         Please enter a question for your select input
                     </label>
-                    <input type="text" name="select-query" onChange={(e) => setFormSelectQuery(e.target.value)}/>
+                    <input type="text" name="select-query" className="form-filename"
+                        onChange={(e) => setFormSelectQuery(e.target.value)}/>
                     <label htmlFor="select-options" className="form-control-instructions">
                         Please enter a comma separated list with no spaces for your select input's options
                     </label>
-                    <input type="text" name="select-options" onChange={(e) => setFormSelectOptions(e.target.value)}/>
+                    <input type="text" name="select-options" className="form-filename"
+                        onChange={(e) => setFormSelectOptions(e.target.value)}/>
                     <label htmlFor="select-options" className="form-control-instructions">
                         Enter a default/placeholder value for your select?
                     </label>
-                    <input type="text" name="select-options" onChange={(e) => setFormSelectDefault(e.target.value)}/>
+                    <input type="text" name="select-options" className="form-filename"
+                        onChange={(e) => setFormSelectDefault(e.target.value)}/>
                     <button className="select-obj-btn" onClick={(e) => handleFormSelects(e,1)}>
                         Set Select Object
                     </button>
@@ -39,19 +42,23 @@ const FormControls = (props) => {
                     <label htmlFor="select-query" className="form-control-instructions">
                         Please enter a question for your select input
                     </label>
-                    <input type="text" name="select-query" onChange={(e) => setFormSelectQuery(e.target.value)}/>
+                    <input type="text" name="select-query" className="form-filename"
+                        onChange={(e) => setFormSelectQuery(e.target.value)}/>
                     <label htmlFor="select-options" className="form-control-instructions">
                         Please enter a comma separated list with no spaces for your select input's options
                     </label>
-                    <input type="text" name="select-options" onChange={(e) => setFormSelectOptions(e.target.value)}/>
+                    <input type="text" name="select-options" className="form-filename"
+                        onChange={(e) => setFormSelectOptions(e.target.value)}/>
                     <label htmlFor="select-options" className="form-control-instructions">
                         Please enter a comma separated list to define the file types that require the select input
                     </label>
-                    <input type="text" name="select-options" onChange={(e) => setFormTypeOptions(e.target.value)}/>
+                    <input type="text" name="select-options" className="form-filename"
+                        onChange={(e) => setFormTypeOptions(e.target.value)}/>
                     <label htmlFor="select-options" className="form-control-instructions">
                         Enter a default/placeholder value for your select?
                     </label>
-                    <input type="text" name="select-options" onChange={(e) => setFormSelectDefault(e.target.value)}/>
+                    <input type="text" name="select-options" className="form-filename"
+                        onChange={(e) => setFormSelectDefault(e.target.value)}/>
                     <button className="select-obj-btn" onClick={(e) => handleFormSelects(e,2)}>
                         Set Select Object
                     </button>
@@ -129,7 +136,8 @@ const FormControls = (props) => {
                         return <option value={type} key={index}>{type}</option>
                     })}
                 </select>
-                <input type="text" name="fields-input" onChange={(e) => setFormFields(e.target.value)}/>
+                <input type="text" name="fields-input" className="form-filename"
+                    onChange={(e) => setFormFields(e.target.value)}/>
                 <button onClick={() => handleFormTwoData()}>
                     Set Type & Fields
                 </button>
@@ -146,7 +154,8 @@ const FormControls = (props) => {
                             Using a comma separated list with no spaces provide file types you would like to support
                         </span>
                     </label>
-                    <input type="text" name="types-input" onChange={(e) => setFormTypes(e.target.value)}/>
+                    <input type="text" name="types-input" className="form-filename"
+                        onChange={(e) => setFormTypes(e.target.value)}/>
                     <button onClick={() => handleFormTypes()} className="form-control-btn">
                         Set Types
                     </button>   
@@ -156,7 +165,8 @@ const FormControls = (props) => {
                             Using a comma separated list with no spaces provide the input fields you would like generated
                         </span>
                     </label>
-                    <input type="text" name="fields-input" onChange={(e) => setFormFields(e.target.value)}/>
+                    <input type="text" name="fields-input" className="form-filename"
+                        onChange={(e) => setFormFields(e.target.value)}/>
                     <button onClick={() => handleFormFields()} className="form-control-btn">
                         Set Fields
                     </button>
@@ -174,7 +184,8 @@ const FormControls = (props) => {
                             Using a comma separated list with no spaces provide file types you would like to support
                         </span>
                     </label>
-                    <input type="text" name="types-input" onChange={(e) => setFormTypes(e.target.value)}/>
+                    <input type="text" name="types-input" className="form-filename"
+                        onChange={(e) => setFormTypes(e.target.value)}/>
                     <button onClick={() => handleFormTypes()} className="form-control-btn">
                         Set Types
                     </button> 
