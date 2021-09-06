@@ -101,16 +101,31 @@ body {
     display: block;
     color: #000000;
     margin-bottom: 2px;
+    text-transform: uppercase;
 }
 
-.form-control-btn {
-    position: relative;
-    margin-bottom: 20px;
+.select-obj-btn, .form-control-btn, .select-toggle  {
+    background-color: #000000;
+    color: #ffffff;
+    line-height: 28px;
+    width: 200px;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.select-obj-btn:hover, .form-control-btn:hover {
+    background-color: #464346;
+    transition: 0.3s;
 }
 
 .select-toggle {
+    background-color: #ffffff;
+    width: 90;
+    color: #000000;
     display: block;
-    margin: auto;
 }
 
 .select-obj-btn {
