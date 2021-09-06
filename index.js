@@ -83,7 +83,8 @@ function FormFields(props) {
         }));
       } else if (field.match(/filename/gi)) {
         return /*#__PURE__*/React__default['default'].createElement("span", {
-          id: "filename-span form-filename",
+          id: "filename-span",
+          className: "form-filename",
           key: index
         }, "Filename: ", props.filename);
       } else {
@@ -122,7 +123,8 @@ var Select = function Select(props) {
   return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("label", {
     htmlFor: "select form-label"
   }, props.obj.query), /*#__PURE__*/React__default['default'].createElement("select", {
-    name: "select form-select",
+    name: "select",
+    className: "form-select",
     onChange: handleChange
   }, /*#__PURE__*/React__default['default'].createElement("option", {
     defaultValue: true
@@ -156,7 +158,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = ".container {\n    text-align: left;\n    width: fit-content;\n}\ninput[type^=\"text\"], textarea#comments {\n  width: 75%;\n}\n.logo {\n  height: 250px;\n  width: auto;\n  filter: invert(1) hue-rotate(210deg);\n  margin: auto;\n}\n.loader {\n  margin: auto;\n  transition: 0.8s;\n  height: 50px;\n}\n.error {\n  display: block;\n}\n.entry-form > * {\n  display: block;\n  font-size: 16px;\n}\n#file {\n  color: red;\n  font-weight: bolder;\n}\n.comments {\n  height: 100px;\n  width: 50%;\n}\n#submit {\n  margin-top: 10px;\n}\n";
+var css_248z = ".container {\n    text-align: left;\n    width: fit-content;\n}\ninput[type^=\"text\"], textarea#comments {\n  width: 75%;\n}\n.logo-container {\n  text-align: center;\n}\n.form-logo-img {\n  margin: auto;\n  height: 30vh;\n  width: auto;\n  text-align: center;\n}\n.loader {\n  margin: auto;\n  transition: 0.8s;\n  height: 50px;\n}\n.error {\n  display: block;\n}\n.entry-form > * {\n  display: block;\n  font-size: 16px;\n}\n#file {\n  color: red;\n  font-weight: bolder;\n}\n.comments {\n  height: 100px;\n  width: 50%;\n}\n#submit {\n  margin-top: 10px;\n}";
 styleInject(css_248z);
 
 var FormOne = function FormOne(props) {
@@ -227,9 +229,18 @@ var FormOne = function FormOne(props) {
     });
   };
 
+  var renderLogo = function renderLogo(path) {
+    return /*#__PURE__*/React__default['default'].createElement("img", {
+      src: path,
+      className: "form-logo-img"
+    });
+  };
+
   return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("div", {
     className: "container form-body"
-  }, /*#__PURE__*/React__default['default'].createElement("p", null, "Supported File Types: ", props.fileTypes.map(function (x) {
+  }, /*#__PURE__*/React__default['default'].createElement("div", {
+    className: "logo-container"
+  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React__default['default'].createElement("p", null, "Supported File Types: ", props.fileTypes.map(function (x) {
     return ".".concat(x);
   }).join(" ")), /*#__PURE__*/React__default['default'].createElement("form", {
     onSubmit: function onSubmit(e) {
@@ -347,9 +358,18 @@ var FormTwo = function FormTwo(props) {
     });
   };
 
+  var renderLogo = function renderLogo(path) {
+    return /*#__PURE__*/React__default['default'].createElement("img", {
+      src: path,
+      className: "form-logo-img"
+    });
+  };
+
   return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("div", {
     className: "container form-body"
-  }, /*#__PURE__*/React__default['default'].createElement("p", null, "Supported File Types: ", Object.keys(props.fileTypes).map(function (x) {
+  }, /*#__PURE__*/React__default['default'].createElement("div", {
+    className: "logo-container"
+  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React__default['default'].createElement("p", null, "Supported File Types: ", Object.keys(props.fileTypes).map(function (x) {
     return ".".concat(x);
   }).join(" ")), /*#__PURE__*/React__default['default'].createElement("form", {
     onSubmit: function onSubmit(e) {
