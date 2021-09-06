@@ -54,53 +54,56 @@ export const FormOne = (props) => {
     );
   };
 
+  const renderLogo = (path) => {
+    return <img src={path} className="form-logo-img"/>
+  };
+
  
   return (
     <>
       <div className="container form-body">
-          <p>
-            Supported File Types: {props.fileTypes.map(x => {
-              return `.${x}`
-            }).join(" ")}
-          </p>
+        <div className="logo-container">
+          {props.logo ? renderLogo(props.logo) : ""}
+        </div>
+        <p>
+          Supported File Types: {props.fileTypes.map(x => {
+            return `.${x}`
+          }).join(" ")}
+        </p>
 
-          <form
-            onSubmit={(e) => dataReturn(e)}
-            className="entry-form"
-            encType="multipart/form-data"
-            method="post"
+        <form
+          onSubmit={(e) => dataReturn(e)}
+          className="entry-form"
+          encType="multipart/form-data"
+          method="post"
+          name="upload">
+          <label htmlFor="file form-label">File:</label>
+          <input
+            id="file"
+            type="file"
             name="upload"
-          >
-            <label htmlFor="file form-label">File:</label>
-            <input
-              id="file"
-              type="file"
-              name="upload"
-              className="form-fileinput"
-              onChange={(e) => {
-                let file = handleFile(e.target.files);
-                
-                if (file === null) {
-                  return false;
-                } else {
-                setFileType(file);
-                setFileName(file[0].name);
-
-                //checks for Select prop
-                if (props.select) setSelect(true);
-                }
-              }}
-            />
-            <br />
-            {select === true 
-              ? generateSelect(props.select)
-              : ""}
-
-            {detectFile()}
-            <input id="submit" type="submit" className="button form-button" />
-            
-          </form>
+            className="form-fileinput"
+            onChange={(e) => {
+              let file = handleFile(e.target.files);
+              
+              if (file === null) {
+                return false;
+              } else {
+              setFileType(file);
+              setFileName(file[0].name);
+              //checks for Select prop
+              if (props.select) setSelect(true);
+              }
+            }}
+          />
           <br />
+          {select === true 
+            ? generateSelect(props.select)
+            : ""}
+          {detectFile()}
+          <input id="submit" type="submit" className="button form-button" />  
+        </form>
+         <br />
       </div>
     </>
   );

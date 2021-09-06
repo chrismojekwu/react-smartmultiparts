@@ -5,6 +5,7 @@ import {jsGraphics} from '../wz_jsgraphics';
 import './app.css';
 
 const App = () => {
+    // refactor all of this to TryIt component
     useEffect(() => {
         const jg = new jsGraphics("myCanvas");
         jg.setColor("#00ff00"); // green (RIP Walter Zorn) 

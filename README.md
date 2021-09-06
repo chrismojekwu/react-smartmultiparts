@@ -73,6 +73,11 @@ const selectObj = {
 Coverage for more input types will be available in future versions. 
 
 ## Styling:
+
+### Logo -
+You can provide a "logo" props using a path to an image of your choice.
+That element can be styles using the "form-logo-img" class selector.
+
 You can style the various aspects of the form using CSS Class selectors.
 
 Body/Container - .form-body
@@ -88,3 +93,5 @@ Comments - .form-textarea
 Text Inputs - .form-textinput
 
 Submit Button - .form-button
+
+Logo - .form-logo-img

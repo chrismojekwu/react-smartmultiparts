@@ -5,11 +5,14 @@
 input[type^="text"], textarea#comments {
   width: 75%;
 }
-.logo {
-  height: 250px;
-  width: auto;
-  filter: invert(1) hue-rotate(210deg);
+.logo-container {
+  text-align: center;
+}
+.form-logo-img {
   margin: auto;
+  height: 30vh;
+  width: auto;
+  text-align: center;
 }
 .loader {
   margin: auto;

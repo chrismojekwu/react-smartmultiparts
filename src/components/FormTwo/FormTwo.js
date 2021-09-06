@@ -64,9 +64,16 @@ export const FormTwo = (props) => {
     );
   };
 
+  const renderLogo = (path) => {
+    return <img src={path} className="form-logo-img"/>
+  };
+
   return (  
     <>
       <div className="container form-body">
+      <div className="logo-container">
+        {props.logo ? renderLogo(props.logo) : ""}
+      </div>
           <p>
             Supported File Types: {Object.keys(props.fileTypes).map(x => {
               return `.${x}`

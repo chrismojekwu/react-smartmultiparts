@@ -22,7 +22,7 @@ const FormControls = (props) => {
                     <input type="text" name="select-query" className="form-filename"
                         onChange={(e) => setFormSelectQuery(e.target.value)}/>
                     <label htmlFor="select-options" className="form-control-instructions">
-                        Please enter a comma separated list with no spaces for your select input's options
+                        Please enter a comma separated list for your select input's options
                     </label>
                     <input type="text" name="select-options" className="form-filename"
                         onChange={(e) => setFormSelectOptions(e.target.value)}/>
@@ -45,7 +45,7 @@ const FormControls = (props) => {
                     <input type="text" name="select-query" className="form-filename"
                         onChange={(e) => setFormSelectQuery(e.target.value)}/>
                     <label htmlFor="select-options" className="form-control-instructions">
-                        Please enter a comma separated list with no spaces for your select input's options
+                        Please enter a comma separated list or your select input's options
                     </label>
                     <input type="text" name="select-options" className="form-filename"
                         onChange={(e) => setFormSelectOptions(e.target.value)}/>
@@ -69,7 +69,7 @@ const FormControls = (props) => {
 
     const handleFormTypes = (e) => {
         if (props.formNum === 1){
-            const types = formTypes.split(",");
+            const types = formTypes.split(",").map(x => x.trim());
             props.setLiveTypes(types);
         } 
         if (props.formNum === 2){
@@ -78,14 +78,14 @@ const FormControls = (props) => {
     };  
 
     const handleFormFields = (e) => {
-        const fields = formFields.split(",");
+        const fields = formFields.split(",").map(x => x.trim());
         props.setLiveFields(fields);
     };
 
     const handleFormSelects = (e,formNum) => {
         e.preventDefault();
         if(formNum === 1) {
-            const options = formSelectOptions.split(",");
+            const options = formSelectOptions.split(",").map(x => x.trim());
             const query = formSelectQuery;
             const selectObj = {
                 query,
@@ -97,9 +97,9 @@ const FormControls = (props) => {
             props.setSelectObject(selectObj);
         }
         if(formNum === 2) {
-            const options = formSelectOptions.split(",");
+            const options = formSelectOptions.split(",").map(x => x.trim());
             const query = formSelectQuery;
-            const types = formTypeOptions.split(",");
+            const types = formTypeOptions.split(",").map(x => x.trim());
             const selectObj = {
                 query,
                 select: options,
@@ -114,17 +114,17 @@ const FormControls = (props) => {
 
     
     const renderFormTwoTypeControls = () => {
-        const types = formTypes.split(","); 
+        const types = formTypes.split(",").map(x => x.trim()); 
 
         const handleFormTwoData = () => {
-            props.formTwoData[formTwoActiveType] = formFields.split(",");
+            props.formTwoData[formTwoActiveType] = formFields.split(",").map(x => x.trim());
         };
 
         return (
             <>
                 <label>
                     <span className="form-control-instructions">
-                        Select a file type and using a comma separated list with no spaces provide the input fields you would like to be generated
+                        Select a file type and using a comma separated list provide the input fields you would like to be generated
                     </span>
                     <span className="form-control-instructions">
                         Note: The form's Supported File Types may not update until you attempt to choose a file to "upload" from your system
@@ -151,7 +151,7 @@ const FormControls = (props) => {
                 <div className="form-options-control">
                     <label htmlFor="types-input">
                         <span className="form-control-instructions">
-                            Using a comma separated list with no spaces provide file types you would like to support
+                            Using a comma separated list provide file types you would like to support
                         </span>
                     </label>
                     <input type="text" name="types-input" className="form-filename"
@@ -162,7 +162,7 @@ const FormControls = (props) => {
 
                     <label htmlFor="fields-input">
                         <span className="form-control-instructions">
-                            Using a comma separated list with no spaces provide the input fields you would like generated
+                            Using a comma separated list provide the input fields you would like generated
                         </span>
                     </label>
                     <input type="text" name="fields-input" className="form-filename"
@@ -181,7 +181,7 @@ const FormControls = (props) => {
                 <div className="form-options-control">
                     <label htmlFor="types-input">
                         <span className="form-control-instructions">
-                            Using a comma separated list with no spaces provide file types you would like to support
+                            Using a comma separated list provide file types you would like to support
                         </span>
                     </label>
                     <input type="text" name="types-input" className="form-filename"

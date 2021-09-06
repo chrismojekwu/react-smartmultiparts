@@ -66,7 +66,7 @@ test('renders the correct "text" type inputs for different file types',() => {
 
         const element = wrapper.find(`#${formObj.jpg[i]}`);
 
-        expect(element.html()).toEqual(`<input type="text" name="${formObj.jpg[i]}" id="${formObj.jpg[i]}">`);
+        expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.jpg[i]}" id="${formObj.jpg[i]}">`);
     };
 
     const mp3File = new File(["test"], "test.mp3", {
@@ -79,7 +79,7 @@ test('renders the correct "text" type inputs for different file types',() => {
 
         const element = wrapper.find(`#${formObj.mp3[i]}`);
 
-        expect(element.html()).toEqual(`<input type="text" name="${formObj.mp3[i]}" id="${formObj.mp3[i]}">`);
+        expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.mp3[i]}" id="${formObj.mp3[i]}">`);
     };
 
     const wavFile = new File(["test"], "test.wav", {
@@ -92,7 +92,7 @@ test('renders the correct "text" type inputs for different file types',() => {
 
         const element = wrapper.find(`#${formObj.wav[i]}`);
 
-        expect(element.html()).toEqual(`<input type="text" name="${formObj.wav[i]}" id="${formObj.wav[i]}">`);
+        expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.wav[i]}" id="${formObj.wav[i]}">`);
     };
 });
 
@@ -179,3 +179,21 @@ test('it renders a select element with the correct options when provided a selec
     expect(wrapper.exists({name: "select"})).toBeTruthy();
 });
 
+test('it renders an img element when provided with logo prop',() => {
+
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const formObj = {
+        wav: ["Title", "Artist", "Comments"],
+        mp3: ["Title", "Artist"],
+        jpg: ["Title", "Subject", "Source"]
+    };
+    
+    render(<FormTwo fileTypes={formObj} cb={printData} logo={"/fakepath.jpg"}/>);
+
+    const logo = screen.getByRole('img');
+
+    expect(logo).toBeInTheDocument();
+});

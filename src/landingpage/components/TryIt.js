@@ -24,8 +24,6 @@ const TryIt = () => {
     const [formTwoOffset, setFormTwoOffset] = useState(0);
 
     
-    
-    
     const handleFormOneSelect = (formNum) => {
         if(formNum === 1){
             if(formOneSelect === false){

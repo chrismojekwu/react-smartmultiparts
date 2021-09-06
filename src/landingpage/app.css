@@ -12,7 +12,7 @@ body {
  }
 
 .landing-header {
-    background-color: #1020ad;
+    background-color: #000000;
     width: 100%;
     margin-bottom: 40px;
     position: fixed;
@@ -88,17 +88,18 @@ body {
     width: 90%;
     padding: 10px;
     margin: auto;
-    border: 1px solid #1020ad67;
+    border: 1px solid #00000067;
     border-radius: 5px;
 }
 
 
 
 .form-control-instructions {
+    position: relative;
     font-family: sans-serif;
     font-size: 10px;
     display: block;
-    color: rgb(109, 70, 25);
+    color: #000000;
     margin-bottom: 2px;
 }
 

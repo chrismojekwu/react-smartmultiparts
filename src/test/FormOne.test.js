@@ -55,7 +55,7 @@ test('it renders the correct "text" type inputs when file is uploaded', () => {
 
         const element = wrapper.find(`#${fields[i]}`);
 
-        expect(element.html()).toEqual(`<input type="text" name="${fields[i]}" id="${fields[i]}">`);
+        expect(element.html()).toEqual(`<input type="text form-textinput\" name="${fields[i]}" id="${fields[i]}">`);
     };
 
 });
@@ -128,4 +128,20 @@ test('it renders a select element with the correct options when provided a selec
         expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}">${selectObj.select[i]}</option>`);
     };
     
+});
+
+test('it renders an img element when provided with logo prop', () => {
+    const fields = ["Title", "Submitee", "Name", "Comments", "filename"];
+
+    const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
+    
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} logo={"/fakepath.jpg"}/>);
+
+    const logo = screen.getByRole('img');
+
+    expect(logo).toBeInTheDocument();
 });
