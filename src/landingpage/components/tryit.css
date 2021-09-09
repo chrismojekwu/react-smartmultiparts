@@ -2,10 +2,12 @@
     font-family: 'Press Start 2P', cursive;
     z-index: 1;
     grid-area: title;
-    background-color: #ffca37;
+    background-color: #000000;
+    color: #ffffff;
     padding-left: 6px;
     width: 50%;
     margin:auto;
+    line-height: 26px;
 }
 
 .forms {
