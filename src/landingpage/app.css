@@ -5,11 +5,18 @@
 
 body {
     background-color: #ffffff;
+    font-family: sans-serif;
 }
- #myCanvas2 {
-    position: absolute;
-    top: 45vh;
- }
+
+#myCanvas {
+    display: flex;
+    flex-direction: column;
+}
+
+#myCanvas2 {
+   position: absolute;
+   top: 45vh;
+}
 
 .landing-header {
     background-color: #000000;
@@ -21,21 +28,16 @@ body {
     overflow: hidden;
 }
 
+.multiparts {
+    font-size: 24px;
+}
+
 .landing-title-header {
     font-family: 'Press Start 2P', cursive;
     z-index: 1;
-    padding-left: 5%;
+    padding-left: 2%;
     color: #ffffff;
-}
-
-.landing-title {
-    font-family: 'Press Start 2P', cursive;
-    z-index: 1;
-    grid-area: title;
-    background-color: #ffca37;
-    padding-left: 6px;
-    width: 50%;
-    margin:auto;
+    word-wrap: normal;
 }
 
 .hover-color:hover {
@@ -43,100 +45,22 @@ body {
     transition: 0.3s;
 }
 
-.forms {
-    position: relative;
-    top: 110px;
-    text-align: center;
-}
-
-.form-body {
-    margin: auto;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 90%;
-}
-
-.form-control-grid {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-}
-
-.form-containing-div {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    overflow-x: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;
-    grid-area: form;
-}
-
-.form-containing-div::-webkit-scrollbar {
-    display: none;
-}
-
-.form-carousel-div {
-    min-width: 100%;
-    transition: 0.4s;
-}
-
-.form-options-control {
-    grid-area: control;
-    width: 90%;
-    padding: 10px;
-    margin: auto;
-    border: 1px solid #00000067;
-    border-radius: 5px;
-}
-
-.form-control-instructions {
-    position: relative;
-    font-family: sans-serif;
-    font-size: 10px;
-    display: block;
-    color: #000000;
-    margin-bottom: 2px;
-    text-transform: capitalize;
-}
-
-.select-obj-btn, .form-control-btn, .select-toggle  {
+.control-btn {
+    margin-left: 10px;
+    text-transform: uppercase;
     background-color: #000000;
     color: #ffffff;
-    line-height: 28px;
-    width: 200px;
-    margin: auto;
-    margin-top: 10px;
+    text-decoration: none;
+    line-height: 26px;
+    width: 120px;
+    text-align: center;
     border-radius: 5px;
-    display: block;
-    margin-bottom: 10px;
 }
 
-.select-obj-btn:hover, .form-control-btn:hover {
-    background-color: #464346;
-    transition: 0.3s;
-}
-
-.select-toggle {
-    background-color: #ffffff;
-    width: 90;
-    color: #000000;
-    display: block;
-}
-
-.select-obj-btn {
-    display: block; 
-    margin: auto; 
-    margin-bottom: 20px;
-}
-
-/*** FORM STYLING ***/
-.form-filename {
-    border-radius: 5px;
-    line-height: 18px;
-    font-size: 12px;
+.landing-description {
+    width: 80%;
+    padding-left: 10px;
+    font-family: sans-serif;
 }
 
 @media only screen and (min-width: 768px) {
@@ -144,23 +68,11 @@ body {
         line-height: 60px;
     }
 
-    .form-control-grid {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        grid-template-rows: 10% 90%;
-        grid-template-areas: 
-        "title tile"
-        "control form";
-        justify-items: center;
+    .controls {
+        justify-content: center;
     }
 
-    .form-body {
-        margin: auto;
-        width: 90%;
-        height: auto;
-    }
-    .form-options-control {
-        margin: 0;
-        padding: 20px;
+    .multiparts {
+        font-size: 1em;
     }
 }

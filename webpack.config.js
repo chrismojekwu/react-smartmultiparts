@@ -9,14 +9,16 @@ module.exports = {
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     open: true,
     clientLogLevel: 'silent',
     port: 9000,
-    hot: true
+    hot: true,
+    historyApiFallback: true
   },
   module: {
     rules: [

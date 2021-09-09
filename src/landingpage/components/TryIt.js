@@ -2,6 +2,7 @@ import React, {useState, useRef} from 'react';
 import {FormOne} from '../../components/FormOne/FormOne';
 import {FormTwo} from '../../components/FormTwo/FormTwo';
 import FormControls from './FormControls';
+import './tryit.css'
 
 const TryIt = () => {
     // Form One

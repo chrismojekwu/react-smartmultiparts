@@ -1,0 +1,46 @@
+.getstarted {
+    padding: 5px;
+}
+
+details > summary {
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.code-snippet {
+    border: 2px solid #000000;
+    background-color: #2b2b2b;
+    color: #ffffff;
+    padding: 5px;
+}
+
+.code-snippet p:hover {
+    color: #ff7b00;
+    transition: 0.3s;
+}
+
+.code-snippet > * {
+    margin-bottom: 10px;
+}
+
+.inputtypes > * , .styling > *, .gist > * {
+    display: block;
+    margin: 5px 0 5px 0
+}
+
+.bold {
+    font-weight: bolder;
+}
+
+.cli {
+    color: #2fe02f;
+    margin-right: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+    .getstarted {
+        width: 80%;
+        align-self: flex-end;
+        margin-right: 10px;
+    }
+}
