@@ -2,6 +2,10 @@
     padding: 5px;
 }
 
+.heading {
+    margin-top: 10px;
+}
+
 details > summary {
     cursor: pointer;
     font-weight: bolder;
@@ -19,7 +23,7 @@ details > summary {
     transition: 0.3s;
 }
 
-.code-snippet > * {
+.code-snippet code > * {
     margin-bottom: 10px;
 }
 

@@ -9,14 +9,16 @@ const GetStarted = () => {
     return (
         <div className="getstarted">
             <div className="code-snippet">
-            <span className="cli">$</span>npm i react-smartmultiparts
+                <code>
+                    <span className="cli">$</span>npm i react-smartmultiparts
+                </code>
             </div>
             <div>
-                <h3>Usage:</h3>
+                <h3 className="heading">Usage:</h3>
 
                 <div className="gist">
                     <span>
-                    The <span className="bold">FormOne</span> component accepts a list of filetypes as a "fileTypes" prop and form fields as "fields" prop.
+                    The <span className="bold">FormOne</span> component accepts a list of file types as a "fileTypes" prop and form fields as "fields" prop.
                     </span>
                     <span>
                     The <span className="bold">FormTwo</span> component allows you to specify an object containing the supported file types as keys and their correspending fields as an array using the "fileTypes" prop.
@@ -29,31 +31,35 @@ const GetStarted = () => {
                 <details>
                     <summary>Form One</summary>
                     <div className="code-snippet">
-                        {formOne.map(x => {
-                            return (
-                                <p>
-                                    {x}
-                                </p>
-                            )
-                        })}
+                        <code>
+                            {formOne.map(x => {
+                                return (
+                                    <div>
+                                        {x}
+                                    </div>
+                                )
+                            })}
+                        </code>
                     </div>
                 </details>
 
                 <details>
                     <summary>Form Two</summary>
                     <div className="code-snippet">
-                        {formTwo.map(x => {
-                                return (
-                                    <p>
-                                        {x}
-                                    </p>
-                                )
-                        })}
+                        <code>
+                            {formTwo.map(x => {
+                                    return (
+                                        <div>
+                                            {x}
+                                        </div>
+                                    )
+                            })}
+                        </code>
                     </div>    
                 </details>
             </div>
 
-            <h3>Input Types Supported:</h3>
+            <h3 className="heading">Input Types Supported:</h3>
             <div className="inputtypes">
                 <span>
                     <span className="bold">Text Inputs</span> - Any field value supplied will generate a text input.
@@ -69,19 +75,21 @@ const GetStarted = () => {
                 <details>
                     <summary>Example</summary>
                     <div className="code-snippet">
-                        {select.map(x => {
-                            return (
-                                <p>
-                                    {x}
-                                </p>
-                            )
-                        })}
+                        <code>
+                            {select.map(x => {
+                                return (
+                                    <div>
+                                        {x}
+                                    </div>
+                                )
+                            })}
+                        </code>
                     </div>
                 </details>
                 </span>
             </div>
 
-            <h3>Styling:</h3>
+            <h3 className="heading">Styling:</h3>
             <div className="styling">
                 <span>
                     <span className="bold">Logo</span> - You can provide a "logo" prop using a path to an image of your choice. That element can be styled using the "form-logo-img" class selector.
