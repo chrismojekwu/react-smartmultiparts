@@ -197,3 +197,40 @@ test('it renders an img element when provided with logo prop',() => {
 
     expect(logo).toBeInTheDocument();
 });
+
+test('Empty object behavior without select',() => {
+    const fileTypes = {};
+
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const wrapper = mount(<FormTwo fileTypes={fileTypes} cb={printData}/>);
+
+    const wavFile = new File(["test"], "test.wav", {
+        type: "audio/wav"
+    });
+
+    wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
+
+    expect((wrapper.find('#error').text() === "Internal Error")).toBe(true);
+});
+
+test('Empty object behavior with select',() => {
+
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const fileTypes = {};
+
+    const wrapper = mount(<FormTwo fileTypes={fileTypes} cb={printData} select={{}}/>);
+
+    const wavFile = new File(["test"], "test.wav", {
+        type: "audio/wav"
+    });
+
+    wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
+
+    expect(wrapper.find('#error').text() === "Internal Error").toBe(true);
+});

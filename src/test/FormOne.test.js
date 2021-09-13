@@ -145,3 +145,43 @@ test('it renders an img element when provided with logo prop', () => {
 
     expect(logo).toBeInTheDocument();
 });
+
+test('Empty Fields behavior no select', () => {
+    const fields = [];
+
+    const fileTypes = [];
+    
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
+
+    const file = new File(["test"], "test.jpg", {
+        type: "image/jpeg"
+    });
+
+    wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+    expect(wrapper.find('#error').text() === "Internal Error").toBe(true);
+});
+
+test('Empty Fields behavior with select', () => {
+    const fields = [];
+
+    const fileTypes = [];
+    
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
+
+    const file = new File(["test"], "test.jpg", {
+        type: "image/jpeg"
+    });
+
+    wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+    expect(wrapper.find('#error').text() === "Internal Error").toBe(true);
+});
