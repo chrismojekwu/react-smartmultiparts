@@ -14,6 +14,7 @@ export const FormTwo = (props) => {
   //function to render correct form component for file type
   const detectFile = () => {
     if (fileType === "") return "";
+    if (Object.keys(props.fileTypes).length === 0) return "Please set form object."
 
     const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
 
@@ -68,6 +69,7 @@ export const FormTwo = (props) => {
     return <img src={path} className="form-logo-img"/>
   };
 
+
   return (  
     <>
       <div className="container form-body">
@@ -75,9 +77,9 @@ export const FormTwo = (props) => {
         {props.logo ? renderLogo(props.logo) : ""}
       </div>
           <p>
-            Supported File Types: {Object.keys(props.fileTypes).map(x => {
+            Supported File Types: {Object.keys(props.fileTypes) != undefined ? Object.keys(props.fileTypes).map(x => {
               return `.${x}`
-            }).join(" ")}
+            }).join(" ") : ""}
           </p>
 
           <form
