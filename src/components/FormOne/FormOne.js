@@ -12,6 +12,7 @@ export const FormOne = (props) => {
   //function to render correct form component for file type
   const detectFile = () => {
     if (fileType === "") return "";
+    if (Object.keys(props.fileTypes).length === 0) return "Internal Error"
     const ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
     const re = new RegExp(props.fileTypes.join("|"), "gi");
     if (!ext) return "Invalid Extention";
@@ -97,9 +98,9 @@ export const FormOne = (props) => {
             }}
           />
           <br />
-          {select === true 
+          {select === true && Object.keys(props.fileTypes).length != 0
             ? generateSelect(props.select)
-            : ""}
+            : "" }
           {detectFile()}
           <input id="submit" type="submit" className="button form-button" />  
         </form>

@@ -14,7 +14,7 @@ export const FormTwo = (props) => {
   //function to render correct form component for file type
   const detectFile = () => {
     if (fileType === "") return "";
-    if (Object.keys(props.fileTypes).length === 0) return "Please set form object."
+    if (Object.keys(props.fileTypes).length === 0) return "Internal Error"
 
     const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
 
