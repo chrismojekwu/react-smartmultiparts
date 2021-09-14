@@ -129,6 +129,27 @@ body {
   color: black;
 }
 
+.card-back {
+    display: relative;
+    border-radius: 5px;
+    background: repeating-linear-gradient(
+        45deg,
+        #000000,
+        #000000 10px,
+        #ffffff 10px,
+        #ffffff 20px
+      );
+}
+
+.card-back-inner {
+    position: absolute;
+    background-color: #000000;
+    padding: 10px;
+    width: 80%;
+    left: 10%;
+    top: 40%;
+}
+
 @keyframes flip {
     0% {
         transform: rotateY(0);
@@ -154,7 +175,7 @@ body {
 }
 
 .card-back {
-  background-color: dodgerblue;
+  background-color: rgb(0, 0, 0);
   color: white;
   transform: rotateY(180deg);
 }  
