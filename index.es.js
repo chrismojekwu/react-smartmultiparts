@@ -177,6 +177,9 @@ var FormOne = function FormOne(props) {
 
   var detectFile = function detectFile() {
     if (fileType === "") return "";
+    if (Object.keys(props.fileTypes).length === 0 || props.fields === []) return /*#__PURE__*/React.createElement("span", {
+      id: "error"
+    }, "Internal Error");
     var ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
     var re = new RegExp(props.fileTypes.join("|"), "gi");
     if (!ext) return "Invalid Extention";
@@ -261,7 +264,7 @@ var FormOne = function FormOne(props) {
         if (props.select) setSelect(true);
       }
     }
-  }), /*#__PURE__*/React.createElement("br", null), select === true ? generateSelect(props.select) : "", detectFile(), /*#__PURE__*/React.createElement("input", {
+  }), /*#__PURE__*/React.createElement("br", null), select === true && Object.keys(props.fileTypes).length != 0 ? generateSelect(props.select) : "", detectFile(), /*#__PURE__*/React.createElement("input", {
     id: "submit",
     type: "submit",
     className: "button form-button"
@@ -270,6 +273,7 @@ var FormOne = function FormOne(props) {
 
 var stringInArr = function stringInArr(arr, ext) {
   var x;
+  if (arr === undefined) return false;
 
   for (var i = 0; i < arr.length; i++) {
     if (arr[i].toLowerCase() === ext) {
@@ -304,6 +308,9 @@ var FormTwo = function FormTwo(props) {
 
   var detectFile = function detectFile() {
     if (fileType === "") return "";
+    if (Object.keys(props.fileTypes).length === 0) return /*#__PURE__*/React.createElement("span", {
+      id: "error"
+    }, "Internal Error");
     var ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
     var re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
     if (!ext) return "Invalid Extention";
@@ -361,9 +368,9 @@ var FormTwo = function FormTwo(props) {
     className: "container form-body"
   }, /*#__PURE__*/React.createElement("div", {
     className: "logo-container"
-  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React.createElement("p", null, "Supported File Types: ", Object.keys(props.fileTypes).map(function (x) {
+  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React.createElement("p", null, "Supported File Types: ", Object.keys(props.fileTypes) != undefined ? Object.keys(props.fileTypes).map(function (x) {
     return ".".concat(x);
-  }).join(" ")), /*#__PURE__*/React.createElement("form", {
+  }).join(" ") : ""), /*#__PURE__*/React.createElement("form", {
     onSubmit: function onSubmit(e) {
       return upload(e);
     },
