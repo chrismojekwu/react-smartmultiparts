@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FormFields from "../FormFields/FormFields";
 import Select from '../Select/Select';
-import {stringInArr} from '../util/helpers';
+import {stringInArr, fileTypes} from '../util/helpers';
 
 import "../Form.css";
 
@@ -44,7 +44,9 @@ export const FormTwo = (props) => {
     }
 
     for(let i = 0; i < fieldArr.length; i++){
-      if(new RegExp('filename', 'gi').test(fieldArr[i]) === true){
+      if(fieldArr[i] === ""){
+        continue;
+      }else if(new RegExp('filename', 'gi').test(fieldArr[i]) === true){
         data.append('filename', fileName);
       } else
       data.append(fieldArr[i], e.target[fieldArr[i]].value);
@@ -77,9 +79,7 @@ export const FormTwo = (props) => {
         {props.logo ? renderLogo(props.logo) : ""}
       </div>
           <p>
-            Supported File Types: {Object.keys(props.fileTypes) != undefined ? Object.keys(props.fileTypes).map(x => {
-              return `.${x}`
-            }).join(" ") : ""}
+            Supported File Types: {Object.keys(props.fileTypes) != undefined ? fileTypes(Object.keys(props.fileTypes)) : ""}
           </p>
 
           <form

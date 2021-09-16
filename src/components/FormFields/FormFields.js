@@ -19,8 +19,10 @@ function FormFields(props) {
                 />
               </React.Fragment>
             );
-          } else if(field.match(/filename/gi)){
+          } else if (field.match(/filename/gi)){
             return <span id="filename-span" className="form-filename" key={index}>Filename: {props.filename}</span>
+          } else if (field === "") {
+            return "";
           } else {
             return (
               <React.Fragment key={index}>
@@ -34,7 +36,11 @@ function FormFields(props) {
     );
   };
 
-  return <>{renderFields()}</>;
+  return (
+    <>
+      {renderFields()}
+    </>
+    );
 }
 
 export default FormFields;

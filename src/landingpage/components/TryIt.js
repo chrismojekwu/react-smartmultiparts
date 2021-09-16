@@ -50,7 +50,9 @@ const TryIt = () => {
     }
 
     const printData = (data) => { 
-        console.log(data);
+        for (var value of data.values()) {
+            console.log(value);
+         }
     };
 
     return (

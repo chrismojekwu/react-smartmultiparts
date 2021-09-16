@@ -9,3 +9,12 @@ export const stringInArr = (arr, ext) => {
     };
     return x;
 };
+
+export const fileTypes = (arr) => {
+    const list = arr.map((x,i) => {
+        if(x === "") return "";
+        else
+            return `.${x}`;
+    });
+    return list.join(" ");
+}

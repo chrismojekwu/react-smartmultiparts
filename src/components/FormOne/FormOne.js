@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FormFields from "../FormFields/FormFields";
 import Select from '../Select/Select';
+import {fileTypes} from '../util/helpers';
 import "../Form.css";
 
 export const FormOne = (props) => {
@@ -34,7 +35,9 @@ export const FormOne = (props) => {
     }
 
     for(let i = 0; i < props.fields.length; i++){
-      if(new RegExp('filename', 'gi').test(props.fields[i]) === true){
+      if(props.fields[i] === ""){
+        continue;
+      }else if(new RegExp('filename', 'gi').test(props.fields[i]) === true){
         data.append('filename', fileName);
       } else
       data.append(props.fields[i], e.target[props.fields[i]].value);
@@ -67,9 +70,7 @@ export const FormOne = (props) => {
           {props.logo ? renderLogo(props.logo) : ""}
         </div>
         <p>
-          Supported File Types: {props.fileTypes.map(x => {
-            return `.${x}`
-          }).join(" ")}
+          Supported File Types: {fileTypes(props.fileTypes)}
         </p>
 
         <form
