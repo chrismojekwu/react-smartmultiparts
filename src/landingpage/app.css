@@ -112,9 +112,9 @@ body {
 
 .card-one {
     /*transform: rotateY(180deg);*/
-    animation-name: flip;
+ /*   animation-name: flip;
     animation-duration: 4s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: infinite;*/
 }
 
 .card-two {
@@ -127,6 +127,7 @@ body {
 .card-front {
   background-color: #bbb;
   color: black;
+  word-wrap: break-word;
 }
 
 .card-back {
@@ -183,6 +184,10 @@ body {
 .form-body {
   width: 100%;
   height: 100%;
+}
+
+.form-fileinput {
+    color: #ff0000;
 }
 
 

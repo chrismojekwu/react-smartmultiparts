@@ -27,8 +27,8 @@ input[type^="text"], textarea#comments {
   font-size: 16px;
 }
 #file {
-  color: red;
-  font-weight: bolder;
+  font-weight: bold;
+  width: 100%;
 }
 .comments {
   height: 100px;
