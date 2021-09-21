@@ -111,14 +111,12 @@ body {
 
 
 .card-one {
-    /*transform: rotateY(180deg);*/
- /*   animation-name: flip;
+    animation-name: flip;
     animation-duration: 4s;
-    animation-iteration-count: infinite;*/
+    animation-iteration-count: infinite;
 }
 
 .card-two {
-    /*transform: rotateY(180deg);*/
     animation-name: flip2;
     animation-duration: 4.5s;
     animation-iteration-count: infinite;

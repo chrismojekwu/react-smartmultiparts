@@ -11,9 +11,7 @@
 }
 
 .forms {
-    position: relative;
-    top: 20px;
-    text-align: center;
+    margin-top: 20px;
 }
 
 .form-body {
@@ -55,8 +53,19 @@
     width: 90%;
     padding: 10px;
     margin: auto;
-    border: 1px solid #00000067;
-    border-radius: 5px;
+    border: 1px solid #8b848467;
+}
+
+.form-options-control input[type='text']{
+    width: 100%;
+    line-height: 28px;
+    font-size: 14px;
+    padding-top: 10px;
+}
+
+.form-options-control label{
+    position: relative;
+    top: 10px;
 }
 
 .form-control-instructions {
@@ -67,6 +76,9 @@
     color: #000000;
     margin-bottom: 2px;
     text-transform: capitalize;
+    background-color: #ffffff;
+    width: fit-content;
+    padding-right: 5px;
 }
 
 .select-obj-btn, .form-control-btn, .select-toggle  {
@@ -74,7 +86,6 @@
     color: #ffffff;
     line-height: 28px;
     width: 200px;
-    margin: auto;
     margin-top: 10px;
     border-radius: 5px;
     display: block;
@@ -97,6 +108,7 @@
     display: block; 
     margin: auto; 
     margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .controls {
@@ -105,13 +117,6 @@
     justify-content: flex-end;
     padding: 10px;
     font-family: sans-serif;
-}
-
-/*** FORM STYLING ***/
-.form-filename {
-    border-radius: 5px;
-    line-height: 18px;
-    font-size: 12px;
 }
 
 @media only screen and (min-width: 768px) {
