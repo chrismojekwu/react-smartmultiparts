@@ -123,10 +123,10 @@ const FormControls = (props) => {
         return (
             <>
                 <label>
-                    <span className="form-control-instructions">
+                    <span className="form-control-instructions select-label">
                         Select a file type and using a comma separated list provide the input fields you would like to be generated
                     </span>
-                    <span className="form-control-instructions">
+                    <span className="form-control-instructions select-label">
                         Note: The form's Supported File Types may not update until you attempt to choose a file to "upload" from your system
                     </span>
                 </label>    
