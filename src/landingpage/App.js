@@ -11,7 +11,7 @@ import './app.css';
 
 const App = () => {
     // refactor all of this to TryIt component
-    const fields = ["Title", "Submitee", "Name", "Comments"];
+    const fields = ["Title", "Submiter", "Name", "Comments"];
 
     const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
     

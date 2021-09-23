@@ -68,6 +68,10 @@
     top: 10px;
 }
 
+.select-label{
+    top: -10px;
+}
+
 .form-control-instructions {
     position: relative;
     font-family: sans-serif;
