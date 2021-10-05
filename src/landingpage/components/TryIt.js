@@ -24,7 +24,15 @@ const TryIt = () => {
     const formTwoOuterRef= useRef();
     const [formTwoOffset, setFormTwoOffset] = useState(0);
 
+    // Notifications
+    const [message, setMessage] = useState("musty");
+    const [yOffset, setYOffset] = useState();
     
+    const notificationToggle = (eventMsg) => {
+        setMessage(eventMsg);
+        setYOffset("-30");
+    };
+
     const handleFormOneSelect = (formNum) => {
         if(formNum === 1){
             if(formOneSelect === false){
@@ -57,6 +65,9 @@ const TryIt = () => {
 
     return (
         <section className="forms">
+                <div className="form-control-notification" style={{transform: `translateY(${yOffset + "px"})`}}>
+                    {message}
+                </div>
                 <div className="form-control-grid">
 
                     <h3 className="landing-title">
@@ -67,7 +78,7 @@ const TryIt = () => {
                         select={formOneSelect} handleSelect={handleFormOneSelect}
                         setLiveTypes={setLiveFormOneTypes} setLiveFields={setLiveFormOneFields} 
                         setSelectObject={setFormOneSelectObj}
-                        formNum={1}
+                        formNum={1} notification={notificationToggle}
                     />
 
                     <div className="form-containing-div" ref={formOneOuterRef}>
