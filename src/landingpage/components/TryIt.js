@@ -30,7 +30,10 @@ const TryIt = () => {
     
     const notificationToggle = (eventMsg) => {
         setMessage(eventMsg);
-        setYOffset("-30");
+        document.getElementById('form-notification').classList.add('noti-ani');
+        setTimeout(() => {
+            document.getElementById('form-notification').classList.remove('noti-ani');
+        }, 1500);
     };
 
     const handleFormOneSelect = (formNum) => {
@@ -65,8 +68,11 @@ const TryIt = () => {
 
     return (
         <section className="forms">
-                <div className="form-control-notification" style={{transform: `translateY(${yOffset + "px"})`}}>
+                <div className="form-control-notification" id="form-notification" style={{transform: `translateY(${yOffset + "px"})`}}>
                     {message}
+                </div>
+                <div className="form-note">
+                    *on submit form values will print to the console
                 </div>
                 <div className="form-control-grid">
 
@@ -77,8 +83,7 @@ const TryIt = () => {
                         btnTitle={formOneButtonTitle} setBtnTitle={setFormOneButtonTitle}
                         select={formOneSelect} handleSelect={handleFormOneSelect}
                         setLiveTypes={setLiveFormOneTypes} setLiveFields={setLiveFormOneFields} 
-                        setSelectObject={setFormOneSelectObj}
-                        formNum={1} notification={notificationToggle}
+                        setSelectObject={setFormOneSelectObj} formNum={1} notification={notificationToggle}
                     />
 
                     <div className="form-containing-div" ref={formOneOuterRef}>
@@ -101,8 +106,7 @@ const TryIt = () => {
                         btnTitle={formTwoButtonTitle} setBtnTitle={setFormTwoButtonTitle}
                         select={formTwoSelect} handleSelect={handleFormOneSelect}
                         setSelectObject={setFormTwoSelectObj} formTwoData={formTwoDataObj}
-                        setFormTwoData={setFormTwoDataObj}
-                        formNum={2}
+                        setFormTwoData={setFormTwoDataObj} formNum={2} notification={notificationToggle}
                     />
 
                     <div className="form-containing-div" ref={formTwoOuterRef}>

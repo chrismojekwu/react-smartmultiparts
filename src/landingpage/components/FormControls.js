@@ -82,6 +82,8 @@ const FormControls = (props) => {
     const handleFormFields = (e) => {
         const fields = formFields.split(",").map(x => x.trim());
         props.setLiveFields(fields);
+
+        props.notification("Fields Set")
     };
 
     const handleFormSelects = (e,formNum) => {
@@ -112,6 +114,8 @@ const FormControls = (props) => {
             }
             props.setSelectObject(selectObj)
         }
+
+        props.notification("Select Set")
     };
 
     
@@ -133,7 +137,7 @@ const FormControls = (props) => {
                     </span>
                 </label>    
                 <select onChange={(e) => setFormTwoActiveType(e.target.value)}>
-                <option selected>Choose File Type</option>
+                <option defaultValue>Choose File Type</option>
                     {types.map((type, index) => {
                         return <option value={type} key={index}>{type}</option>
                     })}
