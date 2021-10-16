@@ -32,9 +32,9 @@ const GetStarted = () => {
                     <summary>Form One</summary>
                     <div className="code-snippet">
                         <code>
-                            {formOne.map(x => {
+                            {formOne.map((x,i) => {
                                 return (
-                                    <div>
+                                    <div key={i}>
                                         {x}
                                     </div>
                                 )
@@ -47,9 +47,9 @@ const GetStarted = () => {
                     <summary>Form Two</summary>
                     <div className="code-snippet">
                         <code>
-                            {formTwo.map(x => {
+                            {formTwo.map((x,i) => {
                                     return (
-                                        <div>
+                                        <div key={i}>
                                             {x}
                                         </div>
                                     )
@@ -76,9 +76,9 @@ const GetStarted = () => {
                     <summary>Example</summary>
                     <div className="code-snippet">
                         <code>
-                            {select.map(x => {
+                            {select.map((x,i) => {
                                 return (
-                                    <div>
+                                    <div key={i}>
                                         {x}
                                     </div>
                                 )

@@ -15,7 +15,7 @@ function FormFields(props) {
                   name="comments"
                   className="comments form-textarea"
                   placeholder="Additional Comments"
-                  id="comments"
+                  id="smartparts-comments"
                 />
               </React.Fragment>
             );

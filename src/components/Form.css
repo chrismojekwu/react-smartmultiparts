@@ -1,39 +1,30 @@
-.container {
+.smartparts-container {
     text-align: left;
     width: fit-content;
 }
-input[type^="text"], textarea#comments {
+input[type^="text"].form-fileinput, textarea#smartparts-comments {
   width: 75%;
 }
-.logo-container {
+.smartparts-logo-container {
   text-align: center;
 }
-.form-logo-img {
+.smartparts-logo-container .form-logo-img {
   margin: auto;
   height: 30vh;
   width: auto;
   text-align: center;
 }
-.loader {
-  margin: auto;
-  transition: 0.8s;
-  height: 50px;
-}
-.error {
+.smartparts-error {
   display: block;
 }
-.entry-form > * {
+.smartparts-entry-form > * {
   display: block;
   font-size: 16px;
 }
-#file {
+#smartparts-file {
   font-weight: bold;
   width: 100%;
 }
-.comments {
-  height: 100px;
-  width: 50%;
-}
-#submit {
+#smartparts-submit {
   margin-top: 10px;
 }

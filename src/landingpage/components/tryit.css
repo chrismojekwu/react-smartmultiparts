@@ -17,10 +17,15 @@
 .form-body {
     margin: auto;
     background-color: #ffffff;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin-bottom: 10px;
-    padding: 10px;
+    padding: 10px 0 0 5%;
     width: 90%;
+}
+
+@media only screen and (min-width: 750px) {
+    .form-body {
+        padding: 10px 0 0 2%;
+    }
 }
 
 .form-control-grid {
@@ -46,6 +51,10 @@
 .form-carousel-div {
     min-width: 100%;
     transition: 0.4s;
+}
+
+.form-containing-div .form-carousel-div:last-child() {
+    border-left: 1px solid #d3d3d3;
 }
 
 .form-options-control {
@@ -119,11 +128,11 @@
     margin-top: 100px;
     display: flex;
     justify-content: flex-end;
-    padding: 10px;
+    padding: 10px 5% 10px 10px;
     font-family: sans-serif;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 750px) {
     .form-control-grid {
         display: grid;
         grid-template-columns: 50% 50%;
@@ -142,5 +151,95 @@
     .form-options-control {
         margin: 0;
         padding: 20px;
+    }
+}
+
+.form-control-notification {
+    position: fixed;
+    transform: translateY(-170px);
+    transition: .5s;
+    background-color: #a0ff68;
+    padding: 5px 10px 5px 10px;
+}
+
+.noti-ani {
+    animation-name: notification;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+}
+
+.form-note {
+    text-align: right;
+    font-size: 12px;
+    margin-right: 5%;
+    margin-top: -20px;
+    margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 750px) {
+    .form-note {
+        margin-right: 35%;
+    }
+}
+
+@keyframes notification {
+    0% {
+        transform: translateY(-160px);
+        font-size: 1px;
+    }
+    25% {
+        width: 10%;
+        font-size: 8px;
+    }
+    50% {
+        transform: translateY(-30px);
+        width: 30%;
+        font-size: 16px;
+    }
+    75% {
+        transform: translateY(-30px);
+        width: 30%;
+        font-size: 16px;
+    }
+    85% {
+        width: 20%;
+        font-size: 14px;
+    }
+    100% {
+        transform: translateY(-160px);
+        width: 10%;
+        font-size: 1px;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    @keyframes notification {
+        0% {
+            transform: translateY(-160px);
+            font-size: 1px;
+        }
+        25% {
+            width: 5%;
+            font-size: 8px;
+        }
+        50% {
+            transform: translateY(-30px);
+            width: 15%;
+            font-size: 16px;
+        }
+        75% {
+            transform: translateY(-30px);
+            width: 15%;
+            font-size: 16px;
+        }
+        85% {
+            width: 10%;
+            font-size: 14px;
+        }
+        100% {
+            transform: translateY(-160px);
+            width: 5%;
+            font-size: 1px;
+        }
     }
 }

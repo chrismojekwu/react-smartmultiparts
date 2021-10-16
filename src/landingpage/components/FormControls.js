@@ -10,7 +10,7 @@ const FormControls = (props) => {
 
     //Form Two
     const [formTwoTypeToggle, setFormTwoTypeToggle] = useState(false);
-    const [formTwoActiveType, setFormTwoActiveType] = useState("");
+    const [formTwoActiveType, setFormTwoActiveType] = useState("MustyMane");
 
     const renderSelectOptions = () => {
         if(props.formNum === 1){
@@ -75,11 +75,15 @@ const FormControls = (props) => {
         if (props.formNum === 2){
             setFormTwoTypeToggle(!formTwoTypeToggle);
         }
+
+        props.notification("Types Set")
     };  
 
     const handleFormFields = (e) => {
         const fields = formFields.split(",").map(x => x.trim());
         props.setLiveFields(fields);
+
+        props.notification("Fields Set")
     };
 
     const handleFormSelects = (e,formNum) => {
@@ -110,6 +114,8 @@ const FormControls = (props) => {
             }
             props.setSelectObject(selectObj)
         }
+
+        props.notification("Select Set")
     };
 
     
@@ -131,7 +137,7 @@ const FormControls = (props) => {
                     </span>
                 </label>    
                 <select onChange={(e) => setFormTwoActiveType(e.target.value)}>
-                <option selected>Choose File Type</option>
+                <option defaultValue>Choose File Type</option>
                     {types.map((type, index) => {
                         return <option value={type} key={index}>{type}</option>
                     })}
