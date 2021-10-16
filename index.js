@@ -79,7 +79,7 @@ function FormFields(props) {
           name: "comments",
           className: "comments form-textarea",
           placeholder: "Additional Comments",
-          id: "comments"
+          id: "smartparts-comments"
         }));
       } else if (field.match(/filename/gi)) {
         return /*#__PURE__*/React__default['default'].createElement("span", {
@@ -87,6 +87,8 @@ function FormFields(props) {
           className: "form-filename",
           key: index
         }, "Filename: ", props.filename);
+      } else if (field === "") {
+        return "";
       } else {
         return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, {
           key: index
@@ -131,6 +133,25 @@ var Select = function Select(props) {
   }, props.obj.placeholder), generateOptions()));
 };
 
+var stringInArr = function stringInArr(arr, ext) {
+  var x;
+  if (arr === undefined) return false;
+
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].toLowerCase() === ext) {
+      x = true;
+      break;
+    } else x = false;
+  }
+  return x;
+};
+var fileTypes = function fileTypes(arr) {
+  var list = arr.map(function (x, i) {
+    if (x === "") return "";else return ".".concat(x);
+  });
+  return list.join(" ");
+};
+
 function styleInject(css, ref) {
   if ( ref === void 0 ) ref = {};
   var insertAt = ref.insertAt;
@@ -158,7 +179,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = ".container {\n    text-align: left;\n    width: fit-content;\n}\ninput[type^=\"text\"], textarea#comments {\n  width: 75%;\n}\n.logo-container {\n  text-align: center;\n}\n.form-logo-img {\n  margin: auto;\n  height: 30vh;\n  width: auto;\n  text-align: center;\n}\n.loader {\n  margin: auto;\n  transition: 0.8s;\n  height: 50px;\n}\n.error {\n  display: block;\n}\n.entry-form > * {\n  display: block;\n  font-size: 16px;\n}\n#file {\n  color: red;\n  font-weight: bolder;\n}\n.comments {\n  height: 100px;\n  width: 50%;\n}\n#submit {\n  margin-top: 10px;\n}";
+var css_248z = ".smartparts-container {\n    text-align: left;\n    width: fit-content;\n}\ninput[type^=\"text\"].form-fileinput, textarea#smartparts-comments {\n  width: 75%;\n}\n.smartparts-logo-container {\n  text-align: center;\n}\n.smartparts-logo-container .form-logo-img {\n  margin: auto;\n  height: 30vh;\n  width: auto;\n  text-align: center;\n}\n.smartparts-error {\n  display: block;\n}\n.smartparts-entry-form > * {\n  display: block;\n  font-size: 16px;\n}\n#smartparts-file {\n  font-weight: bold;\n  width: 100%;\n}\n#smartparts-submit {\n  margin-top: 10px;\n}";
 styleInject(css_248z);
 
 var FormOne = function FormOne(props) {
@@ -186,7 +207,7 @@ var FormOne = function FormOne(props) {
   var detectFile = function detectFile() {
     if (fileType === "") return "";
     if (Object.keys(props.fileTypes).length === 0 || props.fields === []) return /*#__PURE__*/React__default['default'].createElement("span", {
-      id: "error"
+      id: "smartparts-error"
     }, "Internal Error");
     var ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
     var re = new RegExp(props.fileTypes.join("|"), "gi");
@@ -212,7 +233,9 @@ var FormOne = function FormOne(props) {
     }
 
     for (var i = 0; i < props.fields.length; i++) {
-      if (new RegExp('filename', 'gi').test(props.fields[i]) === true) {
+      if (props.fields[i] === "") {
+        continue;
+      } else if (new RegExp('filename', 'gi').test(props.fields[i]) === true) {
         data.append('filename', fileName);
       } else data.append(props.fields[i], e.target[props.fields[i]].value);
     }
@@ -240,23 +263,21 @@ var FormOne = function FormOne(props) {
   };
 
   return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("div", {
-    className: "container form-body"
+    className: "smartparts-container form-body"
   }, /*#__PURE__*/React__default['default'].createElement("div", {
-    className: "logo-container"
-  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React__default['default'].createElement("p", null, "Supported File Types: ", props.fileTypes.map(function (x) {
-    return ".".concat(x);
-  }).join(" ")), /*#__PURE__*/React__default['default'].createElement("form", {
+    className: "smartparts-logo-container"
+  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React__default['default'].createElement("p", null, "Supported File Types: ", fileTypes(props.fileTypes)), /*#__PURE__*/React__default['default'].createElement("form", {
     onSubmit: function onSubmit(e) {
       return dataReturn(e);
     },
-    className: "entry-form",
+    className: "smartparts-entry-form",
     encType: "multipart/form-data",
     method: "post",
     name: "upload"
   }, /*#__PURE__*/React__default['default'].createElement("label", {
     htmlFor: "file form-label"
   }, "File:"), /*#__PURE__*/React__default['default'].createElement("input", {
-    id: "file",
+    id: "smartparts-file",
     type: "file",
     name: "upload",
     className: "form-fileinput",
@@ -273,23 +294,10 @@ var FormOne = function FormOne(props) {
       }
     }
   }), /*#__PURE__*/React__default['default'].createElement("br", null), select === true && Object.keys(props.fileTypes).length != 0 ? generateSelect(props.select) : "", detectFile(), /*#__PURE__*/React__default['default'].createElement("input", {
-    id: "submit",
+    id: "smartparts-submit",
     type: "submit",
     className: "button form-button"
   })), /*#__PURE__*/React__default['default'].createElement("br", null)));
-};
-
-var stringInArr = function stringInArr(arr, ext) {
-  var x;
-  if (arr === undefined) return false;
-
-  for (var i = 0; i < arr.length; i++) {
-    if (arr[i].toLowerCase() === ext) {
-      x = true;
-      break;
-    } else x = false;
-  }
-  return x;
 };
 
 var FormTwo = function FormTwo(props) {
@@ -317,7 +325,7 @@ var FormTwo = function FormTwo(props) {
   var detectFile = function detectFile() {
     if (fileType === "") return "";
     if (Object.keys(props.fileTypes).length === 0) return /*#__PURE__*/React__default['default'].createElement("span", {
-      id: "error"
+      id: "smartparts-error"
     }, "Internal Error");
     var ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
     var re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
@@ -345,7 +353,9 @@ var FormTwo = function FormTwo(props) {
     }
 
     for (var i = 0; i < fieldArr.length; i++) {
-      if (new RegExp('filename', 'gi').test(fieldArr[i]) === true) {
+      if (fieldArr[i] === "") {
+        continue;
+      } else if (new RegExp('filename', 'gi').test(fieldArr[i]) === true) {
         data.append('filename', fileName);
       } else data.append(fieldArr[i], e.target[fieldArr[i]].value);
     }
@@ -373,23 +383,21 @@ var FormTwo = function FormTwo(props) {
   };
 
   return /*#__PURE__*/React__default['default'].createElement(React__default['default'].Fragment, null, /*#__PURE__*/React__default['default'].createElement("div", {
-    className: "container form-body"
+    className: "smartparts-container form-body"
   }, /*#__PURE__*/React__default['default'].createElement("div", {
-    className: "logo-container"
-  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React__default['default'].createElement("p", null, "Supported File Types: ", Object.keys(props.fileTypes) != undefined ? Object.keys(props.fileTypes).map(function (x) {
-    return ".".concat(x);
-  }).join(" ") : ""), /*#__PURE__*/React__default['default'].createElement("form", {
+    className: "smartparts-logo-container"
+  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React__default['default'].createElement("p", null, "Supported File Types: ", Object.keys(props.fileTypes) != undefined ? fileTypes(Object.keys(props.fileTypes)) : ""), /*#__PURE__*/React__default['default'].createElement("form", {
     onSubmit: function onSubmit(e) {
       return upload(e);
     },
-    className: "entry-form",
+    className: "smartparts-entry-form",
     encType: "multipart/form-data",
     method: "post",
     name: "upload"
   }, /*#__PURE__*/React__default['default'].createElement("label", {
     htmlFor: "file form-label"
   }, "File:"), /*#__PURE__*/React__default['default'].createElement("input", {
-    id: "file",
+    id: "smartparts-file",
     type: "file",
     name: "upload",
     className: "form-fileinput",
@@ -406,7 +414,7 @@ var FormTwo = function FormTwo(props) {
       }
     }
   }), /*#__PURE__*/React__default['default'].createElement("br", null), select === true && stringInArr(props.select.types, fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "") === true ? generateSelect(props.select) : "", detectFile(), /*#__PURE__*/React__default['default'].createElement("input", {
-    id: "submit",
+    id: "smartparts-submit",
     type: "submit",
     className: "button form-button"
   })), /*#__PURE__*/React__default['default'].createElement("br", null)));
