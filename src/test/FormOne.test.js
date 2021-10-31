@@ -76,7 +76,7 @@ test('it renders the correct text area when file is uploaded with comments field
     
     wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
-    expect(wrapper.exists('#comments')).toBe(true);
+    expect(wrapper.exists('#smartparts-comments')).toBe(true);
 });
 
 test('it renders the correct span when file is uploaded with filename field', () => {
@@ -163,7 +163,7 @@ test('Empty Fields behavior no select', () => {
 
     wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
-    expect(wrapper.find('#error').text() === "Internal Error").toBe(true);
+    expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
 });
 
 test('Empty Fields behavior with select', () => {
@@ -183,5 +183,5 @@ test('Empty Fields behavior with select', () => {
 
     wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
-    expect(wrapper.find('#error').text() === "Internal Error").toBe(true);
+    expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
 });

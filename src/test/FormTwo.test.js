@@ -116,7 +116,7 @@ test('it renders the correct text area when file is uploaded with comments field
 
     wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
-    expect(wrapper.exists('#comments')).toBe(true);
+    expect(wrapper.exists('#smartparts-comments')).toBe(true);
 });
 
 test('it renders the correct span when file is uploaded with filename field',() => {
@@ -213,7 +213,7 @@ test('Empty object behavior without select',() => {
 
     wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
-    expect((wrapper.find('#error').text() === "Internal Error")).toBe(true);
+    expect((wrapper.find('#smartparts-error').text() === "Internal Error")).toBe(true);
 });
 
 test('Empty object behavior with select',() => {
@@ -232,5 +232,5 @@ test('Empty object behavior with select',() => {
 
     wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
-    expect(wrapper.find('#error').text() === "Internal Error").toBe(true);
+    expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
 });
