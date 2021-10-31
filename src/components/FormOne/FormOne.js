@@ -16,7 +16,7 @@ export const FormOne = (props) => {
     if (Object.keys(props.fileTypes).length === 0 || props.fields === []) return <span id="smartparts-error">Internal Error</span>;
     const ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
     const re = new RegExp(props.fileTypes.join("|"), "gi");
-    if (!ext) return "Invalid Extention";
+    if (!ext) return "Invalid Extension";
     if (re.test(ext) === true) {
       return <FormFields fields={props.fields} filename={fileName}/>;
     }
