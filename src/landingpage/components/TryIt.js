@@ -68,8 +68,10 @@ const TryIt = () => {
 
     return (
         <section className="forms">
-                <div className="form-control-notification" id="form-notification" style={{transform: `translateY(${yOffset + "px"})`}}>
-                    {message}
+                <div className="notification-div">
+                    <div className="form-control-notification" id="form-notification" style={{transform: `translateY(${yOffset + "px"})`}}>
+                        {message}
+                    </div>
                 </div>
                 <div className="form-note">
                     *on submit form values will print to the console

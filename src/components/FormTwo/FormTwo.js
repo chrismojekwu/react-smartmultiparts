@@ -46,8 +46,10 @@ export const FormTwo = (props) => {
     for(let i = 0; i < fieldArr.length; i++){
       if(fieldArr[i] === ""){
         continue;
-      }else if(new RegExp('filename', 'gi').test(fieldArr[i]) === true){
+      } else if(new RegExp('filename', 'gi').test(fieldArr[i]) === true){
         data.append('filename', fileName);
+      } else if(new RegExp('comments', 'gi').test(fieldArr[i]) === true){
+        data.append('comments', e.target.comments.value);
       } else
       data.append(fieldArr[i], e.target[fieldArr[i]].value);
     };

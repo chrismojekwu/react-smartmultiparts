@@ -156,10 +156,11 @@
 
 .form-control-notification {
     position: fixed;
-    transform: translateY(-170px);
+    transform: translateY(-175px);
     transition: .5s;
     background-color: #a0ff68;
     padding: 5px 10px 5px 10px;
+    z-index: 1;
 }
 
 .noti-ani {
