@@ -50,6 +50,8 @@ export const FormTwo = (props) => {
         data.append('filename', fileName);
       } else if(new RegExp('comments', 'gi').test(fieldArr[i]) === true){
         data.append('comments', e.target.comments.value);
+      } else if(new RegExp('date', 'gi').test(fieldArr[i]) === true){
+        data.append('date', e.target.date.value);
       } else
       data.append(fieldArr[i], e.target[fieldArr[i]].value);
     };

@@ -41,6 +41,8 @@ export const FormOne = (props) => {
         data.append('filename', fileName);
       } else if(new RegExp('comments', 'gi').test(props.fields[i]) === true){
         data.append('comments', e.target.comments.value);
+      } else if(new RegExp('date', 'gi').test(props.fields[i]) === true){
+        data.append('date', e.target.date.value);
       } else
       data.append(props.fields[i], e.target[props.fields[i]].value);
     };
