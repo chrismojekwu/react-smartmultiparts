@@ -234,3 +234,26 @@ test('Empty object behavior with select',() => {
 
     expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
 });
+
+test('it renders the date input when file is uploaded with date field', () => {
+
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const formObj = {
+        wav: ["Title", "Artist", "Comments"],
+        mp3: ["Title", "Artist"],
+        jpg: ["Title", "Subject", "Source", "dATE"]
+    };
+    
+    const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
+
+    const file = new File(["test"], "test.jpg", {
+        type: "image/jpeg"
+    });
+    
+    wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+    expect(wrapper.find('#date-input').html()).toEqual('<input type="date" name="date" id="date-input" value="2099-01-01">');
+});

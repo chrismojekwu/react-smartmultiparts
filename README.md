@@ -56,7 +56,9 @@ Text Area - (*comments*) - Providing a "comments" field will generate a Text Are
 
 Filename - (*filename*) - Using "filename" as a field will generate the filename inside of the form and include it in the multipart data.
 
-Selects - You can generate a single select field by providing a select object as a prop to either Form component using the name "select". The select object requires 2 key-values to work. "query", which refers to your question/prompt. "select", which refers to the options you want to display. If you're using Form Two, you can provide a "types" key-value which specifies the file types you would like to generate a select input for.
+Date - (*date*) - Using "date" as a field will generate a date input.
+
+Select - You can generate a single select field by providing a select object as a prop to either Form component using the name "select". The select object requires 2 key-values to work. "query", which refers to your question/prompt. "select", which refers to the options you want to display. If you're using Form Two, you can provide a "types" key-value which specifies the file types you would like to generate a select input for.
 
 See Below:
 ```

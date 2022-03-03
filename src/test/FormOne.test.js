@@ -185,3 +185,22 @@ test('Empty Fields behavior with select', () => {
 
     expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
 });
+
+test('it renders the date input when file is uploaded with date field', () => {
+    const fields = ["dAtE"];
+
+    const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
+    
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
+    const file = new File(["test"], "test.jpg", {
+        type: "image/jpeg"
+    });
+    
+    wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+    
+    expect(wrapper.find('#date-input').html()).toEqual('<input type="date" name="date" id="date-input" value="2099-01-01">');
+});
