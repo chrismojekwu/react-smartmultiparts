@@ -7,10 +7,10 @@ function FormFields(props) {
     return (
       <>
         {props.fields.map((field, index) => {
-          if (field.match(/comments/gi)) {
+          if (field.trim().match(/comments/gi)) {
             return (
               <React.Fragment key={"textarea-" + index.toString()}>
-                <label htmlFor='comments form-label'>Comments:</label>
+                <label htmlFor='comments' className='form-label'>Comments:</label>
                 <textarea
                   name="comments"
                   className="comments form-textarea"
@@ -19,13 +19,20 @@ function FormFields(props) {
                 />
               </React.Fragment>
             );
-          } else if (field.match(/filename/gi)){
+          } else if (field.trim().match(/filename/gi)){
             return <span id="filename-span" className="form-filename" key={index}>Filename: {props.filename}</span>
+          } else if (field.trim().match(/date/gi)) {
+            return (
+              <React.Fragment>
+                <label htmlFor='date' className="form-label">Date:</label>
+                <input type="date"/>
+              </React.Fragment>
+            )
           } else if (field === "") {
             return "";
           } else {
             return (
-              <React.Fragment key={index}>
+              <React.Fragment key={"textinput" + index.toString()}>
                 <label htmlFor={field} className="form-label">{field}:</label>
                 <input type="text form-textinput" name={field} id={field} />
               </React.Fragment>
