@@ -28,7 +28,8 @@ function FormFields(props) {
           } else if (field.trim().match(/date/gi)) {
             return <Date/>;
           } else if (field.trim().match(/select/gi)) {
-            return generateSelect(selectObjs[selectCount], index);
+              return selectObjs[selectCount] === undefined ? ""
+                : generateSelect(selectObjs[selectCount], index);
           } else if (field === "") {
             return "";
           } else {

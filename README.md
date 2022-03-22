@@ -58,7 +58,7 @@ Filename - (*filename*) - Using "filename" as a field will generate the filename
 
 Date - (*date*) - Using "date" as a field will generate a date input.
 
-Select - (*select*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array. Passing too many select fields or too little select objects will result in an error.
+Select - (*select*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array.
 
 A select object requires 3 key value pairs:  
 "query", your question for the select.  
