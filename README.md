@@ -58,18 +58,24 @@ Filename - (*filename*) - Using "filename" as a field will generate the filename
 
 Date - (*date*) - Using "date" as a field will generate a date input.
 
-Select - You can generate a single select field by providing a select object as a prop to either Form component using the name "select". The select object requires 2 key-values to work. "query", which refers to your question/prompt. "select", which refers to the options you want to display. If you're using Form Two, you can provide a "types" key-value which specifies the file types you would like to generate a select input for.
+Select - (*select*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array. Passing too many select fields or too little select objects will result in an error.
 
 See Below:
 ```
 const selectObj = {
-        query: "Whats your name?",
-        select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
-        types: ["wav","jpeg","mp3"] //meant for use with FormTwo
-    };
+    query: "Whats your name?",
+    select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
+    placeholder: "Choose a name"
+};
 
-<FormOne ... select={selectObj}/>
-<FormTwo ... select={selectObj}/>
+const selectObj2 = {
+    query: "Whats your sign?",
+    select: ["Virgo", "Libra", "Cancer", "Leo", "Pisces"],
+    placeholder: "Choose a sign"
+};
+
+<FormOne ... select={[selectObj, selectObj2]}/>
+<FormTwo ... select={[selectObj, selectObj2]}/>
 ```
 
 Coverage for more input types will be available in future versions. 
