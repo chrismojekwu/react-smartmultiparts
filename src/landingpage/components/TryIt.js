@@ -95,7 +95,7 @@ const TryIt = () => {
                         </div>
                         <div className="form-carousel-div"
                             style={{transform: `translateX(${formOneOffset}px)`}}>
-                            <FormOne fields={liveFormOneFields} fileTypes={liveFormOneTypes} cb={printData} select={formOneSelectObj}/>
+                            <FormOne fields={liveFormOneFields} fileTypes={liveFormOneTypes} cb={printData} select={[formOneSelectObj]}/>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ const TryIt = () => {
                         </div>
                         <div className="form-carousel-div" ref={formTwoRef}
                             style={{transform: `translateX(${formTwoOffset}px)`}}>
-                            <FormTwo fileTypes={formTwoDataObj} cb={printData} select={formTwoSelectObj}/>
+                            <FormTwo fileTypes={formTwoDataObj} cb={printData} select={[formTwoSelectObj]}/>
                         </div>
                     </div>
                 </div>

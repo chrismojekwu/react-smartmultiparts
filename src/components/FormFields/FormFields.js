@@ -1,35 +1,39 @@
 import React from "react";
+import TextArea from './input-components/TextArea';
+import TextInput from "./input-components/TextInput";
+import Date from './input-components/Date';
+import Select from "../Select/Select";
 
 //Add support for more input elements
 
 function FormFields(props) {
+  const selectObjs = props.select;
+  let selectCount = 0;
+
+  const generateSelect = (selectObj, index) => {
+    selectCount++;
+    return (
+      <Select obj={selectObj} index={index}/>
+    );
+  };
+
   const renderFields = () => {
     return (
       <>
         {props.fields.map((field, index) => {
-          if (field.match(/comments/gi)) {
-            return (
-              <React.Fragment key={"textarea-" + index.toString()}>
-                <label htmlFor='comments form-label'>Comments:</label>
-                <textarea
-                  name="comments"
-                  className="comments form-textarea"
-                  placeholder="Additional Comments"
-                  id="smartparts-comments"
-                />
-              </React.Fragment>
-            );
-          } else if (field.match(/filename/gi)){
+          if (field.trim().match(/comments/gi)) {
+            return <TextArea index={index}/>;
+          } else if (field.trim().match(/filename/gi)) {
             return <span id="filename-span" className="form-filename" key={index}>Filename: {props.filename}</span>
+          } else if (field.trim().match(/date/gi)) {
+            return <Date/>;
+          } else if (field.trim().match(/select/gi)) {
+              return selectObjs[selectCount] === undefined ? ""
+                : generateSelect(selectObjs[selectCount], index);
           } else if (field === "") {
             return "";
           } else {
-            return (
-              <React.Fragment key={index}>
-                <label htmlFor={field} className="form-label">{field}:</label>
-                <input type="text form-textinput" name={field} id={field} />
-              </React.Fragment>
-            );
+            return <TextInput field={field} index={index}/>
           }
         })}
       </>

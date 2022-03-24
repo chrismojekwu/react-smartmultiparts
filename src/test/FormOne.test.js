@@ -98,8 +98,8 @@ test('it renders the correct span when file is uploaded with filename field', ()
     expect(wrapper.find('#filename-span').text()).toBe(`Filename: test.jpg`);
 });
 
-test('it renders a select element with the correct options when provided a select object', () => {
-    const fields = ["filEnaMe"];
+test('it renders a select element with the correct options when provided a select object array', () => {
+    const fields = ["filEnaMe", 'sElect'];
 
     const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
     
@@ -110,24 +110,67 @@ test('it renders a select element with the correct options when provided a selec
     const selectObj = {
         query: "Whats your name?",
         select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
+        placeholder: "Choose a name"
     };
 
-    const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} select={selectObj}/>);
+    const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} select={[selectObj]}/>);
     const file = new File(["test"], "test.jpg", {
         type: "image/jpeg"
     });
     
     wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
-    expect(wrapper.exists({name: "select"})).toBeTruthy();
+    expect(wrapper.exists({name: "select-1"})).toBeTruthy();
     
     for(let i = 0; i < selectObj.select.length; i++){
-
         const element = wrapper.find(`#${selectObj.select[i]}`);
-
         expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}">${selectObj.select[i]}</option>`);
     };
     
+});
+
+test('it renders multiple selects in accordance with object array', () => {
+    const fields = ['sElect', "filEnaMe", 'comments', 'squanchy', 'Select'];
+
+    const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
+    
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const selectObj = {
+        query: "Whats your name?",
+        select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
+        placeholder: "Choose a name"
+    };
+
+    const selectObj2 = {
+        query: "Whats your sign?",
+        select: ["Virgo", "Libra", "Cancer", "Leo", "Pisces"],
+        placeholder: "Choose a sign"
+    };
+
+    const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} select={[selectObj, selectObj2]}/>);
+    const file = new File(["test"], "test.jpg", {
+        type: "image/jpeg"
+    });
+    
+    wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+    expect(wrapper.exists({name: "select-0"})).toBeTruthy();
+    
+    for(let i = 0; i < selectObj.select.length; i++){
+        const element = wrapper.find(`#${selectObj.select[i]}`);
+        expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}">${selectObj.select[i]}</option>`);
+    };
+
+    expect(wrapper.exists({name: "select-4"})).toBeTruthy();
+    
+    for(let i = 0; i < selectObj.select.length; i++){
+        const element = wrapper.find(`#${selectObj2.select[i]}`);
+        expect(element.html()).toEqual(`<option value="${selectObj2.select[i]}" id="${selectObj2.select[i]}">${selectObj2.select[i]}</option>`);
+    };
+    console.log(wrapper.debug());
 });
 
 test('it renders an img element when provided with logo prop', () => {
@@ -184,4 +227,23 @@ test('Empty Fields behavior with select', () => {
     wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
     expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
+});
+
+test('it renders the date input when file is uploaded with date field', () => {
+    const fields = ["dAtE"];
+
+    const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
+    
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
+    const file = new File(["test"], "test.jpg", {
+        type: "image/jpeg"
+    });
+    
+    wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+    
+    expect(wrapper.find('#date-input').html()).toEqual('<input type="date" name="date" id="date-input" value="2099-01-01">');
 });

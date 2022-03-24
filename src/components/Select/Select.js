@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 
 const Select = (props) => {
+    const [value, setValue] = useState(props.obj.placeholder);
 
     const generateOptions = () => {
         return props.obj.select.map((options, index) => {
@@ -11,14 +12,14 @@ const Select = (props) => {
     };
 
     const handleChange = (e) => {
-        props.setValue(e.target.value)
+        setValue(e.target.value)
     };
 
     return (
         <>
-            <label htmlFor="select form-label">{props.obj.query}</label>
-            <select name="select" className="form-select" onChange={handleChange}>
-                <option defaultValue>{props.obj.placeholder}</option>
+            <label htmlFor={`select-${props.index} form-label`}>{props.obj.query}</label>
+            <select name={`select-${props.index}`} className="form-select" onChange={handleChange}>
+                <option defaultValue>{value}</option>
                 {generateOptions()}
             </select>
         </>

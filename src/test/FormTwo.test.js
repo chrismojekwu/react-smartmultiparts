@@ -142,7 +142,7 @@ test('it renders the correct span when file is uploaded with filename field',() 
     expect(wrapper.find('#filename-span').text()).toBe(`Filename: test.wav`);
 });
 
-test('it renders a select element with the correct options when provided a select object',() => {
+test('it renders a select element with the correct options when provided a select object array',() => {
 
     const printData = (data) => { 
         console.log(data);
@@ -150,17 +150,17 @@ test('it renders a select element with the correct options when provided a selec
 
     const formObj = {
         wav: ["Title", "Artist", "Comments"],
-        mp3: ["Title", "Artist"],
+        mp3: ["Title", "Artist", 'Select'],
         jpg: ["Title", "Subject", "Source"]
     };
 
     const selectObj = {
         query: "Whats your name?",
         select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
-        types: ["wav","jpeg","mp3"]
+        placeholder: "Choose a name"
     };
     
-    const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData} select={selectObj}/>);
+    const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData} select={[selectObj]}/>);
 
     const file = new File(["test"], "test.jpg", {
         type: "image/jpeg"
@@ -168,7 +168,7 @@ test('it renders a select element with the correct options when provided a selec
     
     wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
-    expect(wrapper.exists({name: "select"})).toBeFalsy();
+    expect(wrapper.exists({name: "select-2"})).toBeFalsy();
 
     const mp3File = new File(["test"], "test.mp3", {
         type: "audio/mpeg"
@@ -176,8 +176,69 @@ test('it renders a select element with the correct options when provided a selec
 
     wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
     
-    expect(wrapper.exists({name: "select"})).toBeTruthy();
+    expect(wrapper.exists({name: "select-2"})).toBeTruthy();
+
+    for(let i = 0; i < selectObj.select.length; i++){
+        const element = wrapper.find(`#${selectObj.select[i]}`);
+        expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}">${selectObj.select[i]}</option>`);
+    };
 });
+
+test('it renders multiple selects in accordance with object array', () => {
+
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const formObj = {
+        wav: ["Title", "Artist", "Comments"],
+        mp3: ["Title", 'Select', 'FilenamE', 'SeLECt'],
+        jpg: ["Title", "Subject", "Source"]
+    };
+
+    const selectObj = {
+        query: "Whats your name?",
+        select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
+        placeholder: "Choose a name"
+    };
+
+    const selectObj2 = {
+        query: "Whats your sign?",
+        select: ["Virgo", "Libra", "Cancer", "Leo", "Pisces"],
+        placeholder: "Choose a sign"
+    };
+    
+    const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData} select={[selectObj, selectObj2]}/>);
+
+    const file = new File(["test"], "test.jpg", {
+        type: "image/jpeg"
+    });
+    
+    wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+    expect(wrapper.exists({name: "select-2"})).toBeFalsy();
+
+    const mp3File = new File(["test"], "test.mp3", {
+        type: "audio/mpeg"
+    });
+
+    wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
+    
+    expect(wrapper.exists({name: "select-1"})).toBeTruthy();
+
+    for(let i = 0; i < selectObj.select.length; i++){
+        const element = wrapper.find(`#${selectObj.select[i]}`);
+        expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}">${selectObj.select[i]}</option>`);
+    };
+
+    expect(wrapper.exists({name: "select-3"})).toBeTruthy();
+
+    for(let i = 0; i < selectObj.select.length; i++){
+        const element = wrapper.find(`#${selectObj2.select[i]}`);
+        expect(element.html()).toEqual(`<option value="${selectObj2.select[i]}" id="${selectObj2.select[i]}">${selectObj2.select[i]}</option>`);
+    };
+});
+
 
 test('it renders an img element when provided with logo prop',() => {
 
@@ -233,4 +294,27 @@ test('Empty object behavior with select',() => {
     wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
     expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
+});
+
+test('it renders the date input when file is uploaded with date field', () => {
+
+    const printData = (data) => { 
+        console.log(data);
+    };
+
+    const formObj = {
+        wav: ["Title", "Artist", "Comments"],
+        mp3: ["Title", "Artist"],
+        jpg: ["Title", "Subject", "Source", "dATE"]
+    };
+    
+    const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
+
+    const file = new File(["test"], "test.jpg", {
+        type: "image/jpeg"
+    });
+    
+    wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+    expect(wrapper.find('#date-input').html()).toEqual('<input type="date" name="date" id="date-input" value="2099-01-01">');
 });

@@ -23,7 +23,7 @@ export const FormTwo = (props) => {
     if (!ext) return "Invalid Extention";
 
     if (re.test(ext) === true) {
-      return <FormFields fields={props.fileTypes[ext]} filename={fileName}/>;
+      return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select}/>;
     }
 
     else setFileType("INVALID");
@@ -38,11 +38,6 @@ export const FormTwo = (props) => {
     data.append('file', fileType[0]);
     const fieldArr = props.fileTypes[ext];
 
-    //check for select prop and add value
-    if(props.select && select === true){
-      data.append(props.select.query, selectValue);
-    }
-
     for(let i = 0; i < fieldArr.length; i++){
       if(fieldArr[i] === ""){
         continue;
@@ -50,6 +45,10 @@ export const FormTwo = (props) => {
         data.append('filename', fileName);
       } else if(new RegExp('comments', 'gi').test(fieldArr[i]) === true){
         data.append('comments', e.target.comments.value);
+      } else if(new RegExp('date', 'gi').test(fieldArr[i]) === true){
+        data.append('date', e.target.date.value);
+      } else if (new RegExp('select', 'gi').test(fieldArr[i]) === true) {
+        data.append('date', e.target[`select-${i}`].value);
       } else
       data.append(fieldArr[i], e.target[fieldArr[i]].value);
     };
@@ -61,12 +60,6 @@ export const FormTwo = (props) => {
     if (file[0] === undefined || file[0] === null) {
       return null;
     } else return file;
-  };
-
-  const generateSelect = (selectObj) => {
-    return (
-      <Select obj={selectObj} setValue={setSelectValue}/>
-    );
   };
 
   const renderLogo = (path) => {
@@ -99,23 +92,15 @@ export const FormTwo = (props) => {
               className="form-fileinput"
               onChange={(e) => {
                 let file = handleFile(e.target.files);
-
                 if (file === null) {
                   return false;
                 } else {
                   setFileType(file);
                   setFileName(file[0].name);
-
-                  //checks for Select prop
-                  if (props.select) setSelect(true)
                 }
               }}
             />
             <br />
-            {select === true && stringInArr(props.select.types, fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "") === true
-              ? generateSelect(props.select)
-              : ""}
-
             {detectFile()}
             <input id="smartparts-submit" type="submit" className="button form-button" />
             
