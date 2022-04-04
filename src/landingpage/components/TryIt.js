@@ -63,7 +63,7 @@ const TryIt = () => {
     const printData = (data) => { 
         for (var value of data.values()) {
             console.log(value);
-         }
+        };
     };
 
     return (
@@ -91,7 +91,7 @@ const TryIt = () => {
                     <div className="form-containing-div" ref={formOneOuterRef}>
                         <div className="form-carousel-div" ref={formOneRef}
                             style={{transform: `translateX(${formOneOffset}px)`}}>
-                            <FormOne fields={liveFormOneFields} fileTypes={liveFormOneTypes} cb={printData}/>
+                            <FormOne fields={liveFormOneFields} fileTypes={liveFormOneTypes} cb={printData} errorMessage={""}/>
                         </div>
                         <div className="form-carousel-div"
                             style={{transform: `translateX(${formOneOffset}px)`}}>
@@ -114,7 +114,7 @@ const TryIt = () => {
                     <div className="form-containing-div" ref={formTwoOuterRef}>
                         <div className="form-carousel-div" ref={formTwoRef}
                             style={{transform: `translateX(${formTwoOffset}px)`}}>
-                            <FormTwo fileTypes={formTwoDataObj} cb={printData}/>
+                            <FormTwo fileTypes={formTwoDataObj} cb={printData} errorMessage={""}/>
                         </div>
                         <div className="form-carousel-div" ref={formTwoRef}
                             style={{transform: `translateX(${formTwoOffset}px)`}}>

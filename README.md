@@ -50,20 +50,22 @@ const formObj = {
 ## Input Types Supported:
 #### Input Type - (Field Name) - Info
 
-Text Inputs - (*DEFAULT*) - Any field value supplied will generate a text input.
+**Text Input** - (*) - Any unlisted field value supplied will generate a text input by default.
 
-Text Area - (*comments*) - Providing a "comments" field will generate a Text Area Input.
+**Text Area** - (*comments*) - Providing a "comments" field will generate a Text Area Input.
 
-Filename - (*filename*) - Using "filename" as a field will generate the filename inside of the form and include it in the multipart data.
+**Filename** - (*filename*) - Using "filename" as a field will generate the filename inside of the form and include it in the multipart data.
 
-Date - (*date*) - Using "date" as a field will generate a date input.
+**Date** - (*date*) - Using "date" as a field will generate a date input.
 
-Select - (*select*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array.
+**Range** - (*range[minValue_maxValue_stepValue_label_<]*) - You can generate a range field by using "range" followed by a bracket that specifies min, max, step, & label values seprated by an underscore. Optionally you can include left angle bracket "<", to instruct the form to render the label before the input.
+
+**Select** - (*select*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array.
 
 A select object requires 3 key value pairs:  
-"query", your question for the select.  
-"select", your options for the select dropdown.  
-"placeholder, your initial/default value.
+>"query", your question for the select.  
+>"select", your options for the select dropdown.  
+>"placeholder, your initial/default value.
 
 See Below:
 ```
@@ -72,18 +74,18 @@ const selectObj = {
     select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
     placeholder: "Choose a name"
 };
-
 const selectObj2 = {
     query: "Whats your sign?",
     select: ["Virgo", "Libra", "Cancer", "Leo", "Pisces"],
     placeholder: "Choose a sign"
-};
+>};
 
 <FormOne ... select={[selectObj, selectObj2]}/>
 <FormTwo ... select={[selectObj, selectObj2]}/>
 ```
 
-Coverage for more input types will be available in future versions. 
+### Required Attribute
+You can require applicable input types by using an exclamation point at the end of its field name string. 
 
 ## Styling:
 
@@ -103,8 +105,16 @@ Filename - .form-filename
 
 Comments - .form-textarea
 
-Text Inputs - .form-textinput
+Text Input - .form-textinput
+
+Select Element - 
+
+Select Options -
+
+Date Input - 
 
 Submit Button - .form-button
 
+
 Logo - .form-logo-img
+

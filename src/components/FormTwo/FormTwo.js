@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import FormFields from "../FormFields/FormFields";
-import Select from '../Select/Select';
-import {stringInArr, fileTypes} from '../util/helpers';
+import { fileTypes } from '../util/helpers';
 
 import "../Form.css";
 
@@ -14,7 +13,13 @@ export const FormTwo = (props) => {
   //function to render correct form component for file type
   const detectFile = () => {
     if (fileType === "") return "";
-    if (Object.keys(props.fileTypes).length === 0) return <span id="smartparts-error">Internal Error</span>;
+    if (Object.keys(props.fileTypes).length === 0) { 
+      if (props.errorMessage === undefined || props.errorMessage === "") {
+        return <span id="smartparts-error">Internal Error</span>;
+      } else {
+        return <span id="smartparts-error">{props.errorMessage}</span>;
+      }
+    }
 
     const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
 
@@ -48,7 +53,9 @@ export const FormTwo = (props) => {
       } else if(new RegExp('date', 'gi').test(fieldArr[i]) === true){
         data.append('date', e.target.date.value);
       } else if (new RegExp('select', 'gi').test(fieldArr[i]) === true) {
-        data.append('date', e.target[`select-${i}`].value);
+        data.append(`select-${i}`, e.target[`select-${i}`].value);
+      } else if (new RegExp('range', 'gi').test(fieldArr[i]) === true) {
+        data.append(`range-${i}`, e.target[`range-${i}`].value);
       } else
       data.append(fieldArr[i], e.target[fieldArr[i]].value);
     };
