@@ -37,7 +37,7 @@ export const FormOne = (props) => {
       } else if (new RegExp('date', 'gi').test(props.fields[i]) === true) {
         data.append('date', e.target.date.value);
       } else if (new RegExp('select', 'gi').test(props.fields[i]) === true) {
-        data.append('date', e.target[`select-${i}`].value);
+        data.append(`select-${i}`, e.target[`select-${i}`].value);
       } else
       data.append(props.fields[i], e.target[props.fields[i]].value);
     };
