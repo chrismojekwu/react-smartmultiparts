@@ -7,7 +7,9 @@ const Range = (props) => {
         if (props.rangeLeftSide) {
             return (
                 <React.Fragment>
-                    <label name={`range-${props.index.toString()}`} className="form-label">{props.label}</label>
+                    <label name={`range-${props.index.toString()}`} className="form-label" id="smartparts-range-label">
+                        {props.label}
+                    </label>
                     <input 
                         type="range" className="form-rangeinput" name={`range-${props.index.toString()}`} id="smartparts-range-input"
                         min={props.min} max={props.max} step={props.step} value={value} onChange={(e) => setValue(e.target.value)}
@@ -21,7 +23,9 @@ const Range = (props) => {
                         type="range" className="form-rangeinput" name={`range-${props.index.toString()}`} id="smartparts-range-input"
                         min={props.min} max={props.max} step={props.step} value={value} onChange={(e) => setValue(e.target.value)}
                     />
-                    <label name={`range-${props.index.toString()}`} className="form-label">{props.label}</label>
+                    <label name={`range-${props.index.toString()}`} className="form-label" id="smartparts-range-label">
+                        {props.label}
+                    </label>
                 </React.Fragment>
             );
         }

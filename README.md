@@ -85,7 +85,9 @@ const selectObj2 = {
 ```
 
 ### Required Attribute
-You can require applicable input types by using an exclamation point at the end of its field name string. 
+You can require applicable input types by using an exclamation point at the end of its field name string.
+
+### User Messages
 
 ## Styling:
 

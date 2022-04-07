@@ -7,8 +7,7 @@ import "../Form.css";
 export const FormTwo = (props) => {
   const [fileType, setFileType] = useState("");
   const [fileName, setFileName] = useState("");
-  const [select, setSelect] = useState();
-  const [selectValue, setSelectValue] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   //function to render correct form component for file type
   const detectFile = () => {
@@ -44,13 +43,13 @@ export const FormTwo = (props) => {
     const fieldArr = props.fileTypes[ext];
 
     for(let i = 0; i < fieldArr.length; i++){
-      if(fieldArr[i] === ""){
+      if (fieldArr[i] === "") {
         continue;
-      } else if(new RegExp('filename', 'gi').test(fieldArr[i]) === true){
+      } else if (new RegExp('filename', 'gi').test(fieldArr[i]) === true) {
         data.append('filename', fileName);
-      } else if(new RegExp('comments', 'gi').test(fieldArr[i]) === true){
+      } else if (new RegExp('comments', 'gi').test(fieldArr[i]) === true) {
         data.append('comments', e.target.comments.value);
-      } else if(new RegExp('date', 'gi').test(fieldArr[i]) === true){
+      } else if (new RegExp('date', 'gi').test(fieldArr[i]) === true) { 
         data.append('date', e.target.date.value);
       } else if (new RegExp('select', 'gi').test(fieldArr[i]) === true) {
         data.append(`select-${i}`, e.target[`select-${i}`].value);
@@ -61,6 +60,7 @@ export const FormTwo = (props) => {
     };
 
     props.cb(data);
+    setDisabled(true);
   };
 
   const handleFile = (file) => {
@@ -90,6 +90,7 @@ export const FormTwo = (props) => {
             encType="multipart/form-data"
             method="post"
             name="upload"
+            disabled={disabled}
           >
             <label htmlFor="file form-label">File:</label>
             <input
@@ -109,7 +110,7 @@ export const FormTwo = (props) => {
             />
             <br />
             {detectFile()}
-            <input id="smartparts-submit" type="submit" className="button form-button" />
+            <input id="smartparts-submit" type="submit" className="button form-button" disabled={disabled} />
             
           </form>
           <br />

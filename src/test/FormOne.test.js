@@ -37,6 +37,8 @@ describe("Form One", () => {
         expect(form).toBeInTheDocument();
     });
 
+    // INPUTS
+
     test('it renders the correct "text" type inputs when file is uploaded', () => {
         const fields = ["Title", "Submitee", "Name"];
 
@@ -188,6 +190,8 @@ describe("Form One", () => {
         expect(logo).toBeInTheDocument();
     });
 
+    // EMPTY FIELDS 
+
     test('Empty Fields behavior no select', () => {
         const fields = [];
 
@@ -237,7 +241,7 @@ describe("Form One", () => {
             console.log(data);
         };
 
-        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
+        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
         const file = new File(["test"], "test.jpg", {
             type: "image/jpeg"
         });
@@ -246,6 +250,30 @@ describe("Form One", () => {
         
         expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date" id="smartparts-date-input" value="2099-01-01">');
     });
+
+    test('it renders a range input correctly', () => {
+        const fields = ["Title", "Artist", "Range[1_200_5_Hours_<]", "Comments"];
+
+        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png","pdf"];
+        
+        const printData = (data) => { 
+            console.log(data);
+        };
+
+        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
+
+        const wavFile = new File(["test"], "test.wav", {
+            type: "audio/wav"
+        });
+
+        wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
+        const inputString = wrapper.find('#smartparts-range-input').html();
+        ["1", "200", "5"].forEach((value) =>  expect(inputString.includes(value)).toBe(true));
+        expect(wrapper.find('#smartparts-range-label').text() === "Hours");
+    });
+
+
+    // REQUIRED INPUTS
 
     test('it renders a required text area when "!" is used', () => {
         const fields = ["cOmMenTS!"];
@@ -329,5 +357,21 @@ describe("Form One", () => {
         expect(wrapper.exists({name: "select-1"})).toBeTruthy();
 
         expect(wrapper.find({name: "select-1"}).html().includes("required"));  
+    });
+
+    // USER SUPPLIED MESSAGES
+
+    test('it renders a user supplied message for "Internal Error"', () => {        
+        const printData = (data) => { 
+            console.log(data);
+        }
+
+        const wrapper = mount(<FormOne fields={[]} fileTypes={[]} cb={printData} errorMessage="Test Error Message - Form One"/>);
+        const file = new File(["test"], "test.jpg", {
+            type: "image/jpeg"
+        });
+        
+        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        expect(wrapper.find('#smartparts-error').text()).toBe("Test Error Message - Form One");
     });
 });

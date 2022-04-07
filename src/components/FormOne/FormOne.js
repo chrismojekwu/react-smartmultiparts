@@ -6,6 +6,7 @@ import "../Form.css";
 export const FormOne = (props) => {
   const [fileType, setFileType] = useState("");
   const [fileName, setFileName] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   //function to render correct form component for file type
   const detectFile = () => {
@@ -19,6 +20,7 @@ export const FormOne = (props) => {
     }
     const ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
     const re = new RegExp(props.fileTypes.join("|"), "gi");
+    // replace wiht user message
     if (!ext) return "Invalid Extension";
     if (re.test(ext) === true) {
       return <FormFields fields={props.fields} filename={fileName} select={props.select}/>;
@@ -50,6 +52,7 @@ export const FormOne = (props) => {
     };
 
     props.cb(data);
+    setDisabled(true);
   };
 
   const handleFile = (file) => {
@@ -78,7 +81,9 @@ export const FormOne = (props) => {
           className="smartparts-entry-form"
           encType="multipart/form-data"
           method="post"
-          name="upload">
+          name="upload"
+          disabled={disabled}
+        >
           <label htmlFor="file form-label">File:</label>
           <input
             id="smartparts-file"
@@ -97,7 +102,7 @@ export const FormOne = (props) => {
           />
           <br />
           {detectFile()}
-          <input id="smartparts-submit" type="submit" className="button form-button" />  
+          <input id="smartparts-submit" type="submit" className="button form-button" disabled={disabled}/>  
         </form>
          <br />
       </div>

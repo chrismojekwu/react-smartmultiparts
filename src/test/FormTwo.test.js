@@ -44,6 +44,8 @@ describe("Form Two", () => {
         expect(form).toBeInTheDocument();
     });
 
+    // INPUTS
+
     test('renders the correct "text" type inputs for different file types',() => {
 
         const printData = (data) => { 
@@ -256,6 +258,32 @@ describe("Form Two", () => {
         expect(logo).toBeInTheDocument();
     });
 
+    test('it renders a range input correctly', () => {
+        const printData = (data) => { 
+            console.log(data);
+        };
+
+        const formObj = {
+            wav: ["Title", "Artist","Range[0_.75_.1_Milliseconds_<]", "Comments"],
+            mp3: ["Title", "Artist"],
+            jpg: ["Title", "Subject", "Source"]
+        };
+
+        const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData} logo={"/fakepath.jpg"}/>);
+
+        const wavFile = new File(["test"], "test.wav", {
+            type: "audio/wav"
+        });
+
+        
+        wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
+        const inputString = wrapper.find('#smartparts-range-input').html();
+        ["0", ".75", ".1"].forEach((value) =>  expect(inputString.includes(value)).toBe(true));
+        expect(wrapper.find('#smartparts-range-label').text() === "Milliseconds");
+    });
+
+    // EMPTY FIELDS
+
     test('Empty object behavior without select',() => {
         const fileTypes = {};
 
@@ -316,6 +344,8 @@ describe("Form Two", () => {
         expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date" id="smartparts-date-input" value="2099-01-01">');
     });
 
+    // REQUIRED INPUTS
+
     test('it renders a required text area when "!" is used', () => {
 
         const printData = (data) => { 
@@ -359,7 +389,7 @@ describe("Form Two", () => {
         expect(wrapper.find('#required-text-input').html().includes("required"));
     });
 
-    test('it renders a required text input when "!" is used', () => {    
+    test('it renders a required date input when "!" is used', () => {    
         const printData = (data) => { 
             console.log(data);
         };
@@ -378,7 +408,7 @@ describe("Form Two", () => {
         expect(wrapper.find('#smartparts-date-input').html().includes("required"));
     });
 
-    test('it renders a required select input when "!" is used',() => {
+    test('it renders a required select input when "!" is used', () => {
 
         const printData = (data) => { 
             console.log(data);
@@ -407,5 +437,22 @@ describe("Form Two", () => {
         expect(wrapper.exists({name: "select-2"})).toBeTruthy();
 
         expect(wrapper.find({name: "select-2"}).html().includes("required"));  
+    });
+
+    // USER SUPPLIED MESSAGES
+
+    test('it renders a user supplied message for "Internal Error"', () => {
+        const printData = (data) => { 
+            console.log(data);
+        };
+        
+        const wrapper = mount(<FormTwo fileTypes={{}} cb={printData} errorMessage="Test Error Message - Form Two"/>);
+
+        const mp3File = new File(["test"], "test.mp3", {
+            type: "audio/mpeg"
+        });
+
+        wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
+        expect(wrapper.find('#smartparts-error').text()).toBe("Test Error Message - Form Two");
     });
 });
