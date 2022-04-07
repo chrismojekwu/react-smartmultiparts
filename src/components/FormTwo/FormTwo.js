@@ -37,6 +37,7 @@ export const FormTwo = (props) => {
 
   const upload = (e) => {
     e.preventDefault();
+    if (Object.keys(props.fileTypes).length === 0 || props.fileTypes === undefined || props.fileTypes === null) return false; 
     const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
     const data = new FormData();
     data.append('file', fileType[0]);
@@ -67,6 +68,11 @@ export const FormTwo = (props) => {
     if (file[0] === undefined || file[0] === null) {
       return null;
     } else return file;
+  };
+
+  const handleDisabled = () => {
+    const message = props.disabled !== undefined ? props.disabled.message : "Thanks";
+    return <span className="smartparts-disabled-message">{message}</span>;
   };
 
   const renderLogo = (path) => {
@@ -109,7 +115,7 @@ export const FormTwo = (props) => {
               }}
             />
             <br />
-            {detectFile()}
+            {!disabled ? detectFile() : handleDisabled()}
             <input id="smartparts-submit" type="submit" className="button form-button" disabled={disabled} />
             
           </form>
