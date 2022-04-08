@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Enzyme, { mount } from 'enzyme';
 import {FormTwo} from '../components/FormTwo/FormTwo';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
@@ -68,7 +68,7 @@ describe("Form Two", () => {
 
         for(let i = 0; i < formObj.jpg.length; i++){
             const element = wrapper.find(`#${formObj.jpg[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.jpg[i]}" id="${formObj.jpg[i].toLowerCase()}">`);
+            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.jpg[i].toLowerCase()}" id="${formObj.jpg[i].toLowerCase()}">`);
         };
 
         const mp3File = new File(["test"], "test.mp3", {
@@ -80,7 +80,7 @@ describe("Form Two", () => {
         for(let i = 0; i < formObj.mp3.length; i++){
 
             const element = wrapper.find(`#${formObj.mp3[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.mp3[i]}" id="${formObj.mp3[i].toLowerCase()}">`);
+            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.mp3[i].toLowerCase()}" id="${formObj.mp3[i].toLowerCase()}">`);
         };
 
         const wavFile = new File(["test"], "test.wav", {
@@ -91,7 +91,7 @@ describe("Form Two", () => {
 
         for(let i = 0; i < formObj.wav.length; i++){
             const element = wrapper.find(`#${formObj.wav[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.wav[i]}" id="${formObj.wav[i].toLowerCase()}">`);
+            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.wav[i].toLowerCase()}" id="${formObj.wav[i].toLowerCase()}">`);
         };
     });
 
@@ -454,5 +454,32 @@ describe("Form Two", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
         expect(wrapper.find('#smartparts-error').text()).toBe("Test Error Message - Form Two");
+    });
+
+    test('form is disabled after submit', () => {
+
+        const printData = (data) => { 
+            console.log(data);
+        };
+
+        const formObj = {
+            mp3: ["title"],
+        };
+
+        render(<FormTwo fileTypes={formObj} cb={printData}/>);
+
+        const mp3File = new File(["test"], "test.mp3", {
+            type: "audio/mpeg"
+        });
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        fireEvent.change(screen.getByRole('textbox'), {target: { value: "BLAHBLAH" }});
+
+        fireEvent.click(screen.getByRole('button'));
+
+        expect(screen.getByRole('button')).toBeDisabled(); 
     });
 });

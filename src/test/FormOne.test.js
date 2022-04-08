@@ -1,6 +1,6 @@
-import React, { cloneElement } from 'react';
+import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Enzyme, { mount } from 'enzyme';
 import { FormOne } from '../components/FormOne/FormOne'
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
@@ -57,7 +57,7 @@ describe("Form One", () => {
 
         for(let i = 0; i < fields.length; i++){
             const element = wrapper.find(`#${fields[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${fields[i]}" id="${fields[i].toLowerCase()}">`);
+            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${fields[i].toLowerCase()}" id="${fields[i].toLowerCase()}">`);
         };
 
     });
@@ -373,5 +373,27 @@ describe("Form One", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
         expect(wrapper.find('#smartparts-error').text()).toBe("Test Error Message - Form One");
+    });
+
+    test('form is disabled after submit', () => {
+        const fileTypes = ["mp3"];
+        
+        const printData = (data) => { 
+            console.log(data);
+        };
+
+        const mp3File = new File(["test"], "test.mp3", {
+            type: "audio/mpeg"
+        });
+
+        render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData}/>);
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        fireEvent.click(screen.getByRole('button'));
+
+        expect(screen.getByRole('button')).toBeDisabled();
     });
 });

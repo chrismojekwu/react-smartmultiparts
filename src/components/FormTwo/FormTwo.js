@@ -57,7 +57,7 @@ export const FormTwo = (props) => {
       } else if (new RegExp('range', 'gi').test(fieldArr[i]) === true) {
         data.append(`range-${i}`, e.target[`range-${i}`].value);
       } else
-      data.append(fieldArr[i], e.target[fieldArr[i]].value);
+      data.append(fieldArr[i].toLowerCase(), e.target[fieldArr[i].toLowerCase()].value);
     };
 
     props.cb(data);
@@ -87,7 +87,7 @@ export const FormTwo = (props) => {
         {props.logo ? renderLogo(props.logo) : ""}
       </div>
           <p>
-            Supported File Types: {Object.keys(props.fileTypes) != undefined ? fileTypes(Object.keys(props.fileTypes)) : ""}
+            Supported File Types: {Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""}
           </p>
 
           <form
@@ -101,6 +101,7 @@ export const FormTwo = (props) => {
             <label htmlFor="file form-label">File:</label>
             <input
               id="smartparts-file"
+              data-testid="smartparts-file"
               type="file"
               name="upload"
               className="form-fileinput"
@@ -116,10 +117,8 @@ export const FormTwo = (props) => {
             />
             <br />
             {!disabled ? detectFile() : handleDisabled()}
-            <input id="smartparts-submit" type="submit" className="button form-button" disabled={disabled} />
-            
+            <input id="smartparts-submit" type="submit" className="button form-button" disabled={disabled}/>
           </form>
-          <br />
       </div>
     </>
   );

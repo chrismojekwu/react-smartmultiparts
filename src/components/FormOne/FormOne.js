@@ -20,7 +20,6 @@ export const FormOne = (props) => {
     }
     const ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
     const re = new RegExp(props.fileTypes.join("|"), "gi");
-    // replace wiht user message
     if (!ext) return "Invalid Extension";
     if (re.test(ext) === true) {
       return <FormFields fields={props.fields} filename={fileName} select={props.select}/>;
@@ -49,7 +48,7 @@ export const FormOne = (props) => {
       } else if (new RegExp('range', 'gi').test(props.fields[i]) === true) {
         data.append(`range-${i}`, e.target[`range-${i}`].value);
       } else
-      data.append(props.fields[i], e.target[props.fields[i]].value);
+      data.append(props.fields[i].toLowerCase(), e.target[props.fields[i].toLowerCase()].value);
     };
 
     props.cb(data);
@@ -93,6 +92,7 @@ export const FormOne = (props) => {
           <label htmlFor="file form-label">File:</label>
           <input
             id="smartparts-file"
+            data-testid="smartparts-file"
             type="file"
             name="upload"
             className="form-fileinput"
@@ -110,7 +110,6 @@ export const FormOne = (props) => {
           {!disabled ? detectFile() : handleDisabled()}
           <input id="smartparts-submit" type="submit" className="button form-button" disabled={disabled}/>  
         </form>
-         <br />
       </div>
     </>
   );

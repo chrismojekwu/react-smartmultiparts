@@ -8,7 +8,7 @@ const TextInput = (props) => {
     return (
       <React.Fragment key={"textinput" + props.index.toString()}>
         <label htmlFor={label} className="form-label">{label}:</label>
-        <input type="text form-textinput" name={props.field} id={idString} />
+        <input type="text form-textinput" name={props.field.toLowerCase()} id={idString} />
       </React.Fragment>
     );
   };
@@ -17,7 +17,7 @@ const TextInput = (props) => {
     return (
       <React.Fragment key={"textinput" + props.index.toString()}>
         <label htmlFor={label} className="form-label">{label}:</label>
-        <input type="text form-textinput" name={props.field} id={idString} required />
+        <input type="text form-textinput" name={props.field.toLowerCase()} id={idString} required />
       </React.Fragment>
     );
   };
