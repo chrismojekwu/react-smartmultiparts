@@ -1,10 +1,11 @@
 {
   "name": "react-smartmultiparts",
   "homepage": "http://chrismojekwu.github.io/react-smartmultiparts/",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Form generating file upload components for React",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "type": "module",
   "scripts": {
     "develop": "webpack serve",
     "test": "jest",

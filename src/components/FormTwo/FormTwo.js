@@ -53,9 +53,7 @@ export const FormTwo = (props) => {
       } else if (new RegExp('date', 'gi').test(fieldArr[i]) === true) { 
         data.append('date', e.target.date.value);
       } else if (new RegExp('select', 'gi').test(fieldArr[i]) === true) {
-        data.append(`select-${i}`, e.target[`select-${i}`].value);
-      } else if (new RegExp('range', 'gi').test(fieldArr[i]) === true) {
-        data.append(`range-${i}`, e.target[`range-${i}`].value);
+        data.append(`select_${i}`, e.target[`select-${i}`].value);
       } else
       data.append(fieldArr[i].toLowerCase(), e.target[fieldArr[i].toLowerCase()].value);
     };
