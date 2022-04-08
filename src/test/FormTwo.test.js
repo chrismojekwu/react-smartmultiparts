@@ -482,4 +482,29 @@ describe("Form Two", () => {
 
         expect(screen.getByRole('button')).toBeDisabled(); 
     });
+
+    test('user diabled message', () => {
+
+        const printData = (data) => { 
+            console.log(data);
+        };
+
+        const formObj = {
+            mp3: ["title"],
+        };
+
+        render(<FormTwo fileTypes={formObj} cb={printData} disabled={{message: "Test Form Disabled Message - Form Two"}}/>);
+
+        const mp3File = new File(["test"], "test.mp3", {
+            type: "audio/mpeg"
+        });
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        fireEvent.click(screen.getByRole('button'));
+
+        expect(screen.getByText("Test Form Disabled Message - Form Two")).toBeInTheDocument();
+    });
 });

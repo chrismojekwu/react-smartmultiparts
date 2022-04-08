@@ -396,4 +396,26 @@ describe("Form One", () => {
 
         expect(screen.getByRole('button')).toBeDisabled();
     });
+
+    test('user diabled message', () => {
+        const fileTypes = ["mp3"];
+        
+        const printData = (data) => { 
+            console.log(data);
+        };
+
+        const mp3File = new File(["test"], "test.mp3", {
+            type: "audio/mpeg"
+        });
+
+        render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}}/>);
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        fireEvent.click(screen.getByRole('button'));
+
+        expect(screen.getByText("Test Form Disabled Message - Form One")).toBeInTheDocument();
+    });
 });
