@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import FormFields from "../FormFields/FormFields";
-import Select from '../Select/Select';
-import {stringInArr, fileTypes} from '../util/helpers';
+import { fileTypes } from '../util/helpers';
 
 import "../Form.css";
 
 export const FormTwo = (props) => {
   const [fileType, setFileType] = useState("");
   const [fileName, setFileName] = useState("");
-  const [select, setSelect] = useState();
-  const [selectValue, setSelectValue] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   //function to render correct form component for file type
   const detectFile = () => {
     if (fileType === "") return "";
-    if (Object.keys(props.fileTypes).length === 0) return <span id="smartparts-error">Internal Error</span>;
+    if (Object.keys(props.fileTypes).length === 0) { 
+      if (props.errorMessage === undefined || props.errorMessage === "") {
+        return <span id="smartparts-error">Internal Error</span>;
+      } else {
+        return <span id="smartparts-error">{props.errorMessage}</span>;
+      }
+    }
 
     const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
 
@@ -33,33 +37,40 @@ export const FormTwo = (props) => {
 
   const upload = (e) => {
     e.preventDefault();
+    if (Object.keys(props.fileTypes).length === 0 || props.fileTypes === undefined || props.fileTypes === null) return false; 
     const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
     const data = new FormData();
     data.append('file', fileType[0]);
     const fieldArr = props.fileTypes[ext];
 
     for(let i = 0; i < fieldArr.length; i++){
-      if(fieldArr[i] === ""){
+      if (fieldArr[i] === "") {
         continue;
-      } else if(new RegExp('filename', 'gi').test(fieldArr[i]) === true){
+      } else if (new RegExp('filename', 'gi').test(fieldArr[i]) === true) {
         data.append('filename', fileName);
-      } else if(new RegExp('comments', 'gi').test(fieldArr[i]) === true){
+      } else if (new RegExp('comments', 'gi').test(fieldArr[i]) === true) {
         data.append('comments', e.target.comments.value);
-      } else if(new RegExp('date', 'gi').test(fieldArr[i]) === true){
+      } else if (new RegExp('date', 'gi').test(fieldArr[i]) === true) { 
         data.append('date', e.target.date.value);
       } else if (new RegExp('select', 'gi').test(fieldArr[i]) === true) {
         data.append(`select_${i}`, e.target[`select-${i}`].value);
       } else
-      data.append(fieldArr[i], e.target[fieldArr[i]].value);
+      data.append(fieldArr[i].toLowerCase(), e.target[fieldArr[i].toLowerCase()].value);
     };
 
     props.cb(data);
+    setDisabled(true);
   };
 
   const handleFile = (file) => {
     if (file[0] === undefined || file[0] === null) {
       return null;
     } else return file;
+  };
+
+  const handleDisabled = () => {
+    const message = props.disabled !== undefined ? props.disabled.message : "Thanks";
+    return <span className="smartparts-disabled-message">{message}</span>;
   };
 
   const renderLogo = (path) => {
@@ -74,7 +85,7 @@ export const FormTwo = (props) => {
         {props.logo ? renderLogo(props.logo) : ""}
       </div>
           <p>
-            Supported File Types: {Object.keys(props.fileTypes) != undefined ? fileTypes(Object.keys(props.fileTypes)) : ""}
+            Supported File Types: {Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""}
           </p>
 
           <form
@@ -83,10 +94,12 @@ export const FormTwo = (props) => {
             encType="multipart/form-data"
             method="post"
             name="upload"
+            disabled={disabled}
           >
             <label htmlFor="file form-label">File:</label>
             <input
               id="smartparts-file"
+              data-testid="smartparts-file"
               type="file"
               name="upload"
               className="form-fileinput"
@@ -101,11 +114,9 @@ export const FormTwo = (props) => {
               }}
             />
             <br />
-            {detectFile()}
-            <input id="smartparts-submit" type="submit" className="button form-button" />
-            
+            {!disabled ? detectFile() : handleDisabled()}
+            <input id="smartparts-submit" type="submit" className="button form-button" disabled={disabled}/>
           </form>
-          <br />
       </div>
     </>
   );
