@@ -6,7 +6,7 @@ const TextArea = (props) => {
             <React.Fragment key={"textarea-" + props.index.toString()}>
                 <label htmlFor='comments' className='form-label'>Comments:</label>
                 <textarea
-                  name="comments"
+                  name={`textarea-${props.index}`}
                   className="comments form-textarea"
                   placeholder="Additional Comments"
                   id="smartparts-comments"
@@ -20,7 +20,7 @@ const TextArea = (props) => {
             <React.Fragment key={"textarea-" + props.index.toString()}>
                 <label htmlFor='comments' className='form-label'>Comments:</label>
                 <textarea
-                  name="comments"
+                  name={`textarea-${props.index}`}
                   className="comments form-textarea"
                   placeholder="Additional Comments"
                   id="smartparts-comments"

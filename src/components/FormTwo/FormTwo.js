@@ -44,18 +44,21 @@ export const FormTwo = (props) => {
     const fieldArr = props.fileTypes[ext];
 
     for(let i = 0; i < fieldArr.length; i++){
+      const fieldNameCleaned = fieldArr[i].replace("!", "");;
       if (fieldArr[i] === "") {
         continue;
-      } else if (new RegExp('filename', 'gi').test(fieldArr[i]) === true) {
+      } else if (new RegExp('filename', 'gi').test(fieldNameCleaned) === true) {
         data.append('filename', fileName);
-      } else if (new RegExp('comments', 'gi').test(fieldArr[i]) === true) {
-        data.append('comments', e.target.comments.value);
-      } else if (new RegExp('date', 'gi').test(fieldArr[i]) === true) { 
-        data.append('date', e.target.date.value);
-      } else if (new RegExp('select', 'gi').test(fieldArr[i]) === true) {
+      } else if (new RegExp('comments', 'gi').test(fieldNameCleaned) === true) {
+        data.append('comments', e.target[`textarea-${i}`].value);
+      } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true) { 
+        data.append('date', e.target[`date-${i}`].value);
+      } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
         data.append(`select_${i}`, e.target[`select-${i}`].value);
+      } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
+        data.append(`range_${i}`, e.target[`range-${i}`].value);
       } else
-      data.append(fieldArr[i].toLowerCase(), e.target[fieldArr[i].toLowerCase()].value);
+      data.append(fieldNameCleaned.toLowerCase(), e.target[`${fieldNameCleaned.toLowerCase()}-${i}`].value);
     };
 
     props.cb(data);

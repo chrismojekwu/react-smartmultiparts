@@ -1,14 +1,14 @@
 import React from "react";
 
 const TextInput = (props) => {
-  const label = props.field.split("").filter(x => x !== "!").join("");
+  const label = props.field.replace("!", "");
   const idString = label.split(" ").join("-").toLowerCase();
 
   const renderDefault = () => {
     return (
       <React.Fragment key={"textinput" + props.index.toString()}>
         <label htmlFor={label} className="form-label">{label}:</label>
-        <input type="text form-textinput" name={props.field.toLowerCase()} id={idString} />
+        <input type="text form-textinput" name={`${label.toLowerCase()}-${props.index}`} id={idString} />
       </React.Fragment>
     );
   };
@@ -17,7 +17,7 @@ const TextInput = (props) => {
     return (
       <React.Fragment key={"textinput" + props.index.toString()}>
         <label htmlFor={label} className="form-label">{label}:</label>
-        <input type="text form-textinput" name={props.field.toLowerCase()} id={idString} required />
+        <input type="text form-textinput" name={`${label.toLowerCase()}-${props.index}`} id={idString} required />
       </React.Fragment>
     );
   };

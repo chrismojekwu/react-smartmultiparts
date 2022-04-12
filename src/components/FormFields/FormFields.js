@@ -43,9 +43,9 @@ function FormFields(props) {
             }
           } else if (field.trim().match(/date/gi)) {
             if (field.trim().includes("!")) {
-              return <Date required={true}/>;
+              return <Date required={true} index={index}/>;
             } else {
-              return <Date required={false}/>;
+              return <Date required={false} index={index}/>;
             }
           } else if (field.trim().match(/range/gi)) {
             return generateRange(index, field.trim());
