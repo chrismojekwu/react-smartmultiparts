@@ -27,7 +27,7 @@ details > summary {
     margin-bottom: 10px;
 }
 
-.inputtypes > * , .styling > *, .gist > * {
+.inputtypes > * , .styling > *, .gist > *, .configuration > * {
     display: block;
     margin: 5px 0 5px 0
 }
