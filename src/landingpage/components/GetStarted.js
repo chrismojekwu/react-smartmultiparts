@@ -4,7 +4,7 @@ import './getstarted.css'
 const GetStarted = () => {
     const formOne = [`import {FormOne} from 'react-smartmultiparts';`,`const fields = ["Title", "Submitee", "Name", "Comments"];`, `const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];`, <p>const printData = (data) {"=>"} {"{"}<br/>&emsp;&emsp;console.log(data);<br/>{"}"};</p>, `<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>`];
     const formTwo = [`import {FormTwo} from 'react-smartmultiparts';`, <p>const printData = (data) {"=>"} {"{"}<br/>&emsp;&emsp;console.log(data);<br/>{"}"};</p>, <p>const formObj = {"{"}<br/>&emsp;&emsp;wav: ["Title", "Artist", "Comments"],<br/>&emsp;&emsp;mp3: ["Title", "Artist"],<br/>&emsp;&emsp;jpg: ["Title", "Subject", "Source"]<br/>{"}"};</p>, `<FormTwo fileTypes={formObj} cb={printData}/>`];
-    const select = [<p>const selectObj = {"{"}<br/>&emsp;&emsp;query: "Whats your name?",<br/>&emsp;&emsp;select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],<br/>&emsp;&emsp;types: ["wav","jpeg","mp3"]<br/>{"}"};</p>,`<FormOne ... select={selectObj}/>`];
+    const select = [<p>const selectObj = {"{"}<br/>&emsp;&emsp;query: "Whats your name?",<br/>&emsp;&emsp;select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],<br/>&emsp;&emsp;placeholder: "Lorem"<br/>{"}"};</p>,`<FormOne ... select={selectObj}/>`];
     
     return (
         <div className="getstarted">
@@ -71,7 +71,13 @@ const GetStarted = () => {
                     <span className="bold">Filename</span> - Using "filename" as a field will generate the filename inside of the form and include it in the multipart data.
                 </span>
                 <span>
-                    <span className="bold">Select</span> - You can generate a single select field by providing a select object as a prop to either Form component using the name "select". The select object requires 2 key-values to work. "query", which refers to your question/prompt. "select", which refers to the options you want to display. If you're using Form Two, you can provide a "types" key-value which specifies the file types you would like to generate a select input for.
+                    <span className="bold">Date</span> - Using "date" as a field will generate a date input.
+                </span>
+                <span>
+                    <span className="bold">Range</span> - You can generate a range field by using "range" followed by a bracket that specifies min, max, step, & label values seprated by an underscore. Optionally you can include left angle bracket to instruct the form to render the label before the input.
+                </span>
+                <span>
+                    <span className="bold">Select</span> - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array.
                 <details>
                     <summary>Example</summary>
                     <div className="code-snippet">
@@ -86,6 +92,19 @@ const GetStarted = () => {
                         </code>
                     </div>
                 </details>
+                </span>
+            </div>
+
+            <h3 className="heading">Configuration:</h3>
+            <div className="configuration">
+                <span>
+                    <span className="bold">Required Attribute</span> - You can require applicable input types by using an exclamation point at the end of its field name string.
+                </span>
+                <span>
+                    <span className="bold">Form Disable Message</span> - By default the form will display Thanks after it is submitted. You can provide your own message passing the "disabled" prop an object with a single key/value pair using "message".
+                </span>
+                <span>
+                    <span className="bold">Error Message</span> - By default the form will display Internal Error on error. You can provide an error message for the form by passing a string into an errorMessage prop.
                 </span>
             </div>
 

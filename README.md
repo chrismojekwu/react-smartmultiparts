@@ -89,9 +89,9 @@ You can require applicable input types by using an exclamation point at the end 
 
 ### User Messages
 #### Form Disable Message
-By default the form will display *Thanks* after it is submitted you can provide your own message passing the "disabled" prop an object with a single key/value pair using "message".
+By default the form will display *Thanks* after it is submitted. You can provide your own message passing the "disabled" prop an object with a single key/value pair using "message".
 #### Error Message
-By default the form will display *Internal Error* on error you can provide an error message for the form by passing a string into an errorMessage prop.
+By default the form will display *Internal Error* on error. You can provide an error message for the form by passing a string into an errorMessage prop.
 
 ## Styling:
 
