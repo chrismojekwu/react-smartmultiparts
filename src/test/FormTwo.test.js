@@ -68,7 +68,7 @@ describe("Form Two", () => {
 
         for(let i = 0; i < formObj.jpg.length; i++){
             const element = wrapper.find(`#${formObj.jpg[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.jpg[i].toLowerCase()}" id="${formObj.jpg[i].toLowerCase()}">`);
+            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.jpg[i].toLowerCase()}-${i}" id="${formObj.jpg[i].toLowerCase()}">`);
         };
 
         const mp3File = new File(["test"], "test.mp3", {
@@ -341,7 +341,7 @@ describe("Form Two", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
-        expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date" id="smartparts-date-input" value="2099-01-01">');
+        expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input" value="2099-01-01">');
     });
 
     // REQUIRED INPUTS
@@ -480,17 +480,17 @@ describe("Form Two", () => {
 
         fireEvent.click(screen.getByRole('button'));
 
-        expect(screen.getByRole('button')).toBeDisabled(); 
+        expect(screen.getByRole('form')).toBeDisabled(); 
     });
 
-    test('user diabled message', () => {
+    test('user disabled message', () => {
 
         const printData = (data) => { 
             console.log(data);
         };
 
         const formObj = {
-            mp3: ["title"],
+            mp3: ["Title"],
         };
 
         render(<FormTwo fileTypes={formObj} cb={printData} disabled={{message: "Test Form Disabled Message - Form Two"}}/>);

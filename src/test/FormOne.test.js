@@ -57,7 +57,7 @@ describe("Form One", () => {
 
         for(let i = 0; i < fields.length; i++){
             const element = wrapper.find(`#${fields[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${fields[i].toLowerCase()}" id="${fields[i].toLowerCase()}">`);
+            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${fields[i].toLowerCase()}-${i}" id="${fields[i].toLowerCase()}">`);
         };
 
     });
@@ -248,7 +248,7 @@ describe("Form One", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
         
-        expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date" id="smartparts-date-input" value="2099-01-01">');
+        expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input" value="2099-01-01">');
     });
 
     test('it renders a range input correctly', () => {
@@ -397,7 +397,7 @@ describe("Form One", () => {
         expect(screen.getByRole('button')).toBeDisabled();
     });
 
-    test('user diabled message', () => {
+    test('user disabled message', () => {
         const fileTypes = ["mp3"];
         
         const printData = (data) => { 
