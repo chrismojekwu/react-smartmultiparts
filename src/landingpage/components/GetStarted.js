@@ -129,10 +129,25 @@ const GetStarted = () => {
                     <span className="bold">Filename</span> - .form-filename
                 </span>
                 <span>
-                    <span className="bold">Comments</span> - .form-textarea
+                    <span className="bold">Comments</span> - .form-text-area
                 </span>
                 <span>
-                    <span className="bold">Text Inputs</span> - .form-textinput
+                    <span className="bold">Text Inputs</span> - .form-text-input
+                </span>
+                <span>
+                    <span className="bold">Select Element</span> - .form-select
+                </span>
+                <span>
+                    <span className="bold">Select Options</span> - .form-select-option
+                </span>
+                <span>
+                    <span className="bold">Date Input</span> - .form-date-input
+                </span>
+                <span>
+                    <span className="bold">Range Input</span> - .form-range-input
+                </span>
+                <span>
+                    <span className="bold">Range Value</span> - .form-range-value
                 </span>
                 <span>
                     <span className="bold">Submit Button</span> - .form-button

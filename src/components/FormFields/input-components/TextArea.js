@@ -3,11 +3,11 @@ import React from "react";
 const TextArea = (props) => {
     const renderDefault = () => {
         return (
-            <React.Fragment key={"textarea-" + props.index.toString()}>
+            <React.Fragment>
                 <label htmlFor='comments' className='form-label'>Comments:</label>
                 <textarea
                   name={`textarea-${props.index}`}
-                  className="comments form-textarea"
+                  className="comments form-text-area"
                   placeholder="Additional Comments"
                   id="smartparts-comments"
                 />
@@ -17,11 +17,11 @@ const TextArea = (props) => {
 
     const renderReq = () => {
         return (
-            <React.Fragment key={"textarea-" + props.index.toString()}>
+            <React.Fragment>
                 <label htmlFor='comments' className='form-label'>Comments:</label>
                 <textarea
                   name={`textarea-${props.index}`}
-                  className="comments form-textarea"
+                  className="comments form-text-area"
                   placeholder="Additional Comments"
                   id="smartparts-comments"
                   required

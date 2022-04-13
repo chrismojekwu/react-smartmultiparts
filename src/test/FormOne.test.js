@@ -57,7 +57,7 @@ describe("Form One", () => {
 
         for(let i = 0; i < fields.length; i++){
             const element = wrapper.find(`#${fields[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${fields[i].toLowerCase()}-${i}" id="${fields[i].toLowerCase()}">`);
+            expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${fields[i].toLowerCase()}-${i}" id="${fields[i].toLowerCase()}">`);
         };
 
     });
@@ -126,7 +126,7 @@ describe("Form One", () => {
         
         for(let i = 0; i < selectObj.select.length; i++){
             const element = wrapper.find(`#${selectObj.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}">${selectObj.select[i]}</option>`);
+            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}" class="form-select-option">${selectObj.select[i]}</option>`);
         };
         
     });
@@ -163,14 +163,14 @@ describe("Form One", () => {
         
         for(let i = 0; i < selectObj.select.length; i++){
             const element = wrapper.find(`#${selectObj.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}">${selectObj.select[i]}</option>`);
+            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}" class="form-select-option">${selectObj.select[i]}</option>`);
         };
 
         expect(wrapper.exists({name: "select-4"})).toBeTruthy();
         
         for(let i = 0; i < selectObj.select.length; i++){
             const element = wrapper.find(`#${selectObj2.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj2.select[i]}" id="${selectObj2.select[i]}">${selectObj2.select[i]}</option>`);
+            expect(element.html()).toEqual(`<option value="${selectObj2.select[i]}" id="${selectObj2.select[i]}" class="form-select-option">${selectObj2.select[i]}</option>`);
         };
     });
 
@@ -248,7 +248,7 @@ describe("Form One", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
         
-        expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input" value="2099-01-01">');
+        expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input" class="form-date-input" value="2099-01-01">');
     });
 
     test('it renders a range input correctly', () => {

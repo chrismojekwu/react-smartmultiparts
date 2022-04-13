@@ -68,7 +68,7 @@ describe("Form Two", () => {
 
         for(let i = 0; i < formObj.jpg.length; i++){
             const element = wrapper.find(`#${formObj.jpg[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.jpg[i].toLowerCase()}-${i}" id="${formObj.jpg[i].toLowerCase()}">`);
+            expect(element.html()).toEqual(`<input type="text" class="form-text-input" name="${formObj.jpg[i].toLowerCase()}-${i}" id="${formObj.jpg[i].toLowerCase()}">`);
         };
 
         const mp3File = new File(["test"], "test.mp3", {
@@ -80,7 +80,7 @@ describe("Form Two", () => {
         for(let i = 0; i < formObj.mp3.length; i++){
 
             const element = wrapper.find(`#${formObj.mp3[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.mp3[i].toLowerCase()}" id="${formObj.mp3[i].toLowerCase()}">`);
+            expect(element.html()).toEqual(`<input type="text form-text-input\" name="${formObj.mp3[i].toLowerCase()}" id="${formObj.mp3[i].toLowerCase()}">`);
         };
 
         const wavFile = new File(["test"], "test.wav", {
@@ -91,7 +91,7 @@ describe("Form Two", () => {
 
         for(let i = 0; i < formObj.wav.length; i++){
             const element = wrapper.find(`#${formObj.wav[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-textinput\" name="${formObj.wav[i].toLowerCase()}" id="${formObj.wav[i].toLowerCase()}">`);
+            expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${formObj.wav[i].toLowerCase()}" id="${formObj.wav[i].toLowerCase()}">`);
         };
     });
 
@@ -179,7 +179,7 @@ describe("Form Two", () => {
 
         for(let i = 0; i < selectObj.select.length; i++){
             const element = wrapper.find(`#${selectObj.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}">${selectObj.select[i]}</option>`);
+            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}" class="form-select-option">${selectObj.select[i]}</option>`);
         };
     });
 
@@ -227,14 +227,14 @@ describe("Form Two", () => {
 
         for(let i = 0; i < selectObj.select.length; i++){
             const element = wrapper.find(`#${selectObj.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}">${selectObj.select[i]}</option>`);
+            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}" class="form-select-option">${selectObj.select[i]}</option>`);
         };
 
         expect(wrapper.exists({name: "select-3"})).toBeTruthy();
 
         for(let i = 0; i < selectObj.select.length; i++){
             const element = wrapper.find(`#${selectObj2.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj2.select[i]}" id="${selectObj2.select[i]}">${selectObj2.select[i]}</option>`);
+            expect(element.html()).toEqual(`<option value="${selectObj2.select[i]}" id="${selectObj2.select[i]}" class="form-select-option">${selectObj2.select[i]}</option>`);
         };
     });
 
@@ -341,7 +341,7 @@ describe("Form Two", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
-        expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input" value="2099-01-01">');
+        expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input" class="form-date-input" value="2099-01-01">');
     });
 
     // REQUIRED INPUTS
@@ -480,7 +480,7 @@ describe("Form Two", () => {
 
         fireEvent.click(screen.getByRole('button'));
 
-        expect(screen.getByRole('form')).toBeDisabled(); 
+        expect(screen.getByRole('button')).toBeDisabled(); 
     });
 
     test('user disabled message', () => {

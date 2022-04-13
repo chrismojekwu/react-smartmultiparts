@@ -10,8 +10,9 @@ const Range = (props) => {
                     <label name={`range-${props.index}`} className="form-label" id="smartparts-range-label">
                         {props.label}
                     </label>
+                    <span className="form-range-value">{value}</span>
                     <input 
-                        type="range" className="form-rangeinput" name={`range-${props.index}`} id="smartparts-range-input"
+                        type="range" className="form-range-input" name={`range-${props.index}`} id="smartparts-range-input"
                         min={props.min} max={props.max} step={props.step} value={value} onChange={(e) => setValue(e.target.value)}
                     />
                 </React.Fragment>
@@ -20,12 +21,13 @@ const Range = (props) => {
             return (
                 <React.Fragment>
                     <input 
-                        type="range" className="form-rangeinput" name={`range-${props.index}`} id="smartparts-range-input"
+                        type="range" className="form-range-input" name={`range-${props.index}`} id="smartparts-range-input"
                         min={props.min} max={props.max} step={props.step} value={value} onChange={(e) => setValue(e.target.value)}
                     />
                     <label name={`range-${props.index}`} className="form-label" id="smartparts-range-label">
                         {props.label}
                     </label>
+                    <span className="form-range-value">{value}</span>
                 </React.Fragment>
             );
         }

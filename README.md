@@ -109,18 +109,21 @@ File Input - .form-fileinput
 
 Filename - .form-filename
 
-Comments - .form-textarea
+Comments - .form-text-area
 
-Text Input - .form-textinput
+Text Input - .form-text-input
 
-Select Element - 
+Select Element - .form-select
 
-Select Options -
+Select Options - .form-select-option
 
-Date Input - 
+Date Input - .form-date-input
+
+Range Input - .form-range-input
+
+Range Value - .form-range-value
 
 Submit Button - .form-button
-
 
 Logo - .form-logo-img
 

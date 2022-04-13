@@ -19,20 +19,15 @@ export const FormTwo = (props) => {
         return <span id="smartparts-error">{props.errorMessage}</span>;
       }
     }
-
     const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
-
     const re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
-
     if (!ext) return "Invalid Extention";
-
-    if (re.test(ext) === true) {
+    if (re.test(ext)) {
       return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select}/>;
+    } else {
+      setFileType("INVALID");
+      return "File type not supported.";
     }
-
-    else setFileType("INVALID");
-
-    return "File type not supported.";
   };
 
   const upload = (e) => {

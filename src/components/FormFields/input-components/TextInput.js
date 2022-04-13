@@ -6,19 +6,19 @@ const TextInput = (props) => {
 
   const renderDefault = () => {
     return (
-      <React.Fragment key={"textinput" + props.index.toString()}>
+      <>
         <label htmlFor={label} className="form-label">{label}:</label>
-        <input type="text form-textinput" name={`${label.toLowerCase()}-${props.index}`} id={idString} />
-      </React.Fragment>
+        <input type="text" className="form-text-input" name={`${label.toLowerCase()}-${props.index}`} id={idString}/>
+      </>
     );
   };
 
   const renderReq = () => {
     return (
-      <React.Fragment key={"textinput" + props.index.toString()}>
+      <>
         <label htmlFor={label} className="form-label">{label}:</label>
-        <input type="text form-textinput" name={`${label.toLowerCase()}-${props.index}`} id={idString} required />
-      </React.Fragment>
+        <input type="text" className="form-text-input" name={`${label.toLowerCase()}-${props.index}`} id={idString} required />
+      </>
     );
   };
   

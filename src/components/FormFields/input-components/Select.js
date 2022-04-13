@@ -6,7 +6,9 @@ const Select = (props) => {
     const generateOptions = () => {
         return props.obj.select.map((options, index) => {
             return (
-                <option value={options} id={options} key={index}>{options}</option>
+                <option value={options} id={options} className="form-select-option" key={`select-option-${index}`}>
+                    {options}
+                </option>
             )
         })
     };
@@ -20,7 +22,9 @@ const Select = (props) => {
             <>
                 <label htmlFor={`select-${props.index} form-label`}>{props.obj.query}</label>
                 <select name={`select-${props.index}`} className="form-select" onChange={handleChange}>
-                    <option defaultValue>{value}</option>
+                    <option className="form-select-option" key={`select-option-default`}defaultValue>
+                        {value}
+                    </option>
                     {generateOptions()}
                 </select>
             </>

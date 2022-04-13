@@ -21,11 +21,12 @@ export const FormOne = (props) => {
     const ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
     const re = new RegExp(props.fileTypes.join("|"), "gi");
     if (!ext) return "Invalid Extension";
-    if (re.test(ext) === true) {
+    if (re.test(ext)) {
       return <FormFields fields={props.fields} filename={fileName} select={props.select}/>;
+    } else {
+      setFileType("INVALID");
+      return "File type not supported.";
     }
-    else setFileType("INVALID");
-    return "File type not supported.";
   };
 
   const dataReturn = (e) => {

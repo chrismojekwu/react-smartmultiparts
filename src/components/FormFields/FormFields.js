@@ -14,19 +14,26 @@ function FormFields(props) {
   const generateSelect = (selectObj, index, field) => {
     selectCount++;
     if (field.trim().includes("!")) {
-      return <Select obj={selectObj} index={index} required={true}/>;
+      return <Select obj={selectObj} index={index} required={true} key={`select-input-${index}`}/>;
     } else {
-      return <Select obj={selectObj} index={index} required={false}/>;
+      return <Select obj={selectObj} index={index} required={false} key={`select-input-${index}`}/>;
     };
   };
 
   const generateRange = (index, field) => {
-    // [minValue, maxValue, stepValue, label, <]
     const values = field.slice(6, -1).split("_");
     if (values[4] !== undefined && values[4] === "<") {
-      return <Range index={index} min={values[0]} max={values[1]} step={values[2]} label={values[3]} rangeLeftSide={true}/>;
+      return (
+        <Range index={index} min={values[0]} max={values[1]} step={values[2]} label={values[3]} 
+          rangeLeftSide={true} key={`range-input-${index}`}
+        />
+        );
     } else {
-      return <Range index={index} min={values[0]} max={values[1]} step={values[2]} label={values[3]} rangeLeftSide={false}/>;
+      return (
+        <Range index={index} min={values[0]} max={values[1]} step={values[2]} label={values[3]} 
+          rangeLeftSide={false} key={`range-input-${index}`}
+        />
+        );
     };
   };
 
@@ -37,15 +44,15 @@ function FormFields(props) {
         {props.fields.map((field, index) => {
           if (field.trim().match(/comments/gi)) {
             if (field.trim().includes("!")) {
-              return <TextArea index={index} required={true}/>;
+              return <TextArea index={index} required={true} key={`text-area-${index}`}/>;
             } else {
-              return <TextArea index={index} required={false}/>;
+              return <TextArea index={index} required={false} key={`text-area-${index}`}/>;
             }
           } else if (field.trim().match(/date/gi)) {
             if (field.trim().includes("!")) {
-              return <Date required={true} index={index}/>;
+              return <Date required={true} index={index} key={`date-input-${index}`}/>;
             } else {
-              return <Date required={false} index={index}/>;
+              return <Date required={false} index={index} key={`date-input-${index}`}/>;
             }
           } else if (field.trim().match(/range/gi)) {
             return generateRange(index, field.trim());
@@ -53,14 +60,14 @@ function FormFields(props) {
               return selectObjs[selectCount] === undefined ? ""
                 : generateSelect(selectObjs[selectCount], index, field.trim());
           } else if (field.trim().match(/filename/gi)) {
-            return <span id="filename-span" className="form-filename" key={index}>Filename: {props.filename}</span>
+            return <span id="filename-span" className="form-filename" key={`filename-${index}`}>Filename: {props.filename}</span>
           } else if (field === "") {
             return "";
           } else {
             if (field.trim().includes("!")) {
-              return <TextInput field={field} index={index} required={true} />
+              return <TextInput field={field} index={index} required={true} key={`text-input-${index}`}/>
             } else {
-              return <TextInput field={field} index={index} required={false} />;;
+              return <TextInput field={field} index={index} required={false} key={`text-input-${index}`}/>;;
             }
           }
         })}
