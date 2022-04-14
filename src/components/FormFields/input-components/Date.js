@@ -6,7 +6,7 @@ const Date = (props) => {
   const renderDefault = () => {
     return (
       <React.Fragment>
-        <label htmlFor='date' className="form-label">Date:&#9;<span aria-hidden="true">(YYYY-MM-DD)</span></label>
+        <label htmlFor='date' className="form-label">Date:</label>
         <input type="date" name={`date-${props.index}`} id="smartparts-date-input" value={date} 
           onChange={(e) => setDate(e.target.value)} className="form-date-input"
         />
@@ -17,7 +17,7 @@ const Date = (props) => {
   const renderReq = () => {
     return (
       <React.Fragment>
-        <label htmlFor='date' className="form-label">Date:&#9;<span aria-hidden="true">(YYYY-MM-DD)</span></label>
+        <label htmlFor='date' className="form-label">Date:</label>
         <input type="date" name={`date-${props.index}`} id="smartparts-date-input" value={date} 
           onChange={(e) => setDate(e.target.value)} className="form-date-input" required
         />
