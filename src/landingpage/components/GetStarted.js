@@ -74,7 +74,7 @@ const GetStarted = () => {
                     <span className="bold">Date</span> - Using "date" as a field will generate a date input.
                 </span>
                 <span>
-                    <span className="bold">Range</span> - You can generate a range field by using "range" followed by a bracket that specifies min, max, step, & label values seprated by an underscore. Optionally you can include left angle bracket to instruct the form to render the label before the input.
+                    <span className="bold">Range</span> - You can generate a range field by using "range" followed by a bracket that specifies min, max, step, & label values separated by an underscore. Optionally you can include left angle bracket to instruct the form to render the label before the input.
                 </span>
                 <span>
                     <span className="bold">Select</span> - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array.
