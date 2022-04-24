@@ -25,8 +25,7 @@ const TryIt = () => {
     const [formTwoOffset, setFormTwoOffset] = useState(0);
 
     // Notifications
-    const [message, setMessage] = useState("TEST");
-    const [opacity, setOpacity] = useState();
+    const [message, setMessage] = useState("");
     const notiRef = useRef();
     
     const notificationToggle = (eventMsg) => {
@@ -76,7 +75,6 @@ const TryIt = () => {
                         className="form-control-notification" 
                         id="form-notification"
                         ref={notiRef} 
-                        //style={{ opacity: opacity }}
                     >
                         {message}
                     </div>

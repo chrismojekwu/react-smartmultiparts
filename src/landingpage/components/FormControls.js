@@ -10,7 +10,7 @@ const FormControls = (props) => {
 
     //Form Two
     const [formTwoTypeToggle, setFormTwoTypeToggle] = useState(false);
-    const [formTwoActiveType, setFormTwoActiveType] = useState("MustyMane");
+    const [formTwoActiveType, setFormTwoActiveType] = useState("");
 
     const renderSelectOptions = () => {
         if(props.formNum === 1){
