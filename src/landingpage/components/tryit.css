@@ -148,6 +148,7 @@
         width: 90%;
         height: auto;
     }
+
     .form-options-control {
         margin: 0;
         padding: 20px;
@@ -158,14 +159,15 @@
     position: fixed;
     left: calc(50% - 100px);
     top: 70px;
-    width: 200px;
+    width: 150px;
     transition: .5s;
-    background-color: #498f20;
+    background-color: #000000;
     color: #ffffff;
-    padding: 5px 10px 5px 10px;
+    padding: 8px;
     border-radius: 5px;
     text-align: center;
     transform: translateY(-160px);
+    box-shadow: 0px 3px 11px 0 rgba(0, 0, 0, 0.384);
     z-index: 2;
 }
 

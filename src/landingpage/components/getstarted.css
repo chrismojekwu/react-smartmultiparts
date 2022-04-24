@@ -1,5 +1,52 @@
+.getstarted-container {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+}
+
+.getstarted-buttons {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+    width: 50%;
+}
+
+.getstarted-btn {
+    text-align: left;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px dashed black;
+    border-bottom-width: 5px;
+    background: none;
+    padding-top: 5px;
+    transition: 0.5s;
+}
+
+.getstarted-btn-inner {
+    padding: 10px 20px;
+    width: fit-content;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.getstarted-btn-inner:hover {
+    background-color: #bebebe;
+}
+
+.button-slide {
+    transform: translateX(20%);
+    background-color: #bebebe;
+}
+
 .getstarted {
-    padding: 5px;
+    display: grid;
+    grid-template-rows: 30px auto;
+    min-height: 250px;
+}
+
+.code-snippet-wrapper {
+    min-height: 50px;
 }
 
 .heading {
@@ -42,9 +89,16 @@ details > summary {
 }
 
 @media only screen and (min-width: 768px) {
+    .getstarted-container {
+        flex-direction: row;
+    }
     .getstarted {
         width: 80%;
         align-self: flex-end;
         margin-right: 10px;
+    }
+    .getstarted-buttons {
+        display: flex;
+        width: 15%;
     }
 }
