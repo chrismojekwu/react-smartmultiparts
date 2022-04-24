@@ -82,7 +82,6 @@ const FormControls = (props) => {
     const handleFormFields = (e) => {
         const fields = formFields.split(",").map(x => x.trim());
         props.setLiveFields(fields);
-
         props.notification("Fields Set")
     };
 
@@ -114,7 +113,6 @@ const FormControls = (props) => {
             }
             props.setSelectObject(selectObj)
         }
-
         props.notification("Select Set")
     };
 

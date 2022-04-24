@@ -53,6 +53,7 @@ const GetStarted = () => {
             </div>
         );
     };
+
     const renderInputs = () => {
         return (
             <>
@@ -94,6 +95,7 @@ const GetStarted = () => {
             </>
         );
     };
+
     const renderConfig = () => {
         return (
             <>
@@ -182,28 +184,43 @@ const GetStarted = () => {
         };
     };
 
+    const handleActiveSection = (section, index) => {
+        setActiveSection(section);
+        let sections = document.getElementsByClassName("getstarted-btn-inner");
+        for (let i = 0; i < sections.length; i++) {
+            sections[i].classList.remove("button-slide");
+        };
+        sections[index].classList.add("button-slide");
+    };
+
     return (
         <section className="getstarted-container">
             <aside className="getstarted-buttons">
-                {["Usage-usage", "Input Types-inputs", "Configuration-config", "Styling-style"].map((x,i) => {
+                {["Usage-usage", "Input Types-inputs", "Configuration-config", "Styling-style"].map((x, i) => {
                     return (
                         <button 
                             className="getstarted-btn" 
                             key={`get-started-btn-${i}`}
-                            onClick={() => setActiveSection(x.split("-")[1])}
+                            onClick={() => handleActiveSection(x.split("-")[1], i)}
                         >
-                            {x.split("-")[0]}
+                            <div className="getstarted-btn-inner" >
+                                {x.split("-")[0]}
+                            </div>
                         </button>
                     )
                 })}
             </aside>
             <div className="getstarted">
-                <div className="code-snippet">
-                    <code>
-                        <span className="cli">$</span>npm i react-smartmultiparts
-                    </code>
+                <div className="code-snippet-wrapper">
+                    <div className="code-snippet">
+                        <code>
+                            <span className="cli">$</span>npm i react-smartmultiparts
+                        </code>
+                    </div>
                 </div>
-                {renderBody(activeSection)}
+                <div className="getstarted-body">
+                    {renderBody(activeSection)}
+                </div>
             </div>
         </section>
     )

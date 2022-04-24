@@ -14,16 +14,39 @@
 .getstarted-btn {
     text-align: left;
     font-size: 16px;
-    padding: 5px;
-    padding-left: 5px;
-    background-color: none;
+    border: none;
+    border-bottom: 1px dashed black;
+    border-bottom-width: 5px;
+    background: none;
+    padding-top: 5px;
+    transition: 0.5s;
+}
+
+.getstarted-btn-inner {
+    padding: 10px 20px;
+    width: fit-content;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.getstarted-btn-inner:hover {
+    background-color: #bebebe;
+}
+
+.button-slide {
+    transform: translateX(20%);
+    background-color: #bebebe;
 }
 
 .getstarted {
-    display: flex;
-    flex-direction: column;
-    min-height: 200px;
-    padding: 5px;
+    display: grid;
+    grid-template-rows: 30px auto;
+    min-height: 250px;
+}
+
+.code-snippet-wrapper {
+    min-height: 50px;
 }
 
 .heading {
