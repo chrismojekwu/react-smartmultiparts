@@ -25,8 +25,9 @@ const TryIt = () => {
     const [formTwoOffset, setFormTwoOffset] = useState(0);
 
     // Notifications
-    const [message, setMessage] = useState("musty");
-    const [yOffset, setYOffset] = useState();
+    const [message, setMessage] = useState("TEST");
+    const [opacity, setOpacity] = useState();
+    const notiRef = useRef();
     
     const notificationToggle = (eventMsg) => {
         setMessage(eventMsg);
@@ -66,10 +67,17 @@ const TryIt = () => {
         };
     };
 
+    console.log(notiRef.current?.clientWidth)
+
     return (
         <section className="forms">
                 <div className="notification-div">
-                    <div className="form-control-notification" id="form-notification" style={{transform: `translateY(${yOffset + "px"})`}}>
+                    <div 
+                        className="form-control-notification" 
+                        id="form-notification"
+                        ref={notiRef} 
+                        //style={{ opacity: opacity }}
+                    >
                         {message}
                     </div>
                 </div>

@@ -156,11 +156,17 @@
 
 .form-control-notification {
     position: fixed;
-    transform: translateY(-175px);
+    left: calc(50% - 100px);
+    top: 70px;
+    width: 200px;
     transition: .5s;
-    background-color: #a0ff68;
+    background-color: #498f20;
+    color: #ffffff;
     padding: 5px 10px 5px 10px;
-    z-index: 1;
+    border-radius: 5px;
+    text-align: center;
+    transform: translateY(-160px);
+    z-index: 2;
 }
 
 .noti-ani {
@@ -186,61 +192,14 @@
 @keyframes notification {
     0% {
         transform: translateY(-160px);
-        font-size: 1px;
-    }
-    25% {
-        width: 10%;
-        font-size: 8px;
     }
     50% {
-        transform: translateY(-30px);
-        width: 30%;
-        font-size: 16px;
+        transform: translateY(0px);
     }
     75% {
-        transform: translateY(-30px);
-        width: 30%;
-        font-size: 16px;
-    }
-    85% {
-        width: 20%;
-        font-size: 14px;
+        transform: translateY(0px);
     }
     100% {
         transform: translateY(-160px);
-        width: 10%;
-        font-size: 1px;
-    }
-}
-
-@media only screen and (min-width: 750px) {
-    @keyframes notification {
-        0% {
-            transform: translateY(-160px);
-            font-size: 1px;
-        }
-        25% {
-            width: 5%;
-            font-size: 8px;
-        }
-        50% {
-            transform: translateY(-30px);
-            width: 15%;
-            font-size: 16px;
-        }
-        75% {
-            transform: translateY(-30px);
-            width: 15%;
-            font-size: 16px;
-        }
-        85% {
-            width: 10%;
-            font-size: 14px;
-        }
-        100% {
-            transform: translateY(-160px);
-            width: 5%;
-            font-size: 1px;
-        }
     }
 }
