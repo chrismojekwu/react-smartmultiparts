@@ -6,25 +6,25 @@
 
 .getstarted-buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 5px 10px;
     width: 50%;
 }
 
 .getstarted-btn {
-    text-align: left;
+    min-width: 50%;
     font-size: 16px;
     border: none;
-    border-bottom: 1px dashed black;
-    border-bottom-width: 5px;
+    border-radius: 10px;
     background: none;
-    padding-top: 5px;
+    padding: 5px 0;
     transition: 0.5s;
 }
 
 .getstarted-btn-inner {
+    margin: 0 auto;
     padding: 10px 10px;
-    width: fit-content;
+    width: 100%;
     border-radius: 20px;
     cursor: pointer;
     transition: 0.2s;
@@ -36,7 +36,7 @@
 }
 
 .button-slide {
-    transform: translateX(50%);
+    transform: translateY(-25%);
     background-color: #000000;
     color: white;
 }
@@ -105,11 +105,16 @@ details > summary {
 
     .getstarted-buttons {
         display: flex;
+        flex-direction: column;
         width: 15%;
+    }
+
+    .getstarted-btn-inner {
+        margin: 0;
     }
     
     .button-slide {
         transform: translateX(5%);
-        background-color: #bebebe;
+        background-color: #000000;
     }
 }
