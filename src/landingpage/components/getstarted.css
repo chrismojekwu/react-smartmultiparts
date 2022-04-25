@@ -90,7 +90,7 @@ details > summary {
     margin-right: 10px;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 850px) {
     .getstarted-container {
         flex-direction: row;
     }
@@ -111,6 +111,8 @@ details > summary {
 
     .getstarted-btn-inner {
         margin: 0;
+        min-width: fit-content;
+        width: 90%;
     }
     
     .button-slide {
