@@ -29,6 +29,7 @@
     cursor: pointer;
     transition: 0.2s;
     white-space: nowrap;
+    font-size: .7rem;
 }
 
 .getstarted-btn-inner:hover {
@@ -113,6 +114,7 @@ details > summary {
         margin: 0;
         min-width: fit-content;
         width: 90%;
+        font-size: 1rem;
     }
     
     .button-slide {
