@@ -1,10 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Header from './components/Header';
 import TryIt from './components/TryIt';
 import GetStarted from './components/GetStarted'
-import {jsGraphics} from '../wz_jsgraphics';
 import {FormOne} from '../components/FormOne/FormOne';
-import {FormTwo} from '../components/FormTwo/FormTwo';
 import {Route,Link} from 'react-router-dom';
 import './app.css';
 
@@ -15,22 +13,23 @@ const App = () => {
 
     const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
     
-    const printData = (data) => {
-      console.log(data);
+    const printData = (data) => { 
+        for (var value of data.values()) {
+            console.log(value);
+        };
     };
-
 
     return (
         <main className="landing-page">
             <Header/>
             <div id="container">
                 <div className="controls">
-                    <Link to="/getstarted">
+                    <Link to="/getstarted" tabIndex="-1">
                         <button className="control-btn">
                             Get Started
                         </button>
                     </Link>
-                    <Link to="/tryit">
+                    <Link to="/tryit" tabIndex="-1">
                         <button className="control-btn">
                             Try It
                         </button>
@@ -78,7 +77,6 @@ const App = () => {
                     <TryIt/>
                 </Route>
             </div>
-            {/*<div id="myCanvas2"></div>*/}
         </main>
     )
 };
