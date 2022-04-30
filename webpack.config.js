@@ -13,9 +13,12 @@ module.exports = {
     publicPath: '/'
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
+    /*contentBase: path.resolve(__dirname, 'dist'),*/
     open: true,
-    clientLogLevel: 'silent',
+    /*clientLogLevel: 'silent',*/
     port: 9000,
     hot: true,
     historyApiFallback: true
