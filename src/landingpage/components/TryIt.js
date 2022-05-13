@@ -66,8 +66,6 @@ const TryIt = () => {
         };
     };
 
-    console.log(notiRef.current?.clientWidth)
-
     return (
         <section className="forms">
                 <div className="notification-div">
