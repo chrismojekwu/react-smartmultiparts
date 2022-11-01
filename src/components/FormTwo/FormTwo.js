@@ -13,7 +13,7 @@ export const FormTwo = (props) => {
   const detectFile = () => {
     if (fileType === "") return "";
     if (Object.keys(props.fileTypes).length === 0) { 
-      if (props.textConfig.errorMessage === undefined || props.textConfig.errorMessage === "") {
+      if (props.textConfig === undefined || props.textConfig.errorMessage === "") {
         return <span id="smartparts-error">Internal Error</span>;
       } else {
         return <span id="smartparts-error">{props.textConfig.errorMessage}</span>;
@@ -67,7 +67,7 @@ export const FormTwo = (props) => {
   };
 
   const handleDisabled = () => {
-    const message = props.textConfig.disabled !== undefined ? props.textConfig.disabled : "Thanks";
+    const message = props.textConfig !== undefined ? props.textConfig.disabled : "Thanks";
     return <span className="smartparts-disabled-message">{message}</span>;
   };
 
@@ -83,7 +83,7 @@ export const FormTwo = (props) => {
         {props.logo ? renderLogo(props.logo) : ""}
       </div>
           <p>
-            {props.textConfig.typeLabel !== "" ? props.textConfig.typeLabel : "Supported File Types: "}
+            {props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: "}
             {Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""}
           </p>
 
@@ -96,7 +96,7 @@ export const FormTwo = (props) => {
             disabled={disabled}
           >
             <label htmlFor="file form-label">
-              {props.textConfig.inputLabel !== undefined ? props.textConfig.inputLabel : "File:"}
+              {props.textConfig !== undefined ? props.textConfig.inputLabel : "File:"}
             </label>
             <input
               id="smartparts-file"

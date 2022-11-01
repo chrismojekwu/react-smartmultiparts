@@ -87,11 +87,16 @@ const selectObj2 = {
 ### Required Attribute
 You can require applicable input types by using an exclamation point at the end of its field name string.
 
-### User Messages
+### Text Config
+The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", & "errorMessage".
+#### File Type Label
+Default - *Supported File Types:*
+#### File Input Label
+Default - *File:*
 #### Form Disable Message
-By default the form will display *Thanks* after it is submitted. You can provide your own message passing the "disabled" prop an object with a single key/value pair using "message".
+Default - *Thanks*
 #### Error Message
-By default the form will display *Internal Error* on error. You can provide an error message for the form by passing a string into an errorMessage prop.
+Default - *Internal Error* 
 
 ## Styling:
 

@@ -419,7 +419,7 @@ describe("Form One", () => {
         expect(screen.getByText("Test Form Disabled Message - Form One")).toBeInTheDocument();
     });
 
-    test('user config prop', () => {
-        
+    test('user textConfig prop', () => {
+
     });
 });
