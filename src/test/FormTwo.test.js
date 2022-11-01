@@ -80,7 +80,7 @@ describe("Form Two", () => {
         for(let i = 0; i < formObj.mp3.length; i++){
 
             const element = wrapper.find(`#${formObj.mp3[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-text-input\" name="${formObj.mp3[i].toLowerCase()}" id="${formObj.mp3[i].toLowerCase()}">`);
+            expect(element.html()).toEqual(`<input type="text" class="form-text-input" name="${formObj.mp3[i].toLowerCase() + `-${i}`}" id="${formObj.mp3[i].toLowerCase()}">`);
         };
 
         const wavFile = new File(["test"], "test.wav", {
@@ -445,8 +445,15 @@ describe("Form Two", () => {
         const printData = (data) => { 
             console.log(data);
         };
+
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "",
+            errorMessage: "Test Error Message - Form Two"
+        };
         
-        const wrapper = mount(<FormTwo fileTypes={{}} cb={printData} errorMessage="Test Error Message - Form Two"/>);
+        const wrapper = mount(<FormTwo fileTypes={{}} cb={printData} textConfig={testConfig}/>);
 
         const mp3File = new File(["test"], "test.mp3", {
             type: "audio/mpeg"
