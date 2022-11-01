@@ -12,10 +12,10 @@ export const FormOne = (props) => {
   const detectFile = () => {
     if (fileType === "") return "";
     if (Object.keys(props.fileTypes).length === 0 || props.fields === []) {
-      if (props.errorMessage === undefined || props.errorMessage === "") {
+      if (props.textConfig.errorMessage === undefined || props.textConfig.errorMessage === "") {
         return <span id="smartparts-error">Internal Error</span>;
       } else {
-        return <span id="smartparts-error">{props.errorMessage}</span>;
+        return <span id="smartparts-error">{props.textConfig.errorMessage}</span>;
       }
     }
     const ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
@@ -64,7 +64,7 @@ export const FormOne = (props) => {
   };
 
   const handleDisabled = () => {
-    const message = props.disabled !== undefined ? props.disabled.message : "Thanks";
+    const message = props.textConfig.disabled !== undefined ? props.textConfig.disabled : "Thanks";
     return <span className="smartparts-disabled-message">{message}</span>;
   };
 
@@ -72,6 +72,12 @@ export const FormOne = (props) => {
     return <img src={path} className="form-logo-img"/>
   };
 
+  // form config prop
+  /*
+  File Type Text - default: "Supported File Types:"
+  File Input Label - default: "File:"
+  Disabled Message - default "Thanks"
+  */
  
   return (
     <>
@@ -80,7 +86,8 @@ export const FormOne = (props) => {
           {props.logo ? renderLogo(props.logo) : ""}
         </div>
         <p>
-          Supported File Types: {fileTypes(props.fileTypes)}
+          {props.textConfig.typeLabel !== undefined ? props.textConfig.typeLabel : "Supported File Types: "}
+          {fileTypes(props.fileTypes)}
         </p>
 
         <form
@@ -91,7 +98,9 @@ export const FormOne = (props) => {
           name="upload"
           disabled={disabled}
         >
-          <label htmlFor="file form-label">File:</label>
+          <label htmlFor="file form-label">
+            {props.textConfig.inputLabel !== undefined ? props.textConfig.inputLabel : "File:"}
+          </label>
           <input
             id="smartparts-file"
             data-testid="smartparts-file"

@@ -19,6 +19,13 @@ const App = () => {
         };
     };
 
+    const testConfig = {
+        typeLabel: "Valid Files",
+        inputLabel: "Upload Here:",
+        disabled: "Thanks for submission!",
+        errorMessage: "Something went wrong."
+    };
+
     return (
         <main className="landing-page">
             <Header/>
@@ -41,7 +48,7 @@ const App = () => {
                         <div className="card-one">
                             <div className="card-inner">
                                 <div className="card-front">
-                                <FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>
+                                <FormOne fields={fields} fileTypes={fileTypes} cb={printData} textConfig={testConfig}/>
                                 </div>
                                 <div className="card-back">
                                     <div className="card-back-inner">
@@ -54,7 +61,7 @@ const App = () => {
                         <div className="card-two">
                             <div className="card-inner">
                                 <div className="card-front">
-                                <FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>
+                                <FormOne fields={fields} fileTypes={fileTypes} cb={printData} textConfig={testConfig}/>
                                 </div>
                                 <div className="card-back">
                                     <div className="card-back-inner">

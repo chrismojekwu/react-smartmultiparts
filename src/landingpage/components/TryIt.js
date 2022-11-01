@@ -66,6 +66,13 @@ const TryIt = () => {
         };
     };
 
+    const testConfig = {
+        typeLabel: "",
+        inputLabel: "",
+        disabled: "",
+        errorMessage: ""
+    };
+
     return (
         <section className="forms">
                 <div className="notification-div">
@@ -95,11 +102,22 @@ const TryIt = () => {
                     <div className="form-containing-div" ref={formOneOuterRef}>
                         <div className="form-carousel-div" ref={formOneRef}
                             style={{transform: `translateX(${formOneOffset}px)`}}>
-                            <FormOne fields={liveFormOneFields} fileTypes={liveFormOneTypes} cb={printData} errorMessage={""}/>
+                            <FormOne 
+                                fields={liveFormOneFields} 
+                                fileTypes={liveFormOneTypes} 
+                                cb={printData} 
+                                textConfig={testConfig}
+                            />
                         </div>
                         <div className="form-carousel-div"
                             style={{transform: `translateX(${formOneOffset}px)`}}>
-                            <FormOne fields={liveFormOneFields} fileTypes={liveFormOneTypes} cb={printData} select={[formOneSelectObj]}/>
+                            <FormOne 
+                                fields={liveFormOneFields} 
+                                fileTypes={liveFormOneTypes} 
+                                cb={printData} 
+                                select={[formOneSelectObj]}
+                                textConfig={testConfig}
+                            />
                         </div>
                     </div>
                 </div>
@@ -118,11 +136,20 @@ const TryIt = () => {
                     <div className="form-containing-div" ref={formTwoOuterRef}>
                         <div className="form-carousel-div" ref={formTwoRef}
                             style={{transform: `translateX(${formTwoOffset}px)`}}>
-                            <FormTwo fileTypes={formTwoDataObj} cb={printData} errorMessage={""}/>
+                            <FormTwo 
+                                fileTypes={formTwoDataObj} 
+                                cb={printData} 
+                                textConfig={testConfig}
+                            />
                         </div>
                         <div className="form-carousel-div" ref={formTwoRef}
                             style={{transform: `translateX(${formTwoOffset}px)`}}>
-                            <FormTwo fileTypes={formTwoDataObj} cb={printData} select={[formTwoSelectObj]}/>
+                            <FormTwo 
+                                fileTypes={formTwoDataObj} 
+                                cb={printData} 
+                                select={[formTwoSelectObj]}
+                                textConfig={testConfig}
+                            />
                         </div>
                     </div>
                 </div>
