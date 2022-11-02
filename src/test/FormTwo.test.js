@@ -7,36 +7,23 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+const printData = (data) => { 
+    console.log(data);
+};
+
+const formObj = {
+    wav: ["Title", "Artist", "Comments"],
+    mp3: ["Title", "Artist"],
+    jpg: ["Title", "Subject", "Source"]
+};
 
 describe("Form Two", () => {
     
     test('renders without crashing',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
-        const formObj = {
-            wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", "Artist"],
-            jpg: ["Title", "Subject", "Source"]
-        };
-        
         render(<FormTwo fileTypes={formObj} cb={printData}/>);
     });
 
-    test('renders the initial form',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
-        const formObj = {
-            wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", "Artist"],
-            jpg: ["Title", "Subject", "Source"]
-        };
-        
+    test('renders the initial form',() => {      
         render(<FormTwo fileTypes={formObj} cb={printData}/>);
 
         const form = screen.getByRole('form');
@@ -46,18 +33,7 @@ describe("Form Two", () => {
 
     // INPUTS
 
-    test('renders the correct "text" type inputs for different file types',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
-        const formObj = {
-            wav: ["Title", "Artist", "Source"],
-            mp3: ["Title", "Artist"],
-            jpg: ["Title", "Subject", "Source"]
-        };
-        
+    test('renders the correct "text" type inputs for different file types',() => {        
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
 
         const jpgFile = new File(["test"], "test.jpg", {
@@ -96,11 +72,6 @@ describe("Form Two", () => {
     });
 
     test('it renders the correct text area when file is uploaded with comments field',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
             mp3: ["Title", "Artist"],
@@ -119,11 +90,6 @@ describe("Form Two", () => {
     });
 
     test('it renders the correct span when file is uploaded with filename field',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments", "filEnaMe"],
             mp3: ["Title", "Artist"],
@@ -142,11 +108,6 @@ describe("Form Two", () => {
     });
 
     test('it renders a select element with the correct options when provided a select object array',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
             mp3: ["Title", "Artist", 'Select'],
@@ -184,11 +145,6 @@ describe("Form Two", () => {
     });
 
     test('it renders multiple selects in accordance with object array', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
             mp3: ["Title", 'Select', 'FilenamE', 'SeLECt'],
@@ -239,18 +195,7 @@ describe("Form Two", () => {
     });
 
 
-    test('it renders an img element when provided with logo prop',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
-        const formObj = {
-            wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", "Artist"],
-            jpg: ["Title", "Subject", "Source"]
-        };
-        
+    test('it renders an img element when provided with logo prop',() => {        
         render(<FormTwo fileTypes={formObj} cb={printData} logo={"/fakepath.jpg"}/>);
 
         const logo = screen.getByRole('img');
@@ -259,10 +204,6 @@ describe("Form Two", () => {
     });
 
     test('it renders a range input correctly', () => {
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist","Range[0_.75_.1_Milliseconds_<]", "Comments"],
             mp3: ["Title", "Artist"],
@@ -286,11 +227,6 @@ describe("Form Two", () => {
 
     test('Empty object behavior without select',() => {
         const fileTypes = {};
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const wrapper = mount(<FormTwo fileTypes={fileTypes} cb={printData}/>);
 
         const wavFile = new File(["test"], "test.wav", {
@@ -303,11 +239,6 @@ describe("Form Two", () => {
     });
 
     test('Empty object behavior with select',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const fileTypes = {};
 
         const wrapper = mount(<FormTwo fileTypes={fileTypes} cb={printData} select={{}}/>);
@@ -322,11 +253,6 @@ describe("Form Two", () => {
     });
 
     test('it renders the date input when file is uploaded with date field', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
             mp3: ["Title", "Artist"],
@@ -347,11 +273,6 @@ describe("Form Two", () => {
     // REQUIRED INPUTS
 
     test('it renders a required text area when "!" is used', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
             mp3: ["Title", "Artist"],
@@ -369,10 +290,6 @@ describe("Form Two", () => {
     });
 
     test('it renders a required text input when "!" is used', () => {    
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
             mp3: ["Title", "Artist"],
@@ -390,10 +307,6 @@ describe("Form Two", () => {
     });
 
     test('it renders a required date input when "!" is used', () => {    
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             jpg: ["Title", "Subject", "Source", "dATE!", "cOmMents!", "Required Text Input!"]
         };
@@ -409,14 +322,9 @@ describe("Form Two", () => {
     });
 
     test('it renders a required select input when "!" is used', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", "Artist", 'Select'],
+            mp3: ["Title", "Artist", 'Select!'],
             jpg: ["Title", "Subject", "Source"]
         };
 
@@ -442,10 +350,6 @@ describe("Form Two", () => {
     // USER SUPPLIED MESSAGES
 
     test('it renders a user supplied message for "Internal Error"', () => {
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const testConfig = {
             typeLabel: "",
             inputLabel: "",
@@ -464,11 +368,6 @@ describe("Form Two", () => {
     });
 
     test('form is disabled after submit', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             mp3: ["title"],
         };
@@ -491,13 +390,8 @@ describe("Form Two", () => {
     });
 
     test('user disabled message', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
-            mp3: ["Title"],
+            mp3: ["Title", "name"],
         };
 
         const testConfig = {

@@ -7,28 +7,22 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+const printData = (data) => { 
+    console.log(data);
+};
+
+const fileTypes = ["wav", "jpg", "jpeg", "mp3", "mp4", "png", "pdf"];
+
 describe("Form One", () => { 
 
     test('renders without crashing', () => {
         const fields = ["Title", "Submitee", "Name", "Comments", "filename"];
-
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
 
         render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
     });
 
     test('it renders the initial form', () => {
         const fields = ["Title", "Submitee", "Name", "Comments", "filename"];
-
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
 
         render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
 
@@ -41,12 +35,6 @@ describe("Form One", () => {
 
     test('it renders the correct "text" type inputs when file is uploaded', () => {
         const fields = ["Title", "Submitee", "Name"];
-
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
         const file = new File(["test"], "test.jpg", {
@@ -65,12 +53,6 @@ describe("Form One", () => {
     test('it renders the correct text area when file is uploaded with comments field', () => {
         const fields = ["cOmmEnts"];
 
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
         const file = new File(["test"], "test.jpg", {
             type: "image/jpeg"
@@ -84,12 +66,6 @@ describe("Form One", () => {
     test('it renders the correct span when file is uploaded with filename field', () => {
         const fields = ["filEnaMe"];
 
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
         const file = new File(["test"], "test.jpg", {
             type: "image/jpeg"
@@ -102,12 +78,6 @@ describe("Form One", () => {
 
     test('it renders a select element with the correct options when provided a select object array', () => {
         const fields = ["filEnaMe", 'sElect'];
-
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
 
         const selectObj = {
             query: "Whats your name?",
@@ -133,13 +103,7 @@ describe("Form One", () => {
 
     test('it renders multiple selects in accordance with object array', () => {
         const fields = ['sElect', "filEnaMe", 'comments', 'squanchy', 'Select'];
-
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
         
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const selectObj = {
             query: "Whats your name?",
             select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
@@ -177,12 +141,6 @@ describe("Form One", () => {
     test('it renders an img element when provided with logo prop', () => {
         const fields = ["Title", "Submitee", "Name", "Comments", "filename"];
 
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} logo={"/fakepath.jpg"}/>);
 
         const logo = screen.getByRole('img');
@@ -196,10 +154,6 @@ describe("Form One", () => {
         const fields = [];
 
         const fileTypes = [];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
 
@@ -216,10 +170,6 @@ describe("Form One", () => {
         const fields = [];
 
         const fileTypes = [];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
 
@@ -235,12 +185,6 @@ describe("Form One", () => {
     test('it renders the date input when file is uploaded with date field', () => {
         const fields = ["dAtE"];
 
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
         const file = new File(["test"], "test.jpg", {
             type: "image/jpeg"
@@ -255,10 +199,6 @@ describe("Form One", () => {
         const fields = ["Title", "Artist", "Range[1_200_5_Hours_<]", "Comments"];
 
         const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png","pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
 
@@ -278,12 +218,6 @@ describe("Form One", () => {
     test('it renders a required text area when "!" is used', () => {
         const fields = ["cOmMenTS!"];
 
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
         const file = new File(["test"], "test.jpg", {
             type: "image/jpeg"
@@ -297,12 +231,6 @@ describe("Form One", () => {
     test('it renders a required text input when "!" is used', () => {
         const fields = ["Required Text Input!"];
 
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
         const file = new File(["test"], "test.jpg", {
             type: "image/jpeg"
@@ -314,13 +242,7 @@ describe("Form One", () => {
     });
 
     test('it renders a required date input when "!" is used', () => {
-        const fields = ["dAtE!"];
-
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
+        const fields = ["dAtE!"];       
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
         const file = new File(["test"], "test.jpg", {
@@ -334,12 +256,6 @@ describe("Form One", () => {
 
     test('it renders a required select input when "!" is used', () => {
         const fields = ["filEnaMe", 'sElect!'];
-
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
 
         const selectObj = {
             query: "Whats your name?",
@@ -362,10 +278,6 @@ describe("Form One", () => {
     // USER SUPPLIED MESSAGES
 
     test('it renders a user supplied message for "Internal Error"', () => {        
-        const printData = (data) => { 
-            console.log(data);
-        }
-
         const testConfig = {
             typeLabel: "",
             inputLabel: "",
@@ -384,10 +296,6 @@ describe("Form One", () => {
 
     test('form is disabled after submit', () => {
         const fileTypes = ["mp3"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
 
         const mp3File = new File(["test"], "test.mp3", {
             type: "audio/mpeg"
@@ -406,10 +314,6 @@ describe("Form One", () => {
 
     test('user disabled message', () => {
         const fileTypes = ["mp3"];
-        
-        const printData = (data) => { 
-            console.log(data);
-        };
 
         const mp3File = new File(["test"], "test.mp3", {
             type: "audio/mpeg"
