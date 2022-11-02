@@ -366,7 +366,14 @@ describe("Form One", () => {
             console.log(data);
         }
 
-        const wrapper = mount(<FormOne fields={[]} fileTypes={[]} cb={printData} errorMessage="Test Error Message - Form One"/>);
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "Test Form Disabled Message - Form One",
+            errorMessage: "Test Error Message - Form One"
+        };
+
+        const wrapper = mount(<FormOne fields={[]} fileTypes={[]} cb={printData} textConfig={testConfig}/>);
         const file = new File(["test"], "test.jpg", {
             type: "image/jpeg"
         });
@@ -407,6 +414,13 @@ describe("Form One", () => {
         const mp3File = new File(["test"], "test.mp3", {
             type: "audio/mpeg"
         });
+        
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "Test Form Disabled Message - Form One",
+            errorMessage: "Test Error Message - Form Two"
+        };
 
         render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}}/>);
 

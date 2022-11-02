@@ -67,10 +67,11 @@ const TryIt = () => {
     };
 
     const testConfig = {
-        typeLabel: "",
-        inputLabel: "",
-        disabled: "",
-        errorMessage: ""
+        typeLabel: "Valid Files",
+        inputLabel: "Upload Here:",
+        disabled: "Thanks for submission!",
+        errorMessage: "Something went wrong.",
+        invalidExt: "Sorry we dont support that type of file. :("
     };
 
     return (

@@ -88,7 +88,7 @@ const selectObj2 = {
 You can require applicable input types by using an exclamation point at the end of its field name string.
 
 ### Text Config
-The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", & "errorMessage".
+The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", & "errorMessage". If the textConfig is supplied, unwanted values should be empty strings.
 #### File Type Label
 Default - *Supported File Types:*
 #### File Input Label
@@ -97,6 +97,8 @@ Default - *File:*
 Default - *Thanks*
 #### Error Message
 Default - *Internal Error* 
+#### Error Message - Unsupported Extension
+Default - *Invalid Extension*
 
 ## Styling:
 

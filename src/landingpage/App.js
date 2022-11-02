@@ -23,7 +23,8 @@ const App = () => {
         typeLabel: "Valid Files",
         inputLabel: "Upload Here:",
         disabled: "Thanks for submission!",
-        errorMessage: "Something went wrong."
+        errorMessage: "Something went wrong.",
+        invalidExt: "Sorry we dont support that type of file. :("
     };
 
     return (

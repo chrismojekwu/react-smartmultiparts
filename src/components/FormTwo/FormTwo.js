@@ -21,7 +21,7 @@ export const FormTwo = (props) => {
     }
     const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
     const re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
-    if (!ext) return "Invalid Extention";
+    if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
     if (re.test(ext)) {
       return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select}/>;
     } else {

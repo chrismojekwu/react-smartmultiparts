@@ -452,7 +452,7 @@ describe("Form Two", () => {
             disabled: "",
             errorMessage: "Test Error Message - Form Two"
         };
-        
+
         const wrapper = mount(<FormTwo fileTypes={{}} cb={printData} textConfig={testConfig}/>);
 
         const mp3File = new File(["test"], "test.mp3", {
@@ -500,7 +500,14 @@ describe("Form Two", () => {
             mp3: ["Title"],
         };
 
-        render(<FormTwo fileTypes={formObj} cb={printData} disabled={{message: "Test Form Disabled Message - Form Two"}}/>);
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "Test Form Disabled Message - Form Two",
+            errorMessage: "Test Error Message - Form Two"
+        };
+
+        render(<FormTwo fileTypes={formObj} cb={printData} textConfig={testConfig}/>);
 
         const mp3File = new File(["test"], "test.mp3", {
             type: "audio/mpeg"
@@ -513,9 +520,5 @@ describe("Form Two", () => {
         fireEvent.click(screen.getByRole('button'));
 
         expect(screen.getByText("Test Form Disabled Message - Form Two")).toBeInTheDocument();
-    });
-
-    test('user textConfig prop', () => {
-        
     });
 });
