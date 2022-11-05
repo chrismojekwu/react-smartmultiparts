@@ -22,7 +22,7 @@ export const FormOne = (props) => {
     const re = new RegExp(props.fileTypes.join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
     if (re.test(ext)) {
-      return <FormFields fields={props.fields} filename={fileName} select={props.select}/>;
+      return <FormFields fields={props.fields} filename={fileName} select={props.select} checkboxes={props.checkboxes}/>;
     } else {
       setFileType("INVALID");
       return "File type not supported.";
@@ -43,14 +43,16 @@ export const FormOne = (props) => {
         data.append('filename', fileName);
       } else if (new RegExp('comments', 'gi').test(fieldNameCleaned) === true) {
         data.append('comments', e.target[`textarea-${i}`].value);
-      } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true) {
+      } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true && fieldNameCleaned.length === 4) {
         data.append('date', e.target[`date-${i}`].value);
       } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
         data.append(`select_${i}`, e.target[`select-${i}`].value);
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
+      } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
+        data.append(`checkbox_${i}`, e.target[`checkbox-${i}`].value);
       } else
-      data.append(fieldNameCleaned.toLowerCase(), e.target[fieldNameCleaned.toLowerCase()].value);
+      data.append(fieldNameCleaned.toLowerCase(), e.target[`${fieldNameCleaned.toLowerCase()}-${i}`].value);
     };
 
     props.cb(data);

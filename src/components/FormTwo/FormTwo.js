@@ -23,7 +23,7 @@ export const FormTwo = (props) => {
     const re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
     if (re.test(ext)) {
-      return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select}/>;
+      return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select} checkboxes={props.checkboxes}/>;
     } else {
       setFileType("INVALID");
       return "File type not supported.";
@@ -52,6 +52,8 @@ export const FormTwo = (props) => {
         data.append(`select_${i}`, e.target[`select-${i}`].value);
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
+      } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
+        data.append(`checkbox_${i}`, e.target[`checkbox-${i}`].value);
       } else
       data.append(fieldNameCleaned.toLowerCase(), e.target[`${fieldNameCleaned.toLowerCase()}-${i}`].value);
     };
