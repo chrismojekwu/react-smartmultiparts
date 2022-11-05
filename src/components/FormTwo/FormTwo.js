@@ -13,17 +13,17 @@ export const FormTwo = (props) => {
   const detectFile = () => {
     if (fileType === "") return "";
     if (Object.keys(props.fileTypes).length === 0) { 
-      if (props.errorMessage === undefined || props.errorMessage === "") {
+      if (props.textConfig === undefined || props.textConfig.errorMessage === "") {
         return <span id="smartparts-error">Internal Error</span>;
       } else {
-        return <span id="smartparts-error">{props.errorMessage}</span>;
+        return <span id="smartparts-error">{props.textConfig.errorMessage}</span>;
       }
     }
     const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
     const re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
-    if (!ext) return "Invalid Extention";
+    if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
     if (re.test(ext)) {
-      return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select}/>;
+      return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select} checkboxes={props.checkboxes}/>;
     } else {
       setFileType("INVALID");
       return "File type not supported.";
@@ -52,6 +52,8 @@ export const FormTwo = (props) => {
         data.append(`select_${i}`, e.target[`select-${i}`].value);
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
+      } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
+        data.append(`checkbox_${i}`, e.target[`checkbox-${i}`].value);
       } else
       data.append(fieldNameCleaned.toLowerCase(), e.target[`${fieldNameCleaned.toLowerCase()}-${i}`].value);
     };
@@ -67,7 +69,7 @@ export const FormTwo = (props) => {
   };
 
   const handleDisabled = () => {
-    const message = props.disabled !== undefined ? props.disabled.message : "Thanks";
+    const message = props.textConfig !== undefined ? props.textConfig.disabled : "Thanks";
     return <span className="smartparts-disabled-message">{message}</span>;
   };
 
@@ -83,7 +85,8 @@ export const FormTwo = (props) => {
         {props.logo ? renderLogo(props.logo) : ""}
       </div>
           <p>
-            Supported File Types: {Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""}
+            {props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: "}
+            {Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""}
           </p>
 
           <form
@@ -94,7 +97,9 @@ export const FormTwo = (props) => {
             name="upload"
             disabled={disabled}
           >
-            <label htmlFor="file form-label">File:</label>
+            <label htmlFor="file form-label">
+              {props.textConfig !== undefined ? props.textConfig.inputLabel : "File:"}
+            </label>
             <input
               id="smartparts-file"
               data-testid="smartparts-file"

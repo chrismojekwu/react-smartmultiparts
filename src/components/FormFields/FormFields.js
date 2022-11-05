@@ -4,20 +4,25 @@ import TextInput from "./input-components/TextInput";
 import Date from "./input-components/Date";
 import Select from "./input-components/Select";
 import Range from "./input-components/Range";
+import CheckBox from "./input-components/CheckboxObject/Checkbox";
+import CheckboxObject from "./input-components/CheckboxObject/CheckboxObject";
 
 //Add support for more input elements
 
 function FormFields(props) {
   const selectObjs = props.select;
   let selectCount = 0;
+  //const checkboxObjs = props.checkboxes;
+  let checkboxCount = 0;
+  let checkBoxIndex = 0;
 
   const generateSelect = (selectObj, index, field) => {
     selectCount++;
-    if (field.trim().includes("!")) {
+    if (field.includes("!")) {
       return <Select obj={selectObj} index={index} required={true} key={`select-input-${index}`}/>;
     } else {
       return <Select obj={selectObj} index={index} required={false} key={`select-input-${index}`}/>;
-    };
+    }
   };
 
   const generateRange = (index, field) => {
@@ -37,6 +42,32 @@ function FormFields(props) {
     };
   };
 
+  const generateCheckbox = (checkboxObj, index, field) => {
+    const handleSingleCheckbox = () => {
+      const index = checkBoxIndex;
+      checkBoxIndex++;
+      return index;
+    };
+    
+    if (field.length === 8) {
+      checkboxCount++;
+      checkBoxIndex += checkboxObj.boxes.length;
+      //return <CheckboxObject index={checkBoxIndex} query={checkboxObj.query} boxes={checkboxObj.boxes}/>
+      return "See Docs for Single Checkbox Syntax";
+    } else {
+      let value;
+      let req = false;
+      if (field[8] === "!") {
+        value = field.slice(10, -1);
+        req = true;
+      } else {
+        value = field.slice(9, -1);
+      };
+      return <CheckBox index={index } value={value} key={`checkbox-input-${index}`} req={req}/>
+    }
+   return "";
+  };
+
 
   const renderFields = () => {
     return (
@@ -48,7 +79,7 @@ function FormFields(props) {
             } else {
               return <TextArea index={index} required={false} key={`text-area-${index}`}/>;
             }
-          } else if (field.trim().match(/date/gi)) {
+          } else if (field.trim().match(/date/gi) && field.trim().length <= 5) {
             if (field.trim().includes("!")) {
               return <Date required={true} index={index} key={`date-input-${index}`}/>;
             } else {
@@ -59,8 +90,10 @@ function FormFields(props) {
           } else if (field.trim().match(/select/gi)) {
               return selectObjs[selectCount] === undefined ? ""
                 : generateSelect(selectObjs[selectCount], index, field.trim());
+          } else if (field.trim().match(/checkbox/gi)) {
+            return generateCheckbox(null, index, field.trim()); 
           } else if (field.trim().match(/filename/gi)) {
-            return <span id="filename-span" className="form-filename" key={`filename-${index}`}>Filename: {props.filename}</span>
+            return <span id={`smartparts-filename-span-${index}`} className="form-filename" key={`filename-${index}`}>Filename: {props.filename}</span>
           } else if (field === "") {
             return "";
           } else {

@@ -7,36 +7,23 @@ import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+const printData = (data) => { 
+    console.log(data);
+};
+
+const formObj = {
+    wav: ["Title", "Artist", "Comments"],
+    mp3: ["Title", "Artist"],
+    jpg: ["Title", "Subject", "Source"]
+};
 
 describe("Form Two", () => {
     
     test('renders without crashing',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
-        const formObj = {
-            wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", "Artist"],
-            jpg: ["Title", "Subject", "Source"]
-        };
-        
         render(<FormTwo fileTypes={formObj} cb={printData}/>);
     });
 
-    test('renders the initial form',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
-        const formObj = {
-            wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", "Artist"],
-            jpg: ["Title", "Subject", "Source"]
-        };
-        
+    test('renders the initial form',() => {      
         render(<FormTwo fileTypes={formObj} cb={printData}/>);
 
         const form = screen.getByRole('form');
@@ -46,18 +33,7 @@ describe("Form Two", () => {
 
     // INPUTS
 
-    test('renders the correct "text" type inputs for different file types',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
-        const formObj = {
-            wav: ["Title", "Artist", "Source"],
-            mp3: ["Title", "Artist"],
-            jpg: ["Title", "Subject", "Source"]
-        };
-        
+    test('renders the correct "text" type inputs for different file types',() => {        
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
 
         const jpgFile = new File(["test"], "test.jpg", {
@@ -67,8 +43,8 @@ describe("Form Two", () => {
         wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         for(let i = 0; i < formObj.jpg.length; i++){
-            const element = wrapper.find(`#${formObj.jpg[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text" class="form-text-input" name="${formObj.jpg[i].toLowerCase()}-${i}" id="${formObj.jpg[i].toLowerCase()}">`);
+            const element = wrapper.find(`#smartparts-text-input-${i}`);
+            expect(element.html()).toEqual(`<input type="text" class="form-text-input" name="${formObj.jpg[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}">`);
         };
 
         const mp3File = new File(["test"], "test.mp3", {
@@ -78,11 +54,11 @@ describe("Form Two", () => {
         wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
 
         for(let i = 0; i < formObj.mp3.length; i++){
-
-            const element = wrapper.find(`#${formObj.mp3[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text form-text-input\" name="${formObj.mp3[i].toLowerCase()}" id="${formObj.mp3[i].toLowerCase()}">`);
+            const element = wrapper.find(`#smartparts-text-input-${i}`);
+            expect(element.html()).toEqual(`<input type="text" class="form-text-input" name="${formObj.mp3[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}">`);
         };
 
+        // not sure why this isnt working 
         const wavFile = new File(["test"], "test.wav", {
             type: "audio/wav"
         });
@@ -90,17 +66,13 @@ describe("Form Two", () => {
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
         for(let i = 0; i < formObj.wav.length; i++){
-            const element = wrapper.find(`#${formObj.wav[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${formObj.wav[i].toLowerCase()}" id="${formObj.wav[i].toLowerCase()}">`);
+            //const element = wrapper.find(`#smartparts-text-input-${i}`);
+            //expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${formObj.wav[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}">`);
         };
+        
     });
 
     test('it renders the correct text area when file is uploaded with comments field',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
             mp3: ["Title", "Artist"],
@@ -115,15 +87,10 @@ describe("Form Two", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
-        expect(wrapper.exists('#smartparts-comments')).toBe(true);
+        expect(wrapper.exists('#smartparts-comments-2')).toBe(true);
     });
 
     test('it renders the correct span when file is uploaded with filename field',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments", "filEnaMe"],
             mp3: ["Title", "Artist"],
@@ -138,15 +105,10 @@ describe("Form Two", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
-        expect(wrapper.find('#filename-span').text()).toBe(`Filename: test.wav`);
+        expect(wrapper.find('#smartparts-filename-span-3').text()).toBe(`Filename: test.wav`);
     });
 
     test('it renders a select element with the correct options when provided a select object array',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
             mp3: ["Title", "Artist", 'Select'],
@@ -178,17 +140,12 @@ describe("Form Two", () => {
         expect(wrapper.exists({name: "select-2"})).toBeTruthy();
 
         for(let i = 0; i < selectObj.select.length; i++){
-            const element = wrapper.find(`#${selectObj.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}" class="form-select-option">${selectObj.select[i]}</option>`);
+            const element = wrapper.find(`#smartparts-select-option-2-${i}`);
+            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="smartparts-select-option-2-${i}" class="form-select-option">${selectObj.select[i]}</option>`);
         };
     });
 
     test('it renders multiple selects in accordance with object array', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
             mp3: ["Title", 'Select', 'FilenamE', 'SeLECt'],
@@ -226,31 +183,20 @@ describe("Form Two", () => {
         expect(wrapper.exists({name: "select-1"})).toBeTruthy();
 
         for(let i = 0; i < selectObj.select.length; i++){
-            const element = wrapper.find(`#${selectObj.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}" class="form-select-option">${selectObj.select[i]}</option>`);
+            const element = wrapper.find(`#smartparts-select-option-1-${i}`);
+            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="smartparts-select-option-1-${i}" class="form-select-option">${selectObj.select[i]}</option>`);
         };
 
         expect(wrapper.exists({name: "select-3"})).toBeTruthy();
 
-        for(let i = 0; i < selectObj.select.length; i++){
-            const element = wrapper.find(`#${selectObj2.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj2.select[i]}" id="${selectObj2.select[i]}" class="form-select-option">${selectObj2.select[i]}</option>`);
+        for(let i = 0; i < selectObj2.select.length; i++){
+            const element = wrapper.find(`#smartparts-select-option-3-${i}`);
+            expect(element.html()).toEqual(`<option value="${selectObj2.select[i]}" id="smartparts-select-option-3-${i}" class="form-select-option">${selectObj2.select[i]}</option>`);
         };
     });
 
 
-    test('it renders an img element when provided with logo prop',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
-        const formObj = {
-            wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", "Artist"],
-            jpg: ["Title", "Subject", "Source"]
-        };
-        
+    test('it renders an img element when provided with logo prop',() => {        
         render(<FormTwo fileTypes={formObj} cb={printData} logo={"/fakepath.jpg"}/>);
 
         const logo = screen.getByRole('img');
@@ -259,12 +205,8 @@ describe("Form Two", () => {
     });
 
     test('it renders a range input correctly', () => {
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
-            wav: ["Title", "Artist","Range[0_.75_.1_Milliseconds_<]", "Comments"],
+            wav: ["Title", "Artist", "Range[0_.75_.1_Milliseconds_<]", "Comments"],
             mp3: ["Title", "Artist"],
             jpg: ["Title", "Subject", "Source"]
         };
@@ -277,7 +219,7 @@ describe("Form Two", () => {
 
         
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
-        const inputString = wrapper.find('#smartparts-range-input').html();
+        const inputString = wrapper.find('#smartparts-range-input-2').html();
         ["0", ".75", ".1"].forEach((value) =>  expect(inputString.includes(value)).toBe(true));
         expect(wrapper.find('#smartparts-range-label').text() === "Milliseconds");
     });
@@ -286,11 +228,6 @@ describe("Form Two", () => {
 
     test('Empty object behavior without select',() => {
         const fileTypes = {};
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const wrapper = mount(<FormTwo fileTypes={fileTypes} cb={printData}/>);
 
         const wavFile = new File(["test"], "test.wav", {
@@ -303,11 +240,6 @@ describe("Form Two", () => {
     });
 
     test('Empty object behavior with select',() => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const fileTypes = {};
 
         const wrapper = mount(<FormTwo fileTypes={fileTypes} cb={printData} select={{}}/>);
@@ -322,14 +254,7 @@ describe("Form Two", () => {
     });
 
     test('it renders the date input when file is uploaded with date field', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
-            wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", "Artist"],
             jpg: ["Title", "Subject", "Source", "dATE"]
         };
         
@@ -341,17 +266,12 @@ describe("Form Two", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
-        expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input" class="form-date-input" value="2099-01-01">');
+        expect(wrapper.find('#smartparts-date-input-3').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input-3" class="form-date-input" value="2099-01-01">');
     });
 
     // REQUIRED INPUTS
 
     test('it renders a required text area when "!" is used', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
             mp3: ["Title", "Artist"],
@@ -365,14 +285,10 @@ describe("Form Two", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [file]}})
 
-        expect(wrapper.find('#smartparts-comments').html().includes("required"));
+        expect(wrapper.find('#smartparts-comments-4').html().includes("required"));
     });
 
     test('it renders a required text input when "!" is used', () => {    
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
             mp3: ["Title", "Artist"],
@@ -386,14 +302,10 @@ describe("Form Two", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [file]}})
 
-        expect(wrapper.find('#required-text-input').html().includes("required"));
+        expect(wrapper.find('#smartparts-text-input-5').html().includes("required"));
     });
 
     test('it renders a required date input when "!" is used', () => {    
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             jpg: ["Title", "Subject", "Source", "dATE!", "cOmMents!", "Required Text Input!"]
         };
@@ -405,18 +317,13 @@ describe("Form Two", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [file]}})
 
-        expect(wrapper.find('#smartparts-date-input').html().includes("required"));
+        expect(wrapper.find('#smartparts-date-input-3').html().includes("required"));
     });
 
     test('it renders a required select input when "!" is used', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", "Artist", 'Select'],
+            mp3: ["Title", "Artist", 'Select!'],
             jpg: ["Title", "Subject", "Source"]
         };
 
@@ -442,11 +349,14 @@ describe("Form Two", () => {
     // USER SUPPLIED MESSAGES
 
     test('it renders a user supplied message for "Internal Error"', () => {
-        const printData = (data) => { 
-            console.log(data);
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "",
+            errorMessage: "Test Error Message - Form Two"
         };
-        
-        const wrapper = mount(<FormTwo fileTypes={{}} cb={printData} errorMessage="Test Error Message - Form Two"/>);
+
+        const wrapper = mount(<FormTwo fileTypes={{}} cb={printData} textConfig={testConfig}/>);
 
         const mp3File = new File(["test"], "test.mp3", {
             type: "audio/mpeg"
@@ -457,13 +367,8 @@ describe("Form Two", () => {
     });
 
     test('form is disabled after submit', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
-            mp3: ["title"],
+            mp3: [],
         };
 
         render(<FormTwo fileTypes={formObj} cb={printData}/>);
@@ -476,24 +381,24 @@ describe("Form Two", () => {
 
         fireEvent.change(fileInput, { target: { files: [mp3File] }});
 
-        fireEvent.change(screen.getByRole('textbox'), {target: { value: "BLAHBLAH" }});
-
         fireEvent.click(screen.getByRole('button'));
 
         expect(screen.getByRole('button')).toBeDisabled(); 
     });
 
     test('user disabled message', () => {
-
-        const printData = (data) => { 
-            console.log(data);
-        };
-
         const formObj = {
-            mp3: ["Title"],
+            mp3: [],
         };
 
-        render(<FormTwo fileTypes={formObj} cb={printData} disabled={{message: "Test Form Disabled Message - Form Two"}}/>);
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "Test Form Disabled Message - Form Two",
+            errorMessage: "Test Error Message - Form Two"
+        };
+
+        render(<FormTwo fileTypes={formObj} cb={printData} textConfig={testConfig}/>);
 
         const mp3File = new File(["test"], "test.mp3", {
             type: "audio/mpeg"

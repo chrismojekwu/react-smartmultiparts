@@ -62,6 +62,8 @@ const formObj = {
 
 **Select** - (*select*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array.
 
+**Value Checkbox** - (*checkbox[value]*) - You can generate a value checkbox but using "checkbox" followed by a value surrounded by brackets.
+
 A select object requires 3 key value pairs:  
 >"query", your question for the select.  
 >"select", your options for the select dropdown.  
@@ -87,11 +89,18 @@ const selectObj2 = {
 ### Required Attribute
 You can require applicable input types by using an exclamation point at the end of its field name string.
 
-### User Messages
+### Text Config
+The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", & "errorMessage". If the textConfig is supplied, unwanted values should be empty strings.
+#### File Type Label
+Default - *Supported File Types:*
+#### File Input Label
+Default - *File:*
 #### Form Disable Message
-By default the form will display *Thanks* after it is submitted. You can provide your own message passing the "disabled" prop an object with a single key/value pair using "message".
+Default - *Thanks*
 #### Error Message
-By default the form will display *Internal Error* on error. You can provide an error message for the form by passing a string into an errorMessage prop.
+Default - *Internal Error* 
+#### Error Message - Unsupported Extension
+Default - *Invalid Extension*
 
 ## Styling:
 

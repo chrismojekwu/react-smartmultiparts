@@ -8,8 +8,7 @@ import './app.css';
 
 
 const App = () => {
-    // refactor all of this to TryIt component
-    const fields = ["Title", "Submitter", "Name", "Comments"];
+    const fields = ["Chris Mojekwu", "Comments", "Range[0_12_1_Study Hours]", "Date", "checkbox[C#]", "checkbox[C++]", "checkbox[JAVA]" ,"checkbox[GO]"];
 
     const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
     
@@ -17,6 +16,14 @@ const App = () => {
         for (var value of data.values()) {
             console.log(value);
         };
+    };
+
+    const testConfig = {
+        typeLabel: "Valid Files: ",
+        inputLabel: "Upload - ",
+        disabled: "Thanks for the submission!",
+        errorMessage: "Something went wrong.",
+        invalidExt: "Sorry we dont support that type of file."
     };
 
     return (
@@ -41,7 +48,12 @@ const App = () => {
                         <div className="card-one">
                             <div className="card-inner">
                                 <div className="card-front">
-                                <FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>
+                                <FormOne 
+                                    fields={fields} 
+                                    fileTypes={fileTypes} 
+                                    cb={printData} 
+                                    textConfig={testConfig}
+                                />
                                 </div>
                                 <div className="card-back">
                                     <div className="card-back-inner">
@@ -54,7 +66,7 @@ const App = () => {
                         <div className="card-two">
                             <div className="card-inner">
                                 <div className="card-front">
-                                <FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>
+                                <FormOne fields={fields} fileTypes={fileTypes} cb={printData} textConfig={testConfig}/>
                                 </div>
                                 <div className="card-back">
                                     <div className="card-back-inner">

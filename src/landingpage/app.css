@@ -28,12 +28,7 @@ body {
     overflow: hidden;
 }
 
-.multiparts {
-    font-size: 24px;
-}
-
 .landing-title-header, Link {
-    font-family: 'Press Start 2P', cursive;
     z-index: 1;
     padding-left: 2%;
     color: #ffffff;
@@ -113,14 +108,15 @@ body {
 .card-one {
     animation-name: flip;
     animation-duration: 4s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 3;
 }
 
 .card-two {
     animation-name: flip2;
     animation-duration: 4.5s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 3;
 }
+
 
 .card-front {
   background-color: #bbb;
@@ -196,9 +192,5 @@ body {
 
     .controls {
         justify-content: center;
-    }
-
-    .multiparts {
-        font-size: 1em;
     }
 }

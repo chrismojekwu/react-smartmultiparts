@@ -1,13 +1,13 @@
 {
   "name": "react-smartmultiparts",
   "homepage": "http://chrismojekwu.github.io/react-smartmultiparts/",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Form generating file upload components for React",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
     "develop": "webpack serve",
-    "test": "jest",
+    "test": "jest --watch",
     "build-lib": "rollup -c",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",

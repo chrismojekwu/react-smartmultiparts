@@ -8,8 +8,8 @@ const TextArea = (props) => {
                 <textarea
                   name={`textarea-${props.index}`}
                   className="comments form-text-area"
-                  placeholder="Additional Comments"
-                  id="smartparts-comments"
+                  placeholder="Comments"
+                  id={`smartparts-comments-${props.index}`}
                 />
             </React.Fragment>
         );
@@ -22,8 +22,8 @@ const TextArea = (props) => {
                 <textarea
                   name={`textarea-${props.index}`}
                   className="comments form-text-area"
-                  placeholder="Additional Comments"
-                  id="smartparts-comments"
+                  placeholder="Comments"
+                  id={`smartparts-comments-${props.index}`}
                   required
                 />
             </React.Fragment>

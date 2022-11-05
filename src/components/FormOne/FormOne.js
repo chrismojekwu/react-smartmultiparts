@@ -12,17 +12,17 @@ export const FormOne = (props) => {
   const detectFile = () => {
     if (fileType === "") return "";
     if (Object.keys(props.fileTypes).length === 0 || props.fields === []) {
-      if (props.errorMessage === undefined || props.errorMessage === "") {
+      if (props.textConfig === undefined || props.textConfig.errorMessage === "") {
         return <span id="smartparts-error">Internal Error</span>;
       } else {
-        return <span id="smartparts-error">{props.errorMessage}</span>;
+        return <span id="smartparts-error">{props.textConfig.errorMessage}</span>;
       }
     }
     const ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
     const re = new RegExp(props.fileTypes.join("|"), "gi");
-    if (!ext) return "Invalid Extension";
+    if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
     if (re.test(ext)) {
-      return <FormFields fields={props.fields} filename={fileName} select={props.select}/>;
+      return <FormFields fields={props.fields} filename={fileName} select={props.select} checkboxes={props.checkboxes}/>;
     } else {
       setFileType("INVALID");
       return "File type not supported.";
@@ -43,14 +43,16 @@ export const FormOne = (props) => {
         data.append('filename', fileName);
       } else if (new RegExp('comments', 'gi').test(fieldNameCleaned) === true) {
         data.append('comments', e.target[`textarea-${i}`].value);
-      } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true) {
+      } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true && fieldNameCleaned.length === 4) {
         data.append('date', e.target[`date-${i}`].value);
       } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
         data.append(`select_${i}`, e.target[`select-${i}`].value);
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
+      } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
+        data.append(`checkbox_${i}`, e.target[`checkbox-${i}`].value);
       } else
-      data.append(fieldNameCleaned.toLowerCase(), e.target[fieldNameCleaned.toLowerCase()].value);
+      data.append(fieldNameCleaned.toLowerCase(), e.target[`${fieldNameCleaned.toLowerCase()}-${i}`].value);
     };
 
     props.cb(data);
@@ -64,14 +66,13 @@ export const FormOne = (props) => {
   };
 
   const handleDisabled = () => {
-    const message = props.disabled !== undefined ? props.disabled.message : "Thanks";
+    const message = props.textConfig !== undefined ? props.textConfig.disabled : "Thanks";
     return <span className="smartparts-disabled-message">{message}</span>;
   };
 
   const renderLogo = (path) => {
     return <img src={path} className="form-logo-img"/>
   };
-
  
   return (
     <>
@@ -80,7 +81,8 @@ export const FormOne = (props) => {
           {props.logo ? renderLogo(props.logo) : ""}
         </div>
         <p>
-          Supported File Types: {fileTypes(props.fileTypes)}
+          {props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: "}
+          {fileTypes(props.fileTypes)}
         </p>
 
         <form
@@ -91,7 +93,9 @@ export const FormOne = (props) => {
           name="upload"
           disabled={disabled}
         >
-          <label htmlFor="file form-label">File:</label>
+          <label htmlFor="file form-label">
+            {props.textConfig !== undefined ? props.textConfig.inputLabel : "File:"}
+          </label>
           <input
             id="smartparts-file"
             data-testid="smartparts-file"
