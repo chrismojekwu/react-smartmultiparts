@@ -60,7 +60,7 @@ function FormFields(props) {
               return selectObjs[selectCount] === undefined ? ""
                 : generateSelect(selectObjs[selectCount], index, field.trim());
           } else if (field.trim().match(/filename/gi)) {
-            return <span id="filename-span" className="form-filename" key={`filename-${index}`}>Filename: {props.filename}</span>
+            return <span id={`smartparts-filename-span-${index}`} className="form-filename" key={`filename-${index}`}>Filename: {props.filename}</span>
           } else if (field === "") {
             return "";
           } else {

@@ -28,12 +28,7 @@ body {
     overflow: hidden;
 }
 
-.multiparts {
-    font-size: 24px;
-}
-
 .landing-title-header, Link {
-    font-family: 'Press Start 2P', cursive;
     z-index: 1;
     padding-left: 2%;
     color: #ffffff;
@@ -196,9 +191,5 @@ body {
 
     .controls {
         justify-content: center;
-    }
-
-    .multiparts {
-        font-size: 1em;
     }
 }

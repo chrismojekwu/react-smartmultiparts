@@ -7,7 +7,7 @@
   "module": "dist/index.es.js",
   "scripts": {
     "develop": "webpack serve",
-    "test": "jest",
+    "test": "jest --watch",
     "build-lib": "rollup -c",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",

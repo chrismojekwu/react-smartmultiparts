@@ -4,10 +4,10 @@ const Select = (props) => {
     const [value, setValue] = useState(props.obj.placeholder);
 
     const generateOptions = () => {
-        return props.obj.select.map((options, index) => {
+        return props.obj.select.map((option, index) => {
             return (
-                <option value={options} id={options} className="form-select-option" key={`select-option-${index}`}>
-                    {options}
+                <option value={option} id={`smartparts-select-option-${props.index}-${index}`} className="form-select-option" key={`select-option-${index}`}>
+                    {option}
                 </option>
             )
         })
@@ -20,9 +20,16 @@ const Select = (props) => {
     const renderDefault = () => {
         return (
             <>
-                <label htmlFor={`select-${props.index} form-label`}>{props.obj.query}</label>
-                <select name={`select-${props.index}`} className="form-select" onChange={handleChange}>
-                    <option className="form-select-option" key={`select-option-default`}defaultValue>
+                <label htmlFor={`select-${props.index}`} className="form-label">
+                    {props.obj.query}
+                </label>
+                <select 
+                    id={`smartparts-select-input-${props.index}`}
+                    name={`select-${props.index}`} 
+                    className="form-select" 
+                    onChange={handleChange}
+                >
+                    <option className="form-select-option" key={`select-option-default`} defaultValue>
                         {value}
                     </option>
                     {generateOptions()}
@@ -34,9 +41,19 @@ const Select = (props) => {
     const renderReq = () => {
         return (
             <>
-                <label htmlFor={`select-${props.index} form-label`}>{props.obj.query}</label>
-                <select name={`select-${props.index}`} className="form-select" onChange={handleChange} required>
-                    <option defaultValue>{value}</option>
+                <label htmlFor={`select-${props.index}`} className="form-label">
+                    {props.obj.query}
+                </label>
+                <select 
+                    id={`smartparts-select-input-${props.index}`}
+                    name={`select-${props.index}`} 
+                    className="form-select" 
+                    onChange={handleChange} 
+                    required
+                >
+                    <option defaultValue>
+                        {value}
+                    </option>
                     {generateOptions()}
                 </select>
             </>

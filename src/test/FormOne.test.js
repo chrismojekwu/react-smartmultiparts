@@ -44,8 +44,8 @@ describe("Form One", () => {
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
         for(let i = 0; i < fields.length; i++){
-            const element = wrapper.find(`#${fields[i].toLowerCase()}`);
-            expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${fields[i].toLowerCase()}-${i}" id="${fields[i].toLowerCase()}">`);
+            const element = wrapper.find(`#smartparts-text-input-${i}`);
+            expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${fields[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}">`);
         };
 
     });
@@ -60,7 +60,7 @@ describe("Form One", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
-        expect(wrapper.exists('#smartparts-comments')).toBe(true);
+        expect(wrapper.exists('#smartparts-comments-0')).toBe(true);
     });
 
     test('it renders the correct span when file is uploaded with filename field', () => {
@@ -73,7 +73,7 @@ describe("Form One", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
-        expect(wrapper.find('#filename-span').text()).toBe(`Filename: test.jpg`);
+        expect(wrapper.find('#smartparts-filename-span-0').text()).toBe(`Filename: test.jpg`);
     });
 
     test('it renders a select element with the correct options when provided a select object array', () => {
@@ -95,8 +95,8 @@ describe("Form One", () => {
         expect(wrapper.exists({name: "select-1"})).toBeTruthy();
         
         for(let i = 0; i < selectObj.select.length; i++){
-            const element = wrapper.find(`#${selectObj.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}" class="form-select-option">${selectObj.select[i]}</option>`);
+            const element = wrapper.find(`#smartparts-select-option-1-${i}`);
+            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="smartparts-select-option-1-${i}" class="form-select-option">${selectObj.select[i]}</option>`);
         };
         
     });
@@ -126,15 +126,15 @@ describe("Form One", () => {
         expect(wrapper.exists({name: "select-0"})).toBeTruthy();
         
         for(let i = 0; i < selectObj.select.length; i++){
-            const element = wrapper.find(`#${selectObj.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="${selectObj.select[i]}" class="form-select-option">${selectObj.select[i]}</option>`);
+            const element = wrapper.find(`#smartparts-select-option-0-${i}`);
+            expect(element.html()).toEqual(`<option value="${selectObj.select[i]}" id="smartparts-select-option-0-${i}" class="form-select-option">${selectObj.select[i]}</option>`);
         };
 
         expect(wrapper.exists({name: "select-4"})).toBeTruthy();
         
         for(let i = 0; i < selectObj.select.length; i++){
-            const element = wrapper.find(`#${selectObj2.select[i]}`);
-            expect(element.html()).toEqual(`<option value="${selectObj2.select[i]}" id="${selectObj2.select[i]}" class="form-select-option">${selectObj2.select[i]}</option>`);
+            const element = wrapper.find(`#smartparts-select-option-4-${i}`);
+            expect(element.html()).toEqual(`<option value="${selectObj2.select[i]}" id="smartparts-select-option-4-${i}" class="form-select-option">${selectObj2.select[i]}</option>`);
         };
     });
 
@@ -192,7 +192,7 @@ describe("Form One", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
         
-        expect(wrapper.find('#smartparts-date-input').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input" class="form-date-input" value="2099-01-01">');
+        expect(wrapper.find('#smartparts-date-input-0').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input-0" class="form-date-input" value="2099-01-01">');
     });
 
     test('it renders a range input correctly', () => {
@@ -207,7 +207,7 @@ describe("Form One", () => {
         });
 
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
-        const inputString = wrapper.find('#smartparts-range-input').html();
+        const inputString = wrapper.find('#smartparts-range-input-2').html();
         ["1", "200", "5"].forEach((value) =>  expect(inputString.includes(value)).toBe(true));
         expect(wrapper.find('#smartparts-range-label').text() === "Hours");
     });
@@ -225,7 +225,7 @@ describe("Form One", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [file]}})
 
-        expect(wrapper.find('#smartparts-comments').html().includes("required"));
+        expect(wrapper.find('#smartparts-comments-0').html().includes("required"));
     });
 
     test('it renders a required text input when "!" is used', () => {
@@ -238,7 +238,7 @@ describe("Form One", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [file]}})
 
-        expect(wrapper.find('#required-text-input').html().includes("required"));
+        expect(wrapper.find('#smartparts-text-input-0').html().includes("required"));
     });
 
     test('it renders a required date input when "!" is used', () => {
@@ -251,7 +251,7 @@ describe("Form One", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [file]}})
 
-        expect(wrapper.find('#smartparts-date-input').html().includes("required"));
+        expect(wrapper.find('#smartparts-date-input-0').html().includes("required"));
     });
 
     test('it renders a required select input when "!" is used', () => {
@@ -326,7 +326,7 @@ describe("Form One", () => {
             errorMessage: "Test Error Message - Form Two"
         };
 
-        render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}}/>);
+        render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}} textConfig={testConfig}/>);
 
         const fileInput = screen.getByTestId("smartparts-file");
 
@@ -335,9 +335,5 @@ describe("Form One", () => {
         fireEvent.click(screen.getByRole('button'));
 
         expect(screen.getByText("Test Form Disabled Message - Form One")).toBeInTheDocument();
-    });
-
-    test('user textConfig prop', () => {
-
     });
 });
