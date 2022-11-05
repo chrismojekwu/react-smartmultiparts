@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 
 const CheckBox = (props) => {
-   
-        
-
-
     const renderReq = (req) => {
         return req ? (
             <>
