@@ -58,7 +58,7 @@ describe("Form Two", () => {
             expect(element.html()).toEqual(`<input type="text" class="form-text-input" name="${formObj.mp3[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}">`);
         };
 
-        /*
+        // not sure why this isnt working 
         const wavFile = new File(["test"], "test.wav", {
             type: "audio/wav"
         });
@@ -66,11 +66,10 @@ describe("Form Two", () => {
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
         for(let i = 0; i < formObj.wav.length; i++){
-            const element = wrapper.find(`#smartparts-text-input-${i}`);
-            console.log(element, formObj.wav[i].toLowerCase())
-            expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${formObj.wav[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}">`);
+            //const element = wrapper.find(`#smartparts-text-input-${i}`);
+            //expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${formObj.wav[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}">`);
         };
-        */
+        
     });
 
     test('it renders the correct text area when file is uploaded with comments field',() => {
@@ -382,11 +381,7 @@ describe("Form Two", () => {
 
         fireEvent.change(fileInput, { target: { files: [mp3File] }});
 
-        //fireEvent.change(screen.getByRole('textbox'), {target: { value: "BLAHBLAH" }});
-
         fireEvent.click(screen.getByRole('button'));
-
-        screen.debug();
 
         expect(screen.getByRole('button')).toBeDisabled(); 
     });
