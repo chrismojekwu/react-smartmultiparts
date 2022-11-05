@@ -62,6 +62,8 @@ const formObj = {
 
 **Select** - (*select*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array.
 
+**Value Checkbox** - (*checkbox[value]*) - You can generate a value checkbox but using "checkbox" followed by a value surrounded by brackets.
+
 A select object requires 3 key value pairs:  
 >"query", your question for the select.  
 >"select", your options for the select dropdown.  
