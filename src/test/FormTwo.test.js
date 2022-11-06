@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, getAllByTestId } from '@testing-library/react';
 import Enzyme, { mount } from 'enzyme';
 import {FormTwo} from '../components/FormTwo/FormTwo';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
@@ -222,6 +222,26 @@ describe("Form Two", () => {
         const inputString = wrapper.find('#smartparts-range-input-2').html();
         ["0", ".75", ".1"].forEach((value) =>  expect(inputString.includes(value)).toBe(true));
         expect(wrapper.find('#smartparts-range-label').text() === "Milliseconds");
+    });
+
+    test('value checkbox input', () => {
+        const formObj = {
+            mp3: ['checkbox[This]', 'checkbox[Is]', 'checkbox[Cool]'],
+        };
+
+        render(<FormTwo fileTypes={formObj} cb={printData}/>);
+
+        const mp3File = new File(["test"], "test.mp3", {
+            type: "audio/mpeg"
+        });
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        screen.getAllByRole('checkbox').forEach((x,i) => {
+            expect(x.getAttribute('value')).toBe(formObj.mp3[i].slice(9,-1)); 
+        });
     });
 
     // EMPTY FIELDS

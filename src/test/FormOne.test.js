@@ -148,6 +148,24 @@ describe("Form One", () => {
         expect(logo).toBeInTheDocument();
     });
 
+    test('value checkbox input', () => {
+        const fields = ['checkbox[This]', 'checkbox[Is]', 'checkbox[Cool]'];
+
+        render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} logo={"/fakepath.jpg"}/>);
+
+        const mp3File = new File(["test"], "test.mp3", {
+            type: "audio/mpeg"
+        });
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        screen.getAllByRole('checkbox').forEach((x,i) => {
+            expect(x.getAttribute('value')).toBe(fields[i].slice(9,-1)); 
+        });
+    });
+
     // EMPTY FIELDS 
 
     test('Empty Fields behavior no select', () => {
