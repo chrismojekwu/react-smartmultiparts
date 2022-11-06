@@ -67,8 +67,8 @@ var TextArea = function TextArea(props) {
     }, "Comments:"), /*#__PURE__*/React.createElement("textarea", {
       name: "textarea-".concat(props.index),
       className: "comments form-text-area",
-      placeholder: "Additional Comments",
-      id: "smartparts-comments"
+      placeholder: "Comments",
+      id: "smartparts-comments-".concat(props.index)
     }));
   };
 
@@ -79,8 +79,8 @@ var TextArea = function TextArea(props) {
     }, "Comments:"), /*#__PURE__*/React.createElement("textarea", {
       name: "textarea-".concat(props.index),
       className: "comments form-text-area",
-      placeholder: "Additional Comments",
-      id: "smartparts-comments",
+      placeholder: "Comments",
+      id: "smartparts-comments-".concat(props.index),
       required: true
     }));
   };
@@ -90,7 +90,6 @@ var TextArea = function TextArea(props) {
 
 var TextInput = function TextInput(props) {
   var label = props.field.replace("!", "");
-  var idString = label.split(" ").join("-").toLowerCase();
 
   var renderDefault = function renderDefault() {
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("label", {
@@ -100,7 +99,7 @@ var TextInput = function TextInput(props) {
       type: "text",
       className: "form-text-input",
       name: "".concat(label.toLowerCase(), "-").concat(props.index),
-      id: idString
+      id: "smartparts-text-input-".concat(props.index)
     }));
   };
 
@@ -112,7 +111,7 @@ var TextInput = function TextInput(props) {
       type: "text",
       className: "form-text-input",
       name: "".concat(label.toLowerCase(), "-").concat(props.index),
-      id: idString,
+      id: "smartparts-text-input-".concat(props.index),
       required: true
     }));
   };
@@ -133,7 +132,7 @@ var Date = function Date(props) {
     }, "Date:"), /*#__PURE__*/React.createElement("input", {
       type: "date",
       name: "date-".concat(props.index),
-      id: "smartparts-date-input",
+      id: "smartparts-date-input-".concat(props.index),
       value: date,
       onChange: function onChange(e) {
         return setDate(e.target.value);
@@ -149,7 +148,7 @@ var Date = function Date(props) {
     }, "Date:"), /*#__PURE__*/React.createElement("input", {
       type: "date",
       name: "date-".concat(props.index),
-      id: "smartparts-date-input",
+      id: "smartparts-date-input-".concat(props.index),
       value: date,
       onChange: function onChange(e) {
         return setDate(e.target.value);
@@ -169,13 +168,13 @@ var Select = function Select(props) {
       setValue = _useState2[1];
 
   var generateOptions = function generateOptions() {
-    return props.obj.select.map(function (options, index) {
+    return props.obj.select.map(function (option, index) {
       return /*#__PURE__*/React.createElement("option", {
-        value: options,
-        id: options,
+        value: option,
+        id: "smartparts-select-option-".concat(props.index, "-").concat(index),
         className: "form-select-option",
         key: "select-option-".concat(index)
-      }, options);
+      }, option);
     });
   };
 
@@ -185,8 +184,10 @@ var Select = function Select(props) {
 
   var renderDefault = function renderDefault() {
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "select-".concat(props.index, " form-label")
+      htmlFor: "select-".concat(props.index),
+      className: "form-label"
     }, props.obj.query), /*#__PURE__*/React.createElement("select", {
+      id: "smartparts-select-input-".concat(props.index),
       name: "select-".concat(props.index),
       className: "form-select",
       onChange: handleChange
@@ -199,8 +200,10 @@ var Select = function Select(props) {
 
   var renderReq = function renderReq() {
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "select-".concat(props.index, " form-label")
+      htmlFor: "select-".concat(props.index),
+      className: "form-label"
     }, props.obj.query), /*#__PURE__*/React.createElement("select", {
+      id: "smartparts-select-input-".concat(props.index),
       name: "select-".concat(props.index),
       className: "form-select",
       onChange: handleChange,
@@ -231,7 +234,7 @@ var Range = function Range(props) {
         type: "range",
         className: "form-range-input",
         name: "range-".concat(props.index),
-        id: "smartparts-range-input",
+        id: "smartparts-range-input-".concat(props.index),
         min: props.min,
         max: props.max,
         step: props.step,
@@ -245,7 +248,7 @@ var Range = function Range(props) {
         type: "range",
         className: "form-range-input",
         name: "range-".concat(props.index),
-        id: "smartparts-range-input",
+        id: "smartparts-range-input-".concat(props.index),
         min: props.min,
         max: props.max,
         step: props.step,
@@ -266,14 +269,43 @@ var Range = function Range(props) {
   return handleLabelSide();
 };
 
+var CheckBox = function CheckBox(props) {
+  var renderReq = function renderReq(req) {
+    return req ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", {
+      type: "checkbox",
+      className: "form-checkbox",
+      id: "smartparts-checkbox-".concat(props.index),
+      "data-testid": "smartparts-checkbox-".concat(props.index),
+      name: "checkbox-".concat(props.index),
+      value: props.value,
+      required: true
+    }), /*#__PURE__*/React.createElement("label", {
+      className: "form-checkbox-label",
+      htmlFor: "checkbox-".concat(props.index)
+    }, props.value)) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", {
+      type: "checkbox",
+      className: "form-checkbox",
+      id: "smartparts-checkbox-".concat(props.index),
+      name: "checkbox-".concat(props.index),
+      value: props.value
+    }), /*#__PURE__*/React.createElement("label", {
+      className: "form-checkbox-label",
+      htmlFor: "checkbox-".concat(props.index)
+    }, props.value));
+  };
+
+  return renderReq(props.req);
+};
+
 function FormFields(props) {
   var selectObjs = props.select;
-  var selectCount = 0;
+  var selectCount = 0; //const checkboxObjs = props.checkboxes;
+  var checkBoxIndex = 0;
 
   var generateSelect = function generateSelect(selectObj, index, field) {
     selectCount++;
 
-    if (field.trim().includes("!")) {
+    if (field.includes("!")) {
       return /*#__PURE__*/React.createElement(Select, {
         obj: selectObj,
         index: index,
@@ -316,6 +348,31 @@ function FormFields(props) {
     }
   };
 
+  var generateCheckbox = function generateCheckbox(checkboxObj, index, field) {
+
+    if (field.length === 8) {
+      checkBoxIndex += checkboxObj.boxes.length; //return <CheckboxObject index={checkBoxIndex} query={checkboxObj.query} boxes={checkboxObj.boxes}/>
+
+      return "See Docs for Single Checkbox Syntax";
+    } else {
+      var value;
+      var req = false;
+
+      if (field[8] === "!") {
+        value = field.slice(10, -1);
+        req = true;
+      } else {
+        value = field.slice(9, -1);
+      }
+      return /*#__PURE__*/React.createElement(CheckBox, {
+        index: index,
+        value: value,
+        key: "checkbox-input-".concat(index),
+        req: req
+      });
+    }
+  };
+
   var renderFields = function renderFields() {
     return /*#__PURE__*/React.createElement(React.Fragment, null, props.fields.map(function (field, index) {
       if (field.trim().match(/comments/gi)) {
@@ -332,7 +389,7 @@ function FormFields(props) {
             key: "text-area-".concat(index)
           });
         }
-      } else if (field.trim().match(/date/gi)) {
+      } else if (field.trim().match(/date/gi) && field.trim().length <= 5) {
         if (field.trim().includes("!")) {
           return /*#__PURE__*/React.createElement(Date, {
             required: true,
@@ -350,9 +407,11 @@ function FormFields(props) {
         return generateRange(index, field.trim());
       } else if (field.trim().match(/select/gi)) {
         return selectObjs[selectCount] === undefined ? "" : generateSelect(selectObjs[selectCount], index, field.trim());
+      } else if (field.trim().match(/checkbox/gi)) {
+        return generateCheckbox(null, index, field.trim());
       } else if (field.trim().match(/filename/gi)) {
         return /*#__PURE__*/React.createElement("span", {
-          id: "filename-span",
+          id: "smartparts-filename-span-".concat(index),
           className: "form-filename",
           key: "filename-".concat(index)
         }, "Filename: ", props.filename);
@@ -439,26 +498,27 @@ var FormOne = function FormOne(props) {
     if (fileType === "") return "";
 
     if (Object.keys(props.fileTypes).length === 0 || props.fields === []) {
-      if (props.errorMessage === undefined || props.errorMessage === "") {
+      if (props.textConfig === undefined || props.textConfig.errorMessage === "") {
         return /*#__PURE__*/React.createElement("span", {
           id: "smartparts-error"
         }, "Internal Error");
       } else {
         return /*#__PURE__*/React.createElement("span", {
           id: "smartparts-error"
-        }, props.errorMessage);
+        }, props.textConfig.errorMessage);
       }
     }
 
     var ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
     var re = new RegExp(props.fileTypes.join("|"), "gi");
-    if (!ext) return "Invalid Extension";
+    if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
 
     if (re.test(ext)) {
       return /*#__PURE__*/React.createElement(FormFields, {
         fields: props.fields,
         filename: fileName,
-        select: props.select
+        select: props.select,
+        checkboxes: props.checkboxes
       });
     } else {
       setFileType("INVALID");
@@ -481,13 +541,15 @@ var FormOne = function FormOne(props) {
         data.append('filename', fileName);
       } else if (new RegExp('comments', 'gi').test(fieldNameCleaned) === true) {
         data.append('comments', e.target["textarea-".concat(i)].value);
-      } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true) {
+      } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true && fieldNameCleaned.length === 4) {
         data.append('date', e.target["date-".concat(i)].value);
       } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
         data.append("select_".concat(i), e.target["select-".concat(i)].value);
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append("range_".concat(i), e.target["range-".concat(i)].value);
-      } else data.append(fieldNameCleaned.toLowerCase(), e.target[fieldNameCleaned.toLowerCase()].value);
+      } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
+        data.append("checkbox_".concat(i), e.target["checkbox-".concat(i)].value);
+      } else data.append(fieldNameCleaned.toLowerCase(), e.target["".concat(fieldNameCleaned.toLowerCase(), "-").concat(i)].value);
     }
     props.cb(data);
     setDisabled(true);
@@ -500,7 +562,7 @@ var FormOne = function FormOne(props) {
   };
 
   var handleDisabled = function handleDisabled() {
-    var message = props.disabled !== undefined ? props.disabled.message : "Thanks";
+    var message = props.textConfig !== undefined ? props.textConfig.disabled : "Thanks";
     return /*#__PURE__*/React.createElement("span", {
       className: "smartparts-disabled-message"
     }, message);
@@ -517,7 +579,7 @@ var FormOne = function FormOne(props) {
     className: "smartparts-container form-body"
   }, /*#__PURE__*/React.createElement("div", {
     className: "smartparts-logo-container"
-  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React.createElement("p", null, "Supported File Types: ", fileTypes(props.fileTypes)), /*#__PURE__*/React.createElement("form", {
+  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React.createElement("p", null, props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: ", fileTypes(props.fileTypes)), /*#__PURE__*/React.createElement("form", {
     onSubmit: function onSubmit(e) {
       return dataReturn(e);
     },
@@ -528,7 +590,7 @@ var FormOne = function FormOne(props) {
     disabled: disabled
   }, /*#__PURE__*/React.createElement("label", {
     htmlFor: "file form-label"
-  }, "File:"), /*#__PURE__*/React.createElement("input", {
+  }, props.textConfig !== undefined ? props.textConfig.inputLabel : "File:"), /*#__PURE__*/React.createElement("input", {
     id: "smartparts-file",
     "data-testid": "smartparts-file",
     type: "file",
@@ -573,26 +635,27 @@ var FormTwo = function FormTwo(props) {
     if (fileType === "") return "";
 
     if (Object.keys(props.fileTypes).length === 0) {
-      if (props.errorMessage === undefined || props.errorMessage === "") {
+      if (props.textConfig === undefined || props.textConfig.errorMessage === "") {
         return /*#__PURE__*/React.createElement("span", {
           id: "smartparts-error"
         }, "Internal Error");
       } else {
         return /*#__PURE__*/React.createElement("span", {
           id: "smartparts-error"
-        }, props.errorMessage);
+        }, props.textConfig.errorMessage);
       }
     }
 
     var ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
     var re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
-    if (!ext) return "Invalid Extention";
+    if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
 
     if (re.test(ext)) {
       return /*#__PURE__*/React.createElement(FormFields, {
         fields: props.fileTypes[ext],
         filename: fileName,
-        select: props.select
+        select: props.select,
+        checkboxes: props.checkboxes
       });
     } else {
       setFileType("INVALID");
@@ -623,6 +686,8 @@ var FormTwo = function FormTwo(props) {
         data.append("select_".concat(i), e.target["select-".concat(i)].value);
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append("range_".concat(i), e.target["range-".concat(i)].value);
+      } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
+        data.append("checkbox_".concat(i), e.target["checkbox-".concat(i)].value);
       } else data.append(fieldNameCleaned.toLowerCase(), e.target["".concat(fieldNameCleaned.toLowerCase(), "-").concat(i)].value);
     }
     props.cb(data);
@@ -636,7 +701,7 @@ var FormTwo = function FormTwo(props) {
   };
 
   var handleDisabled = function handleDisabled() {
-    var message = props.disabled !== undefined ? props.disabled.message : "Thanks";
+    var message = props.textConfig !== undefined ? props.textConfig.disabled : "Thanks";
     return /*#__PURE__*/React.createElement("span", {
       className: "smartparts-disabled-message"
     }, message);
@@ -653,7 +718,7 @@ var FormTwo = function FormTwo(props) {
     className: "smartparts-container form-body"
   }, /*#__PURE__*/React.createElement("div", {
     className: "smartparts-logo-container"
-  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React.createElement("p", null, "Supported File Types: ", Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""), /*#__PURE__*/React.createElement("form", {
+  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React.createElement("p", null, props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: ", Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""), /*#__PURE__*/React.createElement("form", {
     onSubmit: function onSubmit(e) {
       return upload(e);
     },
@@ -664,7 +729,7 @@ var FormTwo = function FormTwo(props) {
     disabled: disabled
   }, /*#__PURE__*/React.createElement("label", {
     htmlFor: "file form-label"
-  }, "File:"), /*#__PURE__*/React.createElement("input", {
+  }, props.textConfig !== undefined ? props.textConfig.inputLabel : "File:"), /*#__PURE__*/React.createElement("input", {
     id: "smartparts-file",
     "data-testid": "smartparts-file",
     type: "file",
