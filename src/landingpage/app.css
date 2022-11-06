@@ -117,6 +117,13 @@ body {
     animation-iteration-count: 3;
 }
 
+.card-two .form-checkbox {
+    display: inline-block !important;
+}
+
+.card-two .form-checkbox-label {
+    display: inline !important;
+}
 
 .card-front {
   background-color: #bbb;
