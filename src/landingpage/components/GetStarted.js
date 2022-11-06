@@ -162,6 +162,12 @@ const GetStarted = () => {
                         <span className="bold">Range Value</span> - .form-range-value
                     </span>
                     <span>
+                        <span className="bold">Value Checkbox</span> - .form-checkbox
+                    </span>
+                    <span>
+                        <span className="bold">Value Checkbox Label</span> - .form-checkbox-label
+                    </span>
+                    <span>
                         <span className="bold">Submit Button</span> - .form-button
                     </span>
                     <span>

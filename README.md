@@ -132,6 +132,10 @@ Range Input - .form-range-input
 
 Range Value - .form-range-value
 
+Value Checkbox - .form-checkbox
+
+Value Checkbox Label - .form-checkbox-label
+
 Submit Button - .form-button
 
 Logo - .form-logo-img
