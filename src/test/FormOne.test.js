@@ -162,6 +162,7 @@ describe("Form One", () => {
         fireEvent.change(fileInput, { target: { files: [mp3File] }});
 
         screen.getAllByRole('checkbox').forEach((x,i) => {
+            fireEvent.click(x);
             expect(x.getAttribute('value')).toBe(fields[i].slice(9,-1)); 
         });
     });
