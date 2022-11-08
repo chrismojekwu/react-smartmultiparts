@@ -60,9 +60,9 @@ const formObj = {
 
 **Range** - (*range[minValue_maxValue_stepValue_label_<]*) - You can generate a range field by using "range" followed by a bracket that specifies min, max, step, & label values separated by an underscore. Optionally you can include left angle bracket "<", to instruct the form to render the label before the input.
 
-**Select** - (*select*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array.
-
 **Value Checkbox** - (*checkbox[value]*) - You can generate a value checkbox by using "checkbox" followed by a value surrounded by brackets.
+
+**Select** - (*select*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array.
 
 A select object requires 3 key value pairs:  
 >"query", your question for the select.  
@@ -90,7 +90,7 @@ const selectObj2 = {
 You can require applicable input types by using an exclamation point at the end of its field name string.
 
 ### Text Config
-The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", & "errorMessage". If the textConfig is supplied, unwanted values should be empty strings.
+The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", "errorMessage", & "invalidExt". If the textConfig is supplied, unwanted values should be empty strings.
 #### File Type Label
 Default - *Supported File Types:*
 #### File Input Label
