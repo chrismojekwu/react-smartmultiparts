@@ -270,6 +270,28 @@ var Range = function Range(props) {
 };
 
 var CheckBox = function CheckBox(props) {
+  var inputValue = props.value;
+
+  var _useState = useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      checked = _useState2[0],
+      setChecked = _useState2[1];
+
+  var _useState3 = useState(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      value = _useState4[0],
+      setValue = _useState4[1];
+
+  var handleCheck = function handleCheck() {
+    if (checked === false) {
+      setChecked(true);
+      setValue(inputValue);
+    } else {
+      setChecked(false);
+      setValue("");
+    }
+  };
+
   var renderReq = function renderReq(req) {
     return req ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", {
       type: "checkbox",
@@ -277,7 +299,11 @@ var CheckBox = function CheckBox(props) {
       id: "smartparts-checkbox-".concat(props.index),
       "data-testid": "smartparts-checkbox-".concat(props.index),
       name: "checkbox-".concat(props.index),
-      value: props.value,
+      value: value,
+      checked: checked,
+      onChange: function onChange() {
+        return handleCheck();
+      },
       required: true
     }), /*#__PURE__*/React.createElement("label", {
       className: "form-checkbox-label",
@@ -287,7 +313,11 @@ var CheckBox = function CheckBox(props) {
       className: "form-checkbox",
       id: "smartparts-checkbox-".concat(props.index),
       name: "checkbox-".concat(props.index),
-      value: props.value
+      value: value,
+      checked: checked,
+      onChange: function onChange() {
+        return handleCheck();
+      }
     }), /*#__PURE__*/React.createElement("label", {
       className: "form-checkbox-label",
       htmlFor: "checkbox-".concat(props.index)
@@ -548,7 +578,9 @@ var FormOne = function FormOne(props) {
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append("range_".concat(i), e.target["range-".concat(i)].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        data.append("checkbox_".concat(i), e.target["checkbox-".concat(i)].value);
+        if (e.target["checkbox-".concat(i)].value !== "") {
+          data.append("checkbox_".concat(i), e.target["checkbox-".concat(i)].value);
+        }
       } else data.append(fieldNameCleaned.toLowerCase(), e.target["".concat(fieldNameCleaned.toLowerCase(), "-").concat(i)].value);
     }
     props.cb(data);
@@ -687,7 +719,9 @@ var FormTwo = function FormTwo(props) {
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append("range_".concat(i), e.target["range-".concat(i)].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        data.append("checkbox_".concat(i), e.target["checkbox-".concat(i)].value);
+        if (e.target["checkbox-".concat(i)].value !== "") {
+          data.append("checkbox_".concat(i), e.target["checkbox-".concat(i)].value);
+        }
       } else data.append(fieldNameCleaned.toLowerCase(), e.target["".concat(fieldNameCleaned.toLowerCase(), "-").concat(i)].value);
     }
     props.cb(data);
