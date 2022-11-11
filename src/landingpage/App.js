@@ -2,13 +2,13 @@ import React from 'react';
 import Header from './components/Header';
 import TryIt from './components/TryIt';
 import GetStarted from './components/GetStarted'
-import {FormOne} from '../components/FormOne/FormOne';
-import {Route,Link} from 'react-router-dom';
+import { FormOne } from '../components/FormOne/FormOne';
+import { Route, Link } from 'react-router-dom';
 import './app.css';
 
 
 const App = () => {
-    const fields = ["Chris Mojekwu", "Comments", "Range[0_12_1_Study Hours]", "Date", "checkbox[C#]", "checkbox[C++]", "checkbox[JAVA]" ,"checkbox[GO]"];
+    const fields = ["Chris Mojekwu", "Comments", "Range[0_12_1_Study Hours]", "Date", "checkbox[C#]", "checkbox[C++]", "checkbox[JAVA]" ,"checkbox[GO]", "select", "select"];
 
     const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];
     
@@ -66,7 +66,12 @@ const App = () => {
                         <div className="card-two">
                             <div className="card-inner">
                                 <div className="card-front">
-                                <FormOne fields={fields} fileTypes={fileTypes} cb={printData} textConfig={testConfig}/>
+                                <FormOne 
+                                    fields={fields} 
+                                    fileTypes={fileTypes} 
+                                    cb={printData} 
+                                    textConfig={testConfig}
+                                />
                                 </div>
                                 <div className="card-back">
                                     <div className="card-back-inner">

@@ -17,12 +17,9 @@ function FormFields(props) {
   let checkBoxIndex = 0;
 
   const generateSelect = (selectObj, index, field) => {
-    selectCount++;
-    if (field.includes("!")) {
-      return <Select obj={selectObj} index={index} required={true} key={`select-input-${index}`}/>;
-    } else {
-      return <Select obj={selectObj} index={index} required={false} key={`select-input-${index}`}/>;
-    }
+    const req = field.includes("!") ? true : false;
+    if (props.formTwo === undefined) selectCount++;
+    return <Select obj={selectObj} index={index} required={req} key={`select-input-${index}`}/>;
   };
 
   const generateRange = (index, field) => {
@@ -88,8 +85,10 @@ function FormFields(props) {
           } else if (field.trim().match(/range/gi)) {
             return generateRange(index, field.trim());
           } else if (field.trim().match(/select/gi)) {
-              return selectObjs[selectCount] === undefined ? ""
-                : generateSelect(selectObjs[selectCount], index, field.trim());
+              if (props.formTwo !== undefined && props.formTwo) {
+                selectCount = parseInt(field.trim().slice(7,-1));
+              }
+              return selectObjs[selectCount] === undefined ? "" : generateSelect(selectObjs[selectCount], index, field.trim());
           } else if (field.trim().match(/checkbox/gi)) {
             return generateCheckbox(null, index, field.trim()); 
           } else if (field.trim().match(/filename/gi)) {

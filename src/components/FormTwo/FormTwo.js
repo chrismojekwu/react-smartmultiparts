@@ -23,7 +23,7 @@ export const FormTwo = (props) => {
     const re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
     if (re.test(ext)) {
-      return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select} checkboxes={props.checkboxes}/>;
+      return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select} checkboxes={props.checkboxes} formTwo={true}/>;
     } else {
       setFileType("INVALID");
       return "File type not supported.";

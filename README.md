@@ -62,7 +62,7 @@ const formObj = {
 
 **Value Checkbox** - (*checkbox[value]*) - You can generate a value checkbox by using "checkbox" followed by a value surrounded by brackets.
 
-**Select** - (*select*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array.
+**Select** - (*select*, *select[index]*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. Form One will render selects based on their position in the fields array and the order inside of the select objects array. If using Form Two you must use "select[index]", the index should correspond with the index of the select object needed for that file type.
 
 A select object requires 3 key value pairs:  
 >"query", your question for the select.  
