@@ -23,6 +23,7 @@ const CheckboxObject = (props) => {
                     value={x}
                     index={i}
                     data={data}
+                    key={`object-checkbox-${i}`}
                     setData={setData}
                 />
               );

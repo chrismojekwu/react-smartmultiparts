@@ -60,7 +60,19 @@ const formObj = {
 
 **Range** - (*range[minValue_maxValue_stepValue_label_<]*) - You can generate a range field by using "range" followed by a bracket that specifies min, max, step, & label values separated by an underscore. Optionally you can include left angle bracket "<", to instruct the form to render the label before the input.
 
-**Value Checkbox** - (*checkbox[value]*) - You can generate a value checkbox by using "checkbox" followed by a value surrounded by brackets.
+**Value Checkbox** - (*checkbox[stringValue]*) - You can generate a value checkbox by using "checkbox" followed by a value surrounded by brackets.
+
+**Query Checkbox** - (*checkbox*, *checkbox[index]*) - You can generate a query checkbox by using "checkbox". You must provide a matching array of checkbox objects to correspond with the number of selects you would like to generate. If using Form Two you must use "checkbox[index]", the index should correspond with the index of the checkbox object needed for that file type.
+
+A checkbox object requires 2 key value pairs:  
+>"query", your question for the group of checkboxes.  
+>"boxes", your options for the checkbox values;
+
+See Below:
+```
+<FormOne ... checkboxes={...}/>
+<FormTwo ... checkboxes={...}/>
+```
 
 **Select** - (*select*, *select[index]*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. Form One will render selects based on their position in the fields array and the order inside of the select objects array. If using Form Two you must use "select[index]", the index should correspond with the index of the select object needed for that file type.
 

@@ -77,8 +77,11 @@ const GetStarted = () => {
                     <span>
                         <span className="bold">Value Checkbox</span> - You can generate a value checkbox by using "checkbox" followed by a value surrounded by brackets.
                     </span>
+                    <span>
+                        <span className="bold">Query Checkbox</span> - You can generate a query checkbox by using "checkbox". You must provide a matching array of checkbox objects to correspond with the number of selects you would like to generate. If using Form Two you must use "checkbox[index]", the index should correspond with the index of the checkbox object needed for that file type. The array should be passed to either form using "checkboxes."
+                    </span>
                     <div>
-                        <span className="bold">Select</span> - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. The form will render selects based on their position in the fields array and the order inside of the select objects array.
+                        <span className="bold">Select</span> - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. Form One will render selects based on their position in the fields array and the order inside of the select objects array. If using Form Two you must use "select[index]", the index should correspond with the index of the select object needed for that file type.
                         <details>
                             <summary>Example</summary>
                             <div className="code-snippet">
@@ -161,6 +164,15 @@ const GetStarted = () => {
                     </span>
                     <span>
                         <span className="bold">Value Checkbox Label</span> - .form-checkbox-label
+                    </span>
+                    <span>
+                        <span className="bold">Query Checkbox Question</span> - .form-checkbox-object-query
+                    </span>
+                    <span>
+                        <span className="bold">Query Checkbox Checkbox</span> - .form-checkbox-object-checkbox
+                    </span>
+                    <span>
+                        <span className="bold">Query Checkbox Label</span> - .form-checkbox-object-label
                     </span>
                     <span>
                         <span className="bold">Submit Button</span> - .form-button

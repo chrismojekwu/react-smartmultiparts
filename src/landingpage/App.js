@@ -56,7 +56,6 @@ const App = () => {
                             <div className="card-inner">
                                 <div className="card-front">
                                 <FormTwo
-                                    //fields={fields} 
                                     fileTypes={formObj} 
                                     cb={printData} 
                                     textConfig={testConfig}
@@ -96,11 +95,9 @@ const App = () => {
                             </div>
                         </div>
                     </section>
-                    {/*
                     <div className="landing-description">
                     smartmultiparts are file input components for React that return a form with specified fields. FormOne will return a single set of input fields for a group of file types. FormTwo will return a specified set of fields for each individual file type. Upon submission the form will pass the multipart form data into a callback function provided by you.
                     </div>
-                        */}
                 </Route>
 
                 <Route exact path="/getstarted">

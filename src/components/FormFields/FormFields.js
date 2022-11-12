@@ -42,7 +42,7 @@ function FormFields(props) {
       if (props.formTwo === undefined) {
         checkboxObjCount++;
       }
-      return <CheckboxObject index={index} checks={checkboxObj}/>;
+      return <CheckboxObject index={index} checks={checkboxObj} key={`checkbox-object-${index}`}/>;
     } else {
       let value;
       let req = false;
