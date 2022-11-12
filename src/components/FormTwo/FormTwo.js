@@ -53,7 +53,13 @@ export const FormTwo = (props) => {
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        if (e.target[`checkbox-${i}`].value !== "") {
+        if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && e.target[`checkbox-object-${i}`].value !== "") {
+          if (e.target[`checkbox-object-${i}`].value == "&") {
+            continue;
+          } else {
+            data.append(`checkboxObject_${i}`, e.target[`checkbox-object-${i}`].value);
+          }
+        } else if (e.target[`checkbox-${i}`].value !== "") {
           data.append(`checkbox_${i}`, e.target[`checkbox-${i}`].value);
         }
       } else

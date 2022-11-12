@@ -103,8 +103,7 @@ body {
     -webkit-backface-visibility: hidden; 
     backface-visibility: hidden;
 }
-
-
+/*
 .card-one {
     animation-name: flip;
     animation-duration: 4s;
@@ -116,6 +115,7 @@ body {
     animation-duration: 4.5s;
     animation-iteration-count: 3;
 }
+*/
 
 .card-two .form-checkbox {
     display: inline-block !important;

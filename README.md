@@ -136,6 +136,12 @@ Value Checkbox - .form-checkbox
 
 Value Checkbox Label - .form-checkbox-label
 
+Query Checkbox Question - .form-checkbox-object-query
+
+Query Checkbox Checkbox - .form-checkbox-object-checkbox
+
+Query Checkbox Label - .form-checkbox-object-label
+
 Submit Button - .form-button
 
 Logo - .form-logo-img

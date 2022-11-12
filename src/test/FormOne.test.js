@@ -13,7 +13,7 @@ const printData = (data) => {
 
 const fileTypes = ["wav", "jpg", "jpeg", "mp3", "mp4", "png", "pdf"];
 
-describe("Form One", () => { 
+describe("Form One Renders", () => { 
 
     test('renders without crashing', () => {
         const fields = ["Title", "Submitee", "Name", "Comments", "filename"];
@@ -30,8 +30,9 @@ describe("Form One", () => {
 
         expect(form).toBeInTheDocument();
     });
+});
 
-    // INPUTS
+describe("Form One - Inputs", () => {
 
     test('it renders the correct "text" type inputs when file is uploaded', () => {
         const fields = ["Title", "Submitee", "Name"];
@@ -167,7 +168,38 @@ describe("Form One", () => {
         });
     });
 
-    // EMPTY FIELDS 
+    test('it renders the date input when file is uploaded with date field', () => {
+        const fields = ["dAtE"];
+
+        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
+        const file = new File(["test"], "test.jpg", {
+            type: "image/jpeg"
+        });
+        
+        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        
+        expect(wrapper.find('#smartparts-date-input-0').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input-0" class="form-date-input" value="2099-01-01">');
+    });
+
+    test('it renders a range input correctly', () => {
+        const fields = ["Title", "Artist", "Range[1_200_5_Hours_<]", "Comments"];
+
+        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png","pdf"];
+
+        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
+
+        const wavFile = new File(["test"], "test.wav", {
+            type: "audio/wav"
+        });
+
+        wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
+        const inputString = wrapper.find('#smartparts-range-input-2').html();
+        ["1", "200", "5"].forEach((value) =>  expect(inputString.includes(value)).toBe(true));
+        expect(wrapper.find('#smartparts-range-label').text() === "Hours");
+    });
+});
+
+describe("Form One - Empty Inputs", () => {
 
     test('Empty Fields behavior no select', () => {
         const fields = [];
@@ -200,39 +232,11 @@ describe("Form One", () => {
 
         expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
     });
-
-    test('it renders the date input when file is uploaded with date field', () => {
-        const fields = ["dAtE"];
-
-        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
-        
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
-        
-        expect(wrapper.find('#smartparts-date-input-0').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input-0" class="form-date-input" value="2099-01-01">');
-    });
-
-    test('it renders a range input correctly', () => {
-        const fields = ["Title", "Artist", "Range[1_200_5_Hours_<]", "Comments"];
-
-        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png","pdf"];
-
-        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
-
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
-
-        wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
-        const inputString = wrapper.find('#smartparts-range-input-2').html();
-        ["1", "200", "5"].forEach((value) =>  expect(inputString.includes(value)).toBe(true));
-        expect(wrapper.find('#smartparts-range-label').text() === "Hours");
-    });
+});
 
 
-    // REQUIRED INPUTS
+
+describe("Form One - Required Inputs", () => {
 
     test('it renders a required text area when "!" is used', () => {
         const fields = ["cOmMenTS!"];
@@ -293,8 +297,9 @@ describe("Form One", () => {
 
         expect(wrapper.find({name: "select-1"}).html().includes("required"));  
     });
+});
 
-    // USER SUPPLIED MESSAGES
+describe("Form One - Messages/Inactive Behavior", () => {
 
     test('it renders a user supplied message for "Internal Error"', () => {        
         const testConfig = {

@@ -17,7 +17,7 @@ const formObj = {
     jpg: ["Title", "Subject", "Source"]
 };
 
-describe("Form Two", () => {
+describe("Form Two - Renders", () => {
     
     test('renders without crashing',() => {
         render(<FormTwo fileTypes={formObj} cb={printData}/>);
@@ -30,9 +30,10 @@ describe("Form Two", () => {
 
         expect(form).toBeInTheDocument();
     });
+});
 
-    // INPUTS
-
+describe("Form Two - Inputs", () => {
+    
     test('renders the correct "text" type inputs for different file types',() => {        
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
 
@@ -245,7 +246,24 @@ describe("Form Two", () => {
         });
     });
 
-    // EMPTY FIELDS
+    test('it renders the date input when file is uploaded with date field', () => {
+        const formObj = {
+            jpg: ["Title", "Subject", "Source", "dATE"]
+        };
+        
+        const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
+
+        const file = new File(["test"], "test.jpg", {
+            type: "image/jpeg"
+        });
+        
+        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+        expect(wrapper.find('#smartparts-date-input-3').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input-3" class="form-date-input" value="2099-01-01">');
+    });
+});
+
+describe("Form Two - Empty Object", () => {
 
     test('Empty object behavior without select',() => {
         const fileTypes = {};
@@ -274,23 +292,9 @@ describe("Form Two", () => {
         expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
     });
 
-    test('it renders the date input when file is uploaded with date field', () => {
-        const formObj = {
-            jpg: ["Title", "Subject", "Source", "dATE"]
-        };
-        
-        const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
+});
 
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
-        
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
-
-        expect(wrapper.find('#smartparts-date-input-3').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input-3" class="form-date-input" value="2099-01-01">');
-    });
-
-    // REQUIRED INPUTS
+describe("Form Two - Required Inputs", () => {
 
     test('it renders a required text area when "!" is used', () => {
         const formObj = {
@@ -366,8 +370,9 @@ describe("Form Two", () => {
 
         expect(wrapper.find({name: "select-2"}).html().includes("required"));  
     });
+});
 
-    // USER SUPPLIED MESSAGES
+describe("Form Two - Messages/Inactive Behavior", () => {
 
     test('it renders a user supplied message for "Internal Error"', () => {
         const testConfig = {
@@ -434,3 +439,4 @@ describe("Form Two", () => {
         expect(screen.getByText("Test Form Disabled Message - Form Two")).toBeInTheDocument();
     });
 });
+
