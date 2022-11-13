@@ -30,7 +30,9 @@ const App = () => {
         inputLabel: "Upload - ",
         disabled: "Thanks for the submission!",
         errorMessage: "Something went wrong.",
-        invalidExt: "Sorry we dont support that type of file."
+        invalidExt: "Sorry we dont support that type of file.",
+        logoAlt: "",
+        submitLabel: "Send"
     };
 
     return (

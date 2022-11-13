@@ -113,6 +113,11 @@ Default - *Thanks*
 Default - *Internal Error* 
 #### Error Message - Unsupported Extension
 Default - *Invalid Extension*
+#### Logo Alt
+Default - *Company Logo*
+#### Submit Label
+Default - *Submit*
+
 
 ## Styling:
 

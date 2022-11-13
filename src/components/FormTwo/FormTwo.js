@@ -82,7 +82,7 @@ export const FormTwo = (props) => {
   };
 
   const renderLogo = (path) => {
-    return <img src={path} className="form-logo-img"/>
+    return <img src={path} className="form-logo-img" alt={props.textConfig.logoAlt === "" ? "Company Logo" : props.textConfig.logoAlt}/>
   };
 
 
@@ -126,7 +126,13 @@ export const FormTwo = (props) => {
             />
             <br />
             {!disabled ? detectFile() : handleDisabled()}
-            <input id="smartparts-submit" type="submit" className="button form-button" disabled={disabled}/>
+            <input 
+              id="smartparts-submit" 
+              type="submit" 
+              className="button form-button" 
+              disabled={disabled} 
+              value={props.textConfig.submitLabel === "" ? "Submit" : props.textConfig.submitLabel} 
+            />
           </form>
       </div>
     </>

@@ -109,7 +109,7 @@ const GetStarted = () => {
                 <div className="configuration">
                     <h4>Text Config</h4>
                     <span>
-                    The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", "errorMessage", & "invalidExt". If the textConfig is supplied, unwanted values should be empty strings.
+                    The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", "errorMessage", "invalidExt", "logoAlt", and "submitLabel". If the textConfig is supplied, unwanted values should be empty strings.
                     </span>
                 </div>
             </>
