@@ -12,7 +12,7 @@ import CheckboxObject from "./input-components/CheckboxObject/CheckboxObject";
 function FormFields(props) {
   const selectObjs = props.select;
   let selectCount = 0;
-  const checkboxObjs = props.checkboxes; //!== undefined ? props.checkboxes : null;
+  const checkboxObjs = props.checkboxes;
   let checkboxObjCount = 0;
 
   const generateSelect = (selectObj, index, field) => {
@@ -74,13 +74,13 @@ function FormFields(props) {
             if (props.formTwo !== undefined && props.formTwo) selectCount = parseInt(field.trim().slice(7,-1));
             return selectObjs[selectCount] === undefined ? "" : generateSelect(selectObjs[selectCount], index, field.trim());
           } else if (field.trim().match(/checkbox/gi)) {
-            // fix formtwo and add checkbox thing as list of values or something
             let chkbxObj = false;
             if (props.formTwo && Number.isInteger(parseInt(field[9])) && field.slice(-1) === "]") {
               chkbxObj = true;
               checkboxObjCount = parseInt(field.split("").filter(x => /[0-9]/.test(x)).join(""));
             } 
-            return generateCheckbox(checkboxObjs[checkboxObjCount], index, field.trim(), chkbxObj);
+            const activeCheckboxObj = checkboxObjs === undefined ? null : checkboxObjs[checkboxObjCount];
+            return generateCheckbox(activeCheckboxObj, index, field.trim(), chkbxObj);
           } else if (field.trim().match(/filename/gi)) {
             return <span id={`smartparts-filename-span-${index}`} className="form-filename" key={`filename-${index}`}>Filename: {props.filename}</span>
           } else if (field === "") {

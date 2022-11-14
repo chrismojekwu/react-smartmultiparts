@@ -32,7 +32,7 @@ const App = () => {
         errorMessage: "Something went wrong.",
         invalidExt: "Sorry we dont support that type of file.",
         logoAlt: "",
-        submitLabel: "Send"
+        submitLabel: "Send",
     };
 
     return (

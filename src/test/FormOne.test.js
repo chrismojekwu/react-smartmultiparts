@@ -142,11 +142,48 @@ describe("Form One - Inputs", () => {
     test('it renders an img element when provided with logo prop', () => {
         const fields = ["Title", "Submitee", "Name", "Comments", "filename"];
 
-        render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} logo={"/fakepath.jpg"}/>);
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "Test Form Disabled Message - Form One",
+            errorMessage: "Test Error Message - Form Two",
+            invalidExt: "Sorry we dont support that type of file.",
+            logoAlt: "Test Logo Alt",
+            submitLabel: "Send",
+        };
+
+        render(
+            <FormOne 
+                fields={fields} 
+                fileTypes={fileTypes} 
+                cb={printData} 
+                logo={"/fakepath.jpg"}
+                textConfig={testConfig}
+            />
+        );
 
         const logo = screen.getByRole('img');
 
         expect(logo).toBeInTheDocument();
+        expect(logo.getAttribute("alt")).toBe("Test Logo Alt");
+    });
+
+    test('it renders default logo alt', () => {
+        const fields = ["Title", "Submitee", "Name", "Comments", "filename"];
+
+        render(
+            <FormOne 
+                fields={fields} 
+                fileTypes={fileTypes} 
+                cb={printData} 
+                logo={"/fakepath.jpg"}
+            />
+        );
+
+        const logo = screen.getByRole('img');
+
+        expect(logo).toBeInTheDocument();
+        expect(logo.getAttribute("alt")).toBe("Company Logo");
     });
 
     test('value checkbox input', () => {
@@ -197,9 +234,42 @@ describe("Form One - Inputs", () => {
         ["1", "200", "5"].forEach((value) =>  expect(inputString.includes(value)).toBe(true));
         expect(wrapper.find('#smartparts-range-label').text() === "Hours");
     });
+
+    test('it renders a query checkbox correctly', () => {
+        const fields = ["Title", "Artist", "checkbox", "checkbox"];
+
+        const checks = [
+            {query: "Languages", boxes: ["Basic", "C", "Java", "Ruby", "JS"]},
+            {query: "Skills", boxes: ["Frontend", "Backend", "Full-stack"]}
+        ];
+
+        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png","pdf"];
+
+        render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} checkboxes={checks}/>);
+
+        const wavFile = new File(["test"], "test.wav", {
+            type: "audio/wav"
+        });
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [wavFile] }});
+
+        const checkboxes = screen.getAllByTestId("smartparts-object-checkbox");
+
+        expect(checkboxes.length).toBe(8);
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (i < 5) {
+                expect(checkboxes[i].getAttribute("value")).toBe(checks[0].boxes[i]);
+            } else {
+                expect(checkboxes[i].getAttribute("value")).toBe(checks[1].boxes[i - 5]);
+            }
+        }
+    });
 });
 
-describe("Form One - Empty Inputs", () => {
+describe("Form One - Empty Fields", () => {
 
     test('Empty Fields behavior no select', () => {
         const fields = [];
@@ -359,5 +429,33 @@ describe("Form One - Messages/Inactive Behavior", () => {
         fireEvent.click(screen.getByRole('button'));
 
         expect(screen.getByText("Test Form Disabled Message - Form One")).toBeInTheDocument();
+    });
+
+    test('text config button value/invalid ext', () => {
+        const fileTypes = ["wav"];
+
+        const mp3File = new File(["test"], "test.mp3", {
+            type: "audio/mpeg"
+        });
+        
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "Test Form Disabled Message - Form One",
+            errorMessage: "Test Error Message - Form Two",
+            invalidExt: "Sorry we dont support that type of file.",
+            logoAlt: "",
+            submitLabel: "Send",
+        };
+
+        render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}} textConfig={testConfig}/>);
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        expect(screen.getByRole('button').getAttribute("value")).toBe("Send")
+
+        expect(screen.getByText("Sorry we dont support that type of file.")).toBeInTheDocument();
     });
 });

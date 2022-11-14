@@ -82,7 +82,7 @@ export const FormTwo = (props) => {
   };
 
   const renderLogo = (path) => {
-    return <img src={path} className="form-logo-img" alt={props.textConfig.logoAlt === "" ? "Company Logo" : props.textConfig.logoAlt}/>
+    return <img src={path} className="form-logo-img" alt={props.textConfig === undefined ? "Company Logo" : props.textConfig.logoAlt}/>
   };
 
 
@@ -131,7 +131,7 @@ export const FormTwo = (props) => {
               type="submit" 
               className="button form-button" 
               disabled={disabled} 
-              value={props.textConfig.submitLabel === "" ? "Submit" : props.textConfig.submitLabel} 
+              value={props.textConfig === undefined ? "Submit" : props.textConfig.submitLabel} 
             />
           </form>
       </div>

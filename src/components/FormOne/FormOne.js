@@ -80,7 +80,7 @@ export const FormOne = (props) => {
   };
 
   const renderLogo = (path) => {
-    return <img src={path} className="form-logo-img" alt={props.textConfig.logoAlt === "" ? "Company Logo" : props.textConfig.logoAlt}/>
+    return <img src={path} className="form-logo-img" alt={props.textConfig === undefined ? "Company Logo" : props.textConfig.logoAlt}/>
   };
  
   return (
@@ -126,7 +126,7 @@ export const FormOne = (props) => {
           <input 
             id="smartparts-submit" 
             type="submit" 
-            value={props.textConfig.submitLabel === "" ? "Submit" : props.textConfig.submitLabel} 
+            value={props.textConfig === undefined ? "Submit" : props.textConfig.submitLabel} 
             className="button form-button" 
             disabled={disabled}
           />  
