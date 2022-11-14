@@ -327,63 +327,117 @@ var CheckBox = function CheckBox(props) {
   return renderReq(props.req);
 };
 
+var CheckboxObject$1 = function CheckboxObject(props) {
+  var _useState = useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      checked = _useState2[0],
+      setChecked = _useState2[1];
+
+  var handleCheck = function handleCheck(e) {
+    if (checked === false) {
+      setChecked(true);
+      handleString(e.target.value, true);
+    } else {
+      setChecked(false);
+      handleString(e.target.value, false);
+    }
+  };
+
+  var handleString = function handleString(string, checked) {
+    var arr = props.data.split("&");
+
+    if (checked) {
+      arr.push(string);
+    } else {
+      arr.splice(arr.lastIndexOf(string), 1);
+    }
+    var newData = arr.join("&");
+    props.setData(newData);
+  };
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    className: "form-checkbox-object-checkbox",
+    id: "smartparts-object-checkbox",
+    "data-testid": "smartparts-object-checkbox",
+    value: props.value,
+    checked: checked,
+    onChange: function onChange(e) {
+      return handleCheck(e);
+    }
+  }), /*#__PURE__*/React.createElement("label", {
+    className: "form-checkbox-object-label",
+    htmlFor: "smartparts-object-checkbox-".concat(props.index)
+  }, props.value));
+};
+
+var CheckboxObject = function CheckboxObject(props) {
+  var _useState = useState(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      data = _useState2[0],
+      setData = _useState2[1];
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    id: "smartparts-checkbox-object-query",
+    className: "form-checkbox-object-query"
+  }, props.checks.query), /*#__PURE__*/React.createElement("input", {
+    id: "smartparts-checkbox-object-input",
+    type: "hidden",
+    value: data === "" ? "&" : data,
+    name: "checkbox-object-".concat(props.index)
+  }), props.checks.boxes.map(function (x, i) {
+    return /*#__PURE__*/React.createElement(CheckboxObject$1, {
+      value: x,
+      index: i,
+      data: data,
+      key: "object-checkbox-".concat(i),
+      setData: setData
+    });
+  }));
+};
+
 function FormFields(props) {
   var selectObjs = props.select;
-  var selectCount = 0; //const checkboxObjs = props.checkboxes;
-  var checkBoxIndex = 0;
+  var selectCount = 0;
+  var checkboxObjs = props.checkboxes;
+  var checkboxObjCount = 0;
 
   var generateSelect = function generateSelect(selectObj, index, field) {
-    selectCount++;
-
-    if (field.includes("!")) {
-      return /*#__PURE__*/React.createElement(Select, {
-        obj: selectObj,
-        index: index,
-        required: true,
-        key: "select-input-".concat(index)
-      });
-    } else {
-      return /*#__PURE__*/React.createElement(Select, {
-        obj: selectObj,
-        index: index,
-        required: false,
-        key: "select-input-".concat(index)
-      });
-    }
+    var req = field.includes("!") ? true : false;
+    if (props.formTwo === undefined) selectCount++;
+    return /*#__PURE__*/React.createElement(Select, {
+      obj: selectObj,
+      index: index,
+      required: req,
+      key: "select-input-".concat(index)
+    });
   };
 
   var generateRange = function generateRange(index, field) {
     var values = field.slice(6, -1).split("_");
-
-    if (values[4] !== undefined && values[4] === "<") {
-      return /*#__PURE__*/React.createElement(Range, {
-        index: index,
-        min: values[0],
-        max: values[1],
-        step: values[2],
-        label: values[3],
-        rangeLeftSide: true,
-        key: "range-input-".concat(index)
-      });
-    } else {
-      return /*#__PURE__*/React.createElement(Range, {
-        index: index,
-        min: values[0],
-        max: values[1],
-        step: values[2],
-        label: values[3],
-        rangeLeftSide: false,
-        key: "range-input-".concat(index)
-      });
-    }
+    var side = values[4] !== undefined && values[4] === "<" ? true : false;
+    return /*#__PURE__*/React.createElement(Range, {
+      index: index,
+      min: values[0],
+      max: values[1],
+      step: values[2],
+      label: values[3],
+      rangeLeftSide: side,
+      key: "range-input-".concat(index)
+    });
   };
 
-  var generateCheckbox = function generateCheckbox(checkboxObj, index, field) {
+  var generateCheckbox = function generateCheckbox(checkboxObj, index, field, objBool) {
+    if (field.length === 8 || props.formTwo && objBool) {
+      if (props.formTwo === undefined) {
+        checkboxObjCount++;
+      }
 
-    if (field.length === 8) {
-      checkBoxIndex += checkboxObj.boxes.length; //return <CheckboxObject index={checkBoxIndex} query={checkboxObj.query} boxes={checkboxObj.boxes}/>
-
-      return "See Docs for Single Checkbox Syntax";
+      return /*#__PURE__*/React.createElement(CheckboxObject, {
+        index: index,
+        checks: checkboxObj,
+        key: "checkbox-object-".concat(index)
+      });
     } else {
       var value;
       var req = false;
@@ -405,40 +459,39 @@ function FormFields(props) {
 
   var renderFields = function renderFields() {
     return /*#__PURE__*/React.createElement(React.Fragment, null, props.fields.map(function (field, index) {
+      var req = "";
+
       if (field.trim().match(/comments/gi)) {
-        if (field.trim().includes("!")) {
-          return /*#__PURE__*/React.createElement(TextArea, {
-            index: index,
-            required: true,
-            key: "text-area-".concat(index)
-          });
-        } else {
-          return /*#__PURE__*/React.createElement(TextArea, {
-            index: index,
-            required: false,
-            key: "text-area-".concat(index)
-          });
-        }
+        req = field.trim().includes("!");
+        return /*#__PURE__*/React.createElement(TextArea, {
+          index: index,
+          required: req,
+          key: "text-area-".concat(index)
+        });
       } else if (field.trim().match(/date/gi) && field.trim().length <= 5) {
-        if (field.trim().includes("!")) {
-          return /*#__PURE__*/React.createElement(Date, {
-            required: true,
-            index: index,
-            key: "date-input-".concat(index)
-          });
-        } else {
-          return /*#__PURE__*/React.createElement(Date, {
-            required: false,
-            index: index,
-            key: "date-input-".concat(index)
-          });
-        }
+        req = field.trim().includes("!");
+        return /*#__PURE__*/React.createElement(Date, {
+          required: req,
+          index: index,
+          key: "date-input-".concat(index)
+        });
       } else if (field.trim().match(/range/gi)) {
         return generateRange(index, field.trim());
       } else if (field.trim().match(/select/gi)) {
+        if (props.formTwo !== undefined && props.formTwo) selectCount = parseInt(field.trim().slice(7, -1));
         return selectObjs[selectCount] === undefined ? "" : generateSelect(selectObjs[selectCount], index, field.trim());
       } else if (field.trim().match(/checkbox/gi)) {
-        return generateCheckbox(null, index, field.trim());
+        var chkbxObj = false;
+
+        if (props.formTwo && Number.isInteger(parseInt(field[9])) && field.slice(-1) === "]") {
+          chkbxObj = true;
+          checkboxObjCount = parseInt(field.split("").filter(function (x) {
+            return /[0-9]/.test(x);
+          }).join(""));
+        }
+
+        var activeCheckboxObj = checkboxObjs === undefined ? null : checkboxObjs[checkboxObjCount];
+        return generateCheckbox(activeCheckboxObj, index, field.trim(), chkbxObj);
       } else if (field.trim().match(/filename/gi)) {
         return /*#__PURE__*/React.createElement("span", {
           id: "smartparts-filename-span-".concat(index),
@@ -448,21 +501,13 @@ function FormFields(props) {
       } else if (field === "") {
         return "";
       } else {
-        if (field.trim().includes("!")) {
-          return /*#__PURE__*/React.createElement(TextInput, {
-            field: field,
-            index: index,
-            required: true,
-            key: "text-input-".concat(index)
-          });
-        } else {
-          return /*#__PURE__*/React.createElement(TextInput, {
-            field: field,
-            index: index,
-            required: false,
-            key: "text-input-".concat(index)
-          });
-        }
+        req = field.trim().includes("!");
+        return /*#__PURE__*/React.createElement(TextInput, {
+          field: field,
+          index: index,
+          required: req,
+          key: "text-input-".concat(index)
+        });
       }
     }));
   };
@@ -578,10 +623,18 @@ var FormOne = function FormOne(props) {
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append("range_".concat(i), e.target["range-".concat(i)].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        if (e.target["checkbox-".concat(i)].value !== "") {
+        if (fieldNameCleaned.length === 8 && e.target["checkbox-object-".concat(i)].value !== "") {
+          if (e.target["checkbox-object-".concat(i)].value == "&") {
+            continue;
+          } else {
+            data.append("checkboxObject_".concat(i), e.target["checkbox-object-".concat(i)].value);
+          }
+        } else if (e.target["checkbox-".concat(i)].value !== "") {
           data.append("checkbox_".concat(i), e.target["checkbox-".concat(i)].value);
         }
-      } else data.append(fieldNameCleaned.toLowerCase(), e.target["".concat(fieldNameCleaned.toLowerCase(), "-").concat(i)].value);
+      } else {
+        data.append(fieldNameCleaned.toLowerCase(), e.target["".concat(fieldNameCleaned.toLowerCase(), "-").concat(i)].value);
+      }
     }
     props.cb(data);
     setDisabled(true);
@@ -603,7 +656,8 @@ var FormOne = function FormOne(props) {
   var renderLogo = function renderLogo(path) {
     return /*#__PURE__*/React.createElement("img", {
       src: path,
-      className: "form-logo-img"
+      className: "form-logo-img",
+      alt: props.textConfig === undefined ? "Company Logo" : props.textConfig.logoAlt
     });
   };
 
@@ -641,6 +695,7 @@ var FormOne = function FormOne(props) {
   }), /*#__PURE__*/React.createElement("br", null), !disabled ? detectFile() : handleDisabled(), /*#__PURE__*/React.createElement("input", {
     id: "smartparts-submit",
     type: "submit",
+    value: props.textConfig === undefined ? "Submit" : props.textConfig.submitLabel,
     className: "button form-button",
     disabled: disabled
   }))));
@@ -687,7 +742,8 @@ var FormTwo = function FormTwo(props) {
         fields: props.fileTypes[ext],
         filename: fileName,
         select: props.select,
-        checkboxes: props.checkboxes
+        checkboxes: props.checkboxes,
+        formTwo: true
       });
     } else {
       setFileType("INVALID");
@@ -719,7 +775,13 @@ var FormTwo = function FormTwo(props) {
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append("range_".concat(i), e.target["range-".concat(i)].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        if (e.target["checkbox-".concat(i)].value !== "") {
+        if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && e.target["checkbox-object-".concat(i)].value !== "") {
+          if (e.target["checkbox-object-".concat(i)].value == "&") {
+            continue;
+          } else {
+            data.append("checkboxObject_".concat(i), e.target["checkbox-object-".concat(i)].value);
+          }
+        } else if (e.target["checkbox-".concat(i)].value !== "") {
           data.append("checkbox_".concat(i), e.target["checkbox-".concat(i)].value);
         }
       } else data.append(fieldNameCleaned.toLowerCase(), e.target["".concat(fieldNameCleaned.toLowerCase(), "-").concat(i)].value);
@@ -744,7 +806,8 @@ var FormTwo = function FormTwo(props) {
   var renderLogo = function renderLogo(path) {
     return /*#__PURE__*/React.createElement("img", {
       src: path,
-      className: "form-logo-img"
+      className: "form-logo-img",
+      alt: props.textConfig === undefined ? "Company Logo" : props.textConfig.logoAlt
     });
   };
 
@@ -783,7 +846,8 @@ var FormTwo = function FormTwo(props) {
     id: "smartparts-submit",
     type: "submit",
     className: "button form-button",
-    disabled: disabled
+    disabled: disabled,
+    value: props.textConfig === undefined ? "Submit" : props.textConfig.submitLabel
   }))));
 };
 
