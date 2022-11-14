@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen, fireEvent, getAllByTestId } from '@testing-library/react';
+import { render, screen, fireEvent} from '@testing-library/react';
 import Enzyme, { mount } from 'enzyme';
 import {FormTwo} from '../components/FormTwo/FormTwo';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
@@ -17,7 +17,7 @@ const formObj = {
     jpg: ["Title", "Subject", "Source"]
 };
 
-describe("Form Two", () => {
+describe("Form Two - Renders", () => {
     
     test('renders without crashing',() => {
         render(<FormTwo fileTypes={formObj} cb={printData}/>);
@@ -30,9 +30,10 @@ describe("Form Two", () => {
 
         expect(form).toBeInTheDocument();
     });
+});
 
-    // INPUTS
-
+describe("Form Two - Inputs", () => {
+    
     test('renders the correct "text" type inputs for different file types',() => {        
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
 
@@ -111,7 +112,7 @@ describe("Form Two", () => {
     test('it renders a select element with the correct options when provided a select object array',() => {
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", "Artist", 'Select'],
+            mp3: ["Title", "Artist", 'Select[0]'],
             jpg: ["Title", "Subject", "Source"]
         };
 
@@ -148,7 +149,7 @@ describe("Form Two", () => {
     test('it renders multiple selects in accordance with object array', () => {
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", 'Select', 'FilenamE', 'SeLECt'],
+            mp3: ["Title", 'Select[0]', 'FilenamE', 'SeLECt[1]'],
             jpg: ["Title", "Subject", "Source"]
         };
 
@@ -196,12 +197,32 @@ describe("Form Two", () => {
     });
 
 
-    test('it renders an img element when provided with logo prop',() => {        
+    test('it renders an img element when provided with logo prop',() => {   
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "Test Form Disabled Message - Form One",
+            errorMessage: "Test Error Message - Form Two",
+            invalidExt: "Sorry we dont support that type of file.",
+            logoAlt: "Test Logo Alt",
+            submitLabel: "Send",
+        };
+
+        render(<FormTwo fileTypes={formObj} cb={printData} logo={"/fakepath.jpg"} textConfig={testConfig}/>);
+
+        const logo = screen.getByRole('img');
+
+        expect(logo).toBeInTheDocument();
+        expect(logo.getAttribute("alt")).toBe("Test Logo Alt");
+    });
+
+    test('it renders default alt',() => {   
         render(<FormTwo fileTypes={formObj} cb={printData} logo={"/fakepath.jpg"}/>);
 
         const logo = screen.getByRole('img');
 
         expect(logo).toBeInTheDocument();
+        expect(logo.getAttribute("alt")).toBe("Company Logo");
     });
 
     test('it renders a range input correctly', () => {
@@ -245,7 +266,57 @@ describe("Form Two", () => {
         });
     });
 
-    // EMPTY FIELDS
+    test('it renders the date input when file is uploaded with date field', () => {
+        const formObj = {
+            jpg: ["Title", "Subject", "Source", "dATE"]
+        };
+        
+        const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
+
+        const file = new File(["test"], "test.jpg", {
+            type: "image/jpeg"
+        });
+        
+        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+        expect(wrapper.find('#smartparts-date-input-3').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input-3" class="form-date-input" value="2099-01-01">');
+    });
+
+    test('it renders a query checkbox correctly', () => {
+        const formObj = {
+            wav: ["Title", "checkbox[1]", "checkbox[Test Single Box]", "Source", "checkbox[0]"]
+        };
+
+        const checks = [
+            {query: "Languages", boxes: ["Basic", "C", "Java", "Ruby", "JS"]},
+            {query: "Skills", boxes: ["Frontend", "Backend", "Full-stack"]}
+        ];
+
+        render(<FormTwo fileTypes={formObj} cb={printData} checkboxes={checks}/>);
+
+        const wavFile = new File(["test"], "test.wav", {
+            type: "audio/wav"
+        });
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [wavFile] }});
+
+        const checkboxes = screen.getAllByTestId("smartparts-object-checkbox");
+
+        expect(checkboxes.length).toBe(8);
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (i < 3) {
+                expect(checkboxes[i].getAttribute("value")).toBe(checks[1].boxes[i]);
+            } else {
+                expect(checkboxes[i].getAttribute("value")).toBe(checks[0].boxes[i - 3]);
+            }
+        }
+    });
+});
+
+describe("Form Two - Empty Object", () => {
 
     test('Empty object behavior without select',() => {
         const fileTypes = {};
@@ -274,23 +345,9 @@ describe("Form Two", () => {
         expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
     });
 
-    test('it renders the date input when file is uploaded with date field', () => {
-        const formObj = {
-            jpg: ["Title", "Subject", "Source", "dATE"]
-        };
-        
-        const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
+});
 
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
-        
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
-
-        expect(wrapper.find('#smartparts-date-input-3').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input-3" class="form-date-input" value="2099-01-01">');
-    });
-
-    // REQUIRED INPUTS
+describe("Form Two - Required Inputs", () => {
 
     test('it renders a required text area when "!" is used', () => {
         const formObj = {
@@ -344,7 +401,7 @@ describe("Form Two", () => {
     test('it renders a required select input when "!" is used', () => {
         const formObj = {
             wav: ["Title", "Artist", "Comments"],
-            mp3: ["Title", "Artist", 'Select!'],
+            mp3: ["Title", "Artist", 'Select[0]!'],
             jpg: ["Title", "Subject", "Source"]
         };
 
@@ -366,8 +423,9 @@ describe("Form Two", () => {
 
         expect(wrapper.find({name: "select-2"}).html().includes("required"));  
     });
+});
 
-    // USER SUPPLIED MESSAGES
+describe("Form Two - Messages/Inactive Behavior", () => {
 
     test('it renders a user supplied message for "Internal Error"', () => {
         const testConfig = {
@@ -433,4 +491,35 @@ describe("Form Two", () => {
 
         expect(screen.getByText("Test Form Disabled Message - Form Two")).toBeInTheDocument();
     });
+
+    test('text config button value/invalid ext', () => {
+        const formObj = {
+            wav: ["Sup"],
+        };
+
+        const mp3File = new File(["test"], "test.mp3", {
+            type: "audio/mpeg"
+        });
+        
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "Test Form Disabled Message - Form One",
+            errorMessage: "Test Error Message - Form Two",
+            invalidExt: "Sorry we dont support that type of file.",
+            logoAlt: "",
+            submitLabel: "Send",
+        };
+
+        render(<FormTwo fileTypes={formObj} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}} textConfig={testConfig}/>);
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        expect(screen.getByRole('button').getAttribute("value")).toBe("Send")
+
+        expect(screen.getByText("Sorry we dont support that type of file.")).toBeInTheDocument();
+    });
 });
+

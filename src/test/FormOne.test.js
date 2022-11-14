@@ -13,7 +13,7 @@ const printData = (data) => {
 
 const fileTypes = ["wav", "jpg", "jpeg", "mp3", "mp4", "png", "pdf"];
 
-describe("Form One", () => { 
+describe("Form One Renders", () => { 
 
     test('renders without crashing', () => {
         const fields = ["Title", "Submitee", "Name", "Comments", "filename"];
@@ -30,8 +30,9 @@ describe("Form One", () => {
 
         expect(form).toBeInTheDocument();
     });
+});
 
-    // INPUTS
+describe("Form One - Inputs", () => {
 
     test('it renders the correct "text" type inputs when file is uploaded', () => {
         const fields = ["Title", "Submitee", "Name"];
@@ -141,11 +142,48 @@ describe("Form One", () => {
     test('it renders an img element when provided with logo prop', () => {
         const fields = ["Title", "Submitee", "Name", "Comments", "filename"];
 
-        render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} logo={"/fakepath.jpg"}/>);
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "Test Form Disabled Message - Form One",
+            errorMessage: "Test Error Message - Form Two",
+            invalidExt: "Sorry we dont support that type of file.",
+            logoAlt: "Test Logo Alt",
+            submitLabel: "Send",
+        };
+
+        render(
+            <FormOne 
+                fields={fields} 
+                fileTypes={fileTypes} 
+                cb={printData} 
+                logo={"/fakepath.jpg"}
+                textConfig={testConfig}
+            />
+        );
 
         const logo = screen.getByRole('img');
 
         expect(logo).toBeInTheDocument();
+        expect(logo.getAttribute("alt")).toBe("Test Logo Alt");
+    });
+
+    test('it renders default logo alt', () => {
+        const fields = ["Title", "Submitee", "Name", "Comments", "filename"];
+
+        render(
+            <FormOne 
+                fields={fields} 
+                fileTypes={fileTypes} 
+                cb={printData} 
+                logo={"/fakepath.jpg"}
+            />
+        );
+
+        const logo = screen.getByRole('img');
+
+        expect(logo).toBeInTheDocument();
+        expect(logo.getAttribute("alt")).toBe("Company Logo");
     });
 
     test('value checkbox input', () => {
@@ -165,40 +203,6 @@ describe("Form One", () => {
             fireEvent.click(x);
             expect(x.getAttribute('value')).toBe(fields[i].slice(9,-1)); 
         });
-    });
-
-    // EMPTY FIELDS 
-
-    test('Empty Fields behavior no select', () => {
-        const fields = [];
-
-        const fileTypes = [];
-
-        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
-
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
-
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
-
-        expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
-    });
-
-    test('Empty Fields behavior with select', () => {
-        const fields = [];
-
-        const fileTypes = [];
-
-        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
-
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
-
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
-
-        expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
     });
 
     test('it renders the date input when file is uploaded with date field', () => {
@@ -231,8 +235,78 @@ describe("Form One", () => {
         expect(wrapper.find('#smartparts-range-label').text() === "Hours");
     });
 
+    test('it renders a query checkbox correctly', () => {
+        const fields = ["Title", "Artist", "checkbox", "checkbox"];
 
-    // REQUIRED INPUTS
+        const checks = [
+            {query: "Languages", boxes: ["Basic", "C", "Java", "Ruby", "JS"]},
+            {query: "Skills", boxes: ["Frontend", "Backend", "Full-stack"]}
+        ];
+
+        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png","pdf"];
+
+        render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} checkboxes={checks}/>);
+
+        const wavFile = new File(["test"], "test.wav", {
+            type: "audio/wav"
+        });
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [wavFile] }});
+
+        const checkboxes = screen.getAllByTestId("smartparts-object-checkbox");
+
+        expect(checkboxes.length).toBe(8);
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (i < 5) {
+                expect(checkboxes[i].getAttribute("value")).toBe(checks[0].boxes[i]);
+            } else {
+                expect(checkboxes[i].getAttribute("value")).toBe(checks[1].boxes[i - 5]);
+            }
+        }
+    });
+});
+
+describe("Form One - Empty Fields", () => {
+
+    test('Empty Fields behavior no select', () => {
+        const fields = [];
+
+        const fileTypes = [];
+
+        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
+
+        const file = new File(["test"], "test.jpg", {
+            type: "image/jpeg"
+        });
+
+        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+        expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
+    });
+
+    test('Empty Fields behavior with select', () => {
+        const fields = [];
+
+        const fileTypes = [];
+
+        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
+
+        const file = new File(["test"], "test.jpg", {
+            type: "image/jpeg"
+        });
+
+        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+
+        expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
+    });
+});
+
+
+
+describe("Form One - Required Inputs", () => {
 
     test('it renders a required text area when "!" is used', () => {
         const fields = ["cOmMenTS!"];
@@ -293,8 +367,9 @@ describe("Form One", () => {
 
         expect(wrapper.find({name: "select-1"}).html().includes("required"));  
     });
+});
 
-    // USER SUPPLIED MESSAGES
+describe("Form One - Messages/Inactive Behavior", () => {
 
     test('it renders a user supplied message for "Internal Error"', () => {        
         const testConfig = {
@@ -354,5 +429,33 @@ describe("Form One", () => {
         fireEvent.click(screen.getByRole('button'));
 
         expect(screen.getByText("Test Form Disabled Message - Form One")).toBeInTheDocument();
+    });
+
+    test('text config button value/invalid ext', () => {
+        const fileTypes = ["wav"];
+
+        const mp3File = new File(["test"], "test.mp3", {
+            type: "audio/mpeg"
+        });
+        
+        const testConfig = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "Test Form Disabled Message - Form One",
+            errorMessage: "Test Error Message - Form Two",
+            invalidExt: "Sorry we dont support that type of file.",
+            logoAlt: "",
+            submitLabel: "Send",
+        };
+
+        render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}} textConfig={testConfig}/>);
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        expect(screen.getByRole('button').getAttribute("value")).toBe("Send")
+
+        expect(screen.getByText("Sorry we dont support that type of file.")).toBeInTheDocument();
     });
 });

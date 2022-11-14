@@ -104,7 +104,6 @@ body {
     backface-visibility: hidden;
 }
 
-
 .card-one {
     animation-name: flip;
     animation-duration: 4s;
@@ -190,7 +189,6 @@ body {
 .form-fileinput {
     color: #ff0000;
 }
-
 
 @media only screen and (min-width: 768px) {
     .landing-title-header {

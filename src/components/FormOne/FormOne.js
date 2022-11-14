@@ -50,11 +50,18 @@ export const FormOne = (props) => {
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        if (e.target[`checkbox-${i}`].value !== "") {
+        if (fieldNameCleaned.length === 8 && e.target[`checkbox-object-${i}`].value !== "") {
+          if (e.target[`checkbox-object-${i}`].value == "&") {
+            continue;
+          } else {
+            data.append(`checkboxObject_${i}`, e.target[`checkbox-object-${i}`].value);
+          }
+        } else if (e.target[`checkbox-${i}`].value !== "") {
           data.append(`checkbox_${i}`, e.target[`checkbox-${i}`].value);
         }
-      } else
-      data.append(fieldNameCleaned.toLowerCase(), e.target[`${fieldNameCleaned.toLowerCase()}-${i}`].value);
+      } else {
+        data.append(fieldNameCleaned.toLowerCase(), e.target[`${fieldNameCleaned.toLowerCase()}-${i}`].value);
+      }
     };
 
     props.cb(data);
@@ -73,7 +80,7 @@ export const FormOne = (props) => {
   };
 
   const renderLogo = (path) => {
-    return <img src={path} className="form-logo-img"/>
+    return <img src={path} className="form-logo-img" alt={props.textConfig === undefined ? "Company Logo" : props.textConfig.logoAlt}/>
   };
  
   return (
@@ -116,7 +123,13 @@ export const FormOne = (props) => {
           />
           <br />
           {!disabled ? detectFile() : handleDisabled()}
-          <input id="smartparts-submit" type="submit" className="button form-button" disabled={disabled}/>  
+          <input 
+            id="smartparts-submit" 
+            type="submit" 
+            value={props.textConfig === undefined ? "Submit" : props.textConfig.submitLabel} 
+            className="button form-button" 
+            disabled={disabled}
+          />  
         </form>
       </div>
     </>

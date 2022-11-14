@@ -1,16 +1,34 @@
 import React, { useState } from "react";
-import CheckBox from "./Checkbox";
+import ObjectCheckBox from './ObjectCheckbox';
 
 const CheckboxObject = (props) => {
+    const [data, setData] = useState("");
+
     return (
-        <div>
-            <span id="smartparts-checkbox-obj-query">
-                {props.query}
+        <>
+            <span 
+                id="smartparts-checkbox-object-query"
+                className="form-checkbox-object-query"
+            >
+                {props.checks.query}
             </span>
-            {props.boxes.map((x, i) => {
-                return <CheckBox index={props.index > 0 ? props.index + i : i} value={x} key={`checkbox-input-${i}`} req={false}/>;
+            <input 
+                id="smartparts-checkbox-object-input" 
+                type="hidden" value={data === "" ? "&" : data} 
+                name={`checkbox-object-${props.index}`}
+            />
+            {props.checks.boxes.map((x, i) => {
+              return (
+                <ObjectCheckBox
+                    value={x}
+                    index={i}
+                    data={data}
+                    key={`object-checkbox-${i}`}
+                    setData={setData}
+                />
+              );
             })}
-        </div>
+        </>
     );
 };
 

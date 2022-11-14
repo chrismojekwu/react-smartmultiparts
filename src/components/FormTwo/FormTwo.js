@@ -23,7 +23,7 @@ export const FormTwo = (props) => {
     const re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
     if (re.test(ext)) {
-      return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select} checkboxes={props.checkboxes}/>;
+      return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select} checkboxes={props.checkboxes} formTwo={true}/>;
     } else {
       setFileType("INVALID");
       return "File type not supported.";
@@ -53,7 +53,13 @@ export const FormTwo = (props) => {
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        if (e.target[`checkbox-${i}`].value !== "") {
+        if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && e.target[`checkbox-object-${i}`].value !== "") {
+          if (e.target[`checkbox-object-${i}`].value == "&") {
+            continue;
+          } else {
+            data.append(`checkboxObject_${i}`, e.target[`checkbox-object-${i}`].value);
+          }
+        } else if (e.target[`checkbox-${i}`].value !== "") {
           data.append(`checkbox_${i}`, e.target[`checkbox-${i}`].value);
         }
       } else
@@ -76,7 +82,7 @@ export const FormTwo = (props) => {
   };
 
   const renderLogo = (path) => {
-    return <img src={path} className="form-logo-img"/>
+    return <img src={path} className="form-logo-img" alt={props.textConfig === undefined ? "Company Logo" : props.textConfig.logoAlt}/>
   };
 
 
@@ -120,7 +126,13 @@ export const FormTwo = (props) => {
             />
             <br />
             {!disabled ? detectFile() : handleDisabled()}
-            <input id="smartparts-submit" type="submit" className="button form-button" disabled={disabled}/>
+            <input 
+              id="smartparts-submit" 
+              type="submit" 
+              className="button form-button" 
+              disabled={disabled} 
+              value={props.textConfig === undefined ? "Submit" : props.textConfig.submitLabel} 
+            />
           </form>
       </div>
     </>
