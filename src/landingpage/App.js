@@ -20,8 +20,8 @@ const App = () => {
     };
 
     const formObj = {
-        wav: ["Title", "Artist", "Comments"],
-        mp3: ["Title", "Artist"],
+        gif: ["Title", "Artist", "Comments"],
+        pdf: ["Title", "Artist"],
         jpg: ["Chris Mojekwu", "Comments", "Range[0_12_1_Study Hours]", "Date", "checkbox[C#]", "checkbox[0]","checkbox[C++]","checkbox[1]", "checkbox[JAVA]" ,"checkbox[GO]"]
     };
 
@@ -84,8 +84,8 @@ const App = () => {
                                     cb={printData} 
                                     textConfig={testConfig}
                                     checkboxes={[
-                                        {query: "whaaaa", boxes: ["a", "b", "c", "d", "e"]},
-                                        {query: "whaaaa2", boxes: ["f", "g", "h", "i", "j"]},
+                                        {query: "Words", boxes: ["apple", "banana", "cheese", "dog", "ear"]},
+                                        {query: "Words 2", boxes: ["float", "grow", "hide", "icon", "jar"]},
                                     ]}
                                 />
                                 </div>
