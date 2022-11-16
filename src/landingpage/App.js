@@ -45,11 +45,6 @@ const App = () => {
                             Get Started
                         </button>
                     </Link>
-                    <Link to="/tryit" tabIndex="-1">
-                        <button className="control-btn">
-                            Try It
-                        </button>
-                    </Link>
                 </div>
 
                 <Route exact path="/">
@@ -98,16 +93,12 @@ const App = () => {
                         </div>
                     </section>
                     <div className="landing-description">
-                    smartmultiparts are file input components for React that return a form with specified fields. FormOne will return a single set of input fields for a group of file types. FormTwo will return a specified set of fields for each individual file type. Upon submission the form will pass the multipart form data into a callback function provided by you.
+                    smartmultiparts
                     </div>
                 </Route>
 
                 <Route exact path="/getstarted">
                     <GetStarted/>
-                </Route>
-
-                <Route exact path="/tryit">
-                    <TryIt/>
                 </Route>
             </div>
         </main>
