@@ -20,7 +20,7 @@ const App = () => {
     };
 
     const formObj = {
-        wav: ["Title", "Artist", "Comments"],
+        gif: ["Title", "select[1]!", "Artist","select[0]!", "Comments"],
         mp3: ["Title", "Artist"],
         jpg: ["Chris Mojekwu", "Comments", "Range[0_12_1_Study Hours]", "Date", "checkbox[C#]", "checkbox[0]","checkbox[C++]","checkbox[1]", "checkbox[JAVA]" ,"checkbox[GO]"]
     };
@@ -34,6 +34,19 @@ const App = () => {
         logoAlt: "",
         submitLabel: "Send",
     };
+
+    const selectObjs = [
+        {
+            query: "Whats your name?",
+            select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],
+            placeholder: "Choose a name"
+        },
+        {
+            query: "Whats your sign?",
+            select: ["Virgo", "Libra", "Cancer", "Leo", "Pisces"],
+            placeholder: "Choose a sign"
+        }
+    ];
 
     return (
         <main className="landing-page">
@@ -65,6 +78,7 @@ const App = () => {
                                         {query: "Languages", boxes: ["Basic", "C", "Java", "Ruby", "JS"]},
                                         {query: "Skills", boxes: ["Frontend", "Backend", "Full-stack"]},
                                     ]}
+                                    select={selectObjs}
                                 />
                                 </div>
                                 <div className="card-back">
@@ -98,16 +112,12 @@ const App = () => {
                         </div>
                     </section>
                     <div className="landing-description">
-                    smartmultiparts are file input components for React that return a form with specified fields. FormOne will return a single set of input fields for a group of file types. FormTwo will return a specified set of fields for each individual file type. Upon submission the form will pass the multipart form data into a callback function provided by you.
+                    smartmultiparts
                     </div>
                 </Route>
 
                 <Route exact path="/getstarted">
                     <GetStarted/>
-                </Route>
-
-                <Route exact path="/tryit">
-                    <TryIt/>
                 </Route>
             </div>
         </main>

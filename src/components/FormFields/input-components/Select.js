@@ -51,8 +51,8 @@ const Select = (props) => {
                     onChange={handleChange} 
                     required
                 >
-                    <option defaultValue>
-                        {value}
+                    <option defaultValue value="">
+                        {props.obj.placeholder}
                     </option>
                     {generateOptions()}
                 </select>
