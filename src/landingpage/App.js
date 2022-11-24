@@ -20,7 +20,7 @@ const App = () => {
     };
 
     const formObj = {
-        pdf: ["Appointment Name", "select[1]", "Library Name", "select[0]!", "CheckBox", "CheckBox", "Comments"],
+        pdf: ["Appointment Name", "select[1]", "Library Name", "select[0]!", "CheckBox[1]", "CheckBox[0]", "Comments"],
         mp3: ["Artist", "Title", "Date"],
         jpg: ["Chris Mojekwu", "Comments", "Range[0_12_1_Study Hours]", "Date", "checkbox[C#]", "checkbox[0]","checkbox[C++]","checkbox[1]", "checkbox[JAVA]" ,"checkbox[GO]"]
     };
@@ -56,11 +56,6 @@ const App = () => {
                     <Link to="/getstarted" tabIndex="-1">
                         <button className="control-btn">
                             Get Started
-                        </button>
-                    </Link>
-                    <Link to="/tryit" tabIndex="-1">
-                        <button className="control-btn">
-                            Try It
                         </button>
                     </Link>
                 </div>
