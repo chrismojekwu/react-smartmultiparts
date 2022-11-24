@@ -58,11 +58,6 @@ const App = () => {
                             Get Started
                         </button>
                     </Link>
-                    <Link to="/tryit" tabIndex="-1">
-                        <button className="control-btn">
-                            Try It
-                        </button>
-                    </Link>
                 </div>
 
                 <Route exact path="/">
