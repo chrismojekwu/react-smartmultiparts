@@ -29,8 +29,8 @@ const Select = (props) => {
                     className="form-select" 
                     onChange={handleChange}
                 >
-                    <option className="form-select-option" key={`select-option-default`} defaultValue>
-                        {value}
+                    <option className="form-select-option" key={`select-option-default`} defaultValue value="">
+                        {props.obj.placeholder}
                     </option>
                     {generateOptions()}
                 </select>

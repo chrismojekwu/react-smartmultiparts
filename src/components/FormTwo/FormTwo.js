@@ -49,18 +49,23 @@ export const FormTwo = (props) => {
       } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true) { 
         data.append('date', e.target[`date-${i}`].value);
       } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
-        data.append(`select_${i}`, e.target[`select-${i}`].value);
+        const val = e.target[`select-${i}`] === undefined ? "" : e.target[`select-${i}`].value;
+        if (val !== "") {
+          data.append(`select_${i}`, e.target[`select-${i}`].value);
+        }
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
+        const val = e.target[`checkbox-object-${i}`] === undefined ? "" : e.target[`checkbox-object-${i}`].value;
         if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && e.target[`checkbox-object-${i}`].value !== "") {
-          if (e.target[`checkbox-object-${i}`].value == "&") {
+          console.log(e.target[`checkbox-object-${i}`]);
+          if (val === "&") {
             continue;
           } else {
-            data.append(`checkboxObject_${i}`, e.target[`checkbox-object-${i}`].value);
+            data.append(`checkboxObject_${i}`, val);
           }
-        } else if (e.target[`checkbox-${i}`].value !== "") {
-          data.append(`checkbox_${i}`, e.target[`checkbox-${i}`].value);
+        } else if (val !== "") {
+          data.append(`checkbox_${i}`, val);
         }
       } else
       data.append(fieldNameCleaned.toLowerCase(), e.target[`${fieldNameCleaned.toLowerCase()}-${i}`].value);
