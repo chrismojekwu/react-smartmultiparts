@@ -9,6 +9,9 @@ const CheckboxObject = (props) => {
             <span 
                 id="smartparts-checkbox-object-query"
                 className="form-checkbox-object-query"
+                style={{
+                    fontWeight: "bold"
+                }}
             >
                 {props.checks.query}
             </span>

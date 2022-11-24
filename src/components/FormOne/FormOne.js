@@ -46,7 +46,10 @@ export const FormOne = (props) => {
       } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true && fieldNameCleaned.length === 4) {
         data.append('date', e.target[`date-${i}`].value);
       } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
-        data.append(`select_${i}`, e.target[`select-${i}`].value);
+        const val = e.target[`select-${i}`] === undefined ? "" : e.target[`select-${i}`].value;
+        if (val !== "") {
+          data.append(`select_${i}`, e.target[`select-${i}`].value);
+        }
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
