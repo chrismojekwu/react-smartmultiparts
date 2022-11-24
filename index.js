@@ -171,9 +171,9 @@ var Date = function Date(props) {
 
 var Select = function Select(props) {
   var _useState = React.useState(props.obj.placeholder),
-      _useState2 = _slicedToArray(_useState, 2),
-      value = _useState2[0],
-      setValue = _useState2[1];
+      _useState2 = _slicedToArray(_useState, 2);
+      _useState2[0];
+      var setValue = _useState2[1];
 
   var generateOptions = function generateOptions() {
     return props.obj.select.map(function (option, index) {
@@ -202,8 +202,9 @@ var Select = function Select(props) {
     }, /*#__PURE__*/React__default["default"].createElement("option", {
       className: "form-select-option",
       key: "select-option-default",
-      defaultValue: true
-    }, value), generateOptions()));
+      defaultValue: true,
+      value: ""
+    }, props.obj.placeholder), generateOptions()));
   };
 
   var renderReq = function renderReq() {
@@ -217,8 +218,9 @@ var Select = function Select(props) {
       onChange: handleChange,
       required: true
     }, /*#__PURE__*/React__default["default"].createElement("option", {
-      defaultValue: true
-    }, value), generateOptions()));
+      defaultValue: true,
+      value: ""
+    }, props.obj.placeholder), generateOptions()));
   };
 
   return props.required ? renderReq() : renderDefault();
@@ -387,7 +389,10 @@ var CheckboxObject = function CheckboxObject(props) {
 
   return /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, /*#__PURE__*/React__default["default"].createElement("span", {
     id: "smartparts-checkbox-object-query",
-    className: "form-checkbox-object-query"
+    className: "form-checkbox-object-query",
+    style: {
+      fontWeight: "bold"
+    }
   }, props.checks.query), /*#__PURE__*/React__default["default"].createElement("input", {
     id: "smartparts-checkbox-object-input",
     type: "hidden",
@@ -627,7 +632,11 @@ var FormOne = function FormOne(props) {
       } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true && fieldNameCleaned.length === 4) {
         data.append('date', e.target["date-".concat(i)].value);
       } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
-        data.append("select_".concat(i), e.target["select-".concat(i)].value);
+        var val = e.target["select-".concat(i)] === undefined ? "" : e.target["select-".concat(i)].value;
+
+        if (val !== "") {
+          data.append("select_".concat(i), e.target["select-".concat(i)].value);
+        }
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append("range_".concat(i), e.target["range-".concat(i)].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
@@ -779,18 +788,24 @@ var FormTwo = function FormTwo(props) {
       } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true) {
         data.append('date', e.target["date-".concat(i)].value);
       } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
-        data.append("select_".concat(i), e.target["select-".concat(i)].value);
+        var val = e.target["select-".concat(i)] === undefined ? "" : e.target["select-".concat(i)].value;
+
+        if (val !== "") {
+          data.append("select_".concat(i), e.target["select-".concat(i)].value);
+        }
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append("range_".concat(i), e.target["range-".concat(i)].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
+        var _val = e.target["checkbox-object-".concat(i)] === undefined ? "" : e.target["checkbox-object-".concat(i)].value;
+
         if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && e.target["checkbox-object-".concat(i)].value !== "") {
-          if (e.target["checkbox-object-".concat(i)].value == "&") {
+          if (_val === "&") {
             continue;
           } else {
-            data.append("checkboxObject_".concat(i), e.target["checkbox-object-".concat(i)].value);
+            data.append("checkboxObject_".concat(i), _val);
           }
-        } else if (e.target["checkbox-".concat(i)].value !== "") {
-          data.append("checkbox_".concat(i), e.target["checkbox-".concat(i)].value);
+        } else if (_val !== "") {
+          data.append("checkbox_".concat(i), _val);
         }
       } else data.append(fieldNameCleaned.toLowerCase(), e.target["".concat(fieldNameCleaned.toLowerCase(), "-").concat(i)].value);
     }
