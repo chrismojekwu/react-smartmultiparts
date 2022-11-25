@@ -1,23 +1,18 @@
 import React, { useState } from "react";
 
 const Radios = (props) => {
-    //const [checked, setChecked] = useState(false);
     const [value, setValue] = useState("");
-    //
-    const question = "Does this work?";
-    const options = ["Yes", "No", "Maybe"];
 
-    //
-    const handleChecked = (index) => {
-        const radioInputs = document.getElementById(`smartparts-radio-query-radio-${props.index}`);
+    const handleChecked = (e, index) => {
+        const radioInputs = document.getElementsByClassName(`smartparts-radio-query-radio-${props.index}`);
         for (let i = 0; i < radioInputs.length; i++) {
             if (i === index) {
                 radioInputs[i].checked = true;
-                setValue(value);
             } else {
                 radioInputs[i].checked = false;
             }
-        }
+        };
+        setValue(e.target.value);
     };
 
     const renderRadios = () => {
@@ -25,27 +20,29 @@ const Radios = (props) => {
             <>
                 <input 
                     id="smartparts-radio-query-input" 
-                    type="hidden" value={value} 
-                    name={`checkbox-object-${props.index}`}
+                    type="hidden" 
+                    value={value} 
+                    name={`radio-query-${props.index}`}
                 />
-                {question}
-                {options.map((x, i) => {
+                {props.obj.query}
+                {props.obj.options.map((x, i) => {
                     return (
-                        <label>
+                        <>
                             <input 
                                 id={`smartparts-radio-query-radio-${props.index}`}
+                                className={`smartparts-radio-query-radio-${props.index}`}
                                 type="radio" 
-                                name={`radio-${props.index}`} 
+                                name={`radios-${props.index}`} 
                                 value={x}
-                                onClick={() => handleChecked(i)}
+                                onClick={(e) => handleChecked(e, i)}
                             />
-                            {x}
-                        </label>
+                            <label>{x}</label>
+                        </>
                     );
                 })}
             </>
         )
-    }
+    };
     return renderRadios();
 };
 

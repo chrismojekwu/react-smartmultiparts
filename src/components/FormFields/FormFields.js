@@ -24,9 +24,10 @@ function FormFields(props) {
     return <Select obj={selectObj} index={index} required={req} key={`select-input-${index}`}/>;
   };
 
-  const generateRadios = () => {
-    return "";
-  }
+  const generateRadios = (radioObj, index) => {
+    if (props.formTwo === undefined) radioCount++;
+    return <Radios obj={radioObj} index={index} key={`radio-input-${index}`}/>;
+  };
 
   const generateCheckbox = (checkboxObj, index, field, objBool) => {
     if (field.length === 8 || props.formTwo && objBool) {
@@ -76,7 +77,7 @@ function FormFields(props) {
             return <Date required={req} index={index} key={`date-input-${index}`}/>;
           } else if (field.trim().match(/range/gi)) {
             return generateRange(index, field.trim());
-          } else if (field.trim().match(/radios/gi) && field.trim().length === 6){
+          } else if (field.trim().match(/radios/gi) && field.trim().length <= 9){
             if (props.formTwo !== undefined && props.formTwo) radioCount = parseInt(field.trim().slice(7,-1));
             return radioObjs[radioCount] === undefined ? "" : generateRadios(radioObjs[radioCount], index, field.trim());
           } else if (field.trim().match(/select/gi)) {

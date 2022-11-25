@@ -20,7 +20,7 @@ const App = () => {
     };
 
     const formObj = {
-        pdf: ["Appointment Name", "select[1]", "Library Name", "select[0]!", "CheckBox[1]", "CheckBox[0]", "Comments"],
+        pdf: ["Appointment Name", "radios[0]", "select[1]", "Library Name", "select[0]!", "CheckBox[1]", "CheckBox[0]", "Comments"],
         ics: ["Appointment Name", "select[1]", "Library Name", "select[0]!", "CheckBox[1]", "CheckBox[0]", "Comments"],
         mp3: ["Artist", "Title", "Date"],
         jpg: ["Chris Mojekwu", "Comments", "Range[0_12_1_Study Hours]", "Date", "checkbox[C#]", "checkbox[0]","checkbox[C++]","checkbox[1]", "checkbox[JAVA]" ,"checkbox[GO]"]
@@ -46,6 +46,13 @@ const App = () => {
             query: "Library Wing",
             select: ["North", "South", "East", "West"],
             placeholder: "Choose a direction"
+        }
+    ];
+
+    const radioObjs = [
+        {
+            query: "Does this work?",
+            options: ["Yes", "No", "Maybe"]
         }
     ];
 
@@ -81,6 +88,7 @@ const App = () => {
                                         },
                                     ]}
                                     select={selectObjs}
+                                    radios={radioObjs}
                                 />
                                 </div>
                                 <div className="card-back">
