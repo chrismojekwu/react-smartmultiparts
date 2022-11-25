@@ -104,18 +104,6 @@ body {
     backface-visibility: hidden;
 }
 
-.card-one {
-    animation-name: flip;
-    animation-duration: 4s;
-    animation-iteration-count: 3;
-}
-
-.card-two {
-    animation-name: flip2;
-    animation-duration: 4.5s;
-    animation-iteration-count: 3;
-}
-
 .card-two .form-checkbox {
     display: inline-block !important;
 }
@@ -149,30 +137,6 @@ body {
     width: 80%;
     left: 10%;
     top: 40%;
-}
-
-@keyframes flip {
-    0% {
-        transform: rotateY(0);
-    }
-    50% {
-        transform: rotateY(-180deg);
-    }
-    100% {
-        transform: rotateY(0);
-    }
-}
-
-@keyframes flip2 {
-    0% {
-        transform: rotateY(0);
-    }
-    50% {
-        transform: rotateY(180deg);
-    }
-    100% {
-        transform: rotateY(0);
-    }
 }
 
 .card-back {
