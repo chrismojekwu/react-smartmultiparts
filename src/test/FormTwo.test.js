@@ -314,6 +314,40 @@ describe("Form Two - Inputs", () => {
             }
         }
     });
+
+    test('its renders a radio query correctly', () => {
+        const formObj = {
+            wav:["Title", "Artist", "radios[1]", "radios[0]"]
+        };
+
+        const radioObjs = [
+            {query: "Question One?", options: ["Yes", "No", "Maybe", ]},
+            {query: "Question Two?", options: ["Pat", "Trick", "Swayze"]}
+        ];
+
+        render(<FormTwo fileTypes={formObj} cb={printData} radios={radioObjs}/>);
+
+        const wavFile = new File(["test"], "test.wav", {
+            type: "audio/wav"
+        });
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [wavFile] }});
+
+        const radioInputs = screen.getAllByTestId("smartparts-radio-query-radio");
+
+        expect(radioInputs.length).toBe(6);
+
+        for (let i = 0; i < radioInputs.length; i++) {
+            if (i < 3) {
+                expect(radioInputs[i].getAttribute("value")).toBe(radioObjs[1].options[i]);
+            } else {
+                expect(radioInputs[i].getAttribute("value")).toBe(radioObjs[0].options[i - 3]);
+            }
+            fireEvent.click(radioInputs[4]);
+        };
+    });
 });
 
 describe("Form Two - Empty Object", () => {
