@@ -155,9 +155,17 @@ Value Checkbox Label - .form-checkbox-label
 
 Query Checkbox Question - .form-checkbox-object-query
 
+Query Checkbox Input Div - .form-checkbox-object-input-div
+
 Query Checkbox Checkbox - .form-checkbox-object-checkbox
 
 Query Checkbox Label - .form-checkbox-object-label
+
+Radio Query - .form-radio-query 
+
+Radio Input Div - .form-radio-input-div 
+
+Radio Input - .form-radio-radio
 
 Submit Button - .form-button
 

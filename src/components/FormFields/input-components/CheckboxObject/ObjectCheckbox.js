@@ -14,13 +14,13 @@ const CheckboxObject = (props) => {
   };
 
   const handleString = (string, checked) => {
-    const arr = props.data.split("&");
+    const arr = props.data.split("&=");
     if (checked) {
-        arr.push(string);
+      arr.push(string);
     } else {
-        arr.splice(arr.lastIndexOf(string), 1);
+      arr.splice(arr.lastIndexOf(string), 1);
     };
-    const newData = arr.join("&");
+    const newData = arr.join("&=");
     props.setData(newData);
   };
 
@@ -36,10 +36,10 @@ const CheckboxObject = (props) => {
         onChange={(e) => handleCheck(e)}
       />
       <label 
-          className="form-checkbox-object-label"
-          htmlFor={`smartparts-object-checkbox-${props.index}`}
+        className="form-checkbox-object-label"
+        htmlFor={`smartparts-object-checkbox-${props.index}`}
       > 
-          {props.value}
+        {props.value}
       </label>
     </>
     

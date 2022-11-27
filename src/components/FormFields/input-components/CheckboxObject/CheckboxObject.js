@@ -17,20 +17,24 @@ const CheckboxObject = (props) => {
             </span>
             <input 
                 id="smartparts-checkbox-object-input" 
-                type="hidden" value={data === "" ? "&" : data} 
+                type="hidden" value={data === "" ? "" : data} 
                 name={`checkbox-object-${props.index}`}
             />
-            {props.checks.boxes.map((x, i) => {
-              return (
-                <ObjectCheckBox
-                    value={x}
-                    index={i}
-                    data={data}
-                    key={`object-checkbox-${i}`}
-                    setData={setData}
-                />
-              );
-            })}
+            <div 
+                className="form-checkbox-object-input-div"
+            >
+                {props.checks.boxes.map((x, i) => {
+                  return (
+                    <ObjectCheckBox
+                        value={x}
+                        index={i}
+                        data={data}
+                        key={`object-checkbox-${i}`}
+                        setData={setData}
+                    />
+                  );
+                })}
+            </div>
         </>
     );
 };

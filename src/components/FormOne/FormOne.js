@@ -67,7 +67,7 @@ export const FormOne = (props) => {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
         if (fieldNameCleaned.length === 8 && e.target[`checkbox-object-${i}`].value !== "") {
-          if (e.target[`checkbox-object-${i}`].value == "&") {
+          if (e.target[`checkbox-object-${i}`].value == "&=") {
             continue;
           } else {
             data.append(`checkboxObject_${i}`, e.target[`checkbox-object-${i}`].value);

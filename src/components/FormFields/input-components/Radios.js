@@ -24,26 +24,33 @@ const Radios = (props) => {
                     value={value} 
                     name={`radio-query-${props.index}`}
                 />
-                <div>{props.obj.query}</div>
-                {props.obj.options.map((x, i) => {
-                    return (
-                        <Fragment
-                            key={`radio-query-radio-${props.index}-${i}`}
-                        >
-                            <input 
-                                data-testid="smartparts-radio-query-radio"
-                                id={`smartparts-radio-query-radio-${props.index}`}
-                                className={`smartparts-radio-query-radio-${props.index}`}
-                                type="radio" 
-                                name={`radios-${props.index}`} 
-                                value={x}
-                                onClick={(e) => handleChecked(e, i)}
-                                tabIndex="0"
-                            />
-                            <label>{x}</label>
-                        </Fragment>
-                    );
-                })}
+                <div
+                    className="form-radio-query"
+                >
+                    {props.obj.query}
+                </div>
+                <div className="form-radio-input-div">
+                    {props.obj.options.map((x, i) => {
+                        return (
+                            <Fragment
+                                key={`radio-query-radio-${props.index}-${i}`}
+                            >
+                                <input 
+                                    data-testid="smartparts-radio-query-radio"
+                                    id={`smartparts-radio-query-radio-${props.index}`}
+                                    className={`smartparts-radio-query-radio-${props.index} form-radio-radio`}
+                                    type="radio" 
+                                    name={`radios-${props.index}`} 
+                                    value={x}
+                                    onClick={(e) => handleChecked(e, i)}
+                                    tabIndex="0"
+                                />
+                                <label>{x}</label>
+                            </Fragment>
+                        );
+                    })}
+                </div>
+
             </>
         )
     };

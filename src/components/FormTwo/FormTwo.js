@@ -72,7 +72,7 @@ export const FormTwo = (props) => {
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
         const val = e.target[`checkbox-object-${i}`] === undefined ? "" : e.target[`checkbox-object-${i}`].value;
         if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && e.target[`checkbox-object-${i}`].value !== "") {
-          if (val === "&") {
+          if (val === "&=") {
             continue;
           } else {
             data.append(`checkboxObject_${i}`, val);
