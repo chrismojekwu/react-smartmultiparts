@@ -25,7 +25,7 @@ const CheckboxObject = (props) => {
   };
 
   return (
-    <>
+    <div>
       <input
         type="checkbox"
         className="form-checkbox-object-checkbox"
@@ -41,8 +41,7 @@ const CheckboxObject = (props) => {
       > 
         {props.value}
       </label>
-    </>
-    
+    </div>
   );
 };
 

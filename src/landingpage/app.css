@@ -70,16 +70,33 @@ body {
     display: flex;
     width: 100%;
     justify-content: center;
-    perspective: 1000px;
+    column-gap: 10px;
 }
 
 .form-body {
   width: 100%;
   height: 100%;
+  margin: 0 5px;
 }
 
-.form-fileinput {
-    color: #ff0000;
+.form-fileinput{
+    color: #4400ff;
+}
+
+.form-radio-input-div, .form-checkbox-object-input-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-radio-input-div {
+    justify-content: left;
+}
+.form-radio-input-div > * {
+    margin-left: 5px;
+}
+
+.form-radio-input-div label, .form-checkbox-object-input-div label{
+    margin-left: 5px;
 }
 
 @media only screen and (min-width: 768px) {

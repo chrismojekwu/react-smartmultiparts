@@ -32,7 +32,7 @@ const Radios = (props) => {
                 <div className="form-radio-input-div">
                     {props.obj.options.map((x, i) => {
                         return (
-                            <Fragment
+                            <div
                                 key={`radio-query-radio-${props.index}-${i}`}
                             >
                                 <input 
@@ -45,8 +45,10 @@ const Radios = (props) => {
                                     onClick={(e) => handleChecked(e, i)}
                                     tabIndex="0"
                                 />
-                                <label>{x}</label>
-                            </Fragment>
+                                <label>
+                                    {x}
+                                </label>
+                            </div>
                         );
                     })}
                 </div>
