@@ -100,6 +100,15 @@ body {
     margin-left: 5px;
 }
 
+.form-checkbox , .form-checkbox-label {
+    display: inline-block;
+}
+
+.form-checkbox-label {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
 @media only screen and (min-width: 768px) {
     .landing-title-header {
         line-height: 60px;
