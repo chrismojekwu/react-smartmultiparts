@@ -22,7 +22,15 @@ export const FormOne = (props) => {
     const re = new RegExp(props.fileTypes.join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
     if (re.test(ext)) {
-      return <FormFields fields={props.fields} filename={fileName} select={props.select} checkboxes={props.checkboxes}/>;
+      return (
+        <FormFields 
+          fields={props.fields} 
+          filename={fileName} 
+          select={props.select} 
+          checkboxes={props.checkboxes}
+          radios={props.radios}
+        />
+      );
     } else {
       setFileType("INVALID");
       return "File type not supported.";
@@ -45,6 +53,11 @@ export const FormOne = (props) => {
         data.append('comments', e.target[`textarea-${i}`].value);
       } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true && fieldNameCleaned.length === 4) {
         data.append('date', e.target[`date-${i}`].value);
+      } else if (new RegExp('radios', 'gi').test(fieldNameCleaned) === true) {
+        const val = e.target[`radio-query-${i}`] === undefined ? "" : e.target[`radio-query-${i}`].value;
+        if (val !== "") {
+          data.append(`radio_query_${i}`, e.target[`radio-query-${i}`].value);
+        }
       } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
         const val = e.target[`select-${i}`] === undefined ? "" : e.target[`select-${i}`].value;
         if (val !== "") {
@@ -54,7 +67,7 @@ export const FormOne = (props) => {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
         if (fieldNameCleaned.length === 8 && e.target[`checkbox-object-${i}`].value !== "") {
-          if (e.target[`checkbox-object-${i}`].value == "&") {
+          if (e.target[`checkbox-object-${i}`].value == "&=") {
             continue;
           } else {
             data.append(`checkboxObject_${i}`, e.target[`checkbox-object-${i}`].value);

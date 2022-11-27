@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Enzyme, { mount } from 'enzyme';
-import { FormOne } from '../components/FormOne/FormOne'
+import { FormOne } from './FormOne'
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -46,7 +46,7 @@ describe("Form One - Inputs", () => {
 
         for(let i = 0; i < fields.length; i++){
             const element = wrapper.find(`#smartparts-text-input-${i}`);
-            expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${fields[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}">`);
+            expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${fields[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}" data-testid="smartparts-text-input-${i}">`);
         };
 
     });
@@ -215,7 +215,7 @@ describe("Form One - Inputs", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
         
-        expect(wrapper.find('#smartparts-date-input-0').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input-0" class="form-date-input" value="2099-01-01">');
+        expect(wrapper.find('#smartparts-date-input-0').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input-0" data-testid="smartparts-date-input-0" class="form-date-input" value="2099-01-01">');
     });
 
     test('it renders a range input correctly', () => {
@@ -266,6 +266,40 @@ describe("Form One - Inputs", () => {
                 expect(checkboxes[i].getAttribute("value")).toBe(checks[1].boxes[i - 5]);
             }
         }
+    });
+
+    test('its renders a radio query correctly', () => {
+        const fields = ["Title", "Artist", "radios", "radios"];
+
+        const radioObjs = [
+            {query: "Question One?", options: ["Yes", "No", "Maybe", ]},
+            {query: "Question Two?", options: ["Pat", "Trick", "Swayze"]}
+        ];
+
+        const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png","pdf"];
+
+        render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} radios={radioObjs}/>);
+
+        const wavFile = new File(["test"], "test.wav", {
+            type: "audio/wav"
+        });
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [wavFile] }});
+
+        const radioInputs = screen.getAllByTestId("smartparts-radio-query-radio");
+
+        expect(radioInputs.length).toBe(6);
+
+        for (let i = 0; i < radioInputs.length; i++) {
+            if (i < 3) {
+                expect(radioInputs[i].getAttribute("value")).toBe(radioObjs[0].options[i]);
+            } else {
+                expect(radioInputs[i].getAttribute("value")).toBe(radioObjs[1].options[i - 3]);
+            }
+            fireEvent.click(radioInputs[4]);
+        };
     });
 });
 

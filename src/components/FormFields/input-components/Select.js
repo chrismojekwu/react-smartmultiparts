@@ -24,6 +24,7 @@ const Select = (props) => {
                     {props.obj.query}
                 </label>
                 <select 
+                    data-testid={`smartparts-select-input-${props.index}`}
                     id={`smartparts-select-input-${props.index}`}
                     name={`select-${props.index}`} 
                     className="form-select" 
@@ -45,6 +46,7 @@ const Select = (props) => {
                     {props.obj.query}
                 </label>
                 <select 
+                    data-testid={`smartparts-select-input-${props.index}`}
                     id={`smartparts-select-input-${props.index}`}
                     name={`select-${props.index}`} 
                     className="form-select" 

@@ -6,7 +6,97 @@ const GetStarted = () => {
     const formOne = [`import {FormOne} from 'react-smartmultiparts';`,`const fields = ["Title", "Submitee", "Name", "Comments"];`, `const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png", "pdf"];`, <p>const printData = (data) {"=>"} {"{"}<br/>&emsp;&emsp;console.log(data);<br/>{"}"};</p>, `<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>`];
     const formTwo = [`import {FormTwo} from 'react-smartmultiparts';`, <p>const printData = (data) {"=>"} {"{"}<br/>&emsp;&emsp;console.log(data);<br/>{"}"};</p>, <p>const formObj = {"{"}<br/>&emsp;&emsp;wav: ["Title", "Artist", "Comments"],<br/>&emsp;&emsp;mp3: ["Title", "Artist"],<br/>&emsp;&emsp;jpg: ["Title", "Subject", "Source"]<br/>{"}"};</p>, `<FormTwo fileTypes={formObj} cb={printData}/>`];
     const select = [<p>const selectObj = {"{"}<br/>&emsp;&emsp;query: "Whats your name?",<br/>&emsp;&emsp;select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],<br/>&emsp;&emsp;placeholder: "Lorem"<br/>{"}"};</p>,`<FormOne ... select={selectObj}/>`];
-    
+    const stylingOptions = [
+        {                            
+            label: "Body/Container",
+            selector: ".form-body"
+        },
+        {
+            label: "Labels",
+            selector: ".form-label"
+        },
+        {
+            label: "File Input",
+            selector: ".form-fileinput"
+        },
+        {
+            label: "Filename",
+            selector: ".form-filename"
+        },
+        {
+            label: "Comments",
+            selector: ".form-text-area"
+        },
+        {
+            label: "Text Input",
+            selector: ".form-text-input"
+        },
+        {
+            label: "Select Element",
+            selector: ".form-select"
+        },
+        {
+            label: "Select Options",
+            selector: ".form-select-option"
+        },
+        {
+            label: "Date Input",
+            selector: ".form-date-input"
+        },
+        {
+            label: "Range Input",
+            selector: ".form-range-input"
+        },
+        {
+            label: "Range Value",
+            selector: ".form-range-value"
+        },
+        {
+            label: "Value Checkbox",
+            selector: ".form-checkbox"
+        },
+        {
+            label: "Value Checkbox Label",
+            selector: ".form-checkbox-label"
+        },
+        {
+            label: "Query Checkbox Question",
+            selector: ".form-checkbox-object-query"
+        },
+        {
+            label: "Query Checkbox Input Div",
+            selector: ".form-checkbox-object-input-div"
+        },
+        {
+            label: "Query Checkbox Checkbox",
+            selector: ".form-checkbox-object-checkbox"
+        },
+        {
+            label: "Query Checkbox Label",
+            selector: ".form-checkbox-object-label"
+        },
+        {
+            label: "Radio Query",
+            selector: ".form-radio-query"
+        },
+        {
+            label: "Radio Input Div",
+            selector: ".form-radio-input-div"
+        },
+        {
+            label: "Radio Input",
+            selector: ".form-radio-radio"
+        },
+        {
+            label: "Submit Button",
+            selector: ".form-button"
+        },
+        {
+            label: "Logo",
+            selector: ".form-logo-img"
+        },
+    ];
+
     const renderUsage = () => {
         return (
             <div>
@@ -126,60 +216,13 @@ const GetStarted = () => {
                     <span className="bold">
                     You can style the various aspects of the form using CSS Class selectors.
                     </span>
-                    <span>
-                        <span className="bold">Body/Container</span> - .form-body
-                    </span>
-                    <span>
-                        <span className="bold">Labels</span> - .form-label
-                    </span>
-                    <span>
-                        <span className="bold">File Input</span> - .form-fileinput
-                    </span>
-                    <span>
-                        <span className="bold">Filename</span> - .form-filename
-                    </span>
-                    <span>
-                        <span className="bold">Comments</span> - .form-text-area
-                    </span>
-                    <span>
-                        <span className="bold">Text Inputs</span> - .form-text-input
-                    </span>
-                    <span>
-                        <span className="bold">Select Element</span> - .form-select
-                    </span>
-                    <span>
-                        <span className="bold">Select Options</span> - .form-select-option
-                    </span>
-                    <span>
-                        <span className="bold">Date Input</span> - .form-date-input
-                    </span>
-                    <span>
-                        <span className="bold">Range Input</span> - .form-range-input
-                    </span>
-                    <span>
-                        <span className="bold">Range Value</span> - .form-range-value
-                    </span>
-                    <span>
-                        <span className="bold">Value Checkbox</span> - .form-checkbox
-                    </span>
-                    <span>
-                        <span className="bold">Value Checkbox Label</span> - .form-checkbox-label
-                    </span>
-                    <span>
-                        <span className="bold">Query Checkbox Question</span> - .form-checkbox-object-query
-                    </span>
-                    <span>
-                        <span className="bold">Query Checkbox Checkbox</span> - .form-checkbox-object-checkbox
-                    </span>
-                    <span>
-                        <span className="bold">Query Checkbox Label</span> - .form-checkbox-object-label
-                    </span>
-                    <span>
-                        <span className="bold">Submit Button</span> - .form-button
-                    </span>
-                    <span>
-                        <span className="bold">Logo</span> - .form-logo-img
-                    </span>
+                    {stylingOptions.map((option,i) => {
+                        return (
+                            <span>
+                                <span className="bold">{option.label}</span> - {option.selector}
+                            </span>
+                        )
+                    })}
                 </div>
             </>
         );

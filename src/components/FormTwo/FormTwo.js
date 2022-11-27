@@ -23,7 +23,16 @@ export const FormTwo = (props) => {
     const re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
     if (re.test(ext)) {
-      return <FormFields fields={props.fileTypes[ext]} filename={fileName} select={props.select} checkboxes={props.checkboxes} formTwo={true}/>;
+      return (
+        <FormFields 
+          fields={props.fileTypes[ext]} 
+          filename={fileName} 
+          select={props.select} 
+          checkboxes={props.checkboxes} 
+          radios={props.radios}
+          formTwo={true}
+        />
+      );
     } else {
       setFileType("INVALID");
       return "File type not supported.";
@@ -48,6 +57,11 @@ export const FormTwo = (props) => {
         data.append('comments', e.target[`textarea-${i}`].value);
       } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true) { 
         data.append('date', e.target[`date-${i}`].value);
+      } else if (new RegExp('radios', 'gi').test(fieldNameCleaned) === true) {
+        const val = e.target[`radio-query-${i}`] === undefined ? "" : e.target[`radio-query-${i}`].value;
+        if (val !== "") {
+          data.append(`radio_query_${i}`, e.target[`radio-query-${i}`].value);
+        }
       } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
         const val = e.target[`select-${i}`] === undefined ? "" : e.target[`select-${i}`].value;
         if (val !== "") {
@@ -58,7 +72,7 @@ export const FormTwo = (props) => {
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
         const val = e.target[`checkbox-object-${i}`] === undefined ? "" : e.target[`checkbox-object-${i}`].value;
         if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && e.target[`checkbox-object-${i}`].value !== "") {
-          if (val === "&") {
+          if (val === "&=") {
             continue;
           } else {
             data.append(`checkboxObject_${i}`, val);

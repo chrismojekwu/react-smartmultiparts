@@ -6,6 +6,7 @@ import Select from "./input-components/Select";
 import Range from "./input-components/Range";
 import CheckBox from "./input-components/Checkbox";
 import CheckboxObject from "./input-components/CheckboxObject/CheckboxObject";
+import Radios from "./input-components/Radios";
 
 //Add support for more input elements
 
@@ -14,6 +15,8 @@ function FormFields(props) {
   let selectCount = 0;
   const checkboxObjs = props.checkboxes;
   let checkboxObjCount = 0;
+  const radioObjs = props.radios;
+  let radioCount = 0;
 
   const generateSelect = (selectObj, index, field) => {
     const req = field.includes("!") ? true : false;
@@ -21,20 +24,9 @@ function FormFields(props) {
     return <Select obj={selectObj} index={index} required={req} key={`select-input-${index}`}/>;
   };
 
-  const generateRange = (index, field) => {
-    const values = field.slice(6, -1).split("_");
-    const side = values[4] !== undefined && values[4] === "<" ? true : false;
-    return (
-      <Range 
-        index={index} 
-        min={values[0]} 
-        max={values[1]} 
-        step={values[2]} 
-        label={values[3]} 
-        rangeLeftSide={side} 
-        key={`range-input-${index}`}
-      />
-    );
+  const generateRadios = (radioObj, index) => {
+    if (props.formTwo === undefined) radioCount++;
+    return <Radios obj={radioObj} index={index} key={`radio-input-${index}`}/>;
   };
 
   const generateCheckbox = (checkboxObj, index, field, objBool) => {
@@ -56,6 +48,21 @@ function FormFields(props) {
     }
   };
 
+  const generateRange = (index, field) => {
+    const values = field.slice(6, -1).split("_");
+    const side = values[4] !== undefined && values[4] === "<" ? true : false;
+    return (
+      <Range 
+        index={index} 
+        min={values[0]} 
+        max={values[1]} 
+        step={values[2]} 
+        label={values[3]} 
+        rangeLeftSide={side} 
+        key={`range-input-${index}`}
+      />
+    );
+  };
 
   const renderFields = () => {
     return (
@@ -70,6 +77,9 @@ function FormFields(props) {
             return <Date required={req} index={index} key={`date-input-${index}`}/>;
           } else if (field.trim().match(/range/gi)) {
             return generateRange(index, field.trim());
+          } else if (field.trim().match(/radios/gi) && field.trim().length <= 9){
+            if (props.formTwo !== undefined && props.formTwo) radioCount = parseInt(field.trim().slice(7,-1));
+            return radioObjs[radioCount] === undefined ? "" : generateRadios(radioObjs[radioCount], index, field.trim());
           } else if (field.trim().match(/select/gi)) {
             if (props.formTwo !== undefined && props.formTwo) selectCount = parseInt(field.trim().slice(7,-1));
             return selectObjs[selectCount] === undefined ? "" : generateSelect(selectObjs[selectCount], index, field.trim());
@@ -87,7 +97,7 @@ function FormFields(props) {
             return "";
           } else {
             req = field.trim().includes("!");
-            return <TextInput field={field} index={index} required={req} key={`text-input-${index}`}/>
+            return <TextInput field={field} index={index} required={req} key={`text-input-${index}`}/>;
           }
         })}
       </>

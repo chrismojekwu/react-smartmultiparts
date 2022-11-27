@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CheckboxObject = (props) => {
+const ObjectCheckbox = (props) => {
   const [checked, setChecked] = useState(false);
 
   const handleCheck = (e) => {
@@ -14,18 +14,18 @@ const CheckboxObject = (props) => {
   };
 
   const handleString = (string, checked) => {
-    const arr = props.data.split("&");
+    const arr = props.data.split("&=");
     if (checked) {
-        arr.push(string);
+      arr.push(string);
     } else {
-        arr.splice(arr.lastIndexOf(string), 1);
+      arr.splice(arr.lastIndexOf(string), 1);
     };
-    const newData = arr.join("&");
+    const newData = arr.join("&=");
     props.setData(newData);
   };
 
   return (
-    <>
+    <div>
       <input
         type="checkbox"
         className="form-checkbox-object-checkbox"
@@ -36,14 +36,13 @@ const CheckboxObject = (props) => {
         onChange={(e) => handleCheck(e)}
       />
       <label 
-          className="form-checkbox-object-label"
-          htmlFor={`smartparts-object-checkbox-${props.index}`}
+        className="form-checkbox-object-label"
+        htmlFor={`smartparts-object-checkbox-${props.index}`}
       > 
-          {props.value}
+        {props.value}
       </label>
-    </>
-    
+    </div>
   );
 };
 
-export default CheckboxObject;
+export default ObjectCheckbox;

@@ -12,6 +12,7 @@ const TextInput = (props) => {
           className="form-text-input" 
           name={`${label.toLowerCase()}-${props.index}`} 
           id={`smartparts-text-input-${props.index}`}
+          data-testid={`smartparts-text-input-${props.index}`}
         />
       </>
     );
@@ -26,6 +27,7 @@ const TextInput = (props) => {
           className="form-text-input" 
           name={`${label.toLowerCase()}-${props.index}`} 
           id={`smartparts-text-input-${props.index}`}
+          data-testid={`smartparts-text-input-${props.index}`}
           required 
         />
       </>

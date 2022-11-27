@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from './components/Header';
-import TryIt from './components/TryIt';
 import GetStarted from './components/GetStarted'
 import { FormOne } from '../components/FormOne/FormOne';
 import { FormTwo } from '../components/FormTwo/FormTwo';
@@ -9,9 +8,9 @@ import './app.css';
 
 
 const App = () => {
-    const fields = ["Appointment Name", "select[1]", "Library Name", "select[0]!", "Comments", "Range[0_12_1_Meeting Length (Hours)]", "Date", "checkbox", "checkbox", "select!", "select", "checkbox![ Do you think this is useful?]"];
+    const fields = ["Appointment Name", "select[1]", "Library Name", "select[0]!", "Comments", "Range[0_12_1_Meeting Length (Hours)]", "Date", "checkbox", "checkbox", "select!", "select", "checkbox[ Include Lunch Order]", "radios"];
 
-    const fileTypes = ["wav","jpg","jpeg","ics"];
+    const fileTypes = ["wav", "jpg", "jpeg", "ics"];
     
     const printData = (data) => { 
         for (var value of data.values()) {
@@ -20,7 +19,7 @@ const App = () => {
     };
 
     const formObj = {
-        pdf: ["Appointment Name", "select[1]", "Library Name", "select[0]!", "CheckBox[1]", "CheckBox[0]", "Comments"],
+        pdf: ["Appointment Name!", "select[1]", "Library Name!", "select[0]!", "CheckBox[1]", "CheckBox[0]", "Comments", "radios[1]", "radios[0]"],
         ics: ["Appointment Name", "select[1]", "Library Name", "select[0]!", "CheckBox[1]", "CheckBox[0]", "Comments"],
         mp3: ["Artist", "Title", "Date"],
         jpg: ["Chris Mojekwu", "Comments", "Range[0_12_1_Study Hours]", "Date", "checkbox[C#]", "checkbox[0]","checkbox[C++]","checkbox[1]", "checkbox[JAVA]" ,"checkbox[GO]"]
@@ -49,6 +48,17 @@ const App = () => {
         }
     ];
 
+    const radioObjs = [
+        {
+            query: "Is this useful?",
+            options: ["Yes", "No"]
+        },
+        {
+            query: "Does this work?",
+            options: ["Yes", "No", "Maybe"]
+        },
+    ];
+
     return (
         <main className="landing-page">
             <Header/>
@@ -62,63 +72,46 @@ const App = () => {
                 </div>
 
                 <Route exact path="/">
-                    <section className="card-container">
-                        <div className="card-one">
-                            <div className="card-inner">
-                                <div className="card-front">
-                                <FormTwo
-                                    fileTypes={formObj} 
-                                    cb={printData} 
-                                    textConfig={testConfig}
-                                    checkboxes={[
-                                        {
-                                            query: "Languages", 
-                                            boxes: ["Basic", "C", "Java", "Ruby", "JS"]
-                                        },
-                                        {
-                                            query: "Skills", 
-                                            boxes: ["Frontend", "Backend", "Full-stack"]
-                                        },
-                                    ]}
-                                    select={selectObjs}
-                                />
-                                </div>
-                                <div className="card-back">
-                                    <div className="card-back-inner">
-                                        react-smartmultiparts
-                                    </div>
-                                </div>
-                            </div>
+                    <section className="form-container">
+                        <div>
+                            <FormTwo
+                                fileTypes={formObj} 
+                                cb={printData} 
+                                textConfig={testConfig}
+                                checkboxes={[
+                                    {
+                                        query: "Languages", 
+                                        boxes: ["Basic", "C", "Java", "Ruby", "JS"]
+                                    },
+                                    {
+                                        query: "Skills", 
+                                        boxes: ["Frontend", "Backend", "Full-stack"]
+                                    },
+                                ]}
+                                select={selectObjs}
+                                radios={radioObjs}
+                            />
                         </div>
-
-                        <div className="card-two">
-                            <div className="card-inner">
-                                <div className="card-front">
-                                <FormOne 
-                                    fields={fields} 
-                                    fileTypes={fileTypes} 
-                                    cb={printData} 
-                                    textConfig={testConfig}
-                                    checkboxes={[
-                                        {
-                                            query: "Languages", 
-                                            boxes: ["Basic", "C", "Java", "Ruby", "JS"]
-                                        },
-                                        {
-                                            query: "Skills", 
-                                            boxes: ["Frontend", "Backend", "Full-stack"]
-                                        },
-                                    ]}
-                                    select={selectObjs}
-                                />
-                                </div>
-                                <div className="card-back">
-                                    <div className="card-back-inner">
-                                        react-smartmultiparts
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div>
+                            <FormOne 
+                                fields={fields} 
+                                fileTypes={fileTypes} 
+                                cb={printData} 
+                                textConfig={testConfig}
+                                checkboxes={[
+                                    {
+                                        query: "Languages", 
+                                        boxes: ["Basic", "C", "Java", "Ruby", "JS"]
+                                    },
+                                    {
+                                        query: "Skills", 
+                                        boxes: ["Frontend", "Backend", "Full-stack"]
+                                    },
+                                ]}
+                                select={selectObjs}
+                                radios={radioObjs}
+                            />
+                        </div>       
                     </section>
                     <div className="landing-description">
                         smartmultiparts
