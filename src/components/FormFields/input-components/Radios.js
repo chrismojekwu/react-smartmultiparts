@@ -53,7 +53,6 @@ const Radios = (props) => {
                         );
                     })}
                 </div>
-
             </>
         )
     };
