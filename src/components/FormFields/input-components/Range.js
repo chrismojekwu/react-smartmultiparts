@@ -14,6 +14,7 @@ const Range = (props) => {
                     <input 
                         type="range" className="form-range-input" name={`range-${props.index}`} id={`smartparts-range-input-${props.index}`}
                         min={props.min} max={props.max} step={props.step} value={value} onChange={(e) => setValue(e.target.value)}
+                        data-testid={`smartparts-date-input-${props.index}`}
                     />
                 </React.Fragment>
             );
@@ -23,6 +24,7 @@ const Range = (props) => {
                     <input 
                         type="range" className="form-range-input" name={`range-${props.index}`} id={`smartparts-range-input-${props.index}`}
                         min={props.min} max={props.max} step={props.step} value={value} onChange={(e) => setValue(e.target.value)}
+                        data-testid={`smartparts-date-input-${props.index}`}
                     />
                     <label name={`range-${props.index}`} className="form-label" id="smartparts-range-label">
                         {props.label}

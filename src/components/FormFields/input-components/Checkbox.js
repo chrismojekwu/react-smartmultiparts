@@ -42,6 +42,7 @@ const CheckBox = (props) => {
                     type="checkbox" 
                     className="form-checkbox"
                     id={`smartparts-checkbox-${props.index}`} 
+                    data-testid={`smartparts-checkbox-${props.index}`}
                     name={`checkbox-${props.index}`} 
                     value={value}
                     checked={checked}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CheckboxObject = (props) => {
+const ObjectCheckbox = (props) => {
   const [checked, setChecked] = useState(false);
 
   const handleCheck = (e) => {
@@ -45,4 +45,4 @@ const CheckboxObject = (props) => {
   );
 };
 
-export default CheckboxObject;
+export default ObjectCheckbox;

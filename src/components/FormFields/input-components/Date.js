@@ -7,7 +7,12 @@ const Date = (props) => {
     return (
       <React.Fragment>
         <label htmlFor='date' className="form-label">Date:</label>
-        <input type="date" name={`date-${props.index}`} id={`smartparts-date-input-${props.index}`} value={date} 
+        <input 
+          type="date" 
+          name={`date-${props.index}`} 
+          id={`smartparts-date-input-${props.index}`} 
+          data-testid={`smartparts-date-input-${props.index}`} 
+          value={date} 
           onChange={(e) => setDate(e.target.value)} className="form-date-input"
         />
       </React.Fragment>
@@ -18,7 +23,12 @@ const Date = (props) => {
     return (
       <React.Fragment>
         <label htmlFor='date' className="form-label">Date:</label>
-        <input type="date" name={`date-${props.index}`} id={`smartparts-date-input-${props.index}`} value={date} 
+        <input 
+          type="date" 
+          name={`date-${props.index}`} 
+          id={`smartparts-date-input-${props.index}`} 
+          data-testid={`smartparts-date-input-${props.index}`} 
+          value={date} 
           onChange={(e) => setDate(e.target.value)} className="form-date-input" required
         />
       </React.Fragment>

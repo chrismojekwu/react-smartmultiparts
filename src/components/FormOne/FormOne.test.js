@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Enzyme, { mount } from 'enzyme';
-import { FormOne } from '../components/FormOne/FormOne'
+import { FormOne } from './FormOne'
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -46,7 +46,7 @@ describe("Form One - Inputs", () => {
 
         for(let i = 0; i < fields.length; i++){
             const element = wrapper.find(`#smartparts-text-input-${i}`);
-            expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${fields[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}">`);
+            expect(element.html()).toEqual(`<input type="text\" class="form-text-input\" name="${fields[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}" data-testid="smartparts-text-input-${i}">`);
         };
 
     });
@@ -215,7 +215,7 @@ describe("Form One - Inputs", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
         
-        expect(wrapper.find('#smartparts-date-input-0').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input-0" class="form-date-input" value="2099-01-01">');
+        expect(wrapper.find('#smartparts-date-input-0').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input-0" data-testid="smartparts-date-input-0" class="form-date-input" value="2099-01-01">');
     });
 
     test('it renders a range input correctly', () => {

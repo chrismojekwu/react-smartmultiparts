@@ -10,6 +10,7 @@ const TextArea = (props) => {
                   className="comments form-text-area"
                   placeholder="Comments"
                   id={`smartparts-comments-${props.index}`}
+                  data-testid={`smartparts-comments-${props.index}`}
                 />
             </React.Fragment>
         );
@@ -24,6 +25,7 @@ const TextArea = (props) => {
                   className="comments form-text-area"
                   placeholder="Comments"
                   id={`smartparts-comments-${props.index}`}
+                  data-testid={`smartparts-comments-${props.index}`}
                   required
                 />
             </React.Fragment>

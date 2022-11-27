@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ObjectCheckBox from './ObjectCheckbox';
+import ObjectCheckbox from './ObjectCheckbox';
 
 const CheckboxObject = (props) => {
     const [data, setData] = useState("");
@@ -7,6 +7,7 @@ const CheckboxObject = (props) => {
     return (
         <>
             <span 
+                data-testid="smartparts-checkbox-object-query"
                 id="smartparts-checkbox-object-query"
                 className="form-checkbox-object-query"
                 style={{
@@ -16,6 +17,7 @@ const CheckboxObject = (props) => {
                 {props.checks.query}
             </span>
             <input 
+                data-testid="smartparts-checkbox-object-input" 
                 id="smartparts-checkbox-object-input" 
                 type="hidden" value={data === "" ? "" : data} 
                 name={`checkbox-object-${props.index}`}
@@ -25,7 +27,7 @@ const CheckboxObject = (props) => {
             >
                 {props.checks.boxes.map((x, i) => {
                   return (
-                    <ObjectCheckBox
+                    <ObjectCheckbox
                         value={x}
                         index={i}
                         data={data}

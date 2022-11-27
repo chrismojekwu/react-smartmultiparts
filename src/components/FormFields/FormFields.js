@@ -97,7 +97,7 @@ function FormFields(props) {
             return "";
           } else {
             req = field.trim().includes("!");
-            return <TextInput field={field} index={index} required={req} key={`text-input-${index}`}/>
+            return <TextInput field={field} index={index} required={req} key={`text-input-${index}`}/>;
           }
         })}
       </>

@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent} from '@testing-library/react';
 import Enzyme, { mount } from 'enzyme';
-import {FormTwo} from '../components/FormTwo/FormTwo';
+import {FormTwo} from './FormTwo';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -45,7 +45,7 @@ describe("Form Two - Inputs", () => {
 
         for(let i = 0; i < formObj.jpg.length; i++){
             const element = wrapper.find(`#smartparts-text-input-${i}`);
-            expect(element.html()).toEqual(`<input type="text" class="form-text-input" name="${formObj.jpg[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}">`);
+            expect(element.html()).toEqual(`<input type="text" class="form-text-input" name="${formObj.jpg[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}" data-testid="smartparts-text-input-${i}">`);
         };
 
         const mp3File = new File(["test"], "test.mp3", {
@@ -56,7 +56,7 @@ describe("Form Two - Inputs", () => {
 
         for(let i = 0; i < formObj.mp3.length; i++){
             const element = wrapper.find(`#smartparts-text-input-${i}`);
-            expect(element.html()).toEqual(`<input type="text" class="form-text-input" name="${formObj.mp3[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}">`);
+            expect(element.html()).toEqual(`<input type="text" class="form-text-input" name="${formObj.mp3[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}" data-testid="smartparts-text-input-${i}">`);
         };
 
         // not sure why this isnt working 
@@ -279,7 +279,7 @@ describe("Form Two - Inputs", () => {
         
         wrapper.find('input').first().simulate('change', {target: {files: [file]}});
 
-        expect(wrapper.find('#smartparts-date-input-3').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input-3" class="form-date-input" value="2099-01-01">');
+        expect(wrapper.find('#smartparts-date-input-3').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input-3" data-testid="smartparts-date-input-3" class="form-date-input" value="2099-01-01">');
     });
 
     test('it renders a query checkbox correctly', () => {

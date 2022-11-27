@@ -19,6 +19,7 @@ const Radios = (props) => {
         return (
             <>
                 <input 
+                    data-testid="smartparts-radio-query-input" 
                     id="smartparts-radio-query-input" 
                     type="hidden" 
                     value={value} 
