@@ -62,7 +62,9 @@ const formObj = {
 
 **Value Checkbox** - (*checkbox[stringValue]*) - You can generate a value checkbox by using "checkbox" followed by a value surrounded by brackets.
 
-**Query Checkbox** - (*checkbox*, *checkbox[index]*) - You can generate a query checkbox by using "checkbox". You must provide a matching array of checkbox objects to correspond with the number of selects you would like to generate. If using Form Two you must use "checkbox[index]", the index should correspond with the index of the checkbox object needed for that file type.
+**Query Checkbox** - (*checkbox*, *checkbox[index]*) - You can generate a query checkbox by using "checkbox". You must provide a matching array of checkbox objects to correspond with the number of checkboxes you would like to generate. If using Form Two you must use "checkbox[index]", the index should correspond with the index of the checkbox object needed for that file type.
+
+**Radio Query** - (*radios*, *radios[index]*) - You can generate a radio query by using "radios". You must provide a matching array of radio objects to correspond with the number of radios you would like to generate. If using Form Two you must use "radios[index]", the index should correspond with the index of the radio object needed for that file type.
 
 A checkbox object requires 2 key value pairs:  
 >"query", your question for the group of checkboxes.  

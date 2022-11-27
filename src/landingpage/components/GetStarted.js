@@ -170,6 +170,9 @@ const GetStarted = () => {
                     <span>
                         <span className="bold">Query Checkbox</span> - You can generate a query checkbox by using "checkbox". You must provide a matching array of checkbox objects to correspond with the number of selects you would like to generate. If using Form Two you must use "checkbox[index]", the index should correspond with the index of the checkbox object needed for that file type. The array should be passed to either form using "checkboxes."
                     </span>
+                    <span>
+                        <span className="bold">Radio Query</span> - You can generate a radio query by using "radios". You must provide a matching array of radio objects to correspond with the number of radios you would like to generate. If using Form Two you must use "radios[index]", the index should correspond with the index of the radio object needed for that file type.
+                    </span>
                     <div>
                         <span className="bold">Select</span> - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. Form One will render selects based on their position in the fields array and the order inside of the select objects array. If using Form Two you must use "select[index]", the index should correspond with the index of the select object needed for that file type.
                         <details>
