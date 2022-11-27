@@ -19,7 +19,7 @@ const App = () => {
     };
 
     const formObj = {
-        pdf: ["Appointment Name!", "select[1]", "Library Name!", "select[0]!", "CheckBox[1]", "CheckBox[0]", "Comments", "radios[1]", "radios[0]"],
+        pdf: ["Appointment Name!", "select[1]", "Library Name!", "select[0]!", "CheckBox[1]", "CheckBox[0]", "Comments", "radios[1]", "radios[0]", "checkbox[Include Lunch Order]"],
         ics: ["Appointment Name", "select[1]", "Library Name", "select[0]!", "CheckBox[1]", "CheckBox[0]", "Comments"],
         mp3: ["Artist", "Title", "Date"],
         jpg: ["Chris Mojekwu", "Comments", "Range[0_12_1_Study Hours]", "Date", "checkbox[C#]", "checkbox[0]","checkbox[C++]","checkbox[1]", "checkbox[JAVA]" ,"checkbox[GO]"]

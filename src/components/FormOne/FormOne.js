@@ -66,14 +66,20 @@ export const FormOne = (props) => {
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        if (fieldNameCleaned.length === 8 && e.target[`checkbox-object-${i}`].value !== "") {
-          if (e.target[`checkbox-object-${i}`].value == "&=") {
+        const val =
+          e.target[`checkbox-object-${i}`] !== undefined
+            ? e.target[`checkbox-object-${i}`].value
+            : e.target[`checkbox-${i}`] !== undefined
+            ? e.target[`checkbox-${i}`].value
+            : "";
+        if (fieldNameCleaned.length === 8 && val !== "") {
+          if (val === "&=" || val === "") {
             continue;
           } else {
-            data.append(`checkboxObject_${i}`, e.target[`checkbox-object-${i}`].value);
+            data.append(`checkboxObject_${i}`, val);
           }
-        } else if (e.target[`checkbox-${i}`].value !== "") {
-          data.append(`checkbox_${i}`, e.target[`checkbox-${i}`].value);
+        } else if (val !== "") {
+          data.append(`checkbox_${i}`, val);
         }
       } else {
         data.append(fieldNameCleaned.toLowerCase(), e.target[`${fieldNameCleaned.toLowerCase()}-${i}`].value);

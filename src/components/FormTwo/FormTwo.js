@@ -70,9 +70,14 @@ export const FormTwo = (props) => {
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append(`range_${i}`, e.target[`range-${i}`].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        const val = e.target[`checkbox-object-${i}`] === undefined ? "" : e.target[`checkbox-object-${i}`].value;
-        if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && e.target[`checkbox-object-${i}`].value !== "") {
-          if (val === "&=") {
+        const val =
+          e.target[`checkbox-object-${i}`] !== undefined
+            ? e.target[`checkbox-object-${i}`].value
+            : e.target[`checkbox-${i}`] !== undefined
+            ? e.target[`checkbox-${i}`].value
+            : "";
+        if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && val !== "") {
+          if (val === "&=" || val === "") {
             continue;
           } else {
             data.append(`checkboxObject_${i}`, val);
