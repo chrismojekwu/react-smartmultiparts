@@ -76,7 +76,8 @@ var TextArea = function TextArea(props) {
       name: "textarea-".concat(props.index),
       className: "comments form-text-area",
       placeholder: "Comments",
-      id: "smartparts-comments-".concat(props.index)
+      id: "smartparts-comments-".concat(props.index),
+      "data-testid": "smartparts-comments-".concat(props.index)
     }));
   };
 
@@ -89,6 +90,7 @@ var TextArea = function TextArea(props) {
       className: "comments form-text-area",
       placeholder: "Comments",
       id: "smartparts-comments-".concat(props.index),
+      "data-testid": "smartparts-comments-".concat(props.index),
       required: true
     }));
   };
@@ -107,7 +109,8 @@ var TextInput = function TextInput(props) {
       type: "text",
       className: "form-text-input",
       name: "".concat(label.toLowerCase(), "-").concat(props.index),
-      id: "smartparts-text-input-".concat(props.index)
+      id: "smartparts-text-input-".concat(props.index),
+      "data-testid": "smartparts-text-input-".concat(props.index)
     }));
   };
 
@@ -120,6 +123,7 @@ var TextInput = function TextInput(props) {
       className: "form-text-input",
       name: "".concat(label.toLowerCase(), "-").concat(props.index),
       id: "smartparts-text-input-".concat(props.index),
+      "data-testid": "smartparts-text-input-".concat(props.index),
       required: true
     }));
   };
@@ -141,6 +145,7 @@ var Date = function Date(props) {
       type: "date",
       name: "date-".concat(props.index),
       id: "smartparts-date-input-".concat(props.index),
+      "data-testid": "smartparts-date-input-".concat(props.index),
       value: date,
       onChange: function onChange(e) {
         return setDate(e.target.value);
@@ -157,6 +162,7 @@ var Date = function Date(props) {
       type: "date",
       name: "date-".concat(props.index),
       id: "smartparts-date-input-".concat(props.index),
+      "data-testid": "smartparts-date-input-".concat(props.index),
       value: date,
       onChange: function onChange(e) {
         return setDate(e.target.value);
@@ -195,6 +201,7 @@ var Select = function Select(props) {
       htmlFor: "select-".concat(props.index),
       className: "form-label"
     }, props.obj.query), /*#__PURE__*/React__default["default"].createElement("select", {
+      "data-testid": "smartparts-select-input-".concat(props.index),
       id: "smartparts-select-input-".concat(props.index),
       name: "select-".concat(props.index),
       className: "form-select",
@@ -212,6 +219,7 @@ var Select = function Select(props) {
       htmlFor: "select-".concat(props.index),
       className: "form-label"
     }, props.obj.query), /*#__PURE__*/React__default["default"].createElement("select", {
+      "data-testid": "smartparts-select-input-".concat(props.index),
       id: "smartparts-select-input-".concat(props.index),
       name: "select-".concat(props.index),
       className: "form-select",
@@ -251,7 +259,8 @@ var Range = function Range(props) {
         value: value,
         onChange: function onChange(e) {
           return setValue(e.target.value);
-        }
+        },
+        "data-testid": "smartparts-date-input-".concat(props.index)
       }));
     } else {
       return /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, /*#__PURE__*/React__default["default"].createElement("input", {
@@ -265,7 +274,8 @@ var Range = function Range(props) {
         value: value,
         onChange: function onChange(e) {
           return setValue(e.target.value);
-        }
+        },
+        "data-testid": "smartparts-date-input-".concat(props.index)
       }), /*#__PURE__*/React__default["default"].createElement("label", {
         name: "range-".concat(props.index),
         className: "form-label",
@@ -322,6 +332,7 @@ var CheckBox = function CheckBox(props) {
       type: "checkbox",
       className: "form-checkbox",
       id: "smartparts-checkbox-".concat(props.index),
+      "data-testid": "smartparts-checkbox-".concat(props.index),
       name: "checkbox-".concat(props.index),
       value: value,
       checked: checked,
@@ -337,7 +348,7 @@ var CheckBox = function CheckBox(props) {
   return renderReq(props.req);
 };
 
-var CheckboxObject$1 = function CheckboxObject(props) {
+var ObjectCheckbox = function ObjectCheckbox(props) {
   var _useState = React.useState(false),
       _useState2 = _slicedToArray(_useState, 2),
       checked = _useState2[0],
@@ -354,18 +365,18 @@ var CheckboxObject$1 = function CheckboxObject(props) {
   };
 
   var handleString = function handleString(string, checked) {
-    var arr = props.data.split("&");
+    var arr = props.data.split("&=");
 
     if (checked) {
       arr.push(string);
     } else {
       arr.splice(arr.lastIndexOf(string), 1);
     }
-    var newData = arr.join("&");
+    var newData = arr.join("&=");
     props.setData(newData);
   };
 
-  return /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, /*#__PURE__*/React__default["default"].createElement("input", {
+  return /*#__PURE__*/React__default["default"].createElement("div", null, /*#__PURE__*/React__default["default"].createElement("input", {
     type: "checkbox",
     className: "form-checkbox-object-checkbox",
     id: "smartparts-object-checkbox",
@@ -388,25 +399,80 @@ var CheckboxObject = function CheckboxObject(props) {
       setData = _useState2[1];
 
   return /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, /*#__PURE__*/React__default["default"].createElement("span", {
+    "data-testid": "smartparts-checkbox-object-query",
     id: "smartparts-checkbox-object-query",
     className: "form-checkbox-object-query",
     style: {
       fontWeight: "bold"
     }
   }, props.checks.query), /*#__PURE__*/React__default["default"].createElement("input", {
+    "data-testid": "smartparts-checkbox-object-input",
     id: "smartparts-checkbox-object-input",
     type: "hidden",
-    value: data === "" ? "&" : data,
+    value: data === "" ? "" : data,
     name: "checkbox-object-".concat(props.index)
-  }), props.checks.boxes.map(function (x, i) {
-    return /*#__PURE__*/React__default["default"].createElement(CheckboxObject$1, {
+  }), /*#__PURE__*/React__default["default"].createElement("div", {
+    className: "form-checkbox-object-input-div"
+  }, props.checks.boxes.map(function (x, i) {
+    return /*#__PURE__*/React__default["default"].createElement(ObjectCheckbox, {
       value: x,
       index: i,
       data: data,
       key: "object-checkbox-".concat(i),
       setData: setData
     });
-  }));
+  })));
+};
+
+var Radios = function Radios(props) {
+  var _useState = React.useState(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      value = _useState2[0],
+      setValue = _useState2[1];
+
+  var handleChecked = function handleChecked(e, index) {
+    var radioInputs = document.getElementsByClassName("smartparts-radio-query-radio-".concat(props.index));
+
+    for (var i = 0; i < radioInputs.length; i++) {
+      if (i === index) {
+        radioInputs[i].checked = true;
+      } else {
+        radioInputs[i].checked = false;
+      }
+    }
+    setValue(e.target.value);
+  };
+
+  var renderRadios = function renderRadios() {
+    return /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, /*#__PURE__*/React__default["default"].createElement("input", {
+      "data-testid": "smartparts-radio-query-input",
+      id: "smartparts-radio-query-input",
+      type: "hidden",
+      value: value,
+      name: "radio-query-".concat(props.index)
+    }), /*#__PURE__*/React__default["default"].createElement("div", {
+      className: "form-radio-query"
+    }, props.obj.query), /*#__PURE__*/React__default["default"].createElement("div", {
+      className: "form-radio-input-div"
+    }, props.obj.options.map(function (x, i) {
+      return /*#__PURE__*/React__default["default"].createElement("div", {
+        key: "radio-query-radio-".concat(props.index, "-").concat(i)
+      }, /*#__PURE__*/React__default["default"].createElement("input", {
+        "data-testid": "smartparts-radio-query-radio",
+        id: "smartparts-radio-query-radio-".concat(props.index),
+        className: "smartparts-radio-query-radio-".concat(props.index, " form-radio-radio"),
+        type: "radio",
+        name: "radios-".concat(props.index),
+        value: x,
+        onClick: function onClick(e) {
+          return handleChecked(e, i);
+        },
+        tabIndex: "0"
+      }), /*#__PURE__*/React__default["default"].createElement("label", null, x));
+    })));
+  };
+
+  return renderRadios();
 };
 
 function FormFields(props) {
@@ -414,6 +480,8 @@ function FormFields(props) {
   var selectCount = 0;
   var checkboxObjs = props.checkboxes;
   var checkboxObjCount = 0;
+  var radioObjs = props.radios;
+  var radioCount = 0;
 
   var generateSelect = function generateSelect(selectObj, index, field) {
     var req = field.includes("!") ? true : false;
@@ -426,17 +494,12 @@ function FormFields(props) {
     });
   };
 
-  var generateRange = function generateRange(index, field) {
-    var values = field.slice(6, -1).split("_");
-    var side = values[4] !== undefined && values[4] === "<" ? true : false;
-    return /*#__PURE__*/React__default["default"].createElement(Range, {
+  var generateRadios = function generateRadios(radioObj, index) {
+    if (props.formTwo === undefined) radioCount++;
+    return /*#__PURE__*/React__default["default"].createElement(Radios, {
+      obj: radioObj,
       index: index,
-      min: values[0],
-      max: values[1],
-      step: values[2],
-      label: values[3],
-      rangeLeftSide: side,
-      key: "range-input-".concat(index)
+      key: "radio-input-".concat(index)
     });
   };
 
@@ -470,6 +533,20 @@ function FormFields(props) {
     }
   };
 
+  var generateRange = function generateRange(index, field) {
+    var values = field.slice(6, -1).split("_");
+    var side = values[4] !== undefined && values[4] === "<" ? true : false;
+    return /*#__PURE__*/React__default["default"].createElement(Range, {
+      index: index,
+      min: values[0],
+      max: values[1],
+      step: values[2],
+      label: values[3],
+      rangeLeftSide: side,
+      key: "range-input-".concat(index)
+    });
+  };
+
   var renderFields = function renderFields() {
     return /*#__PURE__*/React__default["default"].createElement(React__default["default"].Fragment, null, props.fields.map(function (field, index) {
       var req = "";
@@ -490,6 +567,9 @@ function FormFields(props) {
         });
       } else if (field.trim().match(/range/gi)) {
         return generateRange(index, field.trim());
+      } else if (field.trim().match(/radios/gi) && field.trim().length <= 9) {
+        if (props.formTwo !== undefined && props.formTwo) radioCount = parseInt(field.trim().slice(7, -1));
+        return radioObjs[radioCount] === undefined ? "" : generateRadios(radioObjs[radioCount], index, field.trim());
       } else if (field.trim().match(/select/gi)) {
         if (props.formTwo !== undefined && props.formTwo) selectCount = parseInt(field.trim().slice(7, -1));
         return selectObjs[selectCount] === undefined ? "" : generateSelect(selectObjs[selectCount], index, field.trim());
@@ -606,7 +686,8 @@ var FormOne = function FormOne(props) {
         fields: props.fields,
         filename: fileName,
         select: props.select,
-        checkboxes: props.checkboxes
+        checkboxes: props.checkboxes,
+        radios: props.radios
       });
     } else {
       setFileType("INVALID");
@@ -631,23 +712,31 @@ var FormOne = function FormOne(props) {
         data.append('comments', e.target["textarea-".concat(i)].value);
       } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true && fieldNameCleaned.length === 4) {
         data.append('date', e.target["date-".concat(i)].value);
-      } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
-        var val = e.target["select-".concat(i)] === undefined ? "" : e.target["select-".concat(i)].value;
+      } else if (new RegExp('radios', 'gi').test(fieldNameCleaned) === true) {
+        var val = e.target["radio-query-".concat(i)] === undefined ? "" : e.target["radio-query-".concat(i)].value;
 
         if (val !== "") {
+          data.append("radio_query_".concat(i), e.target["radio-query-".concat(i)].value);
+        }
+      } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
+        var _val = e.target["select-".concat(i)] === undefined ? "" : e.target["select-".concat(i)].value;
+
+        if (_val !== "") {
           data.append("select_".concat(i), e.target["select-".concat(i)].value);
         }
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append("range_".concat(i), e.target["range-".concat(i)].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        if (fieldNameCleaned.length === 8 && e.target["checkbox-object-".concat(i)].value !== "") {
-          if (e.target["checkbox-object-".concat(i)].value == "&") {
+        var _val2 = e.target["checkbox-object-".concat(i)] !== undefined ? e.target["checkbox-object-".concat(i)].value : e.target["checkbox-".concat(i)] !== undefined ? e.target["checkbox-".concat(i)].value : "";
+
+        if (fieldNameCleaned.length === 8 && _val2 !== "") {
+          if (_val2 === "&=" || _val2 === "") {
             continue;
           } else {
-            data.append("checkboxObject_".concat(i), e.target["checkbox-object-".concat(i)].value);
+            data.append("checkboxObject_".concat(i), _val2);
           }
-        } else if (e.target["checkbox-".concat(i)].value !== "") {
-          data.append("checkbox_".concat(i), e.target["checkbox-".concat(i)].value);
+        } else if (_val2 !== "") {
+          data.append("checkbox_".concat(i), _val2);
         }
       } else {
         data.append(fieldNameCleaned.toLowerCase(), e.target["".concat(fieldNameCleaned.toLowerCase(), "-").concat(i)].value);
@@ -760,6 +849,7 @@ var FormTwo = function FormTwo(props) {
         filename: fileName,
         select: props.select,
         checkboxes: props.checkboxes,
+        radios: props.radios,
         formTwo: true
       });
     } else {
@@ -787,25 +877,31 @@ var FormTwo = function FormTwo(props) {
         data.append('comments', e.target["textarea-".concat(i)].value);
       } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true) {
         data.append('date', e.target["date-".concat(i)].value);
-      } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
-        var val = e.target["select-".concat(i)] === undefined ? "" : e.target["select-".concat(i)].value;
+      } else if (new RegExp('radios', 'gi').test(fieldNameCleaned) === true) {
+        var val = e.target["radio-query-".concat(i)] === undefined ? "" : e.target["radio-query-".concat(i)].value;
 
         if (val !== "") {
+          data.append("radio_query_".concat(i), e.target["radio-query-".concat(i)].value);
+        }
+      } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
+        var _val = e.target["select-".concat(i)] === undefined ? "" : e.target["select-".concat(i)].value;
+
+        if (_val !== "") {
           data.append("select_".concat(i), e.target["select-".concat(i)].value);
         }
       } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
         data.append("range_".concat(i), e.target["range-".concat(i)].value);
       } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        var _val = e.target["checkbox-object-".concat(i)] === undefined ? "" : e.target["checkbox-object-".concat(i)].value;
+        var _val2 = e.target["checkbox-object-".concat(i)] !== undefined ? e.target["checkbox-object-".concat(i)].value : e.target["checkbox-".concat(i)] !== undefined ? e.target["checkbox-".concat(i)].value : "";
 
-        if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && e.target["checkbox-object-".concat(i)].value !== "") {
-          if (_val === "&") {
+        if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && _val2 !== "") {
+          if (_val2 === "&=" || _val2 === "") {
             continue;
           } else {
-            data.append("checkboxObject_".concat(i), _val);
+            data.append("checkboxObject_".concat(i), _val2);
           }
-        } else if (_val !== "") {
-          data.append("checkbox_".concat(i), _val);
+        } else if (_val2 !== "") {
+          data.append("checkbox_".concat(i), _val2);
         }
       } else data.append(fieldNameCleaned.toLowerCase(), e.target["".concat(fieldNameCleaned.toLowerCase(), "-").concat(i)].value);
     }
