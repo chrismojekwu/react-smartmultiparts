@@ -606,6 +606,17 @@ var fileTypes = function fileTypes(arr) {
   });
   return list.join(" ");
 };
+var extension = function extension(fileName) {
+  var ext = [];
+
+  for (var i = fileName.length - 1; i > 0; i--) {
+    if (fileName[i] === ".") {
+      return ext.join("").toLowerCase();
+    } else {
+      ext.unshift(fileName[i]);
+    }
+  }
+};
 
 function styleInject(css, ref) {
   if ( ref === void 0 ) ref = {};
@@ -669,7 +680,7 @@ var FormOne = function FormOne(props) {
       }
     }
 
-    var ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
+    var ext = fileType[0].name ? extension(fileType[0].name) : "";
     var re = new RegExp(props.fileTypes.join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
 
@@ -831,7 +842,7 @@ var FormTwo = function FormTwo(props) {
       }
     }
 
-    var ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
+    var ext = fileType[0].name ? extension(fileType[0].name) : "";
     var re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
 
