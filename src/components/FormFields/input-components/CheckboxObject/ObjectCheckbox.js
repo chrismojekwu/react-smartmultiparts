@@ -14,14 +14,18 @@ const ObjectCheckbox = (props) => {
   };
 
   const handleString = (string, checked) => {
-    const arr = props.data.split("&=");
-    if (checked) {
-      arr.push(string);
+    if (props.data === "") {
+      props.setData(string);
     } else {
-      arr.splice(arr.lastIndexOf(string), 1);
+      const arr = props.data.split("&=");
+      if (checked) {
+        arr.push(string);
+      } else {
+        arr.splice(arr.lastIndexOf(string), 1);
+      };
+      const newData = arr.join("&=");
+      props.setData(newData);
     };
-    const newData = arr.join("&=");
-    props.setData(newData);
   };
 
   return (
