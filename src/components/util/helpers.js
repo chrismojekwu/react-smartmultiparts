@@ -18,3 +18,14 @@ export const fileTypes = (arr) => {
     });
     return list.join(" ");
 }
+
+export const extension = (fileName) => {
+    let ext = [];
+    for (let i = fileName.length - 1; i > 0; i--) {
+        if (fileName[i] === ".") {
+            return ext.join("").toLowerCase();
+        } else {
+            ext.unshift(fileName[i]);
+        }
+    }
+};

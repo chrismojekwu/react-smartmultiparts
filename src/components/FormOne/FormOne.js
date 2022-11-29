@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import FormFields from "../FormFields/FormFields";
-import {fileTypes} from '../util/helpers';
+import { fileTypes , extension } from '../util/helpers';
 import "../Form.css";
 
 export const FormOne = (props) => {
@@ -18,7 +18,7 @@ export const FormOne = (props) => {
         return <span id="smartparts-error">{props.textConfig.errorMessage}</span>;
       }
     }
-    const ext = fileType[0].name ? fileType[0].name.split(".")[1] : "";
+    const ext = fileType[0].name ? extension(fileType[0].name) : "";
     const re = new RegExp(props.fileTypes.join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
     if (re.test(ext)) {
