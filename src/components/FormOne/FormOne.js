@@ -8,7 +8,6 @@ export const FormOne = (props) => {
   const [fileName, setFileName] = useState("");
   const [disabled, setDisabled] = useState(false);
 
-  //function to render correct form component for file type
   const detectFile = () => {
     if (fileType === "") return "";
     if (Object.keys(props.fileTypes).length === 0 || props.fields === []) {
@@ -18,6 +17,17 @@ export const FormOne = (props) => {
         return <span id="smartparts-error">{props.textConfig.errorMessage}</span>;
       }
     }
+    // bytes to mb  (bytes / 1e+6)
+    if (props.fileSize !== undefined) {
+      if (props.fileSize < (fileType[0].size / 1e+6)) {
+        if (props.textConfig === undefined || props.textConfig.fileSizeMessage === "") {
+          return <span id="smartparts-error">File Over Limit - {props.fileSize} MB</span>;
+        } else {
+          return <span id="smartparts-error">{props.textConfig.fileSizeMessage}</span>
+        }
+      }
+    }
+    
     const ext = fileType[0].name ? extension(fileType[0].name) : "";
     const re = new RegExp(props.fileTypes.join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
@@ -111,11 +121,15 @@ export const FormOne = (props) => {
         <div className="smartparts-logo-container">
           {props.logo ? renderLogo(props.logo) : ""}
         </div>
-        <p>
+        <p className="form-file-list">
           {props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: "}
           {fileTypes(props.fileTypes)}
         </p>
-
+        <div>
+          {props.fileSize !== undefined && props.textConfig !== undefined && props.textConfig.fileSizeLabel !== "" 
+          ? props.textConfig.fileSizeLabel : props.fileSize !== undefined ? "File Size Limit: " : ""}
+          {props.fileSize !== undefined ? `${props.fileSize} MB` : ""}
+        </div>
         <form
           onSubmit={(e) => dataReturn(e)}
           className="smartparts-entry-form"

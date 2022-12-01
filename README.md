@@ -131,9 +131,13 @@ You can style the various aspects of the form using CSS Class selectors.
 
 Body/Container - .form-body
 
-Labels - .form-label
+File List - .form-file-list
+
+Logo - .form-logo-img
 
 File Input - .form-fileinput
+
+Labels - .form-label
 
 Filename - .form-filename
 
@@ -170,6 +174,4 @@ Radio Input Div - .form-radio-input-div
 Radio Input - .form-radio-radio
 
 Submit Button - .form-button
-
-Logo - .form-logo-img
 

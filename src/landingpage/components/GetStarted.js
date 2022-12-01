@@ -12,12 +12,20 @@ const GetStarted = () => {
             selector: ".form-body"
         },
         {
-            label: "Labels",
-            selector: ".form-label"
+            label: "File List",
+            selector: ".form-file-list"
+        },
+        {
+            label: "Logo",
+            selector: ".form-logo-img"
         },
         {
             label: "File Input",
             selector: ".form-fileinput"
+        },
+        {
+            label: "Labels",
+            selector: ".form-label"
         },
         {
             label: "Filename",
@@ -90,10 +98,6 @@ const GetStarted = () => {
         {
             label: "Submit Button",
             selector: ".form-button"
-        },
-        {
-            label: "Logo",
-            selector: ".form-logo-img"
         },
     ];
 

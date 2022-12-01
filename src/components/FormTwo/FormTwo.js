@@ -115,7 +115,7 @@ export const FormTwo = (props) => {
       <div className="smartparts-logo-container">
         {props.logo ? renderLogo(props.logo) : ""}
       </div>
-          <p>
+          <p className="form-file-list">
             {props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: "}
             {Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""}
           </p>
