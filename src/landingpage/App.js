@@ -10,7 +10,7 @@ import './app.css';
 const App = () => {
     const fields = ["Appointment Name", "select[1]", "Library Name", "select[0]!", "Comments", "Range[0_12_1_Meeting Length (Hours)]", "Date", "checkbox", "checkbox", "select!", "select", "checkbox[ Include Lunch Order]", "radios"];
 
-    const fileTypes = ["wav", "jpg", "jpeg", "ics", "dmg"];
+    const fileTypes = ["wav", "jpg", "jpeg", "ics"];
     
     const printData = (data) => { 
         for (var value of data.values()) {
@@ -92,6 +92,7 @@ const App = () => {
                                 ]}
                                 select={selectObjs}
                                 radios={radioObjs}
+                                fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 1}}
                             />
                         </div>
                         <div>

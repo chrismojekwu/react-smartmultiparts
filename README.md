@@ -104,7 +104,9 @@ const selectObj2 = {
 You can require applicable input types by using an exclamation point at the end of its field name string.
 
 ### Text Config
-The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", "errorMessage", & "invalidExt". If the textConfig is supplied, unwanted values should be empty strings.
+The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", "errorMessage", "invalidExt", "logoAlt", "submitLabel", "fileSizeLabel", & "fileSizeMessage". 
+
+If the textConfig is supplied, unwanted values should be empty strings.
 #### File Type Label
 Default - *Supported File Types:*
 #### File Input Label
@@ -119,6 +121,10 @@ Default - *Invalid Extension*
 Default - *Company Logo*
 #### Submit Label
 Default - *Submit*
+#### File Size Label
+Default - *File Size Limit:*
+#### File Size Over Limit Message
+Default - *File Over Limit - ${fileSizeProp} MB*
 
 
 ## Styling:
@@ -132,6 +138,8 @@ You can style the various aspects of the form using CSS Class selectors.
 Body/Container - .form-body
 
 File List - .form-file-list
+
+File Size Limit(s) - .form-file-limits
 
 Logo - .form-logo-img
 

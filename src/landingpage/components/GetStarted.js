@@ -16,6 +16,10 @@ const GetStarted = () => {
             selector: ".form-file-list"
         },
         {
+            label: "File Size Limit(s)",
+            selector: ".form-file-limits"
+        },
+        {
             label: "Logo",
             selector: ".form-logo-img"
         },

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import FormFields from "../FormFields/FormFields";
 import { fileTypes, extension } from '../util/helpers';
-
 import "../Form.css";
 
 export const FormTwo = (props) => {
@@ -9,17 +8,26 @@ export const FormTwo = (props) => {
   const [fileName, setFileName] = useState("");
   const [disabled, setDisabled] = useState(false);
 
-  //function to render correct form component for file type
   const detectFile = () => {
     if (fileType === "") return "";
+    const ext = fileType[0].name ? extension(fileType[0].name) : "";
     if (Object.keys(props.fileTypes).length === 0) { 
       if (props.textConfig === undefined || props.textConfig.errorMessage === "") {
         return <span id="smartparts-error">Internal Error</span>;
       } else {
         return <span id="smartparts-error">{props.textConfig.errorMessage}</span>;
       }
-    }
-    const ext = fileType[0].name ? extension(fileType[0].name) : "";
+    };
+    // bytes to mb (bytes / 1e+6)
+    if (props.fileSize !== undefined) {
+      if (props.fileSize[ext] < (fileType[0].size / 1e+6)) {
+        if (props.textConfig === undefined || props.textConfig.fileSizeMessage === "") {
+          return <span id="smartparts-error">File Over Limit - {props.fileSize} MB</span>;
+        } else {
+          return <span id="smartparts-error">{props.textConfig.fileSizeMessage}</span>
+        }
+      }
+    };
     const re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
     if (re.test(ext)) {
@@ -108,6 +116,21 @@ export const FormTwo = (props) => {
     return <img src={path} className="form-logo-img" alt={props.textConfig === undefined ? "Company Logo" : props.textConfig.logoAlt}/>
   };
 
+  const handleFileLabel = () => {
+    if (props.fileSize !== undefined && props.textConfig !== undefined && props.textConfig.fileSizeLabel !== "") {
+      return props.textConfig.fileSizeLabel; 
+    } else if (props.fileSize !== undefined) {
+      return "File Size Limit: ";
+    } else return "";
+  };
+
+  const handleFileSizeList = () => {
+    let sizeString = "";
+    for (const file in props.fileSize) {
+      sizeString +=  `.${file}: ${props.fileSize[file]} MB `
+    }
+    return sizeString;
+  };
 
   return (  
     <>
@@ -115,48 +138,51 @@ export const FormTwo = (props) => {
       <div className="smartparts-logo-container">
         {props.logo ? renderLogo(props.logo) : ""}
       </div>
-          <p className="form-file-list">
-            {props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: "}
-            {Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""}
-          </p>
-
-          <form
-            onSubmit={(e) => upload(e)}
-            className="smartparts-entry-form"
-            encType="multipart/form-data"
-            method="post"
-            name="upload"
-            disabled={disabled}
-          >
-            <label htmlFor="file form-label">
-              {props.textConfig !== undefined ? props.textConfig.inputLabel : "File:"}
-            </label>
-            <input
-              id="smartparts-file"
-              data-testid="smartparts-file"
-              type="file"
-              name="upload"
-              className="form-fileinput"
-              onChange={(e) => {
-                let file = handleFile(e.target.files);
-                if (file === null) {
-                  return false;
-                } else {
-                  setFileType(file);
-                  setFileName(file[0].name);
-                }
-              }}
-            />
-            <br />
-            {!disabled ? detectFile() : handleDisabled()}
-            <input 
-              id="smartparts-submit" 
-              type="submit" 
-              className="button form-button" 
-              disabled={disabled} 
-              value={props.textConfig === undefined ? "Submit" : props.textConfig.submitLabel} 
-            />
-          </form>
+      <p className="form-file-list">
+        {props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: "}
+        {Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""}
+      </p>
+      <div className="form-file-limits">
+        {handleFileLabel()}
+        {props.fileSize !== undefined ? handleFileSizeList() : ""}
+      </div>
+      <form
+        onSubmit={(e) => upload(e)}
+        className="smartparts-entry-form"
+        encType="multipart/form-data"
+        method="post"
+        name="upload"
+        disabled={disabled}
+      >
+        <label htmlFor="file form-label">
+          {props.textConfig !== undefined ? props.textConfig.inputLabel : "File:"}
+        </label>
+        <input
+          id="smartparts-file"
+          data-testid="smartparts-file"
+          type="file"
+          name="upload"
+          className="form-fileinput"
+          onChange={(e) => {
+            let file = handleFile(e.target.files);
+            if (file === null) {
+              return false;
+            } else {
+              setFileType(file);
+              setFileName(file[0].name);
+            }
+          }}
+        />
+        <br />
+        {!disabled ? detectFile() : handleDisabled()}
+        <input 
+          id="smartparts-submit" 
+          type="submit" 
+          className="button form-button" 
+          disabled={disabled} 
+          value={props.textConfig === undefined ? "Submit" : props.textConfig.submitLabel} 
+        />
+      </form>
       </div>
     </>
   );
