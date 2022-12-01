@@ -22,7 +22,7 @@ export const FormTwo = (props) => {
     if (props.fileSize !== undefined) {
       if (props.fileSize[ext] < (fileType[0].size / 1e+6)) {
         if (props.textConfig === undefined || props.textConfig.fileSizeMessage === "") {
-          return <span id="smartparts-error">File Over Limit - {props.fileSize} MB</span>;
+          return <span id="smartparts-error">File Over Limit - {props.fileSize[ext]} MB</span>;
         } else {
           return <span id="smartparts-error">{props.textConfig.fileSizeMessage}</span>
         }
