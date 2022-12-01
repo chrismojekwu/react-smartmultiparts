@@ -8,8 +8,6 @@ import CheckBox from "./input-components/Checkbox";
 import CheckboxObject from "./input-components/CheckboxObject/CheckboxObject";
 import Radios from "./input-components/Radios";
 
-//Add support for more input elements
-
 function FormFields(props) {
   const selectObjs = props.select;
   let selectCount = 0;
