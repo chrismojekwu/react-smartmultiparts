@@ -50,7 +50,7 @@ export const FormTwo = (props) => {
   const upload = (e) => {
     e.preventDefault();
     if (Object.keys(props.fileTypes).length === 0 || props.fileTypes === undefined || props.fileTypes === null) return false; 
-    const ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
+    const ext = fileType[0].name ? extension(fileType[0].name) : "";
     const data = new FormData();
     data.append('file', fileType[0]);
     const fieldArr = props.fileTypes[ext];

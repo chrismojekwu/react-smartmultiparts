@@ -21,7 +21,7 @@ const jpgFile = new File(["test"], "test.jpg", {
     type: "image/jpeg"
 });
 
-const mp3File = new File(["test"], "test.mp3", {
+const mp3File = new File(["test"], "te.st.mp3", {
     type: "audio/mpeg"
 });
 
