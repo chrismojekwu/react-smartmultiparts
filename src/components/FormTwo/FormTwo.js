@@ -120,14 +120,14 @@ export const FormTwo = (props) => {
     if (props.fileSize !== undefined && props.textConfig !== undefined && props.textConfig.fileSizeLabel !== "") {
       return props.textConfig.fileSizeLabel; 
     } else if (props.fileSize !== undefined) {
-      return "File Size Limit: ";
+      return "Size Limit: ";
     } else return "";
   };
 
   const handleFileSizeList = () => {
     let sizeString = "";
     for (const file in props.fileSize) {
-      sizeString +=  `.${file}: ${props.fileSize[file]} MB `
+      sizeString +=  `${file}: ${props.fileSize[file]} MB `
     }
     return sizeString;
   };
@@ -154,7 +154,7 @@ export const FormTwo = (props) => {
         name="upload"
         disabled={disabled}
       >
-        <label htmlFor="file form-label">
+        <label htmlFor="form-file-label" className="form-file-label">
           {props.textConfig !== undefined ? props.textConfig.inputLabel : "File:"}
         </label>
         <input

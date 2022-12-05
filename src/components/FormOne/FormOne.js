@@ -118,7 +118,7 @@ export const FormOne = (props) => {
     if (props.fileSize !== undefined && props.textConfig !== undefined && props.textConfig.fileSizeLabel !== "") {
       return props.textConfig.fileSizeLabel; 
     } else if (props.fileSize !== undefined) {
-      return "File Size Limit: ";
+      return "Size Limit: ";
     } else return "";
   };
  
@@ -144,7 +144,7 @@ export const FormOne = (props) => {
           name="upload"
           disabled={disabled}
         >
-          <label htmlFor="file form-label">
+          <label htmlFor="form-file-label" className="form-file-label">
             {props.textConfig !== undefined ? props.textConfig.inputLabel : "File:"}
           </label>
           <input

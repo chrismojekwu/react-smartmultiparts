@@ -113,6 +113,7 @@ const App = () => {
                                 ]}
                                 select={selectObjs}
                                 radios={radioObjs}
+                                fileSize={.5}
                             />
                         </div>       
                     </section>

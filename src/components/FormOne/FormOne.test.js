@@ -13,6 +13,16 @@ const printData = (data) => {
 
 const fileTypes = ["wav", "jpg", "jpeg", "mp3", "mp4", "png", "pdf"];
 
+const testConfig = {
+    typeLabel: "",
+    inputLabel: "",
+    disabled: "Test Form Disabled Message - Form One",
+    errorMessage: "Test Error Message - Form Two",
+    invalidExt: "Sorry we dont support that type of file.",
+    logoAlt: "",
+    submitLabel: "Send",
+};
+
 const jpgFile = new File(["test"], "test.jpg", {
     type: "image/jpeg"
 });
@@ -308,8 +318,6 @@ describe("Form One - Empty Fields", () => {
     });
 });
 
-
-
 describe("Form One - Required Inputs", () => {
 
     test('it renders a required text area when "!" is used', () => {
@@ -393,13 +401,6 @@ describe("Form One - Messages/Inactive Behavior", () => {
 
     test('user disabled message', () => {
         const fileTypes = ["mp3"];
-        
-        const testConfig = {
-            typeLabel: "",
-            inputLabel: "",
-            disabled: "Test Form Disabled Message - Form One",
-            errorMessage: "Test Error Message - Form Two"
-        };
 
         render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}} textConfig={testConfig}/>);
 
@@ -414,16 +415,6 @@ describe("Form One - Messages/Inactive Behavior", () => {
 
     test('text config button value/invalid ext', () => {
         const fileTypes = ["wav"];
-        
-        const testConfig = {
-            typeLabel: "",
-            inputLabel: "",
-            disabled: "Test Form Disabled Message - Form One",
-            errorMessage: "Test Error Message - Form Two",
-            invalidExt: "Sorry we dont support that type of file.",
-            logoAlt: "",
-            submitLabel: "Send",
-        };
 
         render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}} textConfig={testConfig}/>);
 
