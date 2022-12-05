@@ -170,7 +170,7 @@ export const FormOne = (props) => {
             type="submit" 
             value={props.textConfig === undefined ? "Submit" : props.textConfig.submitLabel} 
             className="button form-button" 
-            disabled={disabled}
+            disabled={fileType === "" ? true : disabled}
           />  
         </form>
       </div>
