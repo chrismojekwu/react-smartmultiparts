@@ -872,7 +872,7 @@ var FormTwo = function FormTwo(props) {
   var upload = function upload(e) {
     e.preventDefault();
     if (Object.keys(props.fileTypes).length === 0 || props.fileTypes === undefined || props.fileTypes === null) return false;
-    var ext = fileType[0].name ? fileType[0].name.split(".")[1].toLowerCase() : "";
+    var ext = fileType[0].name ? extension(fileType[0].name) : "";
     var data = new FormData();
     data.append('file', fileType[0]);
     var fieldArr = props.fileTypes[ext];
