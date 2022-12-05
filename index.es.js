@@ -357,15 +357,19 @@ var ObjectCheckbox = function ObjectCheckbox(props) {
   };
 
   var handleString = function handleString(string, checked) {
-    var arr = props.data.split("&=");
-
-    if (checked) {
-      arr.push(string);
+    if (props.data === "") {
+      props.setData(string);
     } else {
-      arr.splice(arr.lastIndexOf(string), 1);
+      var arr = props.data.split("&=");
+
+      if (checked) {
+        arr.push(string);
+      } else {
+        arr.splice(arr.lastIndexOf(string), 1);
+      }
+      var newData = arr.join("&=");
+      props.setData(newData);
     }
-    var newData = arr.join("&=");
-    props.setData(newData);
   };
 
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
@@ -662,11 +666,11 @@ var FormOne = function FormOne(props) {
   var _useState5 = useState(false),
       _useState6 = _slicedToArray(_useState5, 2),
       disabled = _useState6[0],
-      setDisabled = _useState6[1]; //function to render correct form component for file type
-
+      setDisabled = _useState6[1];
 
   var detectFile = function detectFile() {
     if (fileType === "") return "";
+    var ext = fileType[0].name ? extension(fileType[0].name) : "";
 
     if (Object.keys(props.fileTypes).length === 0 || props.fields === []) {
       if (props.textConfig === undefined || props.textConfig.errorMessage === "") {
@@ -680,7 +684,19 @@ var FormOne = function FormOne(props) {
       }
     }
 
-    var ext = fileType[0].name ? extension(fileType[0].name) : "";
+    if (props.fileSize !== undefined) {
+      if (props.fileSize < fileType[0].size / 1e+6) {
+        if (props.textConfig === undefined || props.textConfig.fileSizeMessage === "") {
+          return /*#__PURE__*/React.createElement("span", {
+            id: "smartparts-error"
+          }, "File Over Limit - ", props.fileSize, " MB");
+        } else {
+          return /*#__PURE__*/React.createElement("span", {
+            id: "smartparts-error"
+          }, props.textConfig.fileSizeMessage);
+        }
+      }
+    }
     var re = new RegExp(props.fileTypes.join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
 
@@ -770,11 +786,23 @@ var FormOne = function FormOne(props) {
     });
   };
 
+  var handleFileLabel = function handleFileLabel() {
+    if (props.fileSize !== undefined && props.textConfig !== undefined && props.textConfig.fileSizeLabel !== "") {
+      return props.textConfig.fileSizeLabel;
+    } else if (props.fileSize !== undefined) {
+      return "Size Limit: ";
+    } else return "";
+  };
+
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "smartparts-container form-body"
   }, /*#__PURE__*/React.createElement("div", {
     className: "smartparts-logo-container"
-  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React.createElement("p", null, props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: ", fileTypes(props.fileTypes)), /*#__PURE__*/React.createElement("form", {
+  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React.createElement("p", {
+    className: "form-file-list"
+  }, props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: ", fileTypes(props.fileTypes)), /*#__PURE__*/React.createElement("div", {
+    className: "form-file-limits"
+  }, handleFileLabel(), props.fileSize !== undefined ? "".concat(props.fileSize, " MB") : ""), /*#__PURE__*/React.createElement("form", {
     onSubmit: function onSubmit(e) {
       return dataReturn(e);
     },
@@ -784,7 +812,8 @@ var FormOne = function FormOne(props) {
     name: "upload",
     disabled: disabled
   }, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "file form-label"
+    htmlFor: "form-file-label",
+    className: "form-file-label"
   }, props.textConfig !== undefined ? props.textConfig.inputLabel : "File:"), /*#__PURE__*/React.createElement("input", {
     id: "smartparts-file",
     "data-testid": "smartparts-file",
@@ -806,7 +835,7 @@ var FormOne = function FormOne(props) {
     type: "submit",
     value: props.textConfig === undefined ? "Submit" : props.textConfig.submitLabel,
     className: "button form-button",
-    disabled: disabled
+    disabled: fileType === "" ? true : disabled
   }))));
 };
 
@@ -824,11 +853,11 @@ var FormTwo = function FormTwo(props) {
   var _useState5 = useState(false),
       _useState6 = _slicedToArray(_useState5, 2),
       disabled = _useState6[0],
-      setDisabled = _useState6[1]; //function to render correct form component for file type
-
+      setDisabled = _useState6[1];
 
   var detectFile = function detectFile() {
     if (fileType === "") return "";
+    var ext = fileType[0].name ? extension(fileType[0].name) : "";
 
     if (Object.keys(props.fileTypes).length === 0) {
       if (props.textConfig === undefined || props.textConfig.errorMessage === "") {
@@ -842,7 +871,19 @@ var FormTwo = function FormTwo(props) {
       }
     }
 
-    var ext = fileType[0].name ? extension(fileType[0].name) : "";
+    if (props.fileSize !== undefined) {
+      if (props.fileSize[ext] < fileType[0].size / 1e+6) {
+        if (props.textConfig === undefined || props.textConfig.fileSizeMessage === "") {
+          return /*#__PURE__*/React.createElement("span", {
+            id: "smartparts-error"
+          }, "File Over Limit - ", props.fileSize[ext], " MB");
+        } else {
+          return /*#__PURE__*/React.createElement("span", {
+            id: "smartparts-error"
+          }, props.textConfig.fileSizeMessage);
+        }
+      }
+    }
     var re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
     if (!ext) return props.textConfig !== undefined ? props.textConfig.invalidExt : "Invalid Extension";
 
@@ -933,11 +974,33 @@ var FormTwo = function FormTwo(props) {
     });
   };
 
+  var handleFileLabel = function handleFileLabel() {
+    if (props.fileSize !== undefined && props.textConfig !== undefined && props.textConfig.fileSizeLabel !== "") {
+      return props.textConfig.fileSizeLabel;
+    } else if (props.fileSize !== undefined) {
+      return "Size Limit: ";
+    } else return "";
+  };
+
+  var handleFileSizeList = function handleFileSizeList() {
+    var sizeString = "";
+
+    for (var file in props.fileSize) {
+      sizeString += "".concat(file, ": ").concat(props.fileSize[file], " MB ");
+    }
+
+    return sizeString;
+  };
+
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "smartparts-container form-body"
   }, /*#__PURE__*/React.createElement("div", {
     className: "smartparts-logo-container"
-  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React.createElement("p", null, props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: ", Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""), /*#__PURE__*/React.createElement("form", {
+  }, props.logo ? renderLogo(props.logo) : ""), /*#__PURE__*/React.createElement("p", {
+    className: "form-file-list"
+  }, props.textConfig !== undefined ? props.textConfig.typeLabel : "Supported File Types: ", Object.keys(props.fileTypes) !== undefined ? fileTypes(Object.keys(props.fileTypes)) : ""), /*#__PURE__*/React.createElement("div", {
+    className: "form-file-limits"
+  }, handleFileLabel(), props.fileSize !== undefined ? handleFileSizeList() : ""), /*#__PURE__*/React.createElement("form", {
     onSubmit: function onSubmit(e) {
       return upload(e);
     },
@@ -947,7 +1010,8 @@ var FormTwo = function FormTwo(props) {
     name: "upload",
     disabled: disabled
   }, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "file form-label"
+    htmlFor: "form-file-label",
+    className: "form-file-label"
   }, props.textConfig !== undefined ? props.textConfig.inputLabel : "File:"), /*#__PURE__*/React.createElement("input", {
     id: "smartparts-file",
     "data-testid": "smartparts-file",
