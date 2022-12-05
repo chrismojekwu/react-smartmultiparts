@@ -33,6 +33,8 @@ const App = () => {
         invalidExt: "Sorry we cant handle that file.",
         logoAlt: "",
         submitLabel: "Send",
+        fileSizeLabel: "",
+        fileSizeMessage: ""
     };
 
     const selectObjs = [
@@ -90,6 +92,7 @@ const App = () => {
                                 ]}
                                 select={selectObjs}
                                 radios={radioObjs}
+                                fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: .52}}
                             />
                         </div>
                         <div>
@@ -110,6 +113,7 @@ const App = () => {
                                 ]}
                                 select={selectObjs}
                                 radios={radioObjs}
+                                fileSize={.5}
                             />
                         </div>       
                     </section>

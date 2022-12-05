@@ -17,6 +17,18 @@ const formObj = {
     jpg: ["Title", "Subject", "Source"]
 };
 
+const jpgFile = new File(["test"], "test.jpg", {
+    type: "image/jpeg"
+});
+
+const mp3File = new File(["test"], "te.st.mp3", {
+    type: "audio/mpeg"
+});
+
+const wavFile = new File(["test"], "test.wav", {
+    type: "audio/wav"
+});
+
 describe("Form Two - Renders", () => {
     
     test('renders without crashing',() => {
@@ -37,20 +49,12 @@ describe("Form Two - Inputs", () => {
     test('renders the correct "text" type inputs for different file types',() => {        
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
 
-        const jpgFile = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
-
         wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         for(let i = 0; i < formObj.jpg.length; i++){
             const element = wrapper.find(`#smartparts-text-input-${i}`);
             expect(element.html()).toEqual(`<input type="text" class="form-text-input" name="${formObj.jpg[i].toLowerCase()}-${i}" id="smartparts-text-input-${i}" data-testid="smartparts-text-input-${i}">`);
         };
-
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
 
         wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
 
@@ -60,10 +64,6 @@ describe("Form Two - Inputs", () => {
         };
 
         // not sure why this isnt working 
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
-
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
         for(let i = 0; i < formObj.wav.length; i++){
@@ -82,10 +82,6 @@ describe("Form Two - Inputs", () => {
         
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
 
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
-
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
         expect(wrapper.exists('#smartparts-comments-2')).toBe(true);
@@ -99,10 +95,6 @@ describe("Form Two - Inputs", () => {
         };
         
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
-
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
 
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
@@ -123,18 +115,10 @@ describe("Form Two - Inputs", () => {
         };
         
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData} select={[selectObj]}/>);
-
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
         
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         expect(wrapper.exists({name: "select-2"})).toBeFalsy();
-
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
 
         wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
         
@@ -166,18 +150,10 @@ describe("Form Two - Inputs", () => {
         };
         
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData} select={[selectObj, selectObj2]}/>);
-
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
         
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         expect(wrapper.exists({name: "select-2"})).toBeFalsy();
-
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
 
         wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
         
@@ -233,11 +209,6 @@ describe("Form Two - Inputs", () => {
         };
 
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData} logo={"/fakepath.jpg"}/>);
-
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
-
         
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
         const inputString = wrapper.find('#smartparts-range-input-2').html();
@@ -251,10 +222,6 @@ describe("Form Two - Inputs", () => {
         };
 
         render(<FormTwo fileTypes={formObj} cb={printData}/>);
-
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
 
         const fileInput = screen.getByTestId("smartparts-file");
 
@@ -272,12 +239,8 @@ describe("Form Two - Inputs", () => {
         };
         
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
-
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
         
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         expect(wrapper.find('#smartparts-date-input-3').html()).toEqual('<input type="date" name="date-3" id="smartparts-date-input-3" data-testid="smartparts-date-input-3" class="form-date-input" value="2099-01-01">');
     });
@@ -293,10 +256,6 @@ describe("Form Two - Inputs", () => {
         ];
 
         render(<FormTwo fileTypes={formObj} cb={printData} checkboxes={checks}/>);
-
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
 
         const fileInput = screen.getByTestId("smartparts-file");
 
@@ -327,10 +286,6 @@ describe("Form Two - Inputs", () => {
 
         render(<FormTwo fileTypes={formObj} cb={printData} radios={radioObjs}/>);
 
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
-
         const fileInput = screen.getByTestId("smartparts-file");
 
         fireEvent.change(fileInput, { target: { files: [wavFile] }});
@@ -356,10 +311,6 @@ describe("Form Two - Empty Object", () => {
         const fileTypes = {};
         const wrapper = mount(<FormTwo fileTypes={fileTypes} cb={printData}/>);
 
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
-
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
         expect((wrapper.find('#smartparts-error').text() === "Internal Error")).toBe(true);
@@ -369,10 +320,6 @@ describe("Form Two - Empty Object", () => {
         const fileTypes = {};
 
         const wrapper = mount(<FormTwo fileTypes={fileTypes} cb={printData} select={{}}/>);
-
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
 
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
@@ -391,11 +338,8 @@ describe("Form Two - Required Inputs", () => {
         };
 
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
 
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}})
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}})
 
         expect(wrapper.find('#smartparts-comments-4').html().includes("required"));
     });
@@ -408,11 +352,8 @@ describe("Form Two - Required Inputs", () => {
         };
 
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
 
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}})
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}})
 
         expect(wrapper.find('#smartparts-text-input-5').html().includes("required"));
     });
@@ -423,11 +364,8 @@ describe("Form Two - Required Inputs", () => {
         };
 
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData}/>);
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
 
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}})
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}})
 
         expect(wrapper.find('#smartparts-date-input-3').html().includes("required"));
     });
@@ -446,10 +384,6 @@ describe("Form Two - Required Inputs", () => {
         };
         
         const wrapper = mount(<FormTwo fileTypes={formObj} cb={printData} select={[selectObj]}/>);
-
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
 
         wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
         
@@ -471,10 +405,6 @@ describe("Form Two - Messages/Inactive Behavior", () => {
 
         const wrapper = mount(<FormTwo fileTypes={{}} cb={printData} textConfig={testConfig}/>);
 
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
-
         wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
         expect(wrapper.find('#smartparts-error').text()).toBe("Test Error Message - Form Two");
     });
@@ -485,10 +415,6 @@ describe("Form Two - Messages/Inactive Behavior", () => {
         };
 
         render(<FormTwo fileTypes={formObj} cb={printData}/>);
-
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
 
         const fileInput = screen.getByTestId("smartparts-file");
 
@@ -513,10 +439,6 @@ describe("Form Two - Messages/Inactive Behavior", () => {
 
         render(<FormTwo fileTypes={formObj} cb={printData} textConfig={testConfig}/>);
 
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
-
         const fileInput = screen.getByTestId("smartparts-file");
 
         fireEvent.change(fileInput, { target: { files: [mp3File] }});
@@ -530,10 +452,6 @@ describe("Form Two - Messages/Inactive Behavior", () => {
         const formObj = {
             wav: ["Sup"],
         };
-
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
         
         const testConfig = {
             typeLabel: "",

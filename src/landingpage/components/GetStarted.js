@@ -12,12 +12,24 @@ const GetStarted = () => {
             selector: ".form-body"
         },
         {
-            label: "Labels",
-            selector: ".form-label"
+            label: "File List",
+            selector: ".form-file-list"
+        },
+        {
+            label: "File Size Limit(s)",
+            selector: ".form-file-limits"
+        },
+        {
+            label: "Logo",
+            selector: ".form-logo-img"
         },
         {
             label: "File Input",
             selector: ".form-fileinput"
+        },
+        {
+            label: "Labels",
+            selector: ".form-label"
         },
         {
             label: "Filename",
@@ -90,10 +102,6 @@ const GetStarted = () => {
         {
             label: "Submit Button",
             selector: ".form-button"
-        },
-        {
-            label: "Logo",
-            selector: ".form-logo-img"
         },
     ];
 
@@ -200,9 +208,18 @@ const GetStarted = () => {
             <>
                 <h3 className="heading">Configuration:</h3>
                 <div className="configuration">
+                    <h4>Required Attribute</h4>
+                    <span>
+                    You can require applicable input types by using an exclamation point at the end of its field name string.
+                    </span>
+                    <h4>File Size Limit(s)</h4>
+                    <span>
+                    You can specify a file size limit in MB to both forms by using the "fileSize" prop. FormOne takes a single number to be applied to all file types. FormTwo takes an object of key/value pairs using the extension as a key and limit as value.
+                    </span>
                     <h4>Text Config</h4>
                     <span>
-                    The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", "errorMessage", "invalidExt", "logoAlt", and "submitLabel". If the textConfig is supplied, unwanted values should be empty strings.
+                    The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", "errorMessage", "invalidExt", "logoAlt", "submitLabel", "fileSizeLabel", & "fileSizeMessage". 
+                    If the textConfig is supplied, unwanted values should be empty strings.
                     </span>
                 </div>
             </>

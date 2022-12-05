@@ -13,6 +13,28 @@ const printData = (data) => {
 
 const fileTypes = ["wav", "jpg", "jpeg", "mp3", "mp4", "png", "pdf"];
 
+const testConfig = {
+    typeLabel: "",
+    inputLabel: "",
+    disabled: "Test Form Disabled Message - Form One",
+    errorMessage: "Test Error Message - Form Two",
+    invalidExt: "Sorry we dont support that type of file.",
+    logoAlt: "",
+    submitLabel: "Send",
+};
+
+const jpgFile = new File(["test"], "test.jpg", {
+    type: "image/jpeg"
+});
+
+const mp3File = new File(["test"], "test.mp3", {
+    type: "audio/mpeg"
+});
+
+const wavFile = new File(["test"], "test.wav", {
+    type: "audio/wav"
+});
+
 describe("Form One Renders", () => { 
 
     test('renders without crashing', () => {
@@ -38,11 +60,8 @@ describe("Form One - Inputs", () => {
         const fields = ["Title", "Submitee", "Name"];
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
 
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         for(let i = 0; i < fields.length; i++){
             const element = wrapper.find(`#smartparts-text-input-${i}`);
@@ -54,12 +73,9 @@ describe("Form One - Inputs", () => {
     test('it renders the correct text area when file is uploaded with comments field', () => {
         const fields = ["cOmmEnts"];
 
-        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
+        const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
         
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         expect(wrapper.exists('#smartparts-comments-0')).toBe(true);
     });
@@ -68,11 +84,8 @@ describe("Form One - Inputs", () => {
         const fields = ["filEnaMe"];
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
         
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         expect(wrapper.find('#smartparts-filename-span-0').text()).toBe(`Filename: test.jpg`);
     });
@@ -87,11 +100,8 @@ describe("Form One - Inputs", () => {
         };
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} select={[selectObj]}/>);
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
         
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         expect(wrapper.exists({name: "select-1"})).toBeTruthy();
         
@@ -118,11 +128,8 @@ describe("Form One - Inputs", () => {
         };
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} select={[selectObj, selectObj2]}/>);
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
         
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         expect(wrapper.exists({name: "select-0"})).toBeTruthy();
         
@@ -191,10 +198,6 @@ describe("Form One - Inputs", () => {
 
         render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} logo={"/fakepath.jpg"}/>);
 
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
-
         const fileInput = screen.getByTestId("smartparts-file");
 
         fireEvent.change(fileInput, { target: { files: [mp3File] }});
@@ -209,11 +212,8 @@ describe("Form One - Inputs", () => {
         const fields = ["dAtE"];
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
         
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
         
         expect(wrapper.find('#smartparts-date-input-0').html()).toEqual('<input type="date" name="date-0" id="smartparts-date-input-0" data-testid="smartparts-date-input-0" class="form-date-input" value="2099-01-01">');
     });
@@ -224,10 +224,6 @@ describe("Form One - Inputs", () => {
         const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png","pdf"];
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>);
-
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
 
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
         const inputString = wrapper.find('#smartparts-range-input-2').html();
@@ -246,10 +242,6 @@ describe("Form One - Inputs", () => {
         const fileTypes = ["wav","jpg","jpeg","mp3","mp4","png","pdf"];
 
         render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} checkboxes={checks}/>);
-
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
 
         const fileInput = screen.getByTestId("smartparts-file");
 
@@ -280,10 +272,6 @@ describe("Form One - Inputs", () => {
 
         render(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} radios={radioObjs}/>);
 
-        const wavFile = new File(["test"], "test.wav", {
-            type: "audio/wav"
-        });
-
         const fileInput = screen.getByTestId("smartparts-file");
 
         fireEvent.change(fileInput, { target: { files: [wavFile] }});
@@ -312,11 +300,7 @@ describe("Form One - Empty Fields", () => {
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
 
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
-
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
     });
@@ -328,17 +312,11 @@ describe("Form One - Empty Fields", () => {
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
 
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
-
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
     });
 });
-
-
 
 describe("Form One - Required Inputs", () => {
 
@@ -346,11 +324,8 @@ describe("Form One - Required Inputs", () => {
         const fields = ["cOmMenTS!"];
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
 
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}})
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}})
 
         expect(wrapper.find('#smartparts-comments-0').html().includes("required"));
     });
@@ -359,11 +334,8 @@ describe("Form One - Required Inputs", () => {
         const fields = ["Required Text Input!"];
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
 
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}})
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}})
 
         expect(wrapper.find('#smartparts-text-input-0').html().includes("required"));
     });
@@ -372,11 +344,8 @@ describe("Form One - Required Inputs", () => {
         const fields = ["dAtE!"];       
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData}/>)
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
 
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}})
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}})
 
         expect(wrapper.find('#smartparts-date-input-0').html().includes("required"));
     });
@@ -391,11 +360,8 @@ describe("Form One - Required Inputs", () => {
         };
 
         const wrapper = mount(<FormOne fields={fields} fileTypes={fileTypes} cb={printData} select={[selectObj]}/>);
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
         
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
         expect(wrapper.exists({name: "select-1"})).toBeTruthy();
 
@@ -414,20 +380,13 @@ describe("Form One - Messages/Inactive Behavior", () => {
         };
 
         const wrapper = mount(<FormOne fields={[]} fileTypes={[]} cb={printData} textConfig={testConfig}/>);
-        const file = new File(["test"], "test.jpg", {
-            type: "image/jpeg"
-        });
         
-        wrapper.find('input').first().simulate('change', {target: {files: [file]}});
+        wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
         expect(wrapper.find('#smartparts-error').text()).toBe("Test Error Message - Form One");
     });
 
     test('form is disabled after submit', () => {
         const fileTypes = ["mp3"];
-
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
 
         render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData}/>);
 
@@ -443,17 +402,6 @@ describe("Form One - Messages/Inactive Behavior", () => {
     test('user disabled message', () => {
         const fileTypes = ["mp3"];
 
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
-        
-        const testConfig = {
-            typeLabel: "",
-            inputLabel: "",
-            disabled: "Test Form Disabled Message - Form One",
-            errorMessage: "Test Error Message - Form Two"
-        };
-
         render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}} textConfig={testConfig}/>);
 
         const fileInput = screen.getByTestId("smartparts-file");
@@ -467,20 +415,6 @@ describe("Form One - Messages/Inactive Behavior", () => {
 
     test('text config button value/invalid ext', () => {
         const fileTypes = ["wav"];
-
-        const mp3File = new File(["test"], "test.mp3", {
-            type: "audio/mpeg"
-        });
-        
-        const testConfig = {
-            typeLabel: "",
-            inputLabel: "",
-            disabled: "Test Form Disabled Message - Form One",
-            errorMessage: "Test Error Message - Form Two",
-            invalidExt: "Sorry we dont support that type of file.",
-            logoAlt: "",
-            submitLabel: "Send",
-        };
 
         render(<FormOne fields={[]} fileTypes={fileTypes} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}} textConfig={testConfig}/>);
 

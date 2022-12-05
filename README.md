@@ -76,7 +76,7 @@ See Below:
 <FormTwo ... checkboxes={...}/>
 ```
 
-**Select** - (*select*, *select[index]*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. Form One will render selects based on their position in the fields array and the order inside of the select objects array. If using Form Two you must use "select[index]", the index should correspond with the index of the select object needed for that file type.
+**Select** - (*select*, *select[index]*) - You can generate a select field by using "select" in a fields array. You must provide a matching array of select objects to correspond with the number of selects you would like to generate. FormOne will render selects based on their position in the fields array and the order inside of the select objects array. If using FormTwo you must use "select[index]", the index should correspond with the index of the select object needed for that file type.
 
 A select object requires 3 key value pairs:  
 >"query", your question for the select.  
@@ -103,8 +103,13 @@ const selectObj2 = {
 ### Required Attribute
 You can require applicable input types by using an exclamation point at the end of its field name string.
 
+### File Size Limit(s)
+You can specify a file size limit in MB to both forms by using the "fileSize" prop. FormOne takes a single number to be applied to all file types. FormTwo takes an object of key/value pairs using the extension as a key and limit as value.
+
 ### Text Config
-The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", "errorMessage", & "invalidExt". If the textConfig is supplied, unwanted values should be empty strings.
+The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", "errorMessage", "invalidExt", "logoAlt", "submitLabel", "fileSizeLabel", & "fileSizeMessage". 
+
+If the textConfig is supplied, unwanted values should be empty strings.
 #### File Type Label
 Default - *Supported File Types:*
 #### File Input Label
@@ -119,6 +124,10 @@ Default - *Invalid Extension*
 Default - *Company Logo*
 #### Submit Label
 Default - *Submit*
+#### File Size Label
+Default - *File Size Limit:*
+#### File Size Over Limit Message
+Default - *File Over Limit - ${fileSizeProp} MB*
 
 
 ## Styling:
@@ -131,9 +140,15 @@ You can style the various aspects of the form using CSS Class selectors.
 
 Body/Container - .form-body
 
-Labels - .form-label
+File List - .form-file-list
+
+File Size Limit(s) - .form-file-limits
+
+Logo - .form-logo-img
 
 File Input - .form-fileinput
+
+Labels - .form-label
 
 Filename - .form-filename
 
@@ -170,6 +185,4 @@ Radio Input Div - .form-radio-input-div
 Radio Input - .form-radio-radio
 
 Submit Button - .form-button
-
-Logo - .form-logo-img
 
