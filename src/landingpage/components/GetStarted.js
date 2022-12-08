@@ -7,6 +7,10 @@ const GetStarted = () => {
     const formTwo = [`import {FormTwo} from 'react-smartmultiparts';`, <p>const printData = (data) {"=>"} {"{"}<br/>&emsp;&emsp;console.log(data);<br/>{"}"};</p>, <p>const formObj = {"{"}<br/>&emsp;&emsp;wav: ["Title", "Artist", "Comments"],<br/>&emsp;&emsp;mp3: ["Title", "Artist"],<br/>&emsp;&emsp;jpg: ["Title", "Subject", "Source"]<br/>{"}"};</p>, `<FormTwo fileTypes={formObj} cb={printData}/>`];
     const select = [<p>const selectObj = {"{"}<br/>&emsp;&emsp;query: "Whats your name?",<br/>&emsp;&emsp;select: ["Chris", "Emeka", "Maya", "Pat", "Arthur"],<br/>&emsp;&emsp;placeholder: "Lorem"<br/>{"}"};</p>,`<FormOne ... select={selectObj}/>`];
     const stylingOptions = [
+        {
+            label: "Logo",
+            selector: ".form-logo-img"
+        },
         {                            
             label: "Body/Container",
             selector: ".form-body"
@@ -230,9 +234,6 @@ const GetStarted = () => {
             <>
                 <h3 className="heading">Styling:</h3>
                 <div className="styling">
-                    <span>
-                        <span className="bold">Logo</span> - You can provide a "logo" prop using a path to an image of your choice. That element can be styled using the "form-logo-img" class selector.
-                    </span>
                     <span className="bold">
                     You can style the various aspects of the form using CSS Class selectors.
                     </span>
