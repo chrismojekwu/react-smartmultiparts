@@ -107,7 +107,7 @@ You can require applicable input types by using an exclamation point at the end 
 You can specify a file size limit in MB to both forms by using the "fileSize" prop. FormOne takes a single number to be applied to all file types. FormTwo takes an object of key/value pairs using the extension as a key and limit as value.
 
 ### Text Config
-The user can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", "errorMessage", "invalidExt", "logoAlt", "submitLabel", "fileSizeLabel", & "fileSizeMessage". 
+You can supply a textConfig prop containing key/value pairs for "typeLabel", "inputLabel", "disabled", "errorMessage", "invalidExt", "logoAlt", "submitLabel", "fileSizeLabel", & "fileSizeMessage". 
 
 If the textConfig is supplied, unwanted values should be empty strings.
 #### File Type Label
