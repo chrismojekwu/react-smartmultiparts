@@ -17,7 +17,10 @@ const CheckBox = (props) => {
 
     const renderReq = (req) => {
         return req ? (
-            <>
+            <div 
+                className="smartparts-checkbox-wrapper"
+                onClick={() => handleCheck()}
+            >
                 <input 
                     type="checkbox" 
                     className="form-checkbox"
@@ -35,9 +38,12 @@ const CheckBox = (props) => {
                 > 
                     {props.value}
                 </label>
-            </>
+            </div>
         ) : (
-            <>
+            <div 
+                className="smartparts-checkbox-wrapper"
+                onClick={() => handleCheck()}
+            >
                 <input 
                     type="checkbox" 
                     className="form-checkbox"
@@ -54,7 +60,7 @@ const CheckBox = (props) => {
                 > 
                     {props.value}
                 </label>
-            </>
+            </div>
         );
     };
     return renderReq(props.req);
