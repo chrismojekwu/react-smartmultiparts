@@ -16,9 +16,7 @@ module.exports = {
     static: {
       directory: path.resolve(__dirname, 'dist'),
     },
-    /*contentBase: path.resolve(__dirname, 'dist'),*/
     open: true,
-    /*clientLogLevel: 'silent',*/
     port: 9000,
     hot: true,
     historyApiFallback: true
