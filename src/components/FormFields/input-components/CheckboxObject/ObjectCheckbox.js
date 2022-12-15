@@ -31,7 +31,7 @@ const ObjectCheckbox = (props) => {
   return (
     <div 
       className="smartparts-object-checkbox-wrapper"
-      onClick={(e) => handleCheck(e)}
+      onClick={() => handleCheck({target:{value: props.value}})}
     >
       <input
         type="checkbox"
