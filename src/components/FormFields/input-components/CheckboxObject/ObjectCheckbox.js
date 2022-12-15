@@ -29,7 +29,10 @@ const ObjectCheckbox = (props) => {
   };
 
   return (
-    <div>
+    <div 
+      className="smartparts-object-checkbox-wrapper"
+      onClick={(e) => handleCheck(e)}
+    >
       <input
         type="checkbox"
         className="form-checkbox-object-checkbox"
