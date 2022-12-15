@@ -1,0 +1,14 @@
+/node_modules
+/coverage
+/.storybook
+/__mocks___
+/build
+/src
+.travis.yml
+babel.config.cjs
+package-lock.json
+package.json
+README.node_modules
+rollup.config.js
+webpack.config.js
+webpack.prod.js

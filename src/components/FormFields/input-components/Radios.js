@@ -35,6 +35,7 @@ const Radios = (props) => {
                         return (
                             <div
                                 key={`radio-query-radio-${props.index}-${i}`}
+                                onClick={(e) => handleChecked({target:{value: x}}, i)}
                             >
                                 <input 
                                     data-testid="smartparts-radio-query-radio"
