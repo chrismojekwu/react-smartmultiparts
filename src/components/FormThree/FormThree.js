@@ -3,7 +3,7 @@ import FormFields from "../FormFields/FormFields";
 import { fileTypes, extension } from '../util/helpers';
 import "../Form.css";
 
-export const FormTwo = (props) => {
+export const FormThree = (props) => {
   const [fileType, setFileType] = useState("");
   const [fileName, setFileName] = useState("");
   const [disabled, setDisabled] = useState(false);

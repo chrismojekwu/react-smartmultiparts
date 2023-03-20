@@ -14,7 +14,7 @@ module.exports = {
   },
   devServer: {
     static: {
-      directory: path.resolve(__dirname, 'dist'),
+      directory:  path.resolve(__dirname, 'src', 'landingpage'),
     },
     open: true,
     port: 9000,
