@@ -93,8 +93,8 @@ const App = () => {
                                 ]}
                                 select={selectObjs}
                                 radios={radioObjs}
-                                fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: .52}}
-                                fileLimit={4}
+                                fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 100}}
+                                fileLimit={5}
                             />
                         </div>
                         <div>
