@@ -11,6 +11,8 @@ export const FormThree = (props) => {
   const detectFile = () => {
     // validate amount of files allowed
     const els = [];
+    const fileExtensions = [];
+
     if (fileType === "") return "";
     if (fileType.length > props.fileLimit) {
         return <span id="smartparts-error">Over File Limit - Maximum {props.fileLimit} Files</span>;
@@ -22,14 +24,14 @@ export const FormThree = (props) => {
         return <span id="smartparts-error">{props.textConfig.errorMessage}</span>;
       }
     };
-    const re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
+    //const re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
     // bytes to mb (bytes / 1e+6)
     //if (props.fileSize !== undefined) {
         // loop thru filetype apply the same operations
       for (let i = 0; i < fileType.length; i++) {
         let ext = extension(fileType[i].name);
         //check extenstion
-        console.log(re.test(ext), ext, fileType[i].name, re);
+        //console.log(re.test(ext), ext, fileType[i].name, re);
         if (!(new RegExp(Object.keys(props.fileTypes).join("|"), "gi")).test(ext)) {
           return `File type not supported - .${ext.toLowerCase()}`;
         }
@@ -55,18 +57,9 @@ export const FormThree = (props) => {
         }
         // collect formfields and push to els array willl likely need new field component
 
-        els.push(<span className="file-title">{fileType[i].name}</span>)
-        els.push(
-          <FormFields 
-            fields={props.fileTypes[ext]} 
-            filename={fileName} 
-            select={props.select} 
-            checkboxes={props.checkboxes} 
-            radios={props.radios}
-            formTwo={true}
-          />
-        )
-        console.log(fileType[i].name, extension(fileType[i].name));
+        //els.push(<span className="file-title">{fileType[i].name}</span>)
+        fileExtensions.push({ext, name: fileType[i].name});
+        //console.log(fileType[i].name, extension(fileType[i].name));
       }
 
     /*
@@ -86,7 +79,17 @@ export const FormThree = (props) => {
       return "File type not supported.";
     }
     */
-   return els.map(x => x);
+    return (
+      <FormFields 
+        fields={props.fileTypes}
+        files={fileExtensions} 
+        filename={fileName} 
+        select={props.select} 
+        checkboxes={props.checkboxes} 
+        radios={props.radios}
+        formThree={true}
+      />
+    );
   };
 
   const upload = (e) => {
