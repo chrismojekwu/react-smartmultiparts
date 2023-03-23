@@ -28,3 +28,8 @@ input[type^="text"].form-fileinput, textarea#smartparts-comments {
 #smartparts-submit {
   margin-top: 10px;
 }
+.multi-file-title {
+  font-weight: bold;
+  text-decoration: underline;
+  margin: 5px 0;
+}

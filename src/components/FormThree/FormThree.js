@@ -4,18 +4,18 @@ import { fileTypes, extension } from '../util/helpers';
 import "../Form.css";
 
 export const FormThree = (props) => {
-  const [fileType, setFileType] = useState("");
+  const [fileType, setFileType] = useState([]);
   const [fileName, setFileName] = useState("");
   const [disabled, setDisabled] = useState(false);
+  const fileExtensions = [];
 
   const detectFile = () => {
     // validate amount of files allowed
     const els = [];
-    const fileExtensions = [];
 
     if (fileType === "") return "";
     if (fileType.length > props.fileLimit) {
-        return <span id="smartparts-error">Over File Limit - Maximum {props.fileLimit} Files</span>;
+      return <span id="smartparts-error">Over File Limit - Maximum {props.fileLimit} Files</span>;
     }
     if (Object.keys(props.fileTypes).length === 0) { 
       if (props.textConfig === undefined || props.textConfig.errorMessage === "") {
@@ -24,14 +24,10 @@ export const FormThree = (props) => {
         return <span id="smartparts-error">{props.textConfig.errorMessage}</span>;
       }
     };
-    //const re = new RegExp(Object.keys(props.fileTypes).join("|"), "gi");
-    // bytes to mb (bytes / 1e+6)
-    //if (props.fileSize !== undefined) {
-        // loop thru filetype apply the same operations
+
       for (let i = 0; i < fileType.length; i++) {
         let ext = extension(fileType[i].name);
-        //check extenstion
-        //console.log(re.test(ext), ext, fileType[i].name, re);
+        //check extension
         if (!(new RegExp(Object.keys(props.fileTypes).join("|"), "gi")).test(ext)) {
           return `File type not supported - .${ext.toLowerCase()}`;
         }
@@ -55,30 +51,8 @@ export const FormThree = (props) => {
             }
           }
         }
-        // collect formfields and push to els array willl likely need new field component
-
-        //els.push(<span className="file-title">{fileType[i].name}</span>)
         fileExtensions.push({ext, name: fileType[i].name});
-        //console.log(fileType[i].name, extension(fileType[i].name));
       }
-
-    /*
-    if (re.test(ext)) {
-      return (
-        <FormFields 
-          fields={props.fileTypes[ext]} 
-          filename={fileName} 
-          select={props.select} 
-          checkboxes={props.checkboxes} 
-          radios={props.radios}
-          formTwo={true}
-        />
-      );
-    } else {
-      setFileType("INVALID");
-      return "File type not supported.";
-    }
-    */
     return (
       <FormFields 
         fields={props.fileTypes}
@@ -95,53 +69,53 @@ export const FormThree = (props) => {
   const upload = (e) => {
     e.preventDefault();
     if (Object.keys(props.fileTypes).length === 0 || props.fileTypes === undefined || props.fileTypes === null) return false; 
-    const ext = fileType[0].name ? extension(fileType[0].name) : "";
     const data = new FormData();
     data.append('file', fileType[0]);
-    const fieldArr = props.fileTypes[ext];
-
-    for(let i = 0; i < fieldArr.length; i++){
-      const fieldNameCleaned = fieldArr[i].replace("!", "");;
-      if (fieldArr[i] === "") {
-        continue;
-      } else if (new RegExp('filename', 'gi').test(fieldNameCleaned) === true) {
-        data.append('filename', fileName);
-      } else if (new RegExp('comments', 'gi').test(fieldNameCleaned) === true) {
-        data.append('comments', e.target[`textarea-${i}`].value);
-      } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true) { 
-        data.append('date', e.target[`date-${i}`].value);
-      } else if (new RegExp('radios', 'gi').test(fieldNameCleaned) === true) {
-        const val = e.target[`radio-query-${i}`] === undefined ? "" : e.target[`radio-query-${i}`].value;
-        if (val !== "") {
-          data.append(`radio_query_${i}`, e.target[`radio-query-${i}`].value);
-        }
-      } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
-        const val = e.target[`select-${i}`] === undefined ? "" : e.target[`select-${i}`].value;
-        if (val !== "") {
-          data.append(`select_${i}`, e.target[`select-${i}`].value);
-        }
-      } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
-        data.append(`range_${i}`, e.target[`range-${i}`].value);
-      } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
-        const val =
-          e.target[`checkbox-object-${i}`] !== undefined
-            ? e.target[`checkbox-object-${i}`].value
-            : e.target[`checkbox-${i}`] !== undefined
-            ? e.target[`checkbox-${i}`].value
-            : "";
-        if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && val !== "") {
-          if (val === "&=" || val === "") {
-            continue;
-          } else {
-            data.append(`checkboxObject_${i}`, val);
+    for(let i = 0; i < fileExtensions.length; i++){
+      const fieldArr = props.fileTypes[fileExtensions[i].ext];
+      for (let j = 0; j < fieldArr.length; j++) {
+        const fieldNameCleaned = fieldArr[j].replace("!", "");;
+        if (fieldArr[j] === "") {
+          continue;
+        } else if (new RegExp('filename', 'gi').test(fieldNameCleaned) === true) {
+          data.append(`filename-${parseInt(`${i}${j}`)}`, fileType[i].name);
+        } else if (new RegExp('comments', 'gi').test(fieldNameCleaned) === true) {
+          data.append('comments', e.target[`textarea-${parseInt(`${i}${j}`)}`].value);
+        } else if (new RegExp('date', 'gi').test(fieldNameCleaned) === true) { 
+          data.append('date', e.target[`date-${parseInt(`${i}${j}`)}`].value);
+        } else if (new RegExp('radios', 'gi').test(fieldNameCleaned) === true) {
+          const val = e.target[`radio-query-${parseInt(`${i}${j}`)}`] === undefined ? "" : e.target[`radio-query-${parseInt(`${i}${j}`)}`].value;
+          if (val !== "") {
+            data.append(`radio_query_${parseInt(`${i}${j}`)}`, e.target[`radio-query-${parseInt(`${i}${j}`)}`].value);
           }
-        } else if (val !== "") {
-          data.append(`checkbox_${i}`, val);
-        }
-      } else
-      data.append(fieldNameCleaned.toLowerCase(), e.target[`${fieldNameCleaned.toLowerCase()}-${i}`].value);
+        } else if (new RegExp('select', 'gi').test(fieldNameCleaned) === true) {
+          const val = e.target[`select-${parseInt(`${i}${j}`)}`] === undefined ? "" : e.target[`select-${parseInt(`${i}${j}`)}`].value;
+          if (val !== "") {
+            data.append(`select_${parseInt(`${i}${j}`)}`, e.target[`select-${parseInt(`${i}${j}`)}`].value);
+          }
+        } else if (new RegExp('range', 'gi').test(fieldNameCleaned) === true) {
+          data.append(`range_${parseInt(`${i}${j}`)}`, e.target[`range-${parseInt(`${i}${j}`)}`].value);
+        } else if (new RegExp('checkbox', 'gi').test(fieldNameCleaned) === true) {
+          const val =
+            e.target[`checkbox-object-${parseInt(`${i}${j}`)}`] !== undefined
+              ? e.target[`checkbox-object-${parseInt(`${i}${j}`)}`].value
+              : e.target[`checkbox-${parseInt(`${i}${j}`)}`] !== undefined
+              ? e.target[`checkbox-${parseInt(`${i}${j}`)}`].value
+              : "";
+          if (Number.isInteger(parseInt(fieldNameCleaned[9])) && fieldNameCleaned.slice(-1) === "]" && val !== "") {
+            if (val === "&=" || val === "") {
+              continue;
+            } else {
+              data.append(`checkboxObject_${parseInt(`${i}${j}`)}`, val);
+            }
+          } else if (val !== "") {
+            data.append(`checkbox_${parseInt(`${i}${j}`)}`, val);
+          }
+        } else
+        data.append(fieldNameCleaned.toLowerCase(), e.target[`${fieldNameCleaned.toLowerCase()}-${parseInt(`${i}${j}`)}`].value);
+      };
     };
-
+    
     props.cb(data);
     setDisabled(true);
   };
