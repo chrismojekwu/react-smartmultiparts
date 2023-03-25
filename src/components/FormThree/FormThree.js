@@ -70,9 +70,9 @@ export const FormThree = (props) => {
     e.preventDefault();
     if (Object.keys(props.fileTypes).length === 0 || props.fileTypes === undefined || props.fileTypes === null) return false; 
     const data = new FormData();
-    data.append('file', fileType[0]);
-    for(let i = 0; i < fileExtensions.length; i++){
+    for (let i = 0; i < fileExtensions.length; i++){
       const fieldArr = props.fileTypes[fileExtensions[i].ext];
+      data.append(`file-${fileType[i]}`, fileType[i]);
       for (let j = 0; j < fieldArr.length; j++) {
         const fieldNameCleaned = fieldArr[j].replace("!", "");;
         if (fieldArr[j] === "") {
