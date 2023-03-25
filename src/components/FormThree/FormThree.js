@@ -29,7 +29,11 @@ export const FormThree = (props) => {
         let ext = extension(fileType[i].name);
         //check extension
         if (!(new RegExp(Object.keys(props.fileTypes).join("|"), "gi")).test(ext)) {
-          return `File type not supported - .${ext.toLowerCase()}`;
+          if (props.textConfig === undefined || props.textConfig.invalidExt === "") {
+            return `File type not supported - .${ext.toLowerCase()}`;
+          } else {
+            return props.textConfig.invalidExt;
+          }
         }
         //check for size
         if (props.fileSize !== undefined) {

@@ -148,3 +148,122 @@ describe("Form Three - File Limit", () => {
         expect(htmlString.includes(`<span id="smartparts-error">Over File Limit - Maximum 2 Files</span>`)).toBe(true);
     });
 });
+
+describe("Form Three - Messages/Inactive Behavior", () => {
+    const testConfig = {
+        typeLabel: "",
+        inputLabel: "",
+        disabled: "",
+        errorMessage: "Test Error Message - Form Two"
+    };
+
+    test('it renders a user supplied message for "Internal Error"', () => {
+
+        const wrapper = mount(
+            <FormThree
+                fileTypes={{}} 
+                cb={printData} 
+                textConfig={testConfig}
+            />
+        );
+
+        wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
+        expect(wrapper.find('#smartparts-error').text()).toBe("Test Error Message - Form Two");
+    });
+
+    test('form is disabled after submit', () => {
+        const formObj = {
+            mp3: [],
+        };
+
+        render(
+            <FormThree
+                fileTypes={formObj} 
+                cb={evaluateData}
+                checkboxes={[
+                    {
+                        query: "Languages", 
+                        boxes: ["Basic", "C", "Java", "Ruby", "JS"]
+                    },
+                    {
+                        query: "Skills", 
+                        boxes: ["Frontend", "Backend", "Full-stack"]
+                    },
+                ]}
+                select={selectObjs}
+                radios={radioObjs}
+                fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 100}}
+                fileLimit={2}
+            />);
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        fireEvent.click(screen.getByRole('button'));
+
+        expect(screen.getByRole('button')).toBeDisabled(); 
+    });
+
+    test('user disabled message', () => {
+        const formObj = {
+            mp3: [],
+        };
+
+        render(
+            <FormThree
+                fileTypes={formObj} 
+                cb={evaluateData}
+                checkboxes={[
+                    {
+                        query: "Languages", 
+                        boxes: ["Basic", "C", "Java", "Ruby", "JS"]
+                    },
+                    {
+                        query: "Skills", 
+                        boxes: ["Frontend", "Backend", "Full-stack"]
+                    },
+                ]}
+                select={selectObjs}
+                radios={radioObjs}
+                fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 100}}
+                fileLimit={2}
+            />
+        );
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        fireEvent.click(screen.getByRole('button'));
+
+        expect(screen.getByText("Thanks")).toBeInTheDocument();
+    });
+
+    test('text config button value/invalid ext', () => {
+        const formObj = {
+            wav: ["Sup"],
+        };
+        
+        const testConfig2 = {
+            typeLabel: "",
+            inputLabel: "",
+            disabled: "Test Form Disabled Message - Form One",
+            errorMessage: "Test Error Message - Form Two",
+            invalidExt: "Sorry we dont support that type of file.",
+            logoAlt: "",
+            submitLabel: "Send",
+        };
+
+        render(
+            <FormThree fileTypes={formObj} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}} textConfig={testConfig2}/>);
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File] }});
+
+        expect(screen.getByRole('button').getAttribute("value")).toBe("Send")
+
+        expect(screen.getByText("Sorry we dont support that type of file.")).toBeInTheDocument();
+    });
+});
