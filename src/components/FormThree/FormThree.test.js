@@ -248,15 +248,15 @@ describe("Form Three - Messages/Inactive Behavior", () => {
         const testConfig2 = {
             typeLabel: "",
             inputLabel: "",
-            disabled: "Test Form Disabled Message - Form One",
-            errorMessage: "Test Error Message - Form Two",
+            disabled: "Test Form Disabled Message - Form Three",
+            errorMessage: "Test Error Message - Form Three",
             invalidExt: "Sorry we dont support that type of file.",
             logoAlt: "",
             submitLabel: "Send",
         };
 
         render(
-            <FormThree fileTypes={formObj} cb={printData} disabled={{ message: "Test Form Disabled Message - Form One"}} textConfig={testConfig2}/>);
+            <FormThree fileTypes={formObj} cb={printData} disabled={{ message: "Test Form Disabled Message - Form Three"}} textConfig={testConfig2}/>);
 
         const fileInput = screen.getByTestId("smartparts-file");
 
