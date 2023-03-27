@@ -11,9 +11,19 @@ const printData = (data) => {
     console.log(data);
 };
 
-const evaluateData = (data) => {
-    console.log(data)
-};
+const evaluateData = jest.fn(data => {
+    let fileNames = true;
+    ["test.jpg", "te.st.mp3", "test.wav"].forEach((x,i ) => {
+        for (var value of data.values()) {
+            if (value === x) {
+                fileNames = true;
+                break;
+            }
+            fileNames = false;
+        };
+    });
+    return fileNames;
+})
 
 const formObj = {
     wav: ["Title", "Artist", "Comments"],
@@ -90,7 +100,7 @@ describe("Form Three - Inputs", () => {
         const wrapper = mount(
             <FormThree 
                 fileTypes={formObj} 
-                cb={evaluateData}
+                cb={printData}
                 checkboxes={[
                     {
                         query: "Languages", 
@@ -125,7 +135,7 @@ describe("Form Three - File Limit", () => {
         const wrapper = mount(
             <FormThree 
                 fileTypes={formObj} 
-                cb={evaluateData}
+                cb={printData}
                 checkboxes={[
                     {
                         query: "Languages", 
@@ -179,7 +189,7 @@ describe("Form Three - Messages/Inactive Behavior", () => {
         render(
             <FormThree
                 fileTypes={formObj} 
-                cb={evaluateData}
+                cb={printData}
                 checkboxes={[
                     {
                         query: "Languages", 
@@ -213,7 +223,7 @@ describe("Form Three - Messages/Inactive Behavior", () => {
         render(
             <FormThree
                 fileTypes={formObj} 
-                cb={evaluateData}
+                cb={printData}
                 checkboxes={[
                     {
                         query: "Languages", 
@@ -265,5 +275,43 @@ describe("Form Three - Messages/Inactive Behavior", () => {
         expect(screen.getByRole('button').getAttribute("value")).toBe("Send")
 
         expect(screen.getByText("Sorry we dont support that type of file.")).toBeInTheDocument();
+    });
+
+    test('filenames exist in formdata object', () => {
+        const formObjInner = {
+            wav: ["Title", "Artist", "Comments"],
+            mp3: ["Title", "Artist"],
+            jpg: ["Appointment Name", "select[1]", "Library Name", "select[0]", "CheckBox[1]", "CheckBox[0]", "Comments", "radios[1]", "radios[0]", "checkbox[Include Lunch Order]"]
+        };
+
+        render(
+            <FormThree
+                fileTypes={formObjInner} 
+                cb={evaluateData}
+                checkboxes={[
+                    {
+                        query: "Languages", 
+                        boxes: ["Basic", "C", "Java", "Ruby", "JS"]
+                    },
+                    {
+                        query: "Skills", 
+                        boxes: ["Frontend", "Backend", "Full-stack"]
+                    },
+                ]}
+                select={selectObjs}
+                radios={radioObjs}
+                fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 100}}
+                fileLimit={2}
+            />);
+
+        const fileInput = screen.getByTestId("smartparts-file");
+
+        fireEvent.change(fileInput, { target: { files: [mp3File, wavFile, jpgFile] }});
+
+        fireEvent.click(screen.getByRole('button'));
+
+        expect(screen.getByRole('button')).toBeDisabled(); 
+
+        expect(evaluateData.mock.results[0].value).toBe(true)
     });
 });
