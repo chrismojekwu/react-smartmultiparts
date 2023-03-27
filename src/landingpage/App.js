@@ -3,6 +3,7 @@ import Header from './components/Header';
 import GetStarted from './components/GetStarted'
 import { FormOne } from '../components/FormOne/FormOne';
 import { FormTwo } from '../components/FormTwo/FormTwo';
+import { FormThree } from '../components/FormThree/FormThree';
 import { Route, Link } from 'react-router-dom';
 import './app.css';
 
@@ -76,7 +77,7 @@ const App = () => {
                 <Route exact path="/">
                     <section className="form-container">
                         <div>
-                            <FormTwo
+                            <FormThree
                                 fileTypes={formObj} 
                                 cb={printData} 
                                 textConfig={testConfig}
@@ -92,11 +93,13 @@ const App = () => {
                                 ]}
                                 select={selectObjs}
                                 radios={radioObjs}
-                                fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: .52}}
+                                fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 100}}
+                                fileLimit={5}
                             />
                         </div>
                         <div>
-                            <FormOne 
+                            wowza
+                            {/*<FormOne 
                                 fields={fields} 
                                 fileTypes={fileTypes} 
                                 cb={printData} 
@@ -114,7 +117,7 @@ const App = () => {
                                 select={selectObjs}
                                 radios={radioObjs}
                                 fileSize={.5}
-                            />
+                            />*/}
                         </div>       
                     </section>
                     <div className="landing-description">

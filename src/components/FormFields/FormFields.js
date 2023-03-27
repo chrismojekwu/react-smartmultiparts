@@ -28,7 +28,7 @@ function FormFields(props) {
   };
 
   const generateCheckbox = (checkboxObj, index, field, objBool) => {
-    if (field.length === 8 || props.formTwo && objBool) {
+    if (field.length === 8 || props.formTwo && objBool || props.formThree && objBool) {
       if (props.formTwo === undefined) {
         checkboxObjCount++;
       }
@@ -102,9 +102,56 @@ function FormFields(props) {
     );
   };
 
+  const renderFieldsThree = () => {
+    const els = [];
+    for (let i = 0; i < props.files.length; i++) {
+      els.push(
+        <div className="multi-file-title">
+          <span key={`file-name-span-${i}`}>{props.files[i].name}</span>
+        </div>
+      );
+      els.push(...props.fields[props.files[i].ext].map((field, index) => {
+        let req = "";
+        if (field.trim().match(/comments/gi)) {
+          req = field.trim().includes("!");
+          return <TextArea index={parseInt(`${i}${index}`)} required={req} key={`text-area-${parseInt(`${i}${index}`)}`}/>;
+        } else if (field.trim().match(/date/gi) && field.trim().length <= 5) {
+          req = field.trim().includes("!");
+          return <Date required={req} index={parseInt(`${i}${index}`)} key={`date-input-${parseInt(`${i}${index}`)}`}/>;
+        } else if (field.trim().match(/range/gi)) {
+          return generateRange(parseInt(`${i}${index}`), field.trim());
+        } else if (field.trim().match(/radios/gi) && field.trim().length <= 9){
+          if (props.formThree !== undefined && props.formThree) radioCount = parseInt(field.trim().slice(7,-1));
+          return radioObjs[radioCount] === undefined ? "" : generateRadios(radioObjs[radioCount], parseInt(`${i}${index}`), field.trim());
+        } else if (field.trim().match(/select/gi)) {
+          if (props.formThree !== undefined && props.formThree) selectCount = parseInt(field.trim().slice(7,-1));
+          return selectObjs[selectCount] === undefined ? "" : generateSelect(selectObjs[selectCount], parseInt(`${i}${index}`), field.trim());
+        } else if (field.trim().match(/checkbox/gi)) {
+          let chkbxObj = false;
+          if (props.formThree && Number.isInteger(parseInt(field[9])) && field.slice(-1) === "]") {
+            chkbxObj = true;
+            checkboxObjCount = parseInt(field.split("").filter(x => /[0-9]/.test(x)).join(""));
+          } 
+          const activeCheckboxObj = checkboxObjs === undefined ? null : checkboxObjs[checkboxObjCount];
+          return generateCheckbox(activeCheckboxObj, parseInt(`${i}${index}`), field.trim(), chkbxObj);
+        } else if (field.trim().match(/filename/gi)) {
+          return <span id={`smartparts-filename-span-${parseInt(`${i}${index}`)}`} className="form-filename" key={`filename-${parseInt(`${i}${index}`)}`}>Filename: {props.files[i].name}</span>
+        } else if (field === "") {
+          return "";
+        } else {
+          req = field.trim().includes("!");
+          return <TextInput field={field} index={parseInt(`${i}${index}`)} required={req} key={`text-input-${parseInt(`${i}${index}`)}`}/>;
+        }
+      }));
+    }
+    return els.map(x => x);
+  };
+
+
+
   return (
     <>
-      {renderFields()}
+      {props.formThree ? renderFieldsThree() : renderFields()}
     </>
   );
 }
