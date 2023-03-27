@@ -1,6 +1,6 @@
 # react-smartmultiparts
 
-smartmultiparts are file input components for React that return a form with specified values. Upon submission the form will pass the multipart form data into a callback function provided by you. FormOne will return a single set of input fields for a group of file types. FormTwo will return a specified set of fields for each individual file type.
+smartmultiparts are file input components for React that return a form with specified values. Upon submission the form will pass the multipart form data into a callback function provided by you. FormOne will return a single set of input fields for a group of file types. FormTwo will return a specified set of fields for each individual file type. FormThree will return one specified set of fields for multiple files based on the file extension. 
 
 ```
 npm i react-smartmultiparts
@@ -12,7 +12,9 @@ The FormOne component accepts a list of filetypes as a "fileTypes" prop and form
 
 The FormTwo component allows you to specify an object containing the supported file types as keys and their correspending fields as an array using the "fileTypes" prop.
 
-Both Forms must be passed a callback function to handle the multipart data using the "cb" prop. 
+The FormThree component allows a user to upload multiple files. The same combination of inputs will be generated for each type of file. You can limit the amount of files using the "fileLimit" prop. 
+
+All Forms must be passed a callback function to handle the multipart data using the "cb" prop. 
 
 
 #### FormOne Example:
@@ -45,6 +47,23 @@ const formObj = {
 };
 
 <FormTwo fileTypes={formObj} cb={printData}/>
+```
+
+#### FormThree Example:
+```
+import {FormThree} from 'react-smartmultiparts';
+
+const printData = (data) => { 
+    console.log(data);
+};
+
+const formObj = {
+    wav: ["Title", "Artist", "Comments"],
+    mp3: ["Title", "Artist"],
+    jpg: ["Title", "Subject", "Source"]
+};
+
+<FormThree fileTypes={formObj} cb={printData} fileLimit={5}/>
 ```
 
 ## Input Types Supported:

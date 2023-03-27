@@ -14,8 +14,10 @@ export const FormThree = (props) => {
     const els = [];
 
     if (fileType === "") return "";
-    if (fileType.length > props.fileLimit) {
-      return <span id="smartparts-error">Over File Limit - Maximum {props.fileLimit} Files</span>;
+    if (props.fileLimit !== undefined) {
+      if (fileType.length > props.fileLimit) {
+        return <span id="smartparts-error">Over File Limit - Maximum {props.fileLimit} Files</span>;
+      }
     }
     if (Object.keys(props.fileTypes).length === 0) { 
       if (props.textConfig === undefined || props.textConfig.errorMessage === "") {
@@ -45,13 +47,13 @@ export const FormThree = (props) => {
                 return <span id="smartparts-error">{props.textConfig.fileSizeMessage}</span>
               }
             }
-          }
-        } else {
-          if (props.fileSize[ext] < (fileType[i].size / 1e+6)) {
-            if (props.textConfig === undefined || props.textConfig.fileSizeMessage === "") {
-              return <span id="smartparts-error">File Over Limit - {props.fileSize[ext]} MB</span>;
-            } else {
-              return <span id="smartparts-error">{props.textConfig.fileSizeMessage}</span>
+          } else {
+            if (props.fileSize[ext] < (fileType[i].size / 1e+6)) {
+              if (props.textConfig === undefined || props.textConfig.fileSizeMessage === "") {
+                return <span id="smartparts-error">File Over Limit - {props.fileSize[ext]} MB</span>;
+              } else {
+                return <span id="smartparts-error">{props.textConfig.fileSizeMessage}</span>
+              }
             }
           }
         }
