@@ -196,7 +196,6 @@ export const FormThree = (props) => {
               return false;
             } else {
               setFileType(file);
-              //setFileName(file[0].name);
             }
           }}
           multiple

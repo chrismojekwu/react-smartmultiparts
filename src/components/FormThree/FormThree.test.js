@@ -148,7 +148,6 @@ describe("Form Three - File Limit", () => {
                 ]}
                 select={selectObjs}
                 radios={radioObjs}
-                //fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 100}}
                 fileLimit={2}
             />
         );

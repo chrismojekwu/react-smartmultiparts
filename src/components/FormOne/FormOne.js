@@ -23,14 +23,12 @@ export const FormOne = (props) => {
     // bytes to mb (bytes / 1e+6)
     if (props.fileSize !== undefined) {
       if (props.fileSize < (fileType[0].size / 1e+6)) {
-        //setSize(true);
         if (props.textConfig === undefined || props.textConfig.fileSizeMessage === "") {
           return <span id={`smartparts-error-${id}`} className="smartparts-error">File Over Limit - {props.fileSize} MB</span>;
         } else {
           return <span id={`smartparts-error-${id}`} className="smartparts-error">{props.textConfig.fileSizeMessage}</span>
         }
       } else {
-        //setSize(false);
       }
     };
     const re = new RegExp(props.fileTypes.join("|"), "gi");
