@@ -313,7 +313,7 @@ describe("Form Two - Empty Object", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
-        expect((wrapper.find('#smartparts-error').text() === "Internal Error")).toBe(true);
+        expect((wrapper.find('.smartparts-error').text() === "Internal Error")).toBe(true);
     });
 
     test('Empty object behavior with select',() => {
@@ -323,7 +323,7 @@ describe("Form Two - Empty Object", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [wavFile]}});
 
-        expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
+        expect(wrapper.find('.smartparts-error').text() === "Internal Error").toBe(true);
     });
 
 });
@@ -406,7 +406,7 @@ describe("Form Two - Messages/Inactive Behavior", () => {
         const wrapper = mount(<FormTwo fileTypes={{}} cb={printData} textConfig={testConfig}/>);
 
         wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
-        expect(wrapper.find('#smartparts-error').text()).toBe("Test Error Message - Form Two");
+        expect(wrapper.find('.smartparts-error').text()).toBe("Test Error Message - Form Two");
     });
 
     test('form is disabled after submit', () => {

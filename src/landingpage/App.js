@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import GetStarted from './components/GetStarted'
 import { FormOne } from '../components/FormOne/FormOne';
@@ -9,6 +9,8 @@ import './app.css';
 
 
 const App = () => {
+    const [display, setDisplay] = useState(0);
+
     const fields = ["Appointment Name", "select[1]", "Library Name", "select[0]!", "Comments", "Range[0_12_1_Meeting Length (Hours)]", "Date", "checkbox", "checkbox", "select!", "select", "checkbox[ Include Lunch Order]", "radios"];
 
     const fileTypes = ["wav", "jpg", "jpeg", "ics"];
@@ -62,79 +64,117 @@ const App = () => {
         },
     ];
 
+    const renderHome = () => {
+        return (
+            <>
+                <div className="controls">
+                    <button 
+                        className="control-btn"
+                        onClick={(e) => setDisplay(-1)}
+                    >
+                        Get Started
+                    </button>
+                </div>
+                <section className="form-container">
+                    <div>
+                        <h3>Form One</h3>
+                        <p className="landing-form-description">
+                            Form One supports a single form for a single file of any specified type.
+                        </p>
+                        <FormOne 
+                            fields={fields} 
+                            fileTypes={fileTypes} 
+                            cb={printData} 
+                            textConfig={testConfig}
+                            checkboxes={[
+                                {
+                                    query: "Languages", 
+                                    boxes: ["Basic", "C", "Java", "Ruby", "JS"]
+                                },
+                                {
+                                    query: "Skills", 
+                                    boxes: ["Frontend", "Backend", "Full-stack"]
+                                },
+                            ]}
+                            select={selectObjs}
+                            radios={radioObjs}
+                            fileSize={.5}
+                        />
+                    </div>
+                    <div>
+                        <h3>Form Two</h3>
+                        <p className="landing-form-description">
+                            Form Two supports a single form for a single file of each specified file type.
+                        </p>
+                        <FormTwo
+                            fileTypes={formObj} 
+                            cb={printData} 
+                            textConfig={testConfig}
+                            checkboxes={[
+                                {
+                                    query: "Languages", 
+                                    boxes: ["Basic", "C", "Java", "Ruby", "JS"]
+                                },
+                                {
+                                    query: "Skills", 
+                                    boxes: ["Frontend", "Backend", "Full-stack"]
+                                },
+                            ]}
+                            select={selectObjs}
+                            radios={radioObjs}
+                            //fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 100}}
+                            //fileLimit={5}
+                        />
+                    </div>
+                    <div>
+                        <h3>Form Three</h3>
+                        <p className="landing-form-description">
+                            Form Three supports mutliple files and produces a single form for each specfied file type.
+                        </p>
+                        <FormThree
+                            fileTypes={formObj} 
+                            cb={printData} 
+                            textConfig={testConfig}
+                            checkboxes={[
+                                {
+                                    query: "Languages", 
+                                    boxes: ["Basic", "C", "Java", "Ruby", "JS"]
+                                },
+                                {
+                                    query: "Skills", 
+                                    boxes: ["Frontend", "Backend", "Full-stack"]
+                                },
+                            ]}
+                            select={selectObjs}
+                            radios={radioObjs}
+                            //fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 100}}
+                            //fileLimit={5}
+                        />
+                    </div>       
+                </section>
+                <div className="landing-description">
+                    smartmultiparts
+                    <div
+                        style={{
+                            width: "200px"
+                        }}
+                    >
+                    ...on submit data will print to the console
+                    </div>
+                </div>
+            </>
+        );
+    }
+
     return (
         <main className="landing-page">
-            <Header/>
+            <Header
+                setDisplay={setDisplay}
+            />
             <div id="container">
-                <div className="controls">
-                    <Link to="/getstarted" tabIndex="-1">
-                        <button className="control-btn">
-                            Get Started
-                        </button>
-                    </Link>
-                </div>
-
-                <Route exact path="/">
-                    <section className="form-container">
-                        <div>
-                            <FormThree
-                                fileTypes={formObj} 
-                                cb={printData} 
-                                textConfig={testConfig}
-                                checkboxes={[
-                                    {
-                                        query: "Languages", 
-                                        boxes: ["Basic", "C", "Java", "Ruby", "JS"]
-                                    },
-                                    {
-                                        query: "Skills", 
-                                        boxes: ["Frontend", "Backend", "Full-stack"]
-                                    },
-                                ]}
-                                select={selectObjs}
-                                radios={radioObjs}
-                                //fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 100}}
-                                //fileLimit={5}
-                            />
-                        </div>
-                        <div>
-                            wowza
-                            {/*<FormOne 
-                                fields={fields} 
-                                fileTypes={fileTypes} 
-                                cb={printData} 
-                                textConfig={testConfig}
-                                checkboxes={[
-                                    {
-                                        query: "Languages", 
-                                        boxes: ["Basic", "C", "Java", "Ruby", "JS"]
-                                    },
-                                    {
-                                        query: "Skills", 
-                                        boxes: ["Frontend", "Backend", "Full-stack"]
-                                    },
-                                ]}
-                                select={selectObjs}
-                                radios={radioObjs}
-                                fileSize={.5}
-                            />*/}
-                        </div>       
-                    </section>
-                    <div className="landing-description">
-                        smartmultiparts
-                        <div
-                            style={{
-                                width: "200px"
-                            }}
-                        >
-                        ...on submit data will print to the console
-                        </div>
-                    </div>
-                </Route>
-
-                <Route exact path="/getstarted">
-                    <GetStarted/>
-                </Route>
+               {display === 0 ? renderHome() : <GetStarted/>}
+                        
+                
             </div>
         </main>
     )

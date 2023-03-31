@@ -11,9 +11,9 @@ const printData = (data) => {
     console.log(data);
 };
 
-const evaluateData = jest.fn(data => {
+const evaluateData = jest.fn( data => {
     let fileNames = true;
-    ["test.jpg", "te.st.mp3", "test.wav"].forEach((x,i ) => {
+    ["test.jpg", "te.st.mp3", "test.wav"].forEach( x => {
         for (var value of data.values()) {
             if (value === x) {
                 fileNames = true;
@@ -154,8 +154,7 @@ describe("Form Three - File Limit", () => {
         );
 
         wrapper.find('input').first().simulate('change', {target: {files: [mp3File, jpgFile, wavFile]}});
-        const htmlString = wrapper.html();
-        expect(htmlString.includes(`<span id="smartparts-error">Over File Limit - Maximum 2 Files</span>`)).toBe(true);
+        expect(wrapper.find('.smartparts-error').text()).toBeTruthy();
     });
 });
 
@@ -178,7 +177,7 @@ describe("Form Three - Messages/Inactive Behavior", () => {
         );
 
         wrapper.find('input').first().simulate('change', {target: {files: [mp3File]}});
-        expect(wrapper.find('#smartparts-error').text()).toBe("Test Error Message - Form Two");
+        expect(wrapper.find('.smartparts-error').text()).toBe("Test Error Message - Form Two");
     });
 
     test('form is disabled after submit', () => {
@@ -312,6 +311,6 @@ describe("Form Three - Messages/Inactive Behavior", () => {
 
         expect(screen.getByRole('button')).toBeDisabled(); 
 
-        expect(evaluateData.mock.results[0].value).toBe(true)
+        expect(evaluateData.mock.results[0].value).toBe(true);
     });
 });

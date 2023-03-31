@@ -7,24 +7,25 @@ export const FormTwo = (props) => {
   const [fileType, setFileType] = useState("");
   const [fileName, setFileName] = useState("");
   const [disabled, setDisabled] = useState(false);
+  const id =  Math.floor(Math.random() * 10000);
 
   const detectFile = () => {
     if (fileType === "") return "";
     const ext = fileType[0].name ? extension(fileType[0].name) : "";
     if (Object.keys(props.fileTypes).length === 0) { 
       if (props.textConfig === undefined || props.textConfig.errorMessage === "") {
-        return <span id="smartparts-error">Internal Error</span>;
+        return <span id={`smartparts-error-${id}`} className="smartparts-error">Internal Error</span>;
       } else {
-        return <span id="smartparts-error">{props.textConfig.errorMessage}</span>;
+        return <span id={`smartparts-error-${id}`} className="smartparts-error">{props.textConfig.errorMessage}</span>;
       }
     };
     // bytes to mb (bytes / 1e+6)
     if (props.fileSize !== undefined) {
       if (props.fileSize[ext] < (fileType[0].size / 1e+6)) {
         if (props.textConfig === undefined || props.textConfig.fileSizeMessage === "") {
-          return <span id="smartparts-error">File Over Limit - {props.fileSize[ext]} MB</span>;
+          return <span id={`smartparts-error-${id}`} className="smartparts-error">File Over Limit - {props.fileSize[ext]} MB</span>;
         } else {
-          return <span id="smartparts-error">{props.textConfig.fileSizeMessage}</span>
+          return <span id={`smartparts-error-${id}`} className="smartparts-error">{props.textConfig.fileSizeMessage}</span>
         }
       }
     };
@@ -49,7 +50,8 @@ export const FormTwo = (props) => {
 
   const upload = (e) => {
     e.preventDefault();
-    if (Object.keys(props.fileTypes).length === 0 || props.fileTypes === undefined || props.fileTypes === null) return false; 
+    const err = document.getElementById(`smartparts-error-${id}`);
+    if (Object.keys(props.fileTypes).length === 0 || props.fileTypes === undefined || props.fileTypes === null || fileType === "" || err !== null) return false; 
     const ext = fileType[0].name ? extension(fileType[0].name) : "";
     const data = new FormData();
     data.append('file', fileType[0]);

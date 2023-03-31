@@ -302,7 +302,7 @@ describe("Form One - Empty Fields", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
-        expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
+        expect(wrapper.find('.smartparts-error').text() === "Internal Error").toBe(true);
     });
 
     test('Empty Fields behavior with select', () => {
@@ -314,7 +314,7 @@ describe("Form One - Empty Fields", () => {
 
         wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
 
-        expect(wrapper.find('#smartparts-error').text() === "Internal Error").toBe(true);
+        expect(wrapper.find('.smartparts-error').text() === "Internal Error").toBe(true);
     });
 });
 
@@ -382,7 +382,7 @@ describe("Form One - Messages/Inactive Behavior", () => {
         const wrapper = mount(<FormOne fields={[]} fileTypes={[]} cb={printData} textConfig={testConfig}/>);
         
         wrapper.find('input').first().simulate('change', {target: {files: [jpgFile]}});
-        expect(wrapper.find('#smartparts-error').text()).toBe("Test Error Message - Form One");
+        expect(wrapper.find('.smartparts-error').text()).toBe("Test Error Message - Form One");
     });
 
     test('form is disabled after submit', () => {

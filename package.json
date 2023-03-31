@@ -1,7 +1,7 @@
 {
   "name": "react-smartmultiparts",
   "homepage": "http://chrismojekwu.github.io/react-smartmultiparts/",
-  "version": "1.5.11",
+  "version": "1.5.14",
   "description": "Form generating file upload components for React",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
