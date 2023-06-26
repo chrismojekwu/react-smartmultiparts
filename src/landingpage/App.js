@@ -122,8 +122,6 @@ const App = () => {
                             ]}
                             select={selectObjs}
                             radios={radioObjs}
-                            //fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 100}}
-                            //fileLimit={5}
                         />
                     </div>
                     <div>
@@ -147,8 +145,6 @@ const App = () => {
                             ]}
                             select={selectObjs}
                             radios={radioObjs}
-                            //fileSize={{pdf: 1, ics: .5, mp3: 3, jpg: 100}}
-                            //fileLimit={5}
                         />
                     </div>       
                 </section>
